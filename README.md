@@ -48,13 +48,24 @@ The driving motivation here comes from my experiences running claims between aga
 
 I did that for many years ... during some periods, this was essentially a full-time activity.
 
-What I learned from these direct interactions is that the person who designs this system must have some firsthand contact with ongoing controversies -- and preferably the kind which present very serious technical challenges to communicating.  I've chosen scientific controversies, and in particular, those which are ongoing -- happening right now.
+What I learned from these direct interactions is that the person who designs this system must have some firsthand contact with ongoing controversies -- and preferably the kind of controversy which presents very serious technical challenges to communicating.  I've chosen scientific controversies, and in particular, those which are ongoing -- happening right now -- to demonstrate the validity of this UI for discussing debate.
 
-To fully appreciate the depth of scientific controversy, a person has to take for granted -- through some provisional process of belief -- that the experts are wrong about some sort of ongoing debate.  Then, from that point, convince somebody else.
+To fully appreciate the depth of scientific controversy, a person has to take for granted -- through some provisional process of belief -- that the experts are wrong about some sort of ongoing debate.  Then, from that worldview, convince somebody else.
+
+The refusal to go through that process creates a blind spot for people who design these systems.  The truth is that people who design argumentation systems approach the subject in a positivist manner.  Yet, positivism is plainly geared towards what Thomas Kuhn refers to as "normal" science.
+
+See for more information ...
+
+**The Positivists vs the Constructivists**
+https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/H1akZRDWs5Y
+
+The only way to create a system which can actually stand a chance of changing somebody's mind on a real-world issue is to actually believe that experts can sometimes be wrong.
+
+(I'm not going to spend any more time here belaboring this point, and I assume that many people stop paying attention at that sentence -- which is fine.)
 
 ## The Future of Scientific Controversy
 
-From my experiences doing this over many years, I came to realize that the web is not fundamentally structured to accommodate such differing worldviews. And some of these problems occur at the level of communication infrastructure. Just to give some examples ...
+From these experiences, I came to realize that the web is not fundamentally structured to accommodate such differing worldviews. And some of these problems occur at the level of communication infrastructure. Just to give some examples ...
 
 **(1) Text is a major problem for conveying new ideas.** Challenges to textbook theory do not fit into a tweet; yet, people just don't want to invest the time required to learn about controversies through the necessary reading unless they have a pre-existing sense that the idea is correct. Controversies are caught in the middle of this tension between the need to be terse, in order to accommodate busy people, and the need to adequately explain the complexity of a technical debate.
 
