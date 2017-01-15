@@ -1,6 +1,6 @@
 # The Open Layers Worldviewer
 
-A new GIS-based approach to visualizing discourse on scientific controversies
+A new GIS-based approach to visualizing discourse on scientific controversies, inspired by Flemming Hansen
 
 ## Defining the Problem
 
