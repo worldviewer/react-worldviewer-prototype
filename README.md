@@ -54,18 +54,25 @@ To fully appreciate the depth of scientific controversy, a person has to take fo
 
 The refusal to go through that process creates a blind spot for people who design these systems.  The truth is that people who design argumentation systems approach the subject in a positivist manner.  Yet, positivism is plainly geared towards what Thomas Kuhn refers to as "normal" science.
 
-See for more information ...
+When it comes to scientific controversies, the correct approach is a constructivist epistemology.
+
+If those words don't mean anything to you, you might want to skim through these explanations ...
 
 **The Positivists vs the Constructivists**
 https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/H1akZRDWs5Y
 
-The only way to create a system which can actually stand a chance of changing somebody's mind on a real-world issue is to actually believe that experts can sometimes be wrong.
+**The Constructivist Revolution**
+https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/fTuMvbBD3Dg?sfc=true
+
+The Cliff's notes is that the only way to create a system which can actually stand a chance of changing somebody's mind on a real-world issue -- which one must presume is the actual point of these diagrams -- is to actually believe that experts can sometimes be wrong -- as has historically been the case, of course.
+
+If you don't believe that that can be happening right now, going into the situation of designing an argumentation interface, then that epistemology is predictably going to reveal itself through your design.  You might as well be working on something else.
 
 (I'm not going to spend any more time here belaboring this point, and I assume that many people stop paying attention at that sentence -- which is fine.)
 
 ## The Future of Scientific Controversy
 
-From these experiences, I came to realize that the web is not fundamentally structured to accommodate such differing worldviews. And some of these problems occur at the level of communication infrastructure. Just to give some examples ...
+From these experiences of pitching alternative worldviews online through technical arguments, I came to realize that the web is not fundamentally structured to accommodate or facilitate the "clash of worldviews". And some of these problems occur at the level of communication infrastructure. Just to give some examples ...
 
 **(1) Text is a major problem for conveying new ideas.** Challenges to textbook theory do not fit into a tweet; yet, people just don't want to invest the time required to learn about controversies through the necessary reading unless they have a pre-existing sense that the idea is correct. Controversies are caught in the middle of this tension between the need to be terse, in order to accommodate busy people, and the need to adequately explain the complexity of a technical debate.
 
