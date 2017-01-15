@@ -138,6 +138,11 @@ Perhaps one reasonable approach would be to embed the epistemology of science in
 
 At the level of the graphic, you don't see any annotations. You just see the original graphic. This solves the original annotation problem which Google's Page wrestled with in college -- having this problem of the annotations cluttering the webpage to the point where the original content becomes inundated (a problem which he never actually revisited once he came up with PageRank ...).
 
+The history of the annotation technology is covered here ...
+
+**The Annotation of Scientific Papers**
+https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/JTW1FYZbDYy
+
 Zoom one scale down from the level of graphic, and perhaps you see the clash of worldviews.
 
 Zoom one scale below that for some particular claim, and you are in the world of models.
@@ -155,3 +160,5 @@ My premise is that if such a system was to exist, scientific controversies would
 <p align="center">
     <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/support-your-local-universe.jpg" />
 </p>
+
+I'll use this repository to build out a prototype which demonstrates what this concept would look like.  I'll build out -- possibly in React and React Native (?) -- what a GIS interface to scientific controversies might look like.
