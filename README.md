@@ -16,6 +16,32 @@ There have been many historical attempts at visualizing debate -- none of which 
 
 It seems that many people have been struck with the -- arguably obvious -- realization that we need to have a way to bring a sense of order to this area.  But, there remain, to my eye, deep misunderstandings about what problems truly need to be solved in this area.
 
+### Example 1
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/ai-controversy-map.jpg" />
+</p>
+
+### Example 2
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/arguman-zoomed-out.jpg" />
+</p>
+
+### Example 3
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/old-school-argumentation-mapping.png" />
+</p>
+
+What each of these examples should show with just a quick glance is that the simple 2d structure is not adequately conveying the complexity of the situation.
+
+But, further, the elements in these diagrams do not convey a sense of: I want to learn with this!
+
+It's tedious.
+
+And it fails to convey the fact that communication is always occurring on several simultaneous levels.  We need a third dimension to do that.
+
 ## Why I Will Solve this Problem
 
 The driving motivation here comes from my experiences running claims between against-the-mainstream theorists and their critics, and then taking those experiences and attempting to pitch laypeople.
