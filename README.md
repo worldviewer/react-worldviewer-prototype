@@ -151,3 +151,7 @@ We are really at the ground level at this point, and perhaps the visualization m
 Each epistemological layer would visualize in a different manner, but also logically connect to one another like the branches of a tree.
 
 My premise is that if such a system was to exist, scientific controversies would no longer be this boring world which academics can get away with ignoring. We'd see a revival of the topic. Controversies would become a form of entertainment, and the academic community could no longer just ignore them.﻿
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/support-your-local-universe.jpg" />
+</p>
