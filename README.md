@@ -46,10 +46,6 @@ And it fails to convey the fact that communication is always occurring on severa
 
 The driving motivation here comes from my experiences running claims between against-the-mainstream theorists and their critics, and then taking those experiences and attempting to pitch laypeople.
 
-I did that for many years ... during some periods, this was essentially a full-time activity.
-
-What I learned from these direct interactions is that the person who designs this system must have some firsthand contact with ongoing controversies -- and preferably the kind of controversy which presents very serious technical challenges to communicating.  I've chosen scientific controversies, and in particular, those which are ongoing -- happening right now -- to demonstrate the validity of this UI for discussing debate.
-
 To fully appreciate the depth of scientific controversy, a person has to take for granted -- through some provisional process of belief -- that the experts are wrong about some sort of ongoing debate.  Then, from that worldview, convince somebody else.
 
 The refusal to go through that process creates a blind spot for people who design these systems.  The truth is that people who design argumentation systems approach the subject in a positivist manner.  Yet, positivism is plainly geared towards what Thomas Kuhn refers to as "normal" science.
