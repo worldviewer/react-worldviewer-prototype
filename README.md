@@ -138,8 +138,7 @@ At the level of the graphic, you don't see any annotations. You just see the ori
 
 The history of the annotation technology is covered here ...
 
-**The Annotation of Scientific Papers**
-https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/JTW1FYZbDYy
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/JTW1FYZbDYy">**The Annotation of Scientific Papers**</a>
 
 Zoom one scale down from the level of graphic, and perhaps you see the clash of worldviews.
 
