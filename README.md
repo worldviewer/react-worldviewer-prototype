@@ -54,10 +54,10 @@ When it comes to scientific controversies, the correct approach is a constructiv
 
 If those words don't mean anything to you, you might want to skim through these explanations ...
 
-**The Positivists vs the Constructivists**
+**The Positivists vs the Constructivists**  
 https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/H1akZRDWs5Y
 
-**The Constructivist Revolution**
+**The Constructivist Revolution**  
 https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/fTuMvbBD3Dg
 
 The Cliff's notes is that the only way to create a system which can actually stand a chance of changing somebody's mind on a real-world issue -- which one must presume is the actual point of these diagrams -- is to actually believe that experts can sometimes be wrong -- as has historically been the case, of course.
