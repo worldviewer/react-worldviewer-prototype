@@ -77,6 +77,12 @@ Before continuing on to my proposed solution, let's jump through some samples wh
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/FXj2NzSzjSo">**The Decline in Conceptual Revolutions**</a>
 
 <p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-college-experience-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/LHiQnz7caYV">**The College Experience**</a>
+
+<p align="center">
     <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-narrative-of-scientific-discovery-bbal-card.jpg" />
 </p>
 
@@ -125,16 +131,52 @@ Before continuing on to my proposed solution, let's jump through some samples wh
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/Dxq5nJgeDGo">**The Journal Oligopoly**</a>
 
 <p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/over-specialization-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/QtKVXCKte2C">**Over-Specialization**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-scientific-attitude-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/Drcac91Aava">**The Scientific Attitude**</a>
+
+<p align="center">
     <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-two-systems-of-the-mind-bbal-card.jpg" />
 </p>
 
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/YL5TQWx5U6a">**The Two Systems of the Mind**</a>
 
 <p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-pressure-to-publish-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/3uPsnDLdbKi">**The Pressure to Publish**</a>
+
+<p align="center">
     <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-wisdom-of-crowds-bbal-card.jpg" />
 </p>
 
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/1eZJwiPZMuN">**The Wisdom of Crowds**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/innovations-long-tail-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/HrBYGqWXFwY">**Innovation's Long Tail**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/innovation-starvation-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/U6qWs62w9Mo">**Innovation Starvation**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-information-cascade-vs-the-independent-thinker-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/DGgoWbwziq8">**The Information Cascade**</a>
 
 <p align="center">
     <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/tourists-vs-explorers-bbal-card.jpg" />
@@ -159,6 +201,12 @@ Before continuing on to my proposed solution, let's jump through some samples wh
 </p>
 
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/ZNuUvggTdrf">**The 5 Stages of the Mind**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-lesson-of-the-cracking-of-enigma-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/Qd6aZV2ASvR">**The Lesson of the Cracking of Enigma**</a>
 
 ## The Future of Scientific Controversy
 
