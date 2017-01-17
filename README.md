@@ -235,7 +235,7 @@ At the level of the graphic, you don't see any annotations. You just see the ori
 The history of the annotation technology is covered here ...
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-annotation-of-scientific-papers.jpg" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-annotation-of-scientific-papers-bbal-card.jpg" />
 </p>
 
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/JTW1FYZbDYy">**The Annotation of Scientific Papers**</a>
