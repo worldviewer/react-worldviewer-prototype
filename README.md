@@ -54,6 +54,10 @@ When it comes to scientific controversies, the correct approach is a constructiv
 
 If those words don't mean anything to you, you might want to skim through these explanations ...
 
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/constructivism-bbal-cards.jpg" />
+</p>
+
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/H1akZRDWs5Y">**The Positivists vs the Constructivists**</a>
 
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/fTuMvbBD3Dg">**The Constructivist Revolution**</a>
@@ -62,7 +66,99 @@ The Cliff's notes is that the only way to create a system which can actually sta
 
 If you don't believe that that can be happening right now, going into the situation of designing an argumentation interface, then that epistemology is predictably going to reveal itself through your design.  You might as well be working on something else.
 
-(I'm not going to spend any more time here belaboring this point, and I assume that many people stop paying attention at that sentence -- which is fine.)
+My own approach has been to systematically document critique of modern science, because I believe that we can increase the rate of innovation within the sciences.  On rare occasion, I will add my own insights into the collection; but for the most part -- and quite intentionally -- I believe that we should not be re-writing the works of these critics, because an important part of what must be learned by laypeople is that this critique comes from a diverse set of independent thinkers.  These people are not coordinating, and yet, they frequently corroborate one anothers' works.
+
+Before continuing on to my proposed solution, let's jump through some samples which I think will help the typical layperson to better define the problems of modern science ...
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-decline-in-conceptual-revolutions-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/FXj2NzSzjSo">**The Decline in Conceptual Revolutions**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-narrative-of-scientific-discovery-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/ARg3vVaoKfk">**The Narrative of Scientific Discovery**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-anti-pattern-of-settled-science-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/i6e3YHua8z1">**The Anti-Pattern of Settled Science**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-pre-scientific-judgment-of-new-ideas-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/9zhxMNRDha3">**The Pre-Scientific Judgment of New Ideas**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-unlearning-of-creativity-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/FpsEoynk6cH">**The Unlearning of Creativity**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-crowdsourcing-of-scientific-controversies-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/9UVEhtvjuAo">**The Crowdsourcing of Scientific Controversies**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-force-concept-inventory-test-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/HV5W3xBr1AQ">**The Force Concept Inventory Test**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-history-of-peer-review-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/a465vDkKrSd">**The History of Peer Review**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-journal-oligopily-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/Dxq5nJgeDGo">**The Journal Oligopoly**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-two-systems-of-the-mind-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/YL5TQWx5U6a">**The Two Systems of the Mind**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-wisdom-of-crowds-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/1eZJwiPZMuN">**The Wisdom of Crowds**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/tourists-vs-explorers-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/Rauu21NEors">**Tourists vs Explorers**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/why-outsider-mavericks-matter-in-science-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/UoR73bKjt4F">**Why Outsider Mavericks Matter in Science**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/why-we-critique-science-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/hCWxYGv6KBU">**Why Critique Science**</a>
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-5-stages-of-the-mind.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/ZNuUvggTdrf">**The 5 Stages of the Mind**</a>
 
 ## The Future of Scientific Controversy
 
@@ -138,6 +234,10 @@ At the level of the graphic, you don't see any annotations. You just see the ori
 
 The history of the annotation technology is covered here ...
 
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-annotation-of-scientific-papers.jpg" />
+</p>
+
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/JTW1FYZbDYy">**The Annotation of Scientific Papers**</a>
 
 Zoom one scale down from the level of graphic, and perhaps you see the clash of worldviews.
@@ -153,6 +253,14 @@ We are really at the ground level at this point, and perhaps the visualization m
 Each epistemological layer would visualize in a different manner, but also logically connect to one another like the branches of a tree.
 
 My premise is that if such a system was to exist, scientific controversies would no longer be this boring world which academics can get away with ignoring. We'd see a revival of the topic. Controversies would become a form of entertainment, and the academic community could no longer just ignore them.﻿
+
+If such an approach was combined with Gerald Pollack's plans for an Institute for Venture Science, we'd see modern science enter into a new era of innovation.
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-institute-for-venture-science-process-bbal-card.jpg" />
+</p>
+
+<a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/GtfYqmXUYKX">**The Institute for Venture Science Peer Review Process**</a>
 
 <p align="center">
     <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/support-your-local-universe.jpg" />
