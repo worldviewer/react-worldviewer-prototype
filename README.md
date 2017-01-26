@@ -1,6 +1,6 @@
-# The Open Layers Worldviewer
+# The Mobile-First Controversy Card Prototype
 
-A new GIS-based approach to visualizing discourse on scientific controversies, inspired by Flemming Hansen
+A GIS-inspired approach to visualizing discourse on scientific controversies, inspired by Flemming Hansen and built in React.js for mobile devices
 
 ## Defining the Problem
 
