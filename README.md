@@ -225,7 +225,7 @@ I would take this even a step further that, in the light of upcoming technologie
 To take controversies out of their "flatworld" representation into a new "3-dimensional", modern representation, we start with the social media unit of information: the graphic with some sort of prominent summary.
 
 <p align="center">
-  <img src="https://github.com/worldviewer/refactor/blob/master/doc/top-spot.jpg" />
+  <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/top-spot.jpg" />
 </p>
 
 I have attempted to document the pattern in my <a href="https://plus.google.com/collection/Yhn4Y">Controversies of Science</a> collection -- with a set which currently stands at almost 200 examples.  This has been fundamentally designed as a curriculum to teach the topic of scientific controversies.
