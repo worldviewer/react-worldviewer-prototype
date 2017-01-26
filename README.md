@@ -8,7 +8,7 @@ There have been many historical attempts at visualizing debate -- none of which 
 
 <p align="center">
   <a href="https://www.amazon.com/Visualizing-Argumentation-Collaborative-Educational-Sense-Making/dp/1852336641/ref=sr_1_1?ie=UTF8&qid=1484428766&sr=8-1&keywords=visualization+of+argumentation">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/visualizing-argumentation.png" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/visualizing-argumentation.png" />
   </a>
 </p>
 
@@ -19,19 +19,19 @@ It seems that many people have been struck with the -- arguably obvious -- reali
 ### Example 1
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/ai-controversy-map.jpg" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/ai-controversy-map.jpg" />
 </p>
 
 ### Example 2
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/arguman-zoomed-out.jpg" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/arguman-zoomed-out.jpg" />
 </p>
 
 ### Example 3
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/old-school-argumentation-mapping.png" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/old-school-argumentation-mapping.png" />
 </p>
 
 What each of these examples should show with just a quick glance is that the simple 2d structure is not adequately conveying the complexity of the situation.
@@ -103,7 +103,7 @@ When it comes to scientific controversies, the correct approach is a constructiv
 If those words don't mean anything to you, you might want to skim through these explanations ...
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/constructivism-bbal-cards.jpg" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/constructivism-bbal-cards.jpg" />
 </p>
 
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/H1akZRDWs5Y">**The Positivists vs the Constructivists**</a>
@@ -119,7 +119,7 @@ My own approach has been to systematically document critique of modern science, 
 Before continuing on to my proposed solution, let's jump through some samples which I think will help the typical layperson to better define the problems of modern science ...
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/controversy-cards.jpg" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/controversy-cards.jpg" />
 </p>
 
 To learn more about any of these topics, find the link below ...
@@ -203,7 +203,7 @@ GIS stands for Geographic Information System.  It's a software UI approach to ma
 An example might look like this ...
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/gis-layers.png" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/gis-layers.png" />
 </p>
 
 We'd be wise to ask, in light of the sophistication of these GIS tools today: *Can we repurpose this technology for the visualization of argumentation?*
@@ -211,7 +211,7 @@ We'd be wise to ask, in light of the sophistication of these GIS tools today: *C
 What I'm asking is: Can we map the structure of science ... this ...
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-structure-of-science-bbal-card.jpg" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/the-structure-of-science-bbal-card.jpg" />
 </p>
 
 ... to the GIS software approach?
@@ -225,7 +225,7 @@ I would take this even a step further that, in the light of upcoming technologie
 To take controversies out of their "flatworld" representation into a new "3-dimensional", modern representation, we start with the social media unit of information: the graphic with some sort of prominent summary.
 
 <p align="center">
-  <img src="https://github.com/worldviewer/refactor/blob/master/top-spot.jpg" />
+  <img src="https://github.com/worldviewer/refactor/blob/master/doc/top-spot.jpg" />
 </p>
 
 I have attempted to document the pattern in my <a href="https://plus.google.com/collection/Yhn4Y">Controversies of Science</a> collection -- with a set which currently stands at almost 200 examples.  This has been fundamentally designed as a curriculum to teach the topic of scientific controversies.
@@ -247,7 +247,7 @@ At the level of the graphic, you don't see any annotations. You just see the ori
 The history of the annotation technology is covered here ...
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-annotation-of-scientific-papers-bbal-card.jpg" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/the-annotation-of-scientific-papers-bbal-card.jpg" />
 </p>
 
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/JTW1FYZbDYy">**The Annotation of Scientific Papers**</a>
@@ -269,13 +269,13 @@ My premise is that if such a system was to exist, scientific controversies would
 If such an approach was combined with Gerald Pollack's plans for an Institute for Venture Science, we'd see modern science enter into a new era of innovation.
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/the-institute-for-venture-science-process-bbal-card.jpg" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/the-institute-for-venture-science-process-bbal-card.jpg" />
 </p>
 
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/GtfYqmXUYKX">**The Institute for Venture Science Peer Review Process**</a>
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/support-your-local-universe.jpg" />
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/support-your-local-universe.jpg" />
 </p>
 
 I'll use this repository to build out a prototype which demonstrates what this concept would look like.  I'll build out -- possibly in React and React Native (?) -- what a GIS interface to scientific controversies might look like.
