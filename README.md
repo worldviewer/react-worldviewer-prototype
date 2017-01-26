@@ -122,6 +122,17 @@ Before continuing on to my proposed solution, let's jump through some samples wh
     <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/controversy-cards.jpg" />
 </p>
 
+Note that the *Controversies of Science* collection includes "controversy cards" which cover 6 separate categories ...
+
+- *ongoing* - Recent, ongoing controversies
+- *historical* - Controversies possibly still at play, but more historical in nature
+- *person* - Some people you should know about + character studies
+- *reform* - Relevant to academic reform and redesigning scientific discourse
+- *critique* - The best critical commentary ever published for modern science
+- *thinking* - How to think like a scientist about controversies
+
+The cards shown above are a limited sampling of some of those categories.
+
 To learn more about any of these topics, find the link below ...
 
 <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/FXj2NzSzjSo">**The Decline in Conceptual Revolutions**</a>
