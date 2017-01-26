@@ -40,7 +40,55 @@ But, further, the elements in these diagrams do not convey a sense of: I want to
 
 It's tedious.
 
-And it fails to convey the fact that communication is always occurring on several simultaneous levels.  We need a third dimension to do that.
+And it fails to convey the fact that communication is always occurring on several simultaneous levels.  We need a "third dimension" to do that.
+
+## Prototype Description
+
+### Objectives:
+
+- Make scientific controversies entertaining.
+- People who use the app will tacitly learn what a worldview is.
+- Create an infographic viewer which is designed from inception to work on a mobile screen, and which can accommodate the "controversy card" design pattern.
+- For the purpose of this prototype, I will pick a single example graphic which demonstrates the form of entertainment and learning I am seeking (this will be the <a href="https://plus.google.com/+ChrisReeveOnlineScientificDiscourseIsBroken/posts/DCDKHXnrdoH">Halton Arp controversy card</a>).
+- (!MVP) I won't focus at this point on navigating between different controversy cards (I have almost 200 of them), so all of the data for now will be mocked; the point of this prototype is to experiment with interactions using React components.
+
+### Responsive and Interactive
+
+- The app should be responsive and fully take advantage of mobile gestures
+- Rather than use the G+ graphic as it was uploaded, the graphic should be broken up into its four main parts: the title, the summary, the graphic and the circled annotation icon.  The point of this is to expand the options for interaction and animation.  If necessary, graphics resolution can be enlarged.
+- Each element should respond in its own appropriate way to interactions.
+- Since the goal is to make controversies entertaining, I hope to over time experiment with various animations -- and regularly check in with designers for feedback.
+
+### Swipes
+
+- Vertical swipes should teach the epistemological structure of science, in that the levels of thought are differentiated by vertical swipes (clash of worldview at the top, model-level layer one down from there, propositional one down from that, and at the very bottom, concepts).  This realization stems from more than a decade of online interactions on controversial science topics.
+- Since the graphics used have been designed for zooming, horizontal swipes should transition through any "slides" which exist within it (which for the time being will be defined by a local, static JSON list).
+- The controversy card exists at the top worldview layer.
+- Swiping the app upwards should bring up a feed of the best related resources (the model layer).  This would be a mix of resources -- annotated articles, excerpts from books, excerpts from threaded discussions, social media posts, anything that is related to the debate which characterizes the mainstream perspective on the subject.  Any bolding or highlighting within these resources would need to be pertinent to this particular controversy (and these would likely rely upon some pre-existing annotation service or tool).  Each of these sources are characterized (like crank dot net) by one of a set of labels: "metaphysics", "mainstream", "scientism", "alarmist", etc.  This should probably be a reddit-like rankable list.
+- Another swipe up should bring up a list of propositions (questions, conjectures, claims) -- which in turn act as collections of resources to support those propositions.  The ranking standards here are quite different from the model layer; we are talking here more about getting people to think.
+- Another swipe up takes the user to the concept level, which includes concept maps, definitions, links to relevant wikis, etc.  This could be ranked in terms of how helpful they are to understanding the debate.
+- (!MVP) At each level, new content can be added by users (but I won't be constructing a real database or API backend just yet).
+
+### Annotations and Comments (!MVP)
+
+- Annotations to the graphic should only appear at a minimum zoom, so that they do not interfere with the graphic itself
+- Perhaps a heat map can occasionally appear to show the annotation activity (?), or be toggled
+- Comments can attach to any content on any level (need to investigate best way to implement this on mobile)
+
+### Interactions
+
+- Clicking the circled annotation icon animates in a ranked set of related controversy icons, connected by a line, and titled, with background shaded dark or light to contrast
+- The summary can be slid out of the way to the bottom of the screen to make room for observing the graphic.  And when it is, the annotation icon also slides out of the way to the nearest side.
+- Clicking any circled content within the graphic zooms and centers to it; additional pinching can further zoom the content, if needed.
+
+### TBD
+
+- How will I display the article text?
+- How will social media sharing occur?
+- How will inter-card navigation occur?
+- How will users be able to annotate all content?
+- What css framework should I use?
+- Is there a React mobile framework which starts me out with a bunch of useful components?  Or, should I assemble these together piecemeal?
 
 ## Why I Will Solve this Problem
 
