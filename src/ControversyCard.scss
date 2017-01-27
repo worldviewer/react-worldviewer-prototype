@@ -40,7 +40,6 @@ $color-faded-white: #efdfd1;
 	color: $color-faded-white;
 	font-family: 'LeagueGothic-RegularThinner';
 	font-size: 4.20vw;
-	font-weight: 100;
 	letter-spacing: .1vw;
 	line-height: 5.6vw;
 	margin: 0;
@@ -86,5 +85,16 @@ $color-faded-white: #efdfd1;
 		padding-left: 7.5vw;
 		padding-right: 12.8vw;
 		text-align: left;
+	}
+
+	.Bubble-Number {
+		font-family: 'LeagueGothic-Regular';
+		font-size: 1.5vw;
+		z-index: 10;
+	}
+
+	.Bubble-Number p {
+		position: relative;
+		top: -.8vw;
 	}
 }
