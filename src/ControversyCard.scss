@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'LeagueGothic-Regular';
+    src: url('../fonts/LeagueGothic-Regular.woff2') format('woff2'),
+    	 url('../fonts/LeagueGothic-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'LeagueGothic-Italic';
+    src: url('../fonts/LeagueGothic-Italic.woff2') format('woff2'),
+    	 url('../fonts/LeagueGothic-Italic.woff') format('woff');
+}
+
+.Card {
+	position: relative;
+
+	.Base-Layer {
+		max-width: 100%;
+	}
+
+	.Title {
+		color: white;
+		font-family: 'LeagueGothic-Regular';
+		font-size: 7.8vw;
+		letter-spacing: .2vw;
+		line-height: 7.7vw;
+		margin: 0;
+		position: absolute;
+		text-transform: uppercase;
+		transform: scale(1.25, 1);
+	}
+
+	.Left {
+		left: 0;
+		padding-left: 7.8vw;
+		padding-top: 6.3vw;
+		text-align: left;
+		top: 0;
+	}
+
+	.Right {
+		padding-right: 7.8vw;
+		padding-top: 6.3vw;
+		right: 0;
+		text-align: right;
+		top: 4.7vw;
+	}
+}
