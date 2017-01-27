@@ -88,12 +88,15 @@ $color-faded-white: #efdfd1;
 	}
 
 	.Bubble-Number {
-		font-family: 'LeagueGothic-Regular';
-		font-size: 1.5vw;
+		border: none;
+		margin: 0;
+		padding: 0;
 		z-index: 10;
 	}
 
 	.Bubble-Number p {
+		font-family: 'LeagueGothic-Regular';
+		font-size: 1.5vw;
 		line-height: 3vw;
 		margin: 0;
 		padding: 0;
