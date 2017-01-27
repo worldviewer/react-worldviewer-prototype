@@ -89,6 +89,7 @@ $color-faded-white: #efdfd1;
 
 	.Bubble-Number {
 		border: none;
+		box-sizing: content-box;
 		margin: 0;
 		padding: 0;
 		z-index: 10;
