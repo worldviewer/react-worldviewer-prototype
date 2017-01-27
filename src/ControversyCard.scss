@@ -2,12 +2,24 @@
     font-family: 'LeagueGothic-Regular';
     src: url('../fonts/LeagueGothic-Regular.woff2') format('woff2'),
     	 url('../fonts/LeagueGothic-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
     font-family: 'LeagueGothic-Italic';
     src: url('../fonts/LeagueGothic-Italic.woff2') format('woff2'),
     	 url('../fonts/LeagueGothic-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeagueGothic-RegularThinner';
+    src: url('../fonts/LeagueGothic-RegularThinner.woff2') format('woff2'),
+    	 url('../fonts/LeagueGothic-RegularThinner.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 $color-faded-white: #efdfd1;
@@ -26,15 +38,16 @@ $color-faded-white: #efdfd1;
 
 @mixin summary {
 	color: $color-faded-white;
-	font-family: 'LeagueGothic-Regular';
-	font-size: 4.4vw;
+	font-family: 'LeagueGothic-RegularThinner';
+	font-size: 4.35vw;
+	font-weight: 100;
 	letter-spacing: .1vw;
 	line-height: 5.6vw;
 	margin: 0;
 	margin-left: 7vw;
 	position: absolute;
 	text-transform: uppercase;
-	transform: scale(1.25, 1);	
+	transform: scale(1.23, 1);	
 }
 
 .Card {
@@ -69,8 +82,8 @@ $color-faded-white: #efdfd1;
 		@include summary;
 
 		bottom: 0;
-		padding-bottom: 4.3vw;
-		padding-left: 7.8vw;
+		padding-bottom: 4.5vw;
+		padding-left: 7.5vw;
 		padding-right: 12.8vw;
 		text-align: left;
 	}
