@@ -15,21 +15,21 @@ let Bubble = function statelessFunctionComponentClass(props) {
 
 	let roundedBorderStyle = {
 		backgroundColor: '#edf5f1',
-		border: '1px solid #edf5f1',
+		border: '6px solid #edf5f1',
 		borderRadius: '50%',
-		height: '3vw',
+		height: '2vw',
 		left: props.numleft,
 		top: props.numtop,
 		position: 'absolute',
-		width: '3vw'
+		width: '2vw'
 	}
 
 	let bubbleNumberStyle = {
 		backgroundColor: '#edf5f1',
 		borderRadius: '50%',
-		height: '3vw',
+		height: '2vw',
 		position: 'absolute',
-		width: '3vw'
+		width: '2vw'
 	};
 
 	let imgStyle = {

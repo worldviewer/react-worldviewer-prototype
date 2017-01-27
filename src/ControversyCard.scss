@@ -88,8 +88,6 @@ $color-faded-white: #efdfd1;
 	}
 
 	.Bubble-Number {
-		border: none;
-		box-sizing: content-box;
 		margin: 0;
 		padding: 0;
 		z-index: 10;
@@ -98,7 +96,7 @@ $color-faded-white: #efdfd1;
 	.Bubble-Number p {
 		font-family: 'LeagueGothic-Regular';
 		font-size: 1.5vw;
-		line-height: 3vw;
+		line-height: 2vw;
 		margin: 0;
 		padding: 0;
 	}
