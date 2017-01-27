@@ -10,23 +10,43 @@
     	 url('../fonts/LeagueGothic-Italic.woff') format('woff');
 }
 
+$color-faded-white: #efdfd1;
+
+@mixin title {
+	color: $color-faded-white;
+	font-family: 'LeagueGothic-Regular';
+	font-size: 7.5vw;
+	letter-spacing: .2vw;
+	line-height: 7.6vw;
+	margin: 0;
+	position: absolute;
+	text-transform: uppercase;
+	transform: scale(1.25, 1);	
+}
+
+@mixin summary {
+	color: $color-faded-white;
+	font-family: 'LeagueGothic-Regular';
+	font-size: 4.4vw;
+	letter-spacing: .1vw;
+	line-height: 5.6vw;
+	margin: 0;
+	margin-left: 7vw;
+	position: absolute;
+	text-transform: uppercase;
+	transform: scale(1.25, 1);	
+}
+
 .Card {
+	overflow: hidden;
 	position: relative;
 
 	.Base-Layer {
-		max-width: 100%;
+		width: 100%;
 	}
 
 	.Title {
-		color: white;
-		font-family: 'LeagueGothic-Regular';
-		font-size: 7.8vw;
-		letter-spacing: .2vw;
-		line-height: 7.7vw;
-		margin: 0;
-		position: absolute;
-		text-transform: uppercase;
-		transform: scale(1.25, 1);
+		@include title;
 	}
 
 	.Left {
@@ -42,6 +62,16 @@
 		padding-top: 6.3vw;
 		right: 0;
 		text-align: right;
-		top: 4.7vw;
+		top: 4.2vw;
+	}
+
+	.Summary {
+		@include summary;
+
+		bottom: 0;
+		padding-bottom: 4.3vw;
+		padding-left: 7.8vw;
+		padding-right: 12.8vw;
+		text-align: left;
 	}
 }
