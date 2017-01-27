@@ -15,7 +15,7 @@ let Bubble = function statelessFunctionComponentClass(props) {
 
 	let bubbleNumberStyle = {
 		backgroundColor: '#edf5f1',
-		borderRadius: '50%',
+		borderRadius: '50% 50% 50% 50%',
 		height: '3vw',
 		left: props.numleft,
 		top: props.numtop,
