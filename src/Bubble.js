@@ -15,7 +15,7 @@ let Bubble = function statelessFunctionComponentClass(props) {
 
 	let roundedBorderStyle = {
 		backgroundColor: '#edf5f1',
-		border: '6px solid #edf5f1',
+		border: '.5vw solid #edf5f1',
 		borderRadius: '50%',
 		height: '2vw',
 		left: props.numleft,
