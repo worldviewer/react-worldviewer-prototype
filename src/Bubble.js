@@ -13,12 +13,21 @@ let Bubble = function statelessFunctionComponentClass(props) {
 	console.log('left: ' + props.numleft);
 	console.log('top: ' + props.numtop);
 
-	let bubbleNumberStyle = {
+	let roundedBorderStyle = {
 		backgroundColor: '#edf5f1',
-		borderRadius: '50% 50% 50% 50%',
+		border: '1px solid #edf5f1',
+		borderRadius: '50%',
 		height: '3vw',
 		left: props.numleft,
 		top: props.numtop,
+		position: 'absolute',
+		width: '3vw'
+	}
+
+	let bubbleNumberStyle = {
+		backgroundColor: '#edf5f1',
+		borderRadius: '50%',
+		height: '3vw',
 		position: 'absolute',
 		width: '3vw'
 	};
@@ -38,12 +47,14 @@ let Bubble = function statelessFunctionComponentClass(props) {
 				style={imgStyle}
 			/>
 
-			<div
-				alt="Slide Number"
-				className="Bubble-Number"
-				style={bubbleNumberStyle}
-			>
-				<p>{bubbleNumber + 1}</p>
+			<div style={roundedBorderStyle}>
+				<div
+					alt="Slide Number"
+					className="Bubble-Number"
+					style={bubbleNumberStyle}
+				>
+					<p>{bubbleNumber + 1}</p>
+				</div>
 			</div>
 		</div>
 	);
