@@ -94,7 +94,8 @@ $color-faded-white: #efdfd1;
 	}
 
 	.Bubble-Number p {
-		position: relative;
-		top: -.9vw;
+		line-height: 3vw;
+		margin: 0;
+		padding: 0;
 	}
 }
