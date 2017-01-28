@@ -10,9 +10,6 @@ let Bubble = function statelessFunctionComponentClass(props) {
 		width: props.width
 	};
 
-	console.log('left: ' + props.numleft);
-	console.log('top: ' + props.numtop);
-
 	// Corrects an issue with creating circles w/ border-radius on mobile devices
 	let roundedBorderStyle = {
 		backgroundColor: '#edf5f1',
