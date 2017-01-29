@@ -10,6 +10,8 @@ The static graphic that I'll be converting into an interactive, deep-zoomable in
 
 ## State of the Prototype
 
+See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
+
 - MagickSlicer was used to create a DZI image pyramid for the large background jpeg.
 - That image pyramid is now successfully serving through React.js on both mobile and desktop devices.
 - The original graphic's text has been removed from that background jpeg, so that it can be rendered in HTML and CSS as an overlay on top of the large background jpeg.
