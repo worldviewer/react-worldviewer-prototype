@@ -43,6 +43,8 @@ See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 
 # The Backstory
 
+The rest of this document goes into the theory, history and experiences which led to this idea.
+
 ## Defining the Problem of Visualizing Scientific Controversies
 
 There have been many historical attempts at visualizing debate -- none of which having gained much in the way of widespread traction.  In fact, it might be fair to call the documentation of argumentation visualization in ...
