@@ -14,7 +14,11 @@ The static graphic that I'll be converting into an interactive, deep-zoomable in
 - That image pyramid is now successfully serving through React.js on both mobile and desktop devices.
 - The original graphic's text has been removed from that background jpeg, so that it can be rendered in HTML and CSS as an overlay on top of the large background jpeg.
 - All numbered bubbles have also been removed from the large background jpeg, so that they can also be placed as overlays.
-- As the demo currently stands, those overlays are interfering with interactions with the background jpeg.  The next step is to conditionally display all overlays only when the graphic is fully zoomed out.
+- As the demo currently stands, those overlays are interfering with interactions with the background jpeg.
+
+## The Next Steps
+
+- The next step is to conditionally display all overlays only when the graphic is fully zoomed out.
 - The idea then is that those bubbles can be interacted with separately from the background through taps.  I also expect to animate them.
 - There's some work left to do with constraining the types of OpenSeadragon interactions that I want to permit.  For example, the graphic should not be able to slide around beyond the boundaries of the container.
 - I should also consider constraining the UI interactions.  For instance, we really want to completely eliminate the viewport zoom (sorry, Aria); if we do not do this, then the containing menu system can become confused by the gestures.  Along these same lines, I should probably prevent this OpenSeadragon container from having any vertical scrollbars (this panning functionality already exists with OpenSeadragon, of course, and having both creates significant confusion).
