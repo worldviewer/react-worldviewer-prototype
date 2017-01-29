@@ -2,7 +2,30 @@
 
 A GIS-inspired approach to visualizing discourse on scientific controversies, inspired by Flemming Hansen and built in React.js for mobile devices
 
-## Defining the Problem
+## State of the Prototype
+
+- MagickSlicer was used to create a DZI image pyramid for the large background jpeg.
+- That image pyramid is now successfully serving through React.js on both mobile and desktop devices.
+- The original graphic's text has been removed from that background jpeg, so that it can be rendered in HTML and CSS as an overlay on top of the large background jpeg.
+- All numbered bubbles have also been removed from the large background jpeg, so that they can also be placed as overlays.
+- As the demo currently stands, those overlays are interfering with interactions with the background jpeg.  The next step is to conditionally display all overlays only when the graphic is fully zoomed out.
+- The idea then is that those bubbles can be interacted with separately from the background through taps.  I also expect to animate them.
+
+## Things Devs Should Know About OpenSeadragon
+
+- The path to the pyramid files must include a trailing slash (or the console will fill with tile errors).
+- The OpenSeadragon container must be specified in specific pixel amounts (or nothing will display).
+- Getting React.js to play with OpenSeadragon is no minor matter, as they are constructed on two very different notions: OpenSeadragon assumes that access to the DOM is readily available, whereas React of course begs to differ.  I'll over time be checking in with other React developers to get feedback on the current approach.
+- MagickSlicer generates a .dzi file and a directory.  The directory needs to be publicly accessible so that OpenSeadragon can reference the image pyramid by URL.  This is of course quite different from how most images are served.
+- I found that the easiest way to get the pyramid image data from the .dzi file into OpenSeadragon was to simply pass the XML directly into OpenSeadragon as parameters.  Once you do that, you can ditch the original .dzi file.  Looking at other online projects was very helpful for figuring this out.
+- There's some work left to do with constraining the types of OpenSeadragon interactions that I want to permit.  For example, the graphic should not be able to slide around beyond the boundaries of the container.
+- I should also consider constraining the UI interactions.  For instance, we really want to completely eliminate the viewport zoom (sorry, Aria); if we do not do this, then the containing menu system can become confused by the gestures.  Along these same lines, I should probably prevent this OpenSeadragon container from having any vertical scrollbars (this panning functionality already exists with OpenSeadragon, of course, and having both creates significant confusion).
+- I might decide, if possible, to activate OpenSeadragon interactions with a tap on the graphic.  This would allow me to switch between the standard UI (and overlay) interactions, and OpenSeadragon interactions.
+- What I am ultimately working towards with this prototype is something similar to https://github.com/Emigre/openseadragon-annotations.  I want to be able to annotate the image pyramid and persist those annotations (although my annotations will not be drawings -- but rather more like interactive GIS icons).
+- I expect to rework the menu system; it's placed there as a proof-of-concept to observe how OpenSeadragon interacts with its parent elements.
+- There's a lot of work left to do with this.
+
+## Defining the Problem of Visualizing Scientific Controversies
 
 There have been many historical attempts at visualizing debate -- none of which having gained much in the way of widespread traction.  In fact, it might be fair to call the documentation of argumentation visualization in ...
 
