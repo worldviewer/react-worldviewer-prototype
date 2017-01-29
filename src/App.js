@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.scss';
-import ControversyCard from './ControversyCard';
-import mobiscroll from './mobiscroll.custom-3.0.1.min';
-import './mobiscroll.custom-3.0.1.min.css';
+import ControversyCard from './ControversyCard/ControversyCard';
+import mobiscroll from './mobiscroll/mobiscroll.custom-3.0.1.min';
+import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 
 var App = React.createClass({
 	prev: function() {

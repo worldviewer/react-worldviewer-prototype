@@ -1,7 +1,7 @@
 import React from 'react';
 
 let Bubble = function statelessFunctionComponentClass(props) {
-	let source = require('../graphics/' + props.source);
+	let source = require('../../graphics/' + props.source);
 
 	let divStyle = {
 		left: props.left,

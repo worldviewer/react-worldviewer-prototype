@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Bubble from './Bubble';
-import Icon from './Icon';
+import Bubble from '../Bubble/Bubble';
+import Icon from '../Icon/Icon';
 import './ControversyCard.scss';
-import DeepZoom from './DeepZoom';
+import DeepZoom from '../DeepZoom/DeepZoom';
 
 class ControversyCard extends Component {
 	handleZoom() {

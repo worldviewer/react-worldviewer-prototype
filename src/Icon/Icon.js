@@ -1,7 +1,7 @@
 import React from 'react';
 
 let Icon = function statelessFunctionComponentClass(props) {
-	let source = require('../graphics/icon.png');
+	let source = require('../../graphics/icon.png');
 
 	let style = {
 		position: 'absolute',
