@@ -6,7 +6,7 @@ const DeepZoom = React.createClass({
 	// 	return false;
 	// },
 
-	createViewer: function(data) {
+	createViewer: function() {
 		this.viewer = OpenSeadragon({
 			id: 'openseadragon',
 			visibilityRatio: 1.0,
@@ -19,14 +19,17 @@ const DeepZoom = React.createClass({
 			showFullPageControl: false,
 			showSequenceControl: false,
 			tileSources: {
-				type: 'legacy-image-pyramid',
-				levels: [
-					{
-						url: this.props.url,
-						height: data.naturalHeight,
-						width: data.naturalWidth
-					}
-				]
+				Image: {
+		            xmlns: 'http://schemas.microsoft.com/deepzoom/2008',
+		            Url: this.props.url,
+		            Format: 'jpg',
+		            Overlap: '0',
+		            TileSize: '256',
+		            Size: {
+		                Height: '9999',
+		                Width: '7142'
+		            }
+				}
 			}
 		});
 	},
@@ -47,24 +50,7 @@ const DeepZoom = React.createClass({
 	},
 
 	componentDidMount: function () {
-		let loadImage = (src) => new Promise (
-			function (resolve, reject) {
-				let img = document.createElement('img');
-
-				img.addEventListener('load', () => {
-					resolve(img); 
-				});
-
-				img.addEventListener('error', (err) => { reject(err); });
-				img.src = src;
-			}
-		);
-
-		loadImage(this.props.url)
-			.then( data => {
-				this.createViewer(data);
-				this.setupZoomHandler();
-			});
+		this.createViewer();
 	},
 
 	render: function () {

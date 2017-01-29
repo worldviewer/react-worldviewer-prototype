@@ -24,8 +24,7 @@ class ControversyCard extends Component {
 		return (
 			<div className="Deep-Zoom-Graphic">
 				<DeepZoom
-					url={process.env.PUBLIC_URL +
-						"/halton-arp-the-modern-galileo-bbal-card.jpg"}
+					url={process.env.PUBLIC_URL + "/pyramid_files/"}
 					onZoom={this.handleZoom}
 				/>
 
