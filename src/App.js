@@ -26,7 +26,7 @@ var App = React.createClass({
 	                    >
 	                        <li data-tab="tab-ngc4319" data-selected="true">1: NGC4319</li>
 	                        <li data-tab="tab-ngc7603">2: NGC7603</li>
-	                        <li data-tab="tab-stephansquintet">3: Stephan's Quintet</li>
+	                        <li data-tab="tab-stephansquintet">3: Stephans Quintet</li>
 	                        <li data-tab="tab-arp41">4: Arp41</li>
 	                        <li data-tab="tab-ngc7319-quasar">5: NGC7319 Quasar</li>
 	                        <li data-tab="tab-lensing-claims">6: Lensing Claims</li>
