@@ -12,22 +12,26 @@ The static graphic that I'll be converting into an interactive, deep-zoomable in
 
 See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 
-- MagickSlicer was used to create a DZI image pyramid for the large background jpeg.
+- Since the 9 circled information bubbles are overlays, they require transparent backgrounds -- and therefore cannot be JPG's.  Their original PNG filesizes were quite large.  All 9 of these files were processed by TinyPNG.com, reducing their total PNG filesizes by 60%.  This was more than just a measure to reduce the total asset size; at the uncompressed PNG sizes, mobile browsers would commonly crash during load.
+- The decision to use the OpenSeadragon/DZI deep zoom approach followed from the iPhone's viewport maximum-scale limitation of 10x zoom.  A prototype was constructed to test whether or not this would be sufficient to observe the smallest type within the existing graphics, and it was definitively observed to be a problem.  Since this 10x limit is non-negotiable, an alternative solution which could get us to far deeper zooms and far larger canvases was necessary.
+- MagickSlicer was used to generate a DZI image pyramid for the large background jpeg (similar to how GIS mapping software works).  In short, these tools solve the problem -- even for mobile devices -- by breaking the graphic up into a grid.  This permits the loading of select tiles rather than the entire image.
 - That image pyramid is now successfully serving through React.js on both mobile and desktop devices.
-- The original graphic's text has been removed from that background jpeg, so that it can be rendered in HTML and CSS as an overlay on top of the large background jpeg.
-- All numbered bubbles have also been removed from the large background jpeg, so that they can also be placed as overlays.
+- OpenSeadragon supports a variety of tile sources.  It can work even with plain JPG images, but what I found through experimentation (and confirmed in the documentation) is that this is only true for desktop; zooming into a JPG image does not work on a mobile device.  The image will simply refuse to load.  Once the DZI pyramid image was created with MagickSlicer, the problem was resolved.
+- The original graphic's text has been removed from that large background JPG, so that it can be rendered in HTML and CSS as an overlay on top of the large background jpeg.
+- As mentioned, all numbered bubbles have also been removed from the large background JPG, so that they too can be placed as overlays.
 - As the demo currently stands, those overlays are interfering with interactions with the background jpeg.
 
 ## The Next Steps
 
-- The next step is to conditionally display all overlays only when the graphic is fully zoomed out.
-- The idea then is that those bubbles can be interacted with separately from the background through taps.  I also expect to animate them.
+- The next step is to conditionally display all overlays only when the graphic is fully zoomed out (or require an initial tap to zoom past the overlay information bubbles).
+- The idea then is that those bubbles can be interacted with separately from the background through taps.  I also expect to soon animate them using https://github.com/FormidableLabs/react-animations, which is a React-based implementation of animate.css.
 - There's some work left to do with constraining the types of OpenSeadragon interactions that I want to permit.  For example, the graphic should not be able to slide around beyond the boundaries of the container.
-- I should also consider constraining the UI interactions.  For instance, we really want to completely eliminate the viewport zoom (sorry, Aria); if we do not do this, then the containing menu system can become confused by the gestures.  Along these same lines, I should probably prevent this OpenSeadragon container from having any vertical scrollbars (this panning functionality already exists with OpenSeadragon, of course, and having both creates significant confusion).
+- I should also consider constraining the UI interactions.  For instance, we really want to completely eliminate the viewport zoom (sorry, Aria); if we do not do this, then the containing menu system can become confused by the gestures (like up-down and left-right swiping, which I hope to be able to implement).
+- Along these same lines, I should probably prevent this OpenSeadragon container from having any vertical scrollbars (this panning functionality already exists with OpenSeadragon, of course, and having both creates significant confusion).
 - I might decide, if possible, to activate OpenSeadragon interactions with a tap on the graphic.  This would allow me to switch between the standard UI (and overlay) interactions, and OpenSeadragon interactions.
 - What I am ultimately working towards with this prototype is something similar to https://github.com/Emigre/openseadragon-annotations.  I want to be able to annotate the image pyramid and persist those annotations (although my annotations will not be hand-drawn drawings -- but rather more like interactive GIS icons with text labels, and other more structured annotation elements).
-- I expect to rework the menu system; it's placed there as a proof-of-concept to observe how OpenSeadragon interacts with its parent elements.
-- There's a lot of work left to do with this.
+- I expect to rework the menu system, possibly swapping it out with a better interface; it's placed there as a proof-of-concept to observe how OpenSeadragon interacts with its parent elements.
+- There's a lot of work left to do with this, but also a fairly specific vision of what must be constructed.  For more details on what that vision is, read further.
 
 ## Things Devs Should Know About OpenSeadragon
 
@@ -36,6 +40,8 @@ See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 - Getting React.js to play with OpenSeadragon is no minor matter, as they are constructed on two very different notions: OpenSeadragon assumes that access to the DOM is readily available, whereas React of course begs to differ.  I'll over time be checking in with other React developers to get feedback on the current approach.
 - MagickSlicer generates a .dzi file and a directory.  The directory needs to be publicly accessible so that OpenSeadragon can reference the image pyramid by URL.  This is of course quite different from how most images are served.
 - I found that the easiest way to get the pyramid image data from the .dzi file into OpenSeadragon was to simply pass the XML directly into OpenSeadragon as parameters.  Once you do that, you can ditch the original .dzi file.  Looking at other online projects was very helpful for figuring this out.
+
+# The Backstory
 
 ## Defining the Problem of Visualizing Scientific Controversies
 
