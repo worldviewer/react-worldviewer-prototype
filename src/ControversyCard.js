@@ -1,33 +1,12 @@
 import React, { Component } from 'react';
-import base from '../graphics/halton-arp-the-modern-galileo-bbal-card.jpg';
 import Bubble from './Bubble';
 import Icon from './Icon';
 import './ControversyCard.scss';
-import OpenSeadragon from 'openseadragon';
+import DeepZoom from './DeepZoom';
 
 class ControversyCard extends Component {
-	shouldComponentUpdate(nextProps, nextState) {
-		return false;
-	}
-
-	componentDidMount(nextProps, nextState) {
-		let deepZoom = OpenSeadragon({
-			element: document.querySelector('.Card'),
-			showNavigator: true,
-			prefixUrl: "pyramid_files/",
-			tileSources: {
-				Image: {
-					xmlns: 'http://schemas.microsoft.com/deepzoom/2008',
-					Format: 'jpg',
-					Overlap: '0',
-					TileSize: '254',
-					Size: {
-						Height: '9999',
-						Width: '7142'
-					}
-				}
-			}
-		});
+	handleZoom() {
+		console.log('toggle bubbles, icon and text');
 	}
 
 	render() {
@@ -42,14 +21,13 @@ class ControversyCard extends Component {
 			{source: 'bubble7.png', left: '78vw', top: '49vw', width: '16vw', numleft: '11vw', numtop: '0.5vw'}
 		];
 
-		let deepZoomStyles = {
-			width: '100%',
-			height: '100%'
-		};
-
 		return (
 			<div className="Deep-Zoom-Graphic">
-				<div className="Card" style={deepZoomStyles}></div>
+				<DeepZoom
+					url={process.env.PUBLIC_URL +
+						"halton-arp-the-modern-galileo-bbal-card.jpg"}
+					onZoom={this.handleZoom}
+				/>
 
 				<p className="Title Left">Halton<br/>Arp</p>
 				<p className="Title Right">The<br/>Modern<br/>Galileo</p>

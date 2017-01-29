@@ -54,10 +54,6 @@ $color-faded-white: #efdfd1;
 	position: relative;
 	top: 45px;
 
-	.Base-Layer {
-		width: 100%;
-	}
-
 	.Title {
 		@include title;
 	}
