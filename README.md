@@ -2,6 +2,12 @@
 
 A GIS-inspired approach to visualizing discourse on scientific controversies, inspired by Flemming Hansen and built in React.js for mobile devices
 
+The static graphic that I'll be converting into an interactive, deep-zoomable infographic ...
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/halton-arp-the-modern-galileo-bbal-card-7percent-rez.jpg" />
+</p>
+
 ## State of the Prototype
 
 - MagickSlicer was used to create a DZI image pyramid for the large background jpeg.
