@@ -1,4 +1,5 @@
 import React from 'react';
+import './Bubble.scss';
 
 let Bubble = function statelessFunctionComponentClass(props) {
 	let source = require('../../graphics/' + props.source);
@@ -40,7 +41,7 @@ let Bubble = function statelessFunctionComponentClass(props) {
 		<div style={divStyle}>
 			<img
 				alt="Figure"
-				className={"Bubble" + bubbleNumber}
+				className={"Bubble Bubble" + bubbleNumber}
 				src={source}
 				style={imgStyle}
 			/>

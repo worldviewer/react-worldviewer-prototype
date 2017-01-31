@@ -3,7 +3,7 @@ import './App.scss';
 import ControversyCard from './ControversyCard/ControversyCard';
 import mobiscroll from './mobiscroll/mobiscroll.custom-3.0.1.min';
 import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
-import './mobiscroll/mobiscroll-prevnext.css';
+import './mobiscroll/mobiscroll-prevnext.scss';
 
 var App = React.createClass({
 	prev: function() {

@@ -1,12 +1,24 @@
 import React from 'react';
 import OpenSeadragon from 'openseadragon';
+import './DeepZoom.scss';
 
 const DeepZoom = React.createClass({
+	getInitialState: function () {
+		let width = document.documentElement.clientWidth;
+
+		return {
+			cardStyle: {
+				width: width,
+				height: width*1.4
+			}
+		}
+	},
+
 	// shouldComponentUpdate: function () {
 	// 	return false;
 	// },
 
-	createViewer: function() {
+	createViewer: function () {
 		this.viewer = OpenSeadragon({
 			id: 'openseadragon',
 			visibilityRatio: 1.0,
@@ -32,20 +44,33 @@ const DeepZoom = React.createClass({
 				}
 			}
 		});
+
+		window.onresize = this.setupResizeHandler;
 	},
 
 	// Change overlays based on OpenSeadragon events
-	setupZoomHandler: function() {
+	setupZoomHandler: function () {
 
 	},
 
+	setupResizeHandler: function () {
+		let width = document.documentElement.clientWidth;
+
+		this.setState({
+			cardStyle: {
+				width: width,
+				height: width*1.4
+			}
+		});
+	},
+
 	// Show overlays if zoom event ends and we are at home
-	showOverlays: function() {
+	showOverlays: function () {
 
 	},
 
 	// Hide overlays at the start of all zoom events
-	hideOverlays: function() {
+	hideOverlays: function () {
 
 	},
 
@@ -54,15 +79,8 @@ const DeepZoom = React.createClass({
 	},
 
 	render: function () {
-		let width = document.documentElement.clientWidth;
-
-		let cardStyle = {
-			width: width,
-			height: width*1.4
-		}
-
 		return (
-			<div className="Card" id="openseadragon" style={cardStyle}></div>			
+			<div className="Card" id="openseadragon" style={this.state.cardStyle}></div>
 		);
 	}
 });

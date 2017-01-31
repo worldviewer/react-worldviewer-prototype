@@ -1,6 +1,11 @@
 /* Demo specific styling */
-.md-prevnext .mbsc-apps-ul {
-    font-size: 16px;
+.md-prevnext {
+    overflow: hidden;
+
+    .md-apps-ul {
+        font-size: 16px;
+        overflow: hidden;
+    }
 }
 
 .md-apps-tab {
@@ -16,7 +21,7 @@
     top: 50%;
     left: 0;
     margin-top: -35px;
-    width: 35px;∏
+    width: 35px;
     height: 70px;
     background: rgba(0, 0, 0, .5);
     line-height: 70px;
@@ -34,6 +39,3 @@
     right: 0;
 }
 
-.md-prevnext {
-    padding-bottom: 75px;
-}
