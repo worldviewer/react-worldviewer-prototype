@@ -21,6 +21,7 @@ const DeepZoom = React.createClass({
 	createViewer: function () {
 		this.viewer = OpenSeadragon({
 			id: 'openseadragon',
+			constrainDuringPan: true,
 			visibilityRatio: 1.0,
 			defaultZoomLevel: 1,
 			minZoomLevel: 1,
