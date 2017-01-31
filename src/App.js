@@ -13,7 +13,10 @@ var App = React.createClass({
 		this.refs.menustrip.instance.next();
 	},
 	componentDidMount: function() {
-		this.addEventListener('gesturestart', (e) => {
+		let mountedApp = document.querySelector('.App');
+
+		mountedApp.addEventListener('gesturestart', (e) => {
+			console.log('denied');
 			e.preventDefault();
 		});
 	},
