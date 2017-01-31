@@ -12,6 +12,11 @@ var App = React.createClass({
 	next: function(event, inst) {
 		this.refs.menustrip.instance.next();
 	},
+	componentDidMount: function() {
+		this.addEventListener('gesturestart', (e) => {
+			e.preventDefault();
+		});
+	},
 	render: function() {
 		return (
 			<div className="App">
