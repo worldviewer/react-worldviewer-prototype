@@ -62,16 +62,22 @@ const DeepZoom = React.createClass({
 				height: width*1.4
 			}
 		});
+
+		if (this.viewer.isFullPage()) {
+			this.showOverlays();
+		} else {
+			this.hideOverlays();
+		}
 	},
 
 	// Show overlays if zoom event ends and we are at home
 	showOverlays: function () {
-
+		console.log('show overlays');
 	},
 
 	// Hide overlays at the start of all zoom events
 	hideOverlays: function () {
-
+		console.log('hide overlays');
 	},
 
 	componentDidMount: function () {
