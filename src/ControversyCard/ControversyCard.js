@@ -5,10 +5,6 @@ import './ControversyCard.scss';
 import DeepZoom from '../DeepZoom/DeepZoom';
 
 class ControversyCard extends Component {
-	handleZoom() {
-		console.log('toggle bubbles, icon and text');
-	}
-
 	render() {
 		let bubbles = [
 			{source: 'bubble0.png', left: '7vw', top: '23vw', width: '24vw', numleft: '20vw', numtop: '4.5vw'},
@@ -21,19 +17,27 @@ class ControversyCard extends Component {
 			{source: 'bubble7.png', left: '78vw', top: '49vw', width: '16vw', numleft: '11vw', numtop: '0.5vw'}
 		];
 
+		let textStyle = {
+			display: this.props.showOverlay ? 'block' : 'none'
+		};
+
 		return (
 			<div className="Deep-Zoom-Graphic">
 				<DeepZoom
 					url={process.env.PUBLIC_URL + "/pyramid_files/"}
-					onZoom={this.handleZoom}
+					onZoom={this.props.zoomHandler}
 				/>
 
-				<p className="Title Left">Halton<br/>Arp</p>
-				<p className="Title Right">The<br/>Modern<br/>Galileo</p>
-				<p className="Summary">He Was a Professional Astronomer Who<br/>Began his Career as Edwin Hubble's Assistant / While Compiling a List of Peculiar Galaxies, Arp Discovered that High-Redshift Quasars are Commonly Associated with or Even Connected by Filaments to Lower-Redshift Galaxies / Since the Big Bang Requires that Differences in Redshift Place the Objects at Different Locations, Astronomers Commonly Reject Arp's Claims / But if he is Right, then there Was No Big Bang</p>
+				<p className="Title Left"
+					style={textStyle}>Halton<br/>Arp</p>
+				<p className="Title Right"
+					style={textStyle}>The<br/>Modern<br/>Galileo</p>
+				<p className="Summary"
+					style={textStyle}>He Was a Professional Astronomer Who<br/>Began his Career as Edwin Hubble's Assistant / While Compiling a List of Peculiar Galaxies, Arp Discovered that High-Redshift Quasars are Commonly Associated with or Even Connected by Filaments to Lower-Redshift Galaxies / Since the Big Bang Requires that Differences in Redshift Place the Objects at Different Locations, Astronomers Commonly Reject Arp's Claims / But if he is Right, then there Was No Big Bang</p>
 
 				{ bubbles.map( (el,i) => 
 					<Bubble
+						show={this.props.showOverlay}
 						key={i}
 						left={el.left}
 						num={i}
@@ -46,6 +50,7 @@ class ControversyCard extends Component {
 				)}
 
 				<Icon
+					show={this.props.showOverlay}
 					left='78vw'
 					top='67vw'
 					width='13vw'

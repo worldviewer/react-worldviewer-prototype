@@ -5,6 +5,7 @@ let Bubble = function statelessFunctionComponentClass(props) {
 	let source = require('../../graphics/' + props.source);
 
 	let divStyle = {
+		display: props.show ? 'block' : 'none',
 		left: props.left,
 		position: 'absolute',
 		top: props.top,

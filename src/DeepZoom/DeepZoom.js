@@ -10,7 +10,8 @@ const DeepZoom = React.createClass({
 			cardStyle: {
 				width: width,
 				height: width*1.4
-			}
+			},
+			isZoomedOut: true
 		}
 	},
 
@@ -47,11 +48,15 @@ const DeepZoom = React.createClass({
 		});
 
 		window.onresize = this.setupResizeHandler;
+		this.setupZoomHandler(this.viewer);
 	},
 
 	// Change overlays based on OpenSeadragon events
-	setupZoomHandler: function () {
-
+	setupZoomHandler: function (viewer) {
+		viewer.addHandler('zoom', (data) => {
+			this.setState( {isZoomedOut: data.zoom} );
+			this.props.onZoom(data.zoom);
+		});
 	},
 
 	setupResizeHandler: function () {
@@ -63,12 +68,6 @@ const DeepZoom = React.createClass({
 				height: width*1.4
 			}
 		});
-
-		if (this.viewer.isFullPage()) {
-			this.showOverlays();
-		} else {
-			this.hideOverlays();
-		}
 	},
 
 	// Show overlays if zoom event ends and we are at home

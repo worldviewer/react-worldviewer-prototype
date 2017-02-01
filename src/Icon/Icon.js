@@ -4,6 +4,7 @@ let Icon = function statelessFunctionComponentClass(props) {
 	let source = require('../../graphics/icon.png');
 
 	let style = {
+		display: props.show ? 'block' : 'none',
 		position: 'absolute',
 		left: props.left,
 		top: props.top,

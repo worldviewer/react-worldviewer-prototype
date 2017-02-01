@@ -6,11 +6,19 @@ import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 import './mobiscroll/mobiscroll-prevnext.scss';
 
 var App = React.createClass({
+	getInitialState: function() {
+		return {
+			overlay: true
+		}
+	},
 	prev: function() {
 		this.refs.menustrip.instance.prev();
 	},
 	next: function(event, inst) {
 		this.refs.menustrip.instance.next();
+	},
+	toggleOverlay: function(zoom) {
+		this.setState( {overlay: zoom <= 1.1} );
 	},
 	componentDidMount: function() {
 		let mountedApp = document.querySelector('.App');
@@ -21,6 +29,10 @@ var App = React.createClass({
 		});
 	},
 	render: function() {
+		let prevNextStyle = {
+			display: this.state.overlay ? 'block' : 'none'
+		}
+
 		return (
 			<div className="App">
 				<div className="md-prevnext">
@@ -45,14 +57,20 @@ var App = React.createClass({
 	                        <li data-tab="tab-arp-quote">Arp Quote</li>
 						</mobiscroll.Menustrip>
 
-						<ControversyCard bubbles={8} />
+						<ControversyCard
+							zoomHandler={this.toggleOverlay}
+							bubbles={8}
+							showOverlay={this.state.overlay}
+						/>
 						<div 
 							onClick={this.prev}
-							className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5">
+							className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5"
+							style={prevNextStyle}>
 						</div>
 	                    <div
 	                    	onClick={this.next}
-	                    	className="md-next md-np md-n mbsc-ic mbsc-ic-arrow-right5">
+	                    	className="md-next md-np md-n mbsc-ic mbsc-ic-arrow-right5"
+	                    	style={prevNextStyle}>
                     	</div>
 	                </div>
 				</div>
