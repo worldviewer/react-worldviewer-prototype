@@ -50,9 +50,9 @@ class ControversyCard extends Component {
 				<ReactCSSTransitionGroup
 					transitionName="zoom"
 					transitionAppear={true}
-					transitionAppearTimeout={300}
-					transitionEnterTimeout={300}
-					transitionLeaveTimeout={300}
+					transitionAppearTimeout={500}
+					transitionEnterTimeout={500}
+					transitionLeaveTimeout={500}
 				>
 					{ this.state.bubbles.map( (el,i) => 
 						<Bubble

@@ -111,7 +111,7 @@ $color-faded-white: #efdfd1;
 	.zoom-enter.zoom-enter-active,
 	.zoom-appear.zoom-appear-active {
 		transform: scale(1);
-		transition: all .3s ease-in;
+		transition: all .5s ease-in;
 	}
 
 	.zoom-leave {
@@ -120,6 +120,6 @@ $color-faded-white: #efdfd1;
 
 	.zoom-leave.zoom-leave-active {
 		transform: scale(0);
-		transition: all .3s ease-in;
+		transition: all .5s ease-in;
 	}
 }
