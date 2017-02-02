@@ -103,4 +103,23 @@ $color-faded-white: #efdfd1;
 		margin: 0;
 		padding: 0;
 	}
+
+	.zoom-enter, .zoom-appear {
+		transform: scale(0);
+	}
+
+	.zoom-enter.zoom-enter-active,
+	.zoom-appear.zoom-appear-active {
+		transform: scale(1);
+		transition: all .3s ease-in;
+	}
+
+	.zoom-leave {
+		transform: scale(1);
+	}
+
+	.zoom-leave.zoom-leave-active {
+		transform: scale(0);
+		transition: all .3s ease-in;
+	}
 }

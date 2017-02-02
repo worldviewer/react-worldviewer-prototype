@@ -53,7 +53,11 @@
   },
   "dependencies": {
     "path": "^0.12.7",
+    "radium": "^0.18.1",
     "react": "^15.4.2",
+    "react-addons-css-transition-group": "^15.4.2",
+    "react-addons-transition-group": "^15.4.2",
+    "react-animations": "^0.1.0",
     "react-dom": "^15.4.2"
   },
   "scripts": {
