@@ -1,63 +1,107 @@
 import React from 'react';
 import './Bubble.scss';
+import TransitionGroup from 'react-addons-transition-group';
+import { TweenMax } from 'gsap';
 
-let Bubble = function statelessFunctionComponentClass(props) {
-	let source = require('../../graphics/' + props.source);
+var AnimatedBubble = React.createClass({
+	componentWillAppear: function (callback) {
+		const el = this.container;
+    	TweenMax.fromTo(el, 4.0, {opacity: 0}, {opacity: 1, onComplete: callback});		
+	},
 
-	let divStyle = {
-		display: props.show ? 'block' : 'none',
-		left: props.left,
-		position: 'absolute',
-		top: props.top,
-		width: props.width
-	};
+	componentWillEnter: function (callback) {
+		const el = this.container;
+    	TweenMax.fromTo(el, 2.0, {opacity: 0}, {opacity: 1, onComplete: callback});		
+	},
 
-	// Corrects an issue with creating circles w/ border-radius on mobile devices
-	let roundedBorderStyle = {
-		backgroundColor: '#edf5f1',
-		border: '.5vw solid #edf5f1',
-		borderRadius: '50%',
-		height: '2vw',
-		left: props.numleft,
-		top: props.numtop,
-		position: 'absolute',
-		width: '2vw'
-	}
+	componentDidEnter: function() {
+	},
 
-	let bubbleNumberStyle = {
-		backgroundColor: '#edf5f1',
-		borderRadius: '50%',
-		height: '2vw',
-		position: 'absolute',
-		width: '2vw'
-	};
+	componentWillLeave: function (callback) {
+	    const el = this.container;
+	    TweenMax.fromTo(el, 2.0, {opacity: 1}, {opacity: 0, onComplete: callback});		
+	},
 
-	let imgStyle = {
-		width: '100%'
-	};
+	componentDidLeave: function() {
+	},
 
-	let bubbleNumber = props.num;
+	render: function() {
+		let source = require('../../graphics/' + this.props.source);
 
-	return (
-		<div style={divStyle}>
-			<img
-				alt="Figure"
-				className={"Bubble Bubble" + bubbleNumber}
-				src={source}
-				style={imgStyle}
-			/>
+		let divStyle = {
+			left: this.props.left,
+			position: 'absolute',
+			top: this.props.top,
+			width: this.props.width
+		};
 
-			<div style={roundedBorderStyle}>
-				<div
-					alt="Slide Number"
-					className="Bubble-Number"
-					style={bubbleNumberStyle}
-				>
-					<p>{bubbleNumber + 1}</p>
+		// Corrects an issue with creating circles w/ border-radius on mobile devices
+		let roundedBorderStyle = {
+			backgroundColor: '#edf5f1',
+			border: '.5vw solid #edf5f1',
+			borderRadius: '50%',
+			height: '2vw',
+			left: this.props.numleft,
+			top: this.props.numtop,
+			position: 'absolute',
+			width: '2vw'
+		}
+
+		let bubbleNumberStyle = {
+			backgroundColor: '#edf5f1',
+			borderRadius: '50%',
+			height: '2vw',
+			position: 'absolute',
+			width: '2vw'
+		};
+
+		let imgStyle = {
+			width: '100%'
+		};
+
+		let bubbleNumber = this.props.num;
+
+		return (
+			<div style={divStyle} ref={c => this.container = c}>
+				<img
+					alt="Figure"
+					className={"Bubble Bubble" + bubbleNumber}
+					src={source}
+					style={imgStyle}
+				/>
+
+				<div style={roundedBorderStyle}>
+					<div
+						alt="Slide Number"
+						className="Bubble-Number"
+						style={bubbleNumberStyle}
+					>
+						<p>{bubbleNumber + 1}</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	);
-};
+		)
+	}
+});
+
+var Bubble = React.createClass({
+	render: function() {
+		return (
+			<TransitionGroup component="div">
+				{ this.props.showOverlay &&
+					<AnimatedBubble
+						left={this.props.left}
+						num={this.props.num}
+						numleft={this.props.numleft}
+						numtop={this.props.numtop}
+						source={this.props.source}
+						top={this.props.top}
+						width={this.props.width}
+					/>
+				}
+			</TransitionGroup>
+		);
+	}
+});
 
 export default Bubble;

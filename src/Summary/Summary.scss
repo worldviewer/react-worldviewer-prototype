@@ -1,0 +1,33 @@
+$color-faded-white: #efdfd1;
+
+@font-face {
+    font-family: 'LeagueGothic-RegularThinner';
+    src: url('../../fonts/LeagueGothic-RegularThinner.woff2') format('woff2'),
+    	 url('../../fonts/LeagueGothic-RegularThinner.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@mixin summary {
+	color: $color-faded-white;
+	font-family: 'LeagueGothic-RegularThinner';
+	font-size: 4.20vw;
+	letter-spacing: .1vw;
+	line-height: 5.6vw;
+	margin: 0;
+	margin-left: 7vw;
+	position: absolute;
+	text-transform: uppercase;
+	transform: scale(1.23, 1);	
+}
+
+.Summary {
+	@include summary;
+
+	bottom: 0;
+	overflow: hidden;
+	padding-bottom: 4.5vw;
+	padding-left: 7.5vw;
+	padding-right: 12.8vw;
+	text-align: left;
+}

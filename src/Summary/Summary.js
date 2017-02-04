@@ -1,8 +1,9 @@
 import React from 'react';
+import './Summary.scss';
 import TransitionGroup from 'react-addons-transition-group';
 import { TweenMax } from 'gsap';
 
-var AnimatedIcon = React.createClass({
+var AnimatedSummary = React.createClass({
 	componentWillAppear: function (callback) {
 		const el = this.container;
     	TweenMax.fromTo(el, 4.0, {opacity: 0}, {opacity: 1, onComplete: callback});		
@@ -25,41 +26,29 @@ var AnimatedIcon = React.createClass({
 	},
 
 	render: function() {
-		let source = require('../../graphics/icon.png');
-
-		let style = {
-			position: 'absolute',
-			left: this.props.left,
-			top: this.props.top,
-			width: this.props.width
-		}
-
 		return (
-			<img
-				alt="Figure"
-				className="Icon"
+			<p
+				className={"Summary " + this.props.position}
 				ref={c => this.container = c}
-				src={source}
-				style={style}
-			/>
+			>
+				{this.props.children}
+			</p>
 		)
 	}
 });
 
-var Icon = React.createClass({
+var Summary = React.createClass({
 	render: function() {
 		return (
 			<TransitionGroup component="div">
-				{this.props.showOverlay &&
-					<AnimatedIcon
-						left={this.props.left}
-						top={this.props.top}
-						width={this.props.width}
-					/>
+				{ this.props.showOverlay &&
+					<AnimatedSummary>
+						{this.props.children}
+					</AnimatedSummary>
 				}
 			</TransitionGroup>
 		);
 	}
 });
 
-export default Icon;
+export default Summary;

@@ -1,12 +1,4 @@
 @font-face {
-    font-family: 'LeagueGothic-Regular';
-    src: url('../../fonts/LeagueGothic-Regular.woff2') format('woff2'),
-    	 url('../../fonts/LeagueGothic-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'LeagueGothic-Italic';
     src: url('../../fonts/LeagueGothic-Italic.woff2') format('woff2'),
     	 url('../../fonts/LeagueGothic-Italic.woff') format('woff');
@@ -14,78 +6,10 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'LeagueGothic-RegularThinner';
-    src: url('../../fonts/LeagueGothic-RegularThinner.woff2') format('woff2'),
-    	 url('../../fonts/LeagueGothic-RegularThinner.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-$color-faded-white: #efdfd1;
-
-@mixin title {
-	color: $color-faded-white;
-	font-family: 'LeagueGothic-Regular';
-	font-size: 7.5vw;
-	letter-spacing: .2vw;
-	line-height: 7.6vw;
-	margin: 0;
-	position: absolute;
-	text-transform: uppercase;
-	transform: scale(1.25, 1);	
-}
-
-@mixin summary {
-	color: $color-faded-white;
-	font-family: 'LeagueGothic-RegularThinner';
-	font-size: 4.20vw;
-	letter-spacing: .1vw;
-	line-height: 5.6vw;
-	margin: 0;
-	margin-left: 7vw;
-	position: absolute;
-	text-transform: uppercase;
-	transform: scale(1.23, 1);	
-}
-
 .Deep-Zoom-Graphic {
 	overflow: hidden;
 	position: relative;
 	top: 45px;
-
-	.Title {
-		@include title;
-
-		overflow: hidden;
-	}
-
-	.Left {
-		left: 0;
-		padding-left: 7.8vw;
-		padding-top: 6.3vw;
-		text-align: left;
-		top: 0;
-	}
-
-	.Right {
-		padding-right: 7.8vw;
-		padding-top: 6.3vw;
-		right: 0;
-		text-align: right;
-		top: 4.2vw;
-	}
-
-	.Summary {
-		@include summary;
-
-		bottom: 0;
-		overflow: hidden;
-		padding-bottom: 4.5vw;
-		padding-left: 7.5vw;
-		padding-right: 12.8vw;
-		text-align: left;
-	}
 
 	.Bubble-Number {
 		align-items: center;
@@ -102,24 +26,5 @@ $color-faded-white: #efdfd1;
 		font-size: 1.5vw;
 		margin: 0;
 		padding: 0;
-	}
-
-	.zoom-enter, .zoom-appear {
-		transform: scale(0);
-	}
-
-	.zoom-enter.zoom-enter-active,
-	.zoom-appear.zoom-appear-active {
-		transform: scale(1);
-		transition: all .5s ease-in;
-	}
-
-	.zoom-leave {
-		transform: scale(1);
-	}
-
-	.zoom-leave.zoom-leave-active {
-		transform: scale(0);
-		transition: all .5s ease-in;
 	}
 }
