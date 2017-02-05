@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Bubble from '../Bubble/Bubble';
 import Icon from '../Icon/Icon';
 import './ControversyCard.scss';
@@ -6,11 +6,9 @@ import DeepZoom from '../DeepZoom/DeepZoom';
 import Title from '../Title/Title';
 import Summary from '../Summary/Summary';
 
-class ControversyCard extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
+var ControversyCard = React.createClass({
+	getInitialState: function() {
+		return {
 			bubbles: [
 				{source: 'bubble0.png', left: '7vw', top: '23vw', width: '24vw', numleft: '20vw', numtop: '4.5vw'},
 				{source: 'bubble1.png', left: '6vw', top: '55vw', width: '14vw', numleft: '5.5vw', numtop: '-1vw'},
@@ -20,41 +18,65 @@ class ControversyCard extends Component {
 				{source: 'bubble5.png', left: '70vw', top: '36vw', width: '9vw', numleft: '0vw', numtop: '0vw'},
 				{source: 'bubble6.png', left: '69vw', top: '46vw', width: '9vw', numleft: '0.5vw', numtop: '6.5vw'},
 				{source: 'bubble7.png', left: '78vw', top: '49vw', width: '16vw', numleft: '11vw', numtop: '0.5vw'}
-			]
+			],
+			spin: [false, false, false, false, false, false, false, false]
 		}
-	}
+	},
 
-	render() {
+	spinBubbleNumber: function(bubbleNumber) {
+		console.log(bubbleNumber);
+		let newSpinState = this.state.spin;
+		newSpinState[bubbleNumber] = true;
+		
+		console.log('newSpinState:');
+		console.log(newSpinState);
+		console.log('this.state.spin:');
+		console.log(this.state.spin);
+
+		this.setState({
+			spin: newSpinState
+		});
+	},
+
+	spinBubbleNumbers: function() {
+		this.state.spin.forEach( (el, i) => {
+			console.log('el: ' + el);
+			console.log('i*1000: ' + i*1000);
+			setTimeout(this.spinBubbleNumber(i), i*1000);
+		});
+	},
+
+	componentDidMount: function() {
+		setTimeout(this.spinBubbleNumbers, 5000);
+	},
+
+	render: function() {
 		return (
 			<div className="Deep-Zoom-Graphic">
 				<DeepZoom
 					url={process.env.PUBLIC_URL + "/pyramid_files/"}
-					onZoom={this.props.zoomHandler}
-				/>
+					onZoom={this.props.zoomHandler} />
 
 				<Title
 					key="left"
 					position="Left"
-					showOverlay={this.props.showOverlay}
-				>
+					showOverlay={this.props.showOverlay}>
 					Halton<br/>Arp
 				</Title>
 
 				<Title
 					key="right"
 					position="Right"
-					showOverlay={this.props.showOverlay}
-				>
+					showOverlay={this.props.showOverlay}>
 					The<br/>Modern<br/>Galileo
 				</Title>
 
 				<Summary
-					showOverlay={this.props.showOverlay}
-				>
+					showOverlay={this.props.showOverlay}>
 					He Was a Professional Astronomer Who<br/>Began his Career as Edwin Hubble's Assistant / While Compiling a List of Peculiar Galaxies, Arp Discovered that High-Redshift Quasars are Commonly Associated with or Even Connected by Filaments to Lower-Redshift Galaxies / Since the Big Bang Requires that Differences in Redshift Place the Objects at Different Locations, Astronomers Commonly Reject Arp's Claims / But if he is Right, then there Was No Big Bang
 				</Summary>
 
-				{ this.state.bubbles.map( (el,i) => 
+				{ this.state.bubbles.map( (el, i) => 
 					<Bubble
 						key={i}
 						left={el.left}
@@ -63,9 +85,9 @@ class ControversyCard extends Component {
 						numtop={el.numtop}
 						showOverlay={this.props.showOverlay}
 						source={el.source}
+						spin={this.state.spin[i]}
 						top={el.top}
-						width={el.width}
-					/>
+						width={el.width} />
 				)}
 
 				<Icon
@@ -73,11 +95,10 @@ class ControversyCard extends Component {
 					left='78vw'
 					showOverlay={this.props.showOverlay}
 					top='67vw'
-					width='13vw'
-				/>
+					width='13vw' />
 			</div>
 		);
 	}
-}
+});
 
 export default ControversyCard;

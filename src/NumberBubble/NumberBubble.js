@@ -1,12 +1,10 @@
 import React from 'react';
-import './Bubble.scss';
 import TransitionGroup from 'react-addons-transition-group';
 import { TweenMax, Bounce } from 'gsap';
-import NumberBubble from '../NumberBubble/NumberBubble';
 
-var AnimatedBubble = React.createClass({
+var AnimatedNumberBubble = React.createClass({
 	spinBubble: function() {
-		const el = this.numContainer['ref'];
+		const el = this.container['ref'];
 		TweenMax.fromTo(el, 0.5, {rotationY:0}, {rotationY:360});
 	},
 
@@ -36,58 +34,59 @@ var AnimatedBubble = React.createClass({
 	},
 
 	render: function() {
-		let source = require('../../graphics/' + this.props.source);
-
-		let divStyle = {
+		// Corrects an issue with creating circles w/ border-radius on mobile devices
+		let roundedBorderStyle = {
+			backgroundColor: '#edf5f1',
+			border: '.5vw solid #edf5f1',
+			borderRadius: '50%',
+			height: '2vw',
 			left: this.props.left,
-			position: 'absolute',
 			top: this.props.top,
-			width: this.props.width
-		};
+			position: 'absolute',
+			width: '2vw'
+		}
 
-		let imgStyle = {
-			width: '100%'
+		let bubbleNumberStyle = {
+			backgroundColor: '#edf5f1',
+			borderRadius: '50%',
+			height: '2vw',
+			position: 'absolute',
+			width: '2vw'
 		};
 
 		let bubbleNumber = this.props.num;
 
 		return (
-			<div style={divStyle} ref={c => this.container = c}>
-				<img
-					alt="Figure"
-					className={"Bubble Bubble" + bubbleNumber}
-					src={source}
-					style={imgStyle} />
+			<div
+				style={roundedBorderStyle}
+				ref={c => this.container =
+					{ref:c, bubbleNumber:bubbleNumber}}>
+				<div
+					alt="Slide Number"
+					className="Bubble-Number"
+					style={bubbleNumberStyle}>
 
-				<NumberBubble
-					left={this.props.numleft}
-					num={this.props.num}
-					showOverlay={this.props.showOverlay}
-					spin={this.props.spin}
-					top={this.props.numtop} />
+					<p>{bubbleNumber + 1}</p>
+				</div>
 			</div>
 		)
 	}
 });
 
-var Bubble = React.createClass({
+var NumberBubble = React.createClass({
 	render: function() {
 		return (
 			<TransitionGroup component="div">
 				{ this.props.showOverlay &&
-					<AnimatedBubble
-						left={this.props.left}
+					<AnimatedNumberBubble
 						num={this.props.num}
-						numleft={this.props.numleft}
-						numtop={this.props.numtop}
-						showOverlay={this.props.showOverlay}
-						source={this.props.source}
+						left={this.props.left}
 						top={this.props.top}
-						width={this.props.width} />
+						spin={this.props.spin} />
 				}
 			</TransitionGroup>
 		);
 	}
 });
 
-export default Bubble;
+export default NumberBubble;
