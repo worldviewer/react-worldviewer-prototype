@@ -1,11 +1,11 @@
 import React from 'react';
 import TransitionGroup from 'react-addons-transition-group';
-import { TweenMax } from 'gsap';
+import { TweenMax, Bounce } from 'gsap';
 
 var AnimatedIcon = React.createClass({
 	componentWillAppear: function (callback) {
 		const el = this.container;
-    	TweenMax.fromTo(el, 4.0, {opacity: 0}, {opacity: 1, onComplete: callback});		
+		TweenMax.fromTo(el, 0.5, {scale:0.5}, {scale:1.0, ease:Bounce.easeOut, onComplete: callback});
 	},
 
 	componentWillEnter: function (callback) {
