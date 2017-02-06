@@ -26,7 +26,7 @@ var AnimatedNumberBubble = React.createClass({
 	},
 
 	componentWillReceiveProps: function(nextProps) {
-		nextProps.spin && this.spinBubble();
+		!this.props.spin && nextProps.spin && this.spinBubble();
 	},
 
 	render: function() {

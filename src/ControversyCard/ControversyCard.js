@@ -67,12 +67,18 @@ var ControversyCard = React.createClass({
 
 	handleBubbleClick: function(index) {
 		console.log('clicked bubble ' + index);
+		let prevState = this.state.activeBubble;
+		console.log('prevState: ' + prevState);
 
-		this.setState({
-			activeBubble: this.state.activeBubble ?
-				null :
-				index
-		});
+		if (prevState === null) {
+			this.setState({activeBubble: index});
+		} else if (prevState === index) {
+			this.setState({activeBubble: null});
+		} else {
+			this.setState({activeBubble: index});
+		}
+
+		console.log('this.state.activeBubble is now ' + this.state.activeBubble);
 	},
 
 	componentDidMount: function() {
@@ -107,6 +113,7 @@ var ControversyCard = React.createClass({
 
 				{ this.state.bubbles.map( (el, i) => 
 					<Bubble
+						active={this.state.activeBubble === i}
 						enterHandler={this.spinBubbleNumbers}
 						clickHandler={this.handleBubbleClick}
 						key={i}
