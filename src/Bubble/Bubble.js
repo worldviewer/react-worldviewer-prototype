@@ -14,12 +14,12 @@ var AnimatedBubble = React.createClass({
 		}
 	},
 
-	componentWillAppear: function (callback) {
+	componentWillAppear: function(callback) {
 		const el = this.container;
 		TweenMax.fromTo(el, 2, {scale:0, opacity:0}, {scale:1, opacity:1, ease:Bounce.easeOut, onComplete: callback});
 	},
 
-	componentWillEnter: function (callback) {
+	componentWillEnter: function(callback) {
 		const el = this.container;
     	TweenMax.fromTo(el, .5, {scale:1.5, opacity:0}, {scale:1, opacity:1, ease:Bounce.easeOut, onComplete: callback});
 	},
@@ -31,7 +31,7 @@ var AnimatedBubble = React.createClass({
 		}
 	},
 
-	componentWillLeave: function (callback) {
+	componentWillLeave: function(callback) {
 	    const el = this.container;
 	    TweenMax.to(el, .5, {scale:1.5, opacity:0, onComplete: callback});
 	},
@@ -52,8 +52,6 @@ var AnimatedBubble = React.createClass({
 	},
 
 	zoomBubble: function() {
-		console.log('zoom bubble ' + this.props.num);
-
 		const el = this.container;
 		TweenMax.fromTo(el, 2, {width:this.props.width, left:this.props.left, top:this.props.top, zIndex:2},
 			{width:'96vw', left:'2vw', top:'20vw', zIndex:10, ease:Elastic.easeOut});
@@ -67,8 +65,6 @@ var AnimatedBubble = React.createClass({
 	},
 
 	unzoomBubble: function() {
-		console.log('unzoom bubble ' + this.props.num);
-
 		const el = this.container;
 		TweenMax.fromTo(el, 2, {width:'96vw', left:'2vw', top:'20vw', zIndex: 10},
 			{width:this.props.width, left:this.props.left, top:this.props.top, zIndex:2, ease:Elastic.easeIn});

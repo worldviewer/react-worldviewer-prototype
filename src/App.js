@@ -11,15 +11,19 @@ var App = React.createClass({
 			overlay: true
 		}
 	},
+
 	prev: function() {
 		this.refs.menustrip.instance.prev();
 	},
+
 	next: function(event, inst) {
 		this.refs.menustrip.instance.next();
 	},
+
 	toggleOverlay: function(zoom) {
-		this.setState( {overlay: zoom <= 1.1} );
+		this.setState({overlay: zoom <= 1.1});
 	},
+
 	componentDidMount: function() {
 		let mountedApp = document.querySelector('.App');
 
@@ -28,6 +32,7 @@ var App = React.createClass({
 			e.preventDefault();
 		});
 	},
+
 	render: function() {
 		let prevNextStyle = {
 			display: this.state.overlay ? 'block' : 'none'

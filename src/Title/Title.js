@@ -4,7 +4,7 @@ import TransitionGroup from 'react-addons-transition-group';
 import { TweenMax, Power1 } from 'gsap';
 
 var AnimatedTitle = React.createClass({
-	componentWillAppear: function (callback) {
+	componentWillAppear: function(callback) {
 		const el = this.container;
 
 	    if (this.props.position === 'Center') {
@@ -16,7 +16,7 @@ var AnimatedTitle = React.createClass({
 		}
 	},
 
-	componentWillEnter: function (callback) {
+	componentWillEnter: function(callback) {
 		const el = this.container;
 
 	    if (this.props.position === 'Center') {
@@ -31,7 +31,7 @@ var AnimatedTitle = React.createClass({
 	componentDidEnter: function() {
 	},
 
-	componentWillLeave: function (callback) {
+	componentWillLeave: function(callback) {
 	    const el = this.container;
 
 	    if (this.props.position === 'Center') {

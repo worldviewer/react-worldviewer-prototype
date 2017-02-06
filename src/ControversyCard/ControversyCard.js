@@ -66,9 +66,7 @@ var ControversyCard = React.createClass({
 	},
 
 	handleBubbleClick: function(index) {
-		console.log('clicked bubble ' + index);
 		let prevState = this.state.activeBubble;
-		console.log('prevState: ' + prevState);
 
 		if (prevState === null) {
 			this.setState({activeBubble: index});
@@ -77,8 +75,6 @@ var ControversyCard = React.createClass({
 		} else {
 			this.setState({activeBubble: index});
 		}
-
-		console.log('this.state.activeBubble is now ' + this.state.activeBubble);
 	},
 
 	componentDidMount: function() {

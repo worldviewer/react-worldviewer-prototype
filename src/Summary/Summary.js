@@ -4,12 +4,12 @@ import TransitionGroup from 'react-addons-transition-group';
 import { TweenMax, Power1 } from 'gsap';
 
 var AnimatedSummary = React.createClass({
-	componentWillAppear: function (callback) {
+	componentWillAppear: function(callback) {
 		const el = this.container;
 		TweenMax.from(el, 1.0, { delay:1, y:300, opacity:0, ease:Power1.easeInOut, onComplete: callback });
 	},
 
-	componentWillEnter: function (callback) {
+	componentWillEnter: function(callback) {
 		const el = this.container;
     	TweenMax.from(el, 1.0, { delay:1, y:300, opacity:0, ease:Power1.easeInOut, onComplete: callback });		
 	},
@@ -17,7 +17,7 @@ var AnimatedSummary = React.createClass({
 	componentDidEnter: function() {
 	},
 
-	componentWillLeave: function (callback) {
+	componentWillLeave: function(callback) {
 	    const el = this.container;
 	    TweenMax.to(el, 1.0, { y:300, opacity:0, ease:Power1.easeInOut, onComplete: callback });	
 	},

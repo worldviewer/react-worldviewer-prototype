@@ -8,18 +8,18 @@ var AnimatedNumberBubble = React.createClass({
 		TweenMax.fromTo(el, 0.5, {rotationY:0}, {rotationY:360});
 	},
 
-	componentWillAppear: function (callback) {
+	componentWillAppear: function(callback) {
 		const el = this.container;
 		TweenMax.fromTo(el, 3.0, {scale:0}, {delay:1.5, scale:1.0, ease:Bounce.easeOut, onComplete: callback});
 	},
 
-	componentWillEnter: function (callback) {
+	componentWillEnter: function(callback) {
 	},
 
 	componentDidEnter: function() {
 	},
 
-	componentWillLeave: function (callback) {
+	componentWillLeave: function(callback) {
 	},
 
 	componentDidLeave: function() {
