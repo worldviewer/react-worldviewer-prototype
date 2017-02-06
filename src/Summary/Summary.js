@@ -1,17 +1,17 @@
 import React from 'react';
 import './Summary.scss';
 import TransitionGroup from 'react-addons-transition-group';
-import { TweenMax } from 'gsap';
+import { TweenMax, Power1 } from 'gsap';
 
 var AnimatedSummary = React.createClass({
 	componentWillAppear: function (callback) {
 		const el = this.container;
-    	TweenMax.fromTo(el, 4.0, {opacity: 0}, {opacity: 1, onComplete: callback});		
+		TweenMax.from(el, 1.0, { delay:1, y:300, opacity:0, ease:Power1.easeInOut, onComplete: callback });
 	},
 
 	componentWillEnter: function (callback) {
 		const el = this.container;
-    	TweenMax.fromTo(el, 2.0, {opacity: 0}, {opacity: 1, onComplete: callback});		
+    	TweenMax.from(el, 1.0, { delay:1, y:300, opacity:0, ease:Power1.easeInOut, onComplete: callback });		
 	},
 
 	componentDidEnter: function() {
@@ -19,7 +19,7 @@ var AnimatedSummary = React.createClass({
 
 	componentWillLeave: function (callback) {
 	    const el = this.container;
-	    TweenMax.fromTo(el, 2.0, {opacity: 1}, {opacity: 0, onComplete: callback});		
+	    TweenMax.to(el, 1.0, { y:300, opacity:0, ease:Power1.easeInOut, onComplete: callback });	
 	},
 
 	componentDidLeave: function() {

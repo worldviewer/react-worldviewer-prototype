@@ -4,33 +4,29 @@ import { TweenMax, Bounce } from 'gsap';
 
 var AnimatedNumberBubble = React.createClass({
 	spinBubble: function() {
-		const el = this.container['ref'];
+		const el = this.container;
 		TweenMax.fromTo(el, 0.5, {rotationY:0}, {rotationY:360});
 	},
 
 	componentWillAppear: function (callback) {
 		const el = this.container;
-		TweenMax.fromTo(el, 0.5, {scale:0.5}, {scale:1.0, ease:Bounce.easeOut, onComplete: callback});
+		TweenMax.fromTo(el, 3.0, {scale:0}, {delay:1.5, scale:1.0, ease:Bounce.easeOut, onComplete: callback});
 	},
 
 	componentWillEnter: function (callback) {
-		const el = this.container;
-    	TweenMax.fromTo(el, 2.0, {opacity: 0}, {opacity: 1, onComplete: callback});		
 	},
 
 	componentDidEnter: function() {
 	},
 
 	componentWillLeave: function (callback) {
-	    const el = this.container;
-	    TweenMax.fromTo(el, 2.0, {opacity: 1}, {opacity: 0, onComplete: callback});		
 	},
 
 	componentDidLeave: function() {
 	},
 
-	componentWillReceiveProps: function() {
-		this.props.spin && this.spinBubble();
+	componentWillReceiveProps: function(nextProps) {
+		nextProps.spin && this.spinBubble();
 	},
 
 	render: function() {
@@ -54,19 +50,16 @@ var AnimatedNumberBubble = React.createClass({
 			width: '2vw'
 		};
 
-		let bubbleNumber = this.props.num;
-
 		return (
 			<div
 				style={roundedBorderStyle}
-				ref={c => this.container =
-					{ref:c, bubbleNumber:bubbleNumber}}>
+				ref={c => this.container = c}>
 				<div
 					alt="Slide Number"
 					className="Bubble-Number"
 					style={bubbleNumberStyle}>
 
-					<p>{bubbleNumber + 1}</p>
+					<p>{this.props.num + 1}</p>
 				</div>
 			</div>
 		)

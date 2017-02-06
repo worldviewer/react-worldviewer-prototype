@@ -19,35 +19,53 @@ var ControversyCard = React.createClass({
 				{source: 'bubble6.png', left: '69vw', top: '46vw', width: '9vw', numleft: '0.5vw', numtop: '6.5vw'},
 				{source: 'bubble7.png', left: '78vw', top: '49vw', width: '16vw', numleft: '11vw', numtop: '0.5vw'}
 			],
-			spin: [false, false, false, false, false, false, false, false]
+			spin: [false, false, false, false, false, false, false, false],
+			timeouts: [0,0,0,0,0,0,0,0]
 		}
 	},
 
-	spinBubbleNumber: function(bubbleNumber) {
-		console.log(bubbleNumber);
-		let newSpinState = this.state.spin;
-		newSpinState[bubbleNumber] = true;
-		
-		console.log('newSpinState:');
-		console.log(newSpinState);
-		console.log('this.state.spin:');
-		console.log(this.state.spin);
+	disableSpinBubbleNumbers: function() {
+		this.state.timeouts.forEach( (timeout) => {
+			clearTimeout(timeout);
+		});
 
 		this.setState({
-			spin: newSpinState
+			spin: [false, false, false, false, false, false, false, false],
+			timeouts: [0,0,0,0,0,0,0,0]
 		});
 	},
 
 	spinBubbleNumbers: function() {
-		this.state.spin.forEach( (el, i) => {
-			console.log('el: ' + el);
-			console.log('i*1000: ' + i*1000);
-			setTimeout(this.spinBubbleNumber(i), i*1000);
-		});
+		this.disableSpinBubbleNumbers();
+
+		setTimeout(() => {
+			this.state.spin.forEach( (el, i) => {
+				let newTimeout = setTimeout(() => {
+					let newSpinState = [false, false, false, false, false, false, false, false];
+					newSpinState[i] = true;
+
+					this.setState({
+						spin: newSpinState
+					});
+				}, (i+1)*1000);
+
+				let timeouts = this.state.timeouts;
+				timeouts[i] = newTimeout;
+
+				this.setState({
+					timeouts: timeouts
+				});
+			});
+
+			// Reset the spin state to no spin
+			setTimeout(() => {
+				this.disableSpinBubbleNumbers();
+			}, 9000);
+		}, 5000);
 	},
 
 	componentDidMount: function() {
-		setTimeout(this.spinBubbleNumbers, 5000);
+		this.spinBubbleNumbers();
 	},
 
 	render: function() {
@@ -78,6 +96,7 @@ var ControversyCard = React.createClass({
 
 				{ this.state.bubbles.map( (el, i) => 
 					<Bubble
+						enterHandler={this.spinBubbleNumbers}
 						key={i}
 						left={el.left}
 						num={i}
@@ -85,7 +104,7 @@ var ControversyCard = React.createClass({
 						numtop={el.numtop}
 						showOverlay={this.props.showOverlay}
 						source={el.source}
-						spin={this.state.spin[i]}
+						spin={this.state.spin}
 						top={el.top}
 						width={el.width} />
 				)}
