@@ -20,7 +20,8 @@ var ControversyCard = React.createClass({
 				{source: 'bubble7.png', left: '78vw', top: '49vw', width: '16vw', numleft: '11vw', numtop: '0.5vw'}
 			],
 			spin: [false, false, false, false, false, false, false, false],
-			timeouts: [0,0,0,0,0,0,0,0]
+			timeouts: [0,0,0,0,0,0,0,0],
+			activeBubble: null
 		}
 	},
 
@@ -64,6 +65,16 @@ var ControversyCard = React.createClass({
 		}, 5000);
 	},
 
+	handleBubbleClick: function(index) {
+		console.log('clicked bubble ' + index);
+
+		this.setState({
+			activeBubble: this.state.activeBubble ?
+				null :
+				index
+		});
+	},
+
 	componentDidMount: function() {
 		this.spinBubbleNumbers();
 	},
@@ -97,6 +108,7 @@ var ControversyCard = React.createClass({
 				{ this.state.bubbles.map( (el, i) => 
 					<Bubble
 						enterHandler={this.spinBubbleNumbers}
+						clickHandler={this.handleBubbleClick}
 						key={i}
 						left={el.left}
 						num={i}

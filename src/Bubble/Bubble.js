@@ -30,6 +30,10 @@ var AnimatedBubble = React.createClass({
 	componentDidLeave: function() {
 	},
 
+	getComponent: function(index) {
+		this.props.clickHandler(index);
+	},
+
 	render: function() {
 		let source = require('../../graphics/' + this.props.source);
 
@@ -49,6 +53,7 @@ var AnimatedBubble = React.createClass({
 				<img
 					alt="Figure"
 					className={"Bubble Bubble" + this.props.num}
+					onClick={this.getComponent.bind(this, this.props.num)}
 					src={source}
 					style={imgStyle} />
 
@@ -70,6 +75,7 @@ var Bubble = React.createClass({
 			<TransitionGroup component="div">
 				{ this.props.showOverlay &&
 					<AnimatedBubble
+						clickHandler={this.props.clickHandler}
 						enterHandler={this.props.enterHandler}
 						key={this.props.num}
 						left={this.props.left}
