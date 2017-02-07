@@ -34,13 +34,16 @@ See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 - A good way to do this for static assets would be to set up a state variable within the `ControversyCard` component which indicates `allImagesLoaded`.  Then, assuming that the images are being pulled from an API -- which is a planned next step -- I should use promises to determine when each is loaded.  With this approach, I should be able to use a `Promise.all()` to then render all of the static assets at once, by passing the state down to the animated components via props.
 - The situation with the canvas is a bit different.  For the canvas, it will likely display better if we evaluate whether or not we display it within `componentWillReceiveProps`, like so:
 
+```
     componentWillReceiveProps: function(props) {
         props.allImagesHaveBeenLoaded && this.createViewer();
     },
+```
 
 - On low bandwidth connections, there is a flash of default font before the custom font loads.  What I should look into for this is use of a font load event.  There should be some sort of http status associated with the loading of the stylesheet (1 = loading, 2=ok,loaded, 3=redirect, 4=error, etc).  I may be able to use the above-mentioned `Promise.all()` to solve this same issue -- perhaps by initially styling the text as transparent (?).
 - One thing that came up in conversations with Rishat is that I should be using a React `ref` to style the width and height of the parent containing the canvas.  This should look something like ...
 
+```
     render: function() {
         return (
             <div
@@ -52,6 +55,7 @@ See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
             style={this.state.cardStyle} />
         );
     }
+```
 
 ... then ...
 
