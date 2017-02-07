@@ -28,10 +28,47 @@ See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 
 ## The Next Steps
 
-- Identify the cause of that vertical scrollbar on desktop, and get rid of it.  This panning functionality already exists with OpenSeadragon, of course, and having both creates significant confusion.
-- The idea is that those bubbles can be interacted with separately from the background, via taps.  The next step is to animate these overlay transitions and the on-screen loadings using https://github.com/FormidableLabs/react-animations -- which is a React-based implementation of animate.css.
+*Note: I had an excellent conversation with Rishat of codementor.io on Tuesday.  This gave me a chance to get some React-specific code review, and I've combined the notes from our conversation with my own former notes below ...*
+
+- When I load the graphic in low-bandwidth situations, I lose all control over the coordination of the animations.  What I would like to do is to load my assets first, and only then once those assets are present, begin rendering the animations.  Based on conversations with Rishat from codementor.io, I should deploy a different approach for the canvas and the static images.
+- A good way to do this for static assets would be to set up a state variable within the `ControversyCard` component which indicates `allImagesLoaded`.  Then, assuming that the images are being pulled from an API -- which is a planned next step -- I should use promises to determine when each is loaded.  With this approach, I should be able to use a `Promise.all()` to then render all of the static assets at once, by passing the state down to the animated components via props.
+- The situation with the canvas is a bit different.  For the canvas, it will likely display better if we evaluate whether or not we display it within `componentWillReceiveProps`, like so:
+
+    componentWillReceiveProps: function(props) {
+        props.allImagesHaveBeenLoaded && this.createViewer();
+    },
+
+- On low bandwidth connections, there is a flash of default font before the custom font loads.  What I should look into for this is use of a font load event.  There should be some sort of http status associated with the loading of the stylesheet (1 = loading, 2=ok,loaded, 3=redirect, 4=error, etc).  I may be able to use the above-mentioned `Promise.all()` to solve this same issue -- perhaps by initially styling the text as transparent (?).
+- One thing that came up in conversations with Rishat is that I should be using a React `ref` to style the width and height of the parent containing the canvas.  This should look something like ...
+
+    render: function() {
+        return (
+            <div
+            ref={node => {
+                this.root = node;
+            }}
+            className="Card"
+            id="openseadragon"
+            style={this.state.cardStyle} />
+        );
+    }
+
+... then ...
+
+    setupResizeHandler: function() {
+        let width = this.root.clientWidth;
+
+That will help better isolate the component from its surroundings.  Further, this is probably not really necessary ...
+
+    getInitialState: function() {
+        let width = document.documentElement.clientWidth;
+
+... at least not for now, while I am simply using 100vw (100% of client window width).  See https://facebook.github.io/react/docs/refs-and-the-dom.html for more information on that.
+- I should change `window.onresize` to `window.addEventListener('resize', {})`.
+- As I build out my React-canvas interactions, I'll probably want to start storing a lot more information about the canvas within my state.
+- Identify the cause of that vertical scrollbar on desktop, and get rid of it when zoom into the canvas is activated.  This panning functionality already exists with OpenSeadragon.  In order to get rid of it, it is not enough to just specify `overflow: hidden`.  I also need to specify either a `height` or `max-height`.
 - I might decide, if necessary, to activate OpenSeadragon interactions with a tap on the graphic.  This would allow me to switch between the standard UI (and overlay) interactions, and OpenSeadragon interactions.  So far, it seems unnecessary.
-- What I am ultimately working towards with this prototype is something similar to https://github.com/Emigre/openseadragon-annotations.  I want to be able to annotate the image pyramid and persist those annotations (although my annotations will not be hand-drawn drawings -- but rather more like interactive GIS icons with text labels, and other more structured annotation elements).
+- What I am ultimately working towards with this prototype is something similar to https://github.com/Emigre/openseadragon-annotations.  I want to be able to annotate the image pyramid and persist those annotations (although my annotations will not be hand-drawn drawings -- but rather more like interactive GIS icons with text labels, and other more structured annotation elements).  Based on advice from Rishat from codementor.io, I should keep track of the absolute canvas-based coordinates at all times in my React state, and use that zoom level and calculated box to determine whether or not to render any particular annotation overlay.  With this approach in mind, it may not be necessary to refer to the implementation above (?).
 - I expect to rework the menu system, possibly swapping it out with a better interface; it's placed there as a proof-of-concept to observe how OpenSeadragon interacts with its parent elements.
 - There's a lot of work left to do with this, but also a fairly specific vision of what must be constructed.  For more details on what that vision is, read further.
 
