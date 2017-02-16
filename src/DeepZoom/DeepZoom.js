@@ -47,7 +47,9 @@ const DeepZoom = React.createClass({
 			}
 		});
 
-		window.onresize = this.setupResizeHandler;
+		let resize = () => this.setupResizeHandler();
+
+		window.addEventListener('resize', resize);
 		this.setupZoomHandler(this.viewer);
 	},
 

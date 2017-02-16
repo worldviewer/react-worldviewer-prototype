@@ -68,7 +68,6 @@ That will help better isolate the component from its surroundings.  Further, thi
         let width = document.documentElement.clientWidth;
 
 ... at least not for now, while I am simply using 100vw (100% of client window width).  See https://facebook.github.io/react/docs/refs-and-the-dom.html for more information on that.
-- I should change `window.onresize` to `window.addEventListener('resize', {})`.
 - As I build out my React-canvas interactions, I'll probably want to start storing a lot more information about the canvas within my state.
 - Identify the cause of that vertical scrollbar on desktop, and get rid of it when zoom into the canvas is activated.  This panning functionality already exists with OpenSeadragon.  In order to get rid of it, it is not enough to just specify `overflow: hidden`.  I also need to specify either a `height` or `max-height`.
 - I might decide, if necessary, to activate OpenSeadragon interactions with a tap on the graphic.  This would allow me to switch between the standard UI (and overlay) interactions, and OpenSeadragon interactions.  So far, it seems unnecessary.
