@@ -4,12 +4,10 @@ import './DeepZoom.scss';
 
 const DeepZoom = React.createClass({
 	getInitialState: function() {
-		let width = document.documentElement.clientWidth;
-
 		return {
 			cardStyle: {
-				width: width,
-				height: width*1.4
+				width: '100vw',
+				height: '140vw'
 			},
 			isZoomedOut: true
 		}
@@ -34,15 +32,15 @@ const DeepZoom = React.createClass({
 			showSequenceControl: false,
 			tileSources: {
 				Image: {
-		            xmlns: 'http://schemas.microsoft.com/deepzoom/2008',
-		            Url: this.props.url,
-		            Format: 'jpg',
-		            Overlap: '0',
-		            TileSize: '256',
-		            Size: {
-		                Height: '9999',
-		                Width: '7142'
-		            }
+					xmlns: 'http://schemas.microsoft.com/deepzoom/2008',
+					Url: this.props.url,
+					Format: 'jpg',
+					Overlap: '0',
+					TileSize: '256',
+					Size: {
+						Height: '9999',
+						Width: '7142'
+					}
 				}
 			}
 		});
@@ -62,12 +60,13 @@ const DeepZoom = React.createClass({
 	},
 
 	setupResizeHandler: function() {
-		let width = document.documentElement.clientWidth;
+		let width = this.refs.clientWidth,
+			height = parseInt(width, 10)*1.4;
 
 		this.setState({
 			cardStyle: {
 				width: width,
-				height: width*1.4
+				height: height + 'vw'
 			}
 		});
 	},
@@ -88,7 +87,11 @@ const DeepZoom = React.createClass({
 
 	render: function() {
 		return (
-			<div className="Card" id="openseadragon" style={this.state.cardStyle}></div>
+			<div
+				ref={node => { this.root = node; }}
+				className="Card"
+				id="openseadragon"
+				style={this.state.cardStyle} />
 		);
 	}
 });
