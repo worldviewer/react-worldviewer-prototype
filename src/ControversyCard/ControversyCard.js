@@ -20,19 +20,22 @@ var ControversyCard = React.createClass({
 				{source: 'bubble7.png', left: '78vw', top: '49vw', width: '16vw', numleft: '11vw', numtop: '0.5vw'}
 			],
 			spin: [false, false, false, false, false, false, false, false],
-			timeouts: [0,0,0,0,0,0,0,0],
-			activeBubble: null
+			spinTimeouts: [0,0,0,0,0,0,0,0],
+			activeBubble: null,
+			display: [false, false, false, false, false, false, false, false],
+			displayTimeouts: [0,0,0,0,0,0,0,0],
+			allAssetsLoaded: false
 		}
 	},
 
 	disableSpinBubbleNumbers: function() {
-		this.state.timeouts.forEach( (timeout) => {
+		this.state.spinTimeouts.forEach( (timeout) => {
 			clearTimeout(timeout);
 		});
 
 		this.setState({
 			spin: [false, false, false, false, false, false, false, false],
-			timeouts: [0,0,0,0,0,0,0,0]
+			spinTimeouts: [0,0,0,0,0,0,0,0]
 		});
 	},
 
@@ -50,11 +53,11 @@ var ControversyCard = React.createClass({
 					});
 				}, (i+1)*1000);
 
-				let timeouts = this.state.timeouts;
-				timeouts[i] = newTimeout;
+				let spinTimeouts = this.state.spinTimeouts;
+				spinTimeouts[i] = newTimeout;
 
 				this.setState({
-					timeouts: timeouts
+					spinTimeouts: spinTimeouts
 				});
 			});
 
@@ -63,6 +66,19 @@ var ControversyCard = React.createClass({
 				this.disableSpinBubbleNumbers();
 			}, 9000);
 		}, 5000);
+	},
+
+	showBubbles: function() {
+		this.state.display.forEach( (el, i) => {
+			setTimeout(() => {
+				let newDisplayState = this.state.display;
+				newDisplayState[i] = true;
+
+				this.setState({
+					display: newDisplayState
+				});
+			}, (i+1)*200);
+		});
 	},
 
 	handleBubbleClick: function(index) {
@@ -78,7 +94,11 @@ var ControversyCard = React.createClass({
 	},
 
 	componentDidMount: function() {
-		this.spinBubbleNumbers();
+		setTimeout(() => {
+			this.setState({allAssetsLoaded: true});
+			this.showBubbles();
+			this.spinBubbleNumbers();
+		}, 3000);
 	},
 
 	render: function() {
@@ -117,7 +137,7 @@ var ControversyCard = React.createClass({
 						num={i}
 						numleft={el.numleft}
 						numtop={el.numtop}
-						showOverlay={this.props.showOverlay}
+						showOverlay={this.props.showOverlay && this.state.display[i]}
 						source={el.source}
 						spin={this.state.spin}
 						top={el.top}
@@ -127,7 +147,7 @@ var ControversyCard = React.createClass({
 				<Icon
 					key='9'
 					left='78vw'
-					showOverlay={this.props.showOverlay}
+					showOverlay={this.props.showOverlay && this.state.allAssetsLoaded}
 					top='67vw'
 					width='13vw' />
 			</div>
