@@ -28,8 +28,6 @@ See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 
 ## The Next Steps
 
-*Note: I had an excellent conversation with Rishat of codementor.io on Tuesday.  This gave me a chance to get some React-specific code review, and I've combined the notes from our conversation with my own former notes below ...*
-
 - When I load the graphic in low-bandwidth situations, I lose all control over the coordination of the animations.  What I would like to do is to load my assets first, and only then once those assets are present, begin rendering the animations.  Based on conversations with Rishat from codementor.io, I should deploy a different approach for the canvas and the static images.
 - A good way to do this for static assets would be to set up a state variable within the `ControversyCard` component which indicates `allImagesLoaded`.  Then, assuming that the images are being pulled from an API -- which is a planned next step -- I should use promises to determine when each is loaded.  With this approach, I should be able to use a `Promise.all()` to then render all of the static assets at once, by passing the state down to the animated components via props.
 - The situation with the canvas is a bit different.  For the canvas, it will likely display better if we evaluate whether or not we display it within `componentWillReceiveProps`, like so:

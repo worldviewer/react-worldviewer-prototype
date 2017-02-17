@@ -13,10 +13,6 @@ const DeepZoom = React.createClass({
 		}
 	},
 
-	// shouldComponentUpdate: function () {
-	// 	return false;
-	// },
-
 	createViewer: function() {
 		this.viewer = OpenSeadragon({
 			id: 'openseadragon',
@@ -69,16 +65,6 @@ const DeepZoom = React.createClass({
 				height: height + 'vw'
 			}
 		});
-	},
-
-	// Show overlays if zoom event ends and we are at home
-	showOverlays: function() {
-		console.log('show overlays');
-	},
-
-	// Hide overlays at the start of all zoom events
-	hideOverlays: function() {
-		console.log('hide overlays');
 	},
 
 	componentDidMount: function () {
