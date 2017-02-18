@@ -12,6 +12,8 @@ The static graphic that I'll be converting into an interactive, deep-zoomable in
 
 See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 
+### Part 1: Infographic Frontend
+
 - Since the 9 circled information bubbles are overlays, they require transparent backgrounds -- and therefore cannot be JPG's.  Their original PNG filesizes were quite large.  All 9 of these files were processed by TinyPNG.com, reducing their total PNG filesizes by 60%.  This was more than just a measure to reduce the total asset size; at the uncompressed PNG sizes, mobile browsers would commonly crash during load.
 - The decision to use the OpenSeadragon/DZI deep zoom approach followed from the iPhone's viewport maximum-scale limitation of 10x zoom.  A prototype was constructed to test whether or not this would be sufficient to observe the smallest type within the existing graphics, and it was definitively observed to be a problem.  Since this 10x limit is non-negotiable, an alternative solution which could get us to far deeper zooms and far larger canvases was necessary.
 - MagickSlicer was used to generate a DZI image pyramid for the large background jpeg (similar to how GIS mapping software works).  In short, these tools solve the problem -- even for mobile devices -- by breaking the graphic up into a grid.  This permits the loading of select tiles rather than the entire image.
@@ -125,6 +127,9 @@ http://docs.apigee.com/app-services/content/assets
 ```
 
 That's crazy.  I've got a large image pyramid folder of files.  Apigee's solution is becoming laborious.  I'm going to set up a simple Node backend and deploy it to Heroku or Amazon AWS.
+
+### Part 2: The Node Backend
+
 
 ## The Next Steps
 
