@@ -12,7 +12,7 @@ var App = React.createClass({
 			allAssetsLoaded: false,
 			showNext: true,
 			showPrev: false,
-			currentSlide: 0,
+			currentSlide: null,
 			activeSlide: false,
 			numSlides: 8
 		}
