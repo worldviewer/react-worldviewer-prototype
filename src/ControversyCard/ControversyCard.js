@@ -22,9 +22,7 @@ var ControversyCard = React.createClass({
 			spin: [false, false, false, false, false, false, false, false],
 			spinTimeouts: [0,0,0,0,0,0,0,0],
 			activeBubble: null,
-			display: [false, false, false, false, false, false, false, false],
-			displayTimeouts: [0,0,0,0,0,0,0,0],
-			allAssetsLoaded: false
+			display: [false, false, false, false, false, false, false, false]
 		}
 	},
 
@@ -68,6 +66,7 @@ var ControversyCard = React.createClass({
 		}, 5000);
 	},
 
+	// If all bubbles are shown simultaneously, the animation frame rate drops
 	showBubbles: function() {
 		this.state.display.forEach( (el, i) => {
 			setTimeout(() => {
@@ -95,10 +94,9 @@ var ControversyCard = React.createClass({
 
 	componentDidMount: function() {
 		setTimeout(() => {
-			this.setState({allAssetsLoaded: true});
 			this.showBubbles();
 			this.spinBubbleNumbers();
-		}, 3000);
+		}, 2000);
 	},
 
 	render: function() {
@@ -147,7 +145,7 @@ var ControversyCard = React.createClass({
 				<Icon
 					key='9'
 					left='78vw'
-					showOverlay={this.props.showOverlay && this.state.allAssetsLoaded}
+					showOverlay={this.props.showOverlay}
 					top='67vw'
 					width='13vw' />
 			</div>

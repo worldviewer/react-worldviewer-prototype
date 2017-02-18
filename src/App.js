@@ -4,11 +4,13 @@ import ControversyCard from './ControversyCard/ControversyCard';
 import mobiscroll from './mobiscroll/mobiscroll.custom-3.0.1.min';
 import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 import './mobiscroll/mobiscroll-prevnext.scss';
+import Spinner from './Spinner/Spinner';
 
 var App = React.createClass({
 	getInitialState: function() {
 		return {
-			overlay: true
+			overlay: true,
+			allAssetsLoaded: false
 		}
 	},
 
@@ -31,6 +33,8 @@ var App = React.createClass({
 			console.log('denied');
 			e.preventDefault();
 		});
+
+		this.setState({ allAssetsLoaded: true });
 	},
 
 	render: function() {
@@ -40,6 +44,7 @@ var App = React.createClass({
 
 		return (
 			<div className="App">
+				<Spinner active={!this.state.allAssetsLoaded} />
 				<div className="md-prevnext">
 					<div className="md-apps-ul">
 
@@ -62,11 +67,12 @@ var App = React.createClass({
 	                        <li data-tab="tab-arp-quote">Arp Quote</li>
 						</mobiscroll.Menustrip>
 
-						<ControversyCard
+						{ this.state.allAssetsLoaded && <ControversyCard
 							zoomHandler={this.toggleOverlay}
 							bubbles={8}
-							showOverlay={this.state.overlay}
-						/>
+							showOverlay={this.state.overlay} />
+						}
+
 						<div 
 							onClick={this.prev}
 							className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5"
