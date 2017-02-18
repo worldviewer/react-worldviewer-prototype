@@ -90,6 +90,8 @@ var ControversyCard = React.createClass({
 		} else {
 			this.setState({activeBubble: index});
 		}
+
+		this.props.prevNextHandler(index, this.state.bubbles.length);
 	},
 
 	componentDidMount: function() {
