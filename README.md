@@ -25,20 +25,112 @@ See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
     (1) You must call the supplied callbacks that are supplied to the new lifecycle methods -- componentWillAppear, componentWillEnter, componentDidEnter, componentWillLeave and componentDidLeave -- after your animation ends, otherwise your component will enter but not leave (or leave but not enter).  I can validate that this is indeed the case.
     (2) Because ReactTransitionGroup relies upon the new lifecycle methods which it introduces to exist, in order for these animations to link to those particular hooks, it's necessary to move the SomeComponents we want to animate into their own AnimatedSomeComponents.
     (3) In the parent of AnimatedSomeComponent, SomeComponent, we must generate a ref attribute with `ref={c => this.container = c}` so that we can refer to the parent with `const el = this.container` inside of the child.
+- I've begun the process of setting up my backend to support requests for assets.  The first step with Apigee towards uploading assets is to create a folder to place them into.  That, in turn, requires that a user is created, to associate the folder with.  This is now done, and the folder looks like so:
+
+```
+    {
+      "uuid": "9c9d67ad-f61b-11e6-be71-0eec2415f3df",
+      "type": "folders",
+      "name": "halton-arp-graphics",
+      "created": 1487450913349,
+      "modified": 1487450913349,
+      "path": "/controversery-card-graphics/",
+      "metadata": {
+        "path": "/folders/9c9d67ad-f61b-11e6-be71-0eec2415f3df",
+        "size": 391
+      },
+      "owner": "worldviewer"
+    }
+```
+
+In order to upload an asset to the backend, we curl the file into the folder, like this:
+
+```
+    curl -X POST -F name='<filename>' -F file=@<file_location> 'https://<baas_host_name>/<org>/<app>/<collection>/<entity>'
+```
+
+In our case ...
+
+```
+    curl -X POST -F name='bubble0.png' -F file=@bubble0.png 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/folders/9c9d67ad-f61b-11e6-be71-0eec2415f3df'
+```
+
+... which responds with ...
+
+```
+    {
+      "action" : "post",
+      "application" : "a5e5b52d-c8b1-11e6-a734-122e0737977d",
+      "params" : { },
+      "path" : "/folders",
+      "uri" : "https://apibaas-trial.apigee.net/controversies-of-science/sandbox/folders",
+      "entities" : [ {
+        "uuid" : "9c9d67ad-f61b-11e6-be71-0eec2415f3df",
+        "type" : "folder",
+        "name" : "halton-arp-graphics",
+        "created" : 1487450913349,
+        "modified" : 1487450913349,
+        "path" : "/controversery-card-graphics/",
+        "file-metadata" : {
+          "last-modified" : 1487452535341,
+          "content-length" : 1154567,
+          "checksum" : "70cff6e2aef00aee0b8f2628050d7243",
+          "content-type" : "image/png",
+          "etag" : "70cff6e2aef00aee0b8f2628050d7243"
+        },
+        "metadata" : {
+          "path" : "/folders/9c9d67ad-f61b-11e6-be71-0eec2415f3df",
+          "size" : 391
+        },
+        "name" : "halton-arp-graphics",
+        "owner" : "worldviewer"
+      } ],
+      "timestamp" : 1487452535273,
+      "duration" : 240,
+      "organization" : "controversies-of-science",
+      "applicationName" : "sandbox"
+    }
+```
+
+The final step is to associate the folder with all of the graphics in it to the controversy card:
+
+```
+    curl -X POST https://<baas_host_name>/<org>/<app>/<connecting_collection>/<connecting_entity>/<relationship>/<connected_entity>
+```
+
+More specifically ...
+
+```
+    curl -X POST 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/metacards/99024cfb-d137-11e6-a1a4-0eec2415f3df/contains/folders/9c9d67ad-f61b-11e6-be71-0eec2415f3df'
+```
+
+Then, to retrieve the folder for the controversy card:
+
+```
+    curl -X GET -H 'Accept: image/png' 'https://<baas_host_name>/<org>/<app>/<collection>/<entity>/<relationship>'
+```
+
+Or:
+
+```
+    curl -X GET -H 'Accept: image/png' 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/metacards/99024cfb-d137-11e6-a1a4-0eec2415f3df/contains'
+```
+
+A problem, from ...
+
+http://docs.apigee.com/app-services/content/assets
+
+```
+    Only 1 asset can be attached to an entity.
+```
+
+That's crazy.  I've got a large image pyramid folder of files.  Apigee's solution is becoming laborious.  I'm going to set up a simple Node backend and deploy it to Heroku or Amazon AWS.
 
 ## The Next Steps
 
 - When I load the graphic in low-bandwidth situations, I lose all control over the coordination of the animations.  What I would like to do is to load my assets first, and only then once those assets are present, begin rendering the animations.  Based on conversations with Rishat from codementor.io, I should deploy a different approach for the canvas and the static images.
 - A good way to do this for static assets would be to set up a state variable within the `ControversyCard` component which indicates `allImagesLoaded`.  Then, assuming that the images are being pulled from an API -- which is a planned next step -- I should use promises to determine when each is loaded.  With this approach, I should be able to use a `Promise.all()` to then render all of the static assets at once, by passing the state down to the animated components via props.
-- The situation with the canvas is a bit different.  For the canvas, it will likely display better if we evaluate whether or not we display it within `componentWillReceiveProps`, like so:
-
-```
-    componentWillReceiveProps: function(props) {
-        props.allImagesHaveBeenLoaded && this.createViewer();
-    },
-```
-
-- On low bandwidth connections, there is a flash of default font before the custom font loads.  What I should look into for this is use of a font load event.  There should be some sort of http status associated with the loading of the stylesheet (1 = loading, 2=ok,loaded, 3=redirect, 4=error, etc).  I may be able to use the above-mentioned `Promise.all()` to solve this same issue -- perhaps by initially styling the text as transparent (?).
+- On low bandwidth connections, there is sometimes a flash of default font before the custom font loads.  What I should look into for this is use of a font load event.  There should be some sort of http status associated with the loading of the stylesheet (1 = loading, 2=ok,loaded, 3=redirect, 4=error, etc).  I may be able to use the above-mentioned `Promise.all()` to solve this same issue -- perhaps by initially styling the text as transparent (?).
 - As I build out my React-canvas interactions, I'll probably want to start storing a lot more information about the canvas within my state.
 - Identify the cause of that vertical scrollbar on desktop, and get rid of it when zoom into the canvas is activated.  This panning functionality already exists with OpenSeadragon.  In order to get rid of it, it is not enough to just specify `overflow: hidden`.  I also need to specify either a `height` or `max-height`.
 - I might decide, if necessary, to activate OpenSeadragon interactions with a tap on the graphic.  This would allow me to switch between the standard UI (and overlay) interactions, and OpenSeadragon interactions.  So far, it seems unnecessary.
