@@ -11,16 +11,42 @@ var App = React.createClass({
 			overlay: true,
 			allAssetsLoaded: false,
 			showNext: true,
-			showPrev: false
+			showPrev: false,
+			currentSlide: 0,
+			activeSlide: false,
+			numSlides: 8
 		}
 	},
 
 	prev: function() {
-		console.log('prev!');
+		if (this.state.activeSlide) {
+			this.setState({
+				activeSlide: false
+			});
+		} else {
+			this.updateNextPrev(this.state.currentSlide-1);
+			this.setState({
+				activeSlide: true
+			});
+		}
 	},
 
-	next: function(event, inst) {
-		console.log('next!');
+	next: function() {
+		if (this.state.activeSlide) {
+			this.setState({
+				activeSlide: false
+			});
+		} else if (this.state.currentSlide === null) {
+			this.updateNextPrev(0);
+			this.setState({
+				activeSlide: true
+			});
+		} else {
+			this.updateNextPrev(this.state.currentSlide+1);
+			this.setState({
+				activeSlide: true
+			});
+		}
 	},
 
 	toggleOverlay: function(zoom) {
@@ -38,23 +64,37 @@ var App = React.createClass({
 		this.setState({ allAssetsLoaded: true });
 	},
 
-	updateNextPrev: function(slideNumber, numSlides) {
-		console.log('slideNumber: ' + slideNumber + ', numSlides: ' + numSlides);
+	toggleSlide: function() {
+		this.setState({
+			activeSlide: !this.state.activeSlide
+		});
+	},
 
-		if (slideNumber === 0) {
+	updateNextPrev: function(slideNumber) {
+		console.log('slideNumber: ' + slideNumber +
+			' this.state.currentSlide: ' + this.state.currentSlide +
+			', numSlides: ' + this.state.numSlides);
+
+		if (slideNumber === 0 || slideNumber === null) {
 			this.setState({
 				showPrev: false,
-				showNext: true
+				showNext: true,
+				currentSlide: slideNumber,
+				activeSlide: true
 			});
-		} else if (slideNumber === numSlides-1) {
+		} else if (slideNumber === this.state.numSlides-1) {
 			this.setState({
 				showPrev: true,
-				showNext: false
+				showNext: false,
+				currentSlide: slideNumber,
+				activeSlide: true
 			});
 		} else {
 			this.setState({
 				showPrev: true,
-				showNext: true
+				showNext: true,
+				currentSlide: slideNumber,
+				activeSlide: true
 			});
 		}
 	},
@@ -67,35 +107,34 @@ var App = React.createClass({
 		return (
 			<div className="App">
 				<Spinner active={!this.state.allAssetsLoaded} />
-				<div className="md-prevnext">
-					<div className="md-apps-ul">
 
-						{ this.state.allAssetsLoaded &&
-							<ControversyCard
-								zoomHandler={this.toggleOverlay}
-								bubbles={8}
-								prevNextHandler={this.updateNextPrev}
-								showOverlay={this.state.overlay} />
-						}
+				{ this.state.allAssetsLoaded &&
+					<ControversyCard
+						zoomHandler={this.toggleOverlay}
+						bubbles={8}
+						toggleSlideHandler={this.toggleSlide}
+						prevNextHandler={this.updateNextPrev}
+						currentSlide={this.state.currentSlide}
+						activeSlide={this.state.activeSlide}
+						showOverlay={this.state.overlay} />
+				}
 
-						{ this.state.showPrev &&
-							<div 
-								onClick={this.prev}
-								className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5"
-								style={prevNextStyle}>
-							</div>
-						}
+				{ this.state.showPrev &&
+					<div 
+						onClick={this.prev}
+						className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5"
+						style={prevNextStyle}>
+					</div>
+				}
 
-						{ this.state.showNext &&
-		                    <div
-		                    	onClick={this.next}
-		                    	className="md-next md-np md-n mbsc-ic mbsc-ic-arrow-right5"
-		                    	style={prevNextStyle}>
-	                    	</div>
-	                    }
+				{ this.state.showNext &&
+                    <div
+                    	onClick={this.next}
+                    	className="md-next md-np md-n mbsc-ic mbsc-ic-arrow-right5"
+                    	style={prevNextStyle}>
+                	</div>
+                }
 
-	                </div>
-				</div>
 			</div>
 		);
 	}

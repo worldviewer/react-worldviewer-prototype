@@ -21,7 +21,6 @@ var ControversyCard = React.createClass({
 			],
 			spin: [false, false, false, false, false, false, false, false],
 			spinTimeouts: [0,0,0,0,0,0,0,0],
-			activeBubble: null,
 			display: [false, false, false, false, false, false, false, false]
 		}
 	},
@@ -81,17 +80,14 @@ var ControversyCard = React.createClass({
 	},
 
 	handleBubbleClick: function(index) {
-		let prevState = this.state.activeBubble;
+		console.log('this.props.currentSlide: ' + this.props.currentSlide +
+			' index: ' + index);
 
-		if (prevState === null) {
-			this.setState({activeBubble: index});
-		} else if (prevState === index) {
-			this.setState({activeBubble: null});
+		if (index !== this.props.currentSlide) {
+			this.props.prevNextHandler(index);
 		} else {
-			this.setState({activeBubble: index});
+			this.props.toggleSlideHandler();
 		}
-
-		this.props.prevNextHandler(index, this.state.bubbles.length);
 	},
 
 	componentDidMount: function() {
@@ -99,6 +95,12 @@ var ControversyCard = React.createClass({
 			this.showBubbles();
 			this.spinBubbleNumbers();
 		}, 2000);
+	},
+
+	componentWillReceiveProps: function(nextProps) {
+		if (this.props.currentSlide !== nextProps.currentSlide) {
+			this.handleBubbleClick(nextProps.currentSlide);
+		}
 	},
 
 	render: function() {
@@ -129,7 +131,7 @@ var ControversyCard = React.createClass({
 
 				{ this.state.bubbles.map( (el, i) => 
 					<Bubble
-						active={this.state.activeBubble === i}
+						active={this.props.currentSlide === i && this.props.activeSlide}
 						enterHandler={this.spinBubbleNumbers}
 						clickHandler={this.handleBubbleClick}
 						key={i}
