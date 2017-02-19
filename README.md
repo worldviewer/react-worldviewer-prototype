@@ -114,6 +114,14 @@ I'm going to now try react-preload at https://www.npmjs.com/package/react-preloa
 
 This solution worked much better: Not only do the preloader and animations both work perfectly, but the load time is also much faster (2.25 seconds).  He's set up his own image cache component and looking at his code, it appears that he's not resolving the Promise until the image load event fires.  That's probably why my images were loading prematurely.
 
+I'm seeing a difference between mobile and desktop access to the API.  Desktop works perfectly, but on all mobile browsers, I get a 404 for this asset:
+
+```
+    <img src="https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics/26396ee5-f630-11e6-be71-0eec2415f3df">
+```
+
+What's unusual is that this is a totally valid URL.  This very well could be a cross-origin issue, and it might require me to go through the API gateway -- since the gateway is already set up to handle that problem.  That should at least be my first approach.
+
 ### Part 3: The Node Backend
 
 
