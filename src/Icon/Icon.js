@@ -25,7 +25,6 @@ var AnimatedIcon = React.createClass({
 	},
 
 	render: function() {
-		let source = require('../../graphics/icon.png');
 
 		let style = {
 			position: 'absolute',
@@ -39,7 +38,7 @@ var AnimatedIcon = React.createClass({
 				alt="Figure"
 				className="Icon"
 				ref={c => this.container = c}
-				src={source}
+				src={this.props.source}
 				style={style}
 			/>
 		)
@@ -52,6 +51,7 @@ var Icon = React.createClass({
 			<TransitionGroup component="div">
 				{this.props.showOverlay &&
 					<AnimatedIcon
+						source={this.props.source}
 						left={this.props.left}
 						top={this.props.top}
 						width={this.props.width}

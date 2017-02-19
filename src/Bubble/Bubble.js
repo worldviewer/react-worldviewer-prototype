@@ -78,8 +78,6 @@ var AnimatedBubble = React.createClass({
 	},
 
 	render: function() {
-		let source = require('../../graphics/' + this.props.source);
-
 		let divStyle = {
 			left: this.state.left,
 			position: 'absolute',
@@ -98,7 +96,7 @@ var AnimatedBubble = React.createClass({
 					alt="Figure"
 					className={"Bubble Bubble" + this.props.num}
 					onClick={this.getComponent.bind(this, this.props.num)}
-					src={source}
+					src={this.props.source}
 					style={imgStyle} />
 
 				<NumberBubble
