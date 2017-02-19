@@ -27,7 +27,30 @@ See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
     (1) You must call the supplied callbacks that are supplied to the new lifecycle methods -- componentWillAppear, componentWillEnter, componentDidEnter, componentWillLeave and componentDidLeave -- after your animation ends, otherwise your component will enter but not leave (or leave but not enter).  I can validate that this is indeed the case.
     (2) Because ReactTransitionGroup relies upon the new lifecycle methods which it introduces to exist, in order for these animations to link to those particular hooks, it's necessary to move the SomeComponents we want to animate into their own AnimatedSomeComponents.
     (3) In the parent of AnimatedSomeComponent, SomeComponent, we must generate a ref attribute with `ref={c => this.container = c}` so that we can refer to the parent with `const el = this.container` inside of the child.
-- I've begun the process of setting up my backend to support requests for assets.  In order to upload an asset to the backend, we have to first set up a folder on the backend that's owned by a user.  Then, we curl the file into that folder, like this:
+- I've begun the process of setting up my backend to support requests for assets.  The very first step is to transfer the `/metacards` info into the `/cards` info, because we want to set up a route that relates to this specific cardId.  This is an example ...
+
+```
+    {
+      "type": "cards",
+      "name": "Halton Arp, the Modern Galileo",
+      "author": {
+        "lastTimeOnline": "1985-04-12T23:20:50.52Z",
+        "bio": "(MC) Master of Controversies",
+        "avatar": "https://lh3.googleusercontent.com/-7pSD5TEGt4g/AAAAAAAAAAI/AAAAAAAAACI/Cqefb4i8T3E/photo.jpg?sz=50",
+        "userId": 0,
+        "email": "paradigmsareconstructed@gmail.com",
+        "username": "Chris Reeve"
+      },
+      "graphicType": "bubbleOverlay",
+      "summary": "He Was a Professional Astronomer Who Began his Career as Edwin Hubble's Assistant / While Compiling a List of Peculiar Galaxies, Arp Discovered that High-Redshift Quasars are Commonly Associated with or Even Connected by Filaments to Lower-Redshift Galaxies / Since the Big Bang Requires that Differences in Redshift Place the Objects at Different Locations, Astronomers Commonly Reject Arp's Claims / But if he is Right, then there Was No Big Bang",
+      "thumbnail": "https://lh3.googleusercontent.com/-UJsVVpygCpg/WA2XbtJflgI/AAAAAAAAJAU/M0vr_EK-krkPjiWqudBnGA1T3loMC6TSgCJoC/w506-h750/halton-arp-the-modern-galileo-bbal-card.jpg",
+      "url": "https://lh3.googleusercontent.com/-UJsVVpygCpg/WA2XbtJflgI/AAAAAAAAJAU/M0vr_EK-krkPjiWqudBnGA1T3loMC6TSgCJoC/w7142-h9999/halton-arp-the-modern-galileo-bbal-card.jpg"
+    }
+```
+
+The following information required a number of attempts to nail down ...
+
+In order to upload an asset to the backend, we have to first set up a folder on the backend that's owned by a user.  Then, we curl the file into that folder, like this:
 
 ```
     curl -X POST -F name='<filename>' -F file=@<file_location> 'https://<baas_host_name>/<org>/<app>/<collection>/<entity>'
@@ -36,36 +59,60 @@ See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 In our case ...
 
 ```
-    curl -X POST -F name='bubble0.png' -F file=@bubble0.png 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics'
+    curl -X POST -F name='bubble0.png' -F file=@bubble0.png 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/haltonarpgraphics'
 ```
+
+We do that for each asset associated with the controversy card.
 
 We need to then tell Usergrid that this is a folder on the backend by doing a POST to `/folders` with ...
 
 ```
-{"name": "graphics",
- "owner": "worldviewer",
- "path": "/graphics"}
+    {"name": "graphics",
+     "owner": "worldviewer",
+     "path": "/graphics"}
 ```
 
-Now link the Halton Arp metacard to the `graphics` folder ...
+Now link the Halton Arp card to the `graphics` folder ...
 
 ```
-    curl -X POST https://apibaas-trial.apigee.net/controversies-of-science/sandbox/metacards/99024cfb-d137-11e6-a1a4-0eec2415f3df/folders/71b41113-f633-11e6-be71-0eec2415f3df
+    curl -X POST https://<baas_host_name>/<org>/<app>/<connecting_collection>/<connecting_entity>/<relationship>/<connected_entity>
 ```
 
-To get a list of the graphics ...
+More specifically:
 
 ```
-    curl -X POST https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics
+    curl -X POST https://apibaas-trial.apigee.net/controversies-of-science/sandbox/cards/5dd8d904-f6d8-11e6-9a38-0ad881f403bf/embeds/d5136be4-f6d7-11e6-be71-0eec2415f3df
 ```
 
-To get a specific graphic ...
+Now, to get the list of graphics, do this:
 
 ```
-    curl -X POST https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics/7bb12a07-f630-11e6-8477-122e0737977d
+    curl -X GET https://<baas_host_name>/<org>/<app>/<collection>/<entity>/<relationship>
 ```
 
-To download them as graphics with curl:
+Or:
+
+```
+    curl -X GET https://apibaas-trial.apigee.net/controversies-of-science/sandbox/cards/5dd8d904-f6d8-11e6-9a38-0ad881f403bf/embeds
+```
+
+Then, within that response will be an `entities` array, and for each object in that array, there will be a `path` which designates a folder which we can append to our base URL to retrieve the JSON list of images -- in this case `/haltonarpgraphics`.
+
+So, to get a list of the graphics in this simple case ...
+
+```
+    curl -X POST https://apibaas-trial.apigee.net/controversies-of-science/sandbox/haltonarpgraphics
+```
+
+To get a specific graphic, we do a get on the folder path `/haltonarpgraphics` -- which gives us a JSON listing of all entities.
+
+```
+    curl -X GET https://apibaas-trial.apigee.net/controversies-of-science/sandbox/haltonarpgraphics
+```
+
+This process allows us to not have to keep track of all of these UUID's for each graphic.  We don't even need to know the folder name, since it's linked to the `/cards/{cardId}` route.  What we need to know is the cardId uuid -- which we can get by doing a get on `/metacards`.  This is all possible because we have created separate folders for each graphic.
+
+To download them as graphics with curl, we can match the uuid to the filename by checking the `name` property on the asset object, then download with the proper uuid ...
 
 ```
     curl -X GET -H 'Accept: image/png' 'https://<baas_host_name>/<org>/<app>/<collection>/<entity>/<relationship>'
@@ -74,7 +121,7 @@ To download them as graphics with curl:
 Or:
 
 ```
-    curl -X GET -H 'Accept: image/png' 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics/7bb12a07-f630-11e6-8477-122e0737977d'
+    curl -X GET -H 'Accept: image/png' 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/haltonarpgraphics/769de745-f6d7-11e6-be71-0eec2415f3df'
 ```
 
 A problem for the image pyramid, from ...
@@ -121,6 +168,24 @@ I'm seeing a difference between mobile and desktop access to the API.  Desktop w
 ```
 
 What's unusual is that this is a totally valid URL.  This very well could be a cross-origin issue, and it might require me to go through the API gateway -- since the gateway is already set up to handle that problem.  That should at least be my first approach.
+
+Created a simple test page which replicates the problem, and it does not matter if I reduce the rendered pixel width to 200px.  The problem persists with this on mobile from Github Pages ...
+
+```
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Mobile Image Test</title>
+    </head>
+    <body>
+        <img style="width:200px" src="https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics/26396ee5-f630-11e6-be71-0eec2415f3df">
+    </body>
+    </html>
+```
+
+What is very suspicious is that it says the size is 888 bytes.  I know that this file is around a megabyte, so it seems to me that the browser is not understanding that this is an image -- and it's downloading the JSON description of the image instead.  When I curl the asset from the command-line, the same thing will happen if I do not specify my content type.
+
+I believe I now understand the problem, and am going to try routing these assets through the API gateway.  Another indicator that there is a content type problem here is that in my Safari mobile developer tools, the image type is just "image" -- whereas it's more specifically labeled "png" in my desktop dev tools.
 
 ### Part 3: The Node Backend
 
