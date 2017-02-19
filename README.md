@@ -124,6 +124,46 @@ Or:
     curl -X GET -H 'Accept: image/png' 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/haltonarpgraphics/769de745-f6d7-11e6-be71-0eec2415f3df'
 ```
 
+So now, when I curl my new controversy card ...
+
+```
+    curl -X GET https://worldviewer-test.apigee.net/controversies-of-science/v1/cards/5dd8d904-f6d8-11e6-9a38-0ad881f403bf
+```
+
+... I can see my embeds ...
+
+```
+    {
+      "method": "GET",
+      "type": "card",
+      "uuid": "5dd8d904-f6d8-11e6-9a38-0ad881f403bf",
+      "name": "Halton Arp, the Modern Galileo",
+      "created": 1487531982924,
+      "modified": 1487531982924,
+      "author": {
+        "lastTimeOnline": "1985-04-12T23:20:50.52Z",
+        "bio": "(MC) Master of Controversies",
+        "avatar": "https://lh3.googleusercontent.com/-7pSD5TEGt4g/AAAAAAAAAAI/AAAAAAAAACI/Cqefb4i8T3E/photo.jpg?sz=50",
+        "userId": 0,
+        "email": "paradigmsareconstructed@gmail.com",
+        "username": "Chris Reeve"
+      },
+      "graphicType": "bubbleOverlay",
+      "metadata": {
+        "path": "/cards/5dd8d904-f6d8-11e6-9a38-0ad881f403bf",
+        "size": 1525,
+        "connections": {
+          "embeds": "/cards/5dd8d904-f6d8-11e6-9a38-0ad881f403bf/embeds"
+        }
+      },
+      "summary": "He Was a Professional Astronomer Who Began his Career as Edwin Hubble's Assistant / While Compiling a List of Peculiar Galaxies, Arp Discovered that High-Redshift Quasars are Commonly Associated with or Even Connected by Filaments to Lower-Redshift Galaxies / Since the Big Bang Requires that Differences in Redshift Place the Objects at Different Locations, Astronomers Commonly Reject Arp's Claims / But if he is Right, then there Was No Big Bang",
+      "thumbnail": "https://lh3.googleusercontent.com/-UJsVVpygCpg/WA2XbtJflgI/AAAAAAAAJAU/M0vr_EK-krkPjiWqudBnGA1T3loMC6TSgCJoC/w506-h750/halton-arp-the-modern-galileo-bbal-card.jpg",
+      "url": "https://lh3.googleusercontent.com/-UJsVVpygCpg/WA2XbtJflgI/AAAAAAAAJAU/M0vr_EK-krkPjiWqudBnGA1T3loMC6TSgCJoC/w7142-h9999/halton-arp-the-modern-galileo-bbal-card.jpg"
+    }
+```
+
+But, I have no way to access the embeds from here.  I need to create a new route on `/cards/{cardId}/graphics` that somehow gives them to me.
+
 A problem for the image pyramid, from ...
 
 http://docs.apigee.com/app-services/content/assets
@@ -186,6 +226,10 @@ Created a simple test page which replicates the problem, and it does not matter 
 What is very suspicious is that it says the size is 888 bytes.  I know that this file is around a megabyte, so it seems to me that the browser is not understanding that this is an image -- and it's downloading the JSON description of the image instead.  When I curl the asset from the command-line, the same thing will happen if I do not specify my content type.
 
 I believe I now understand the problem, and am going to try routing these assets through the API gateway.  Another indicator that there is a content type problem here is that in my Safari mobile developer tools, the image type is just "image" -- whereas it's more specifically labeled "png" in my desktop dev tools.
+
+After going through Apigee's examples and requests for help, it seems as though their API gateway is not really designed to act as a gateway for assets.  In every example I checked out, users are being advised to submit requests directly to Usergrid in order to interact with their assets -- rather than going through the API gateway.  I'm not sure if this is common in the world of API gateways, but the idea of exposing the backend to developers seems to eliminate the security advantages of using a gateway to begin with.
+
+I'm going to work on getting through my image display problem for now, but in the long term, I should probably reach out to Apigee to better understand what the correct approach should be here.
 
 ### Part 3: The Node Backend
 

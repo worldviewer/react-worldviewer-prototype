@@ -4,7 +4,8 @@ import ControversyCard from './ControversyCard/ControversyCard';
 import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner';
-import Preload from 'react-preload';
+// import Preload from 'react-preload';
+import Preload from './Preload/Preload';
 
 var App = React.createClass({
 	getInitialState: function() {
