@@ -4,6 +4,7 @@ import ControversyCard from './ControversyCard/ControversyCard';
 import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner';
+import Preload from 'react-preload';
 
 var App = React.createClass({
 	getInitialState: function() {
@@ -71,29 +72,6 @@ var App = React.createClass({
 	},
 
 	componentDidMount: function() {
-		// let mountedApp = document.querySelector('.App');
-
-		// mountedApp.addEventListener('gesturestart', (e) => {
-		// 	console.log('denied');
-		// 	e.preventDefault();
-		// });
-
-		// this.state.slides.forEach( (slide) => {
-		// 	console.log(slide.source);
-		// });
-
-		let promises = this.state.slides.map( (slide) => {
-			return fetch(slide.source);
-		});
-
-		return Promise.all(promises).then( (responses) => {
-			this.setState({
-				allAssetsLoaded: true
-			});		
-		}).catch( (error) => {
-			console.log('Error loading remote overlay resources ...');
-    		console.log(error);
-		});
 	},
 
 	toggleSlide: function() {
@@ -131,16 +109,34 @@ var App = React.createClass({
 		}
 	},
 
+	handleAssetLoadError: function(error) {
+		console.log('Error loading overlay images ...');
+		console.log(error);
+	},
+
+	handleAssetLoadSuccess: function() {
+		console.log('All assets loaded successfully.');
+	},
+
 	render: function() {
 		let prevNextStyle = {
 			display: this.state.overlay ? 'block' : 'none'
 		}
 
+		let slides = this.state.slides.map( (slide) => slide.source ),
+			loadSpinner = (<Spinner />);
+
 		return (
 			<div className="App">
-				<Spinner active={!this.state.allAssetsLoaded} />
 
-				{ this.state.allAssetsLoaded &&
+				<Preload
+					images={slides}
+					loadingIndicator={loadSpinner}
+					onError={this.handleAssetLoadError}
+					onSuccess={this.handleAssetLoadSuccess}
+					resolveOnError={true}
+					mountChildren={true} >
+
 					<ControversyCard
 						icon={this.state.icon}
 						slides={this.state.slides}
@@ -150,7 +146,8 @@ var App = React.createClass({
 						currentSlide={this.state.currentSlide}
 						activeSlide={this.state.activeSlide}
 						showOverlay={this.state.overlay} />
-				}
+
+				</Preload>
 
 				{ this.state.showPrev &&
 					<div 

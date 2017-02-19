@@ -112,21 +112,18 @@ Whereas I was only having problems with low bandwidth loads, this approach worse
 
 I'm going to now try react-preload at https://www.npmjs.com/package/react-preload.
 
-
+This solution worked much better: Not only do the preloader and animations both work perfectly, but the load time is also much faster (2.25 seconds).  He's set up his own image cache component and looking at his code, it appears that he's not resolving the Promise until the image load event fires.  That's probably why my images were loading prematurely.
 
 ### Part 3: The Node Backend
 
 
 ## The Next Steps
 
-- When I load the graphic in low-bandwidth situations, I lose all control over the coordination of the animations.  What I would like to do is to load my assets first, and only then once those assets are present, begin rendering the animations.  Based on conversations with Rishat from codementor.io, I should deploy a different approach for the canvas and the static images.
-- A good way to do this for static assets would be to set up a state variable within the `ControversyCard` component which indicates `allImagesLoaded`.  Then, assuming that the images are being pulled from an API -- which is a planned next step -- I should use promises to determine when each is loaded.  With this approach, I should be able to use a `Promise.all()` to then render all of the static assets at once, by passing the state down to the animated components via props.
-- On low bandwidth connections, there is sometimes a flash of default font before the custom font loads.  What I should look into for this is use of a font load event.  There should be some sort of http status associated with the loading of the stylesheet (1 = loading, 2=ok,loaded, 3=redirect, 4=error, etc).  I may be able to use the above-mentioned `Promise.all()` to solve this same issue -- perhaps by initially styling the text as transparent (?).
+- *I doubt that this remains a problem, but I should check on a low bandwidth connection when I get a chance:* On low bandwidth connections, there is sometimes a flash of default font before the custom font loads.  What I should look into for this is use of a font load event.  There should be some sort of http status associated with the loading of the stylesheet (1 = loading, 2=ok,loaded, 3=redirect, 4=error, etc).  I may be able to use the above-mentioned `Promise.all()` to solve this same issue -- perhaps by initially styling the text as transparent (?).
 - As I build out my React-canvas interactions, I'll probably want to start storing a lot more information about the canvas within my state.
 - Identify the cause of that vertical scrollbar on desktop, and get rid of it when zoom into the canvas is activated.  This panning functionality already exists with OpenSeadragon.  In order to get rid of it, it is not enough to just specify `overflow: hidden`.  I also need to specify either a `height` or `max-height`.
 - I might decide, if necessary, to activate OpenSeadragon interactions with a tap on the graphic.  This would allow me to switch between the standard UI (and overlay) interactions, and OpenSeadragon interactions.  So far, it seems unnecessary.
 - What I am ultimately working towards with this prototype is something similar to https://github.com/Emigre/openseadragon-annotations.  I want to be able to annotate the image pyramid and persist those annotations (although my annotations will not be hand-drawn drawings -- but rather more like interactive GIS icons with text labels, and other more structured annotation elements).  Based on advice from Rishat from codementor.io, I should keep track of the absolute canvas-based coordinates at all times in my React state, and use that zoom level and calculated box to determine whether or not to render any particular annotation overlay.  With this approach in mind, it may not be necessary to refer to the implementation above (?).
-- I expect to rework the menu system, possibly swapping it out with a better interface; it's placed there as a proof-of-concept to observe how OpenSeadragon interacts with its parent elements.
 - There's a lot of work left to do with this, but also a fairly specific vision of what must be constructed.  For more details on what that vision is, read further.
 
 ## Things Devs Should Know About OpenSeadragon

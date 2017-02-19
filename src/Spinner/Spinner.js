@@ -58,10 +58,8 @@ var Spinner = React.createClass({
 	render: function() {
 		return (
 			<TransitionGroup component="div">
-				{ this.props.active &&
-					<AnimatedSpinner
-						source={this.props.source} />
-				}
+				<AnimatedSpinner
+					source={this.props.source} />
 			</TransitionGroup>
 		);
 	}
