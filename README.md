@@ -85,9 +85,36 @@ http://docs.apigee.com/app-services/content/assets
     Only 1 asset can be attached to an entity.
 ```
 
-That's crazy.  I've got a large image pyramid folder of files.  Apigee's solution is becoming laborious.  I'm going to set up a simple Node backend and deploy it to Heroku or Amazon AWS.
+That's probably not going to work for my large image pyramid folder of files.  I might have to set up a simple Node backend and deploy the pyramid to Heroku or Amazon AWS.
 
-### Part 2: The Node Backend
+### Part 2: Pre-fetching Images Before Loading the Controversy Card
+
+- My first attempt at prefetching was to set my loaded flag state based upon the result of all fetch promises returning ...
+
+```
+    componentDidMount: function() {
+        let promises = this.state.slides.map( (slide) => {
+            return fetch(slide.source);
+        });
+
+        return Promise.all(promises).then( (responses) => {
+            this.setState({
+                allAssetsLoaded: true
+            });     
+        }).catch( (error) => {
+            console.log('Error loading remote overlay resources ...');
+            console.log(error);
+        });
+    }
+```
+
+Whereas I was only having problems with low bandwidth loads, this approach worsened even my high bandwidth loads.  It totally kills all of my overlay loading animations even though all overlay assets load by about 3.5 seconds.
+
+I'm going to now try react-preload at https://www.npmjs.com/package/react-preload.
+
+
+
+### Part 3: The Node Backend
 
 
 ## The Next Steps

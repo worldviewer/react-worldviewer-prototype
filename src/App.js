@@ -7,7 +7,22 @@ import Spinner from './Spinner/Spinner';
 
 var App = React.createClass({
 	getInitialState: function() {
+		let api = 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics/';
+
 		return {
+			slides: [
+				{source: api + '26396ee5-f630-11e6-be71-0eec2415f3df', left: '7vw', top: '23vw', width: '24vw', numleft: '20vw', numtop: '4.5vw'},
+				{source: api + '31f37276-f630-11e6-9a38-0ad881f403bf', left: '6vw', top: '55vw', width: '14vw', numleft: '5.5vw', numtop: '-1vw'},
+				{source: api + '416a3010-f630-11e6-9a38-0ad881f403bf', left: '21vw', top: '50vw', width: '10vw', numleft: '1vw', numtop: '-0.5vw'},
+				{source: api + '4da59868-f630-11e6-be71-0eec2415f3df', left: '37vw', top: '33vw', width: '12vw', numleft: '-1vw', numtop: '3vw'},
+				{source: api + '57f955d1-f630-11e6-9a38-0ad881f403bf', left: '52vw', top: '27vw', width: '16vw', numleft: '14vw', numtop: '6.5vw'},
+				{source: api + '5e74e181-f630-11e6-8477-122e0737977d', left: '70vw', top: '36vw', width: '9vw', numleft: '0vw', numtop: '0vw'},
+				{source: api + '6b41b46f-f630-11e6-8477-122e0737977d', left: '69vw', top: '46vw', width: '9vw', numleft: '0.5vw', numtop: '6.5vw'},
+				{source: api + '737d405a-f630-11e6-8477-122e0737977d', left: '78vw', top: '49vw', width: '16vw', numleft: '11vw', numtop: '0.5vw'}
+			],
+			icon: {
+				source: api + '7bb12a07-f630-11e6-8477-122e0737977d'
+			},
 			overlay: true,
 			allAssetsLoaded: false,
 			showNext: true,
@@ -50,18 +65,35 @@ var App = React.createClass({
 	},
 
 	toggleOverlay: function(zoom) {
-		this.setState({overlay: zoom <= 1.1});
+		this.setState({
+			overlay: zoom <= 1.1
+		});
 	},
 
 	componentDidMount: function() {
-		let mountedApp = document.querySelector('.App');
+		// let mountedApp = document.querySelector('.App');
 
-		mountedApp.addEventListener('gesturestart', (e) => {
-			console.log('denied');
-			e.preventDefault();
+		// mountedApp.addEventListener('gesturestart', (e) => {
+		// 	console.log('denied');
+		// 	e.preventDefault();
+		// });
+
+		// this.state.slides.forEach( (slide) => {
+		// 	console.log(slide.source);
+		// });
+
+		let promises = this.state.slides.map( (slide) => {
+			return fetch(slide.source);
 		});
 
-		this.setState({ allAssetsLoaded: true });
+		return Promise.all(promises).then( (responses) => {
+			this.setState({
+				allAssetsLoaded: true
+			});		
+		}).catch( (error) => {
+			console.log('Error loading remote overlay resources ...');
+    		console.log(error);
+		});
 	},
 
 	toggleSlide: function() {
@@ -110,8 +142,9 @@ var App = React.createClass({
 
 				{ this.state.allAssetsLoaded &&
 					<ControversyCard
+						icon={this.state.icon}
+						slides={this.state.slides}
 						zoomHandler={this.toggleOverlay}
-						bubbles={8}
 						toggleSlideHandler={this.toggleSlide}
 						prevNextHandler={this.updateNextPrev}
 						currentSlide={this.state.currentSlide}

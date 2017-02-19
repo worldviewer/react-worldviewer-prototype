@@ -53,7 +53,6 @@
   },
   "dependencies": {
     "bezier-easing": "^2.0.3",
-    "fetch": "^1.1.0",
     "gsap": "^1.19.1",
     "path": "^0.12.7",
     "radium": "^0.18.1",
