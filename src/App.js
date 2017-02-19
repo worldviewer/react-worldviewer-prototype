@@ -131,6 +131,7 @@ var App = React.createClass({
 
 				<Preload
 					images={slides}
+					autoResolveDelay={3000}
 					loadingIndicator={loadSpinner}
 					onError={this.handleAssetLoadError}
 					onSuccess={this.handleAssetLoadSuccess}
