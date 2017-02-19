@@ -1,9 +1,13 @@
-import ug from '../Usergrid/UsergridHelper';
+import UsergridHelper from '../Usergrid/UsergridHelper';
 
 class ImageCache {
 	constructor() {
 		this.hash = {};
 		this.cache = [];
+
+		this.ug = new UsergridHelper();
+		this.ug.init();
+		this.ug.getCardData();
 	}
 
 	add(url, options = {}) {
