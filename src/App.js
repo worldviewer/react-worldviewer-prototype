@@ -126,12 +126,13 @@ var App = React.createClass({
 		let slides = this.state.slides.map( (slide) => slide.source ),
 			loadSpinner = (<Spinner />);
 
+		slides.push(this.state.icon.source);
+
 		return (
 			<div className="App">
 
 				<Preload
 					images={slides}
-					autoResolveDelay={3000}
 					loadingIndicator={loadSpinner}
 					onError={this.handleAssetLoadError}
 					onSuccess={this.handleAssetLoadSuccess}
