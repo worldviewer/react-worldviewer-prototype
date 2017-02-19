@@ -1,37 +1,56 @@
-const hash = {};
-const cache = [];
+import Usergrid from 'usergrid';
 
-const add = (url, options = {}) => {
-    if (!hash[url]) {
-        hash[url] = new Image();
+class ImageCache {
+	constructor() {
+		this.hash = {};
+		this.cache = [];
 
-        // if (options.crossOrigin) {
-        //     hash[url].crossOrigin = options.crossOrigin;
-        // }
+		this.endpoint = {
+			metacard: {
+				'singular': 'mcard',
+				'plural': 'mcards'
+			},
+			card: {
+				'singular': 'card',
+				'plural': 'cards'
+			}
+		};
 
-        hash[url].src = url;
+		this.init();
+	}
 
-        cache.push(hash[url]);
-    }
-    return hash[url];
-};
+	init() {
+		Usergrid.init({
+		    orgId: 'controversies-of-science',
+		    appId: 'sandbox',
+			URI: 'https://apibaas-trial.apigee.net'
+		});
+	}
 
-const get = (url, options) => {
-    return add(url, options);
-};
+	add(url, options = {}) {
+	    if (!this.hash[url]) {
+	        this.hash[url] = new Image();
 
-const stuff = (urls, options) => {
-    if (urls.length > 0) {
-        urls.map((url) => add(url, options));
-    }
-};
+	        // if (options.crossOrigin) {
+	        //     hash[url].crossOrigin = options.crossOrigin;
+	        // }
 
-const ImageCache = {
-    add,
-    stuff,
-    get,
-    hash,
-    cache,
-};
+	        this.hash[url].src = url;
+
+	        this.cache.push(this.hash[url]);
+	    }
+	    return this.hash[url];
+	}
+
+	get(url, options) {
+	    return this.add(url, options);
+	}
+
+	stuff(urls, options) {
+	    if (urls.length > 0) {
+	        urls.map((url) => this.add(url, options));
+	    }
+	}
+}
 
 export default ImageCache;

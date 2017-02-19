@@ -1,8 +1,12 @@
 import ImageCache from './ImageCache';
 
-const ImageHelper = {
+class ImageHelper {
+	constructor() {
+		this.imageCache = new ImageCache();
+	}
+
     loadImage(url, options) {
-        const image = ImageCache.get(url, options);
+        const image = this.imageCache.get(url, options);
 
         return new Promise((resolve, reject) => {
             const handleSuccess = () => {
@@ -27,17 +31,17 @@ const ImageHelper = {
                 image.addEventListener('error', handleError, false);
             }
         });
-    },
+    }
 
     loadImages(urls, options) {
         const promises = urls.map(url =>  this.loadImage(url, options));
         return Promise.all(promises);
-    },
+    }
 
     // preload without caring about the result
     stuffImages(urls, options) {
-        ImageCache.stuff(urls, options);
-    },
-};
+        this.imageCache.stuff(urls, options);
+    }
+}
 
 export default ImageHelper;

@@ -231,6 +231,8 @@ After going through Apigee's examples and requests for help, it seems as though 
 
 I'm going to work on getting through my image display problem for now, but in the long term, I should probably reach out to Apigee to better understand what the correct approach should be here.
 
+My next approach is to use the Usergrid client to retrieve assets.
+
 ### Part 3: The Node Backend
 
 

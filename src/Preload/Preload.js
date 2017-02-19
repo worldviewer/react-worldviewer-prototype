@@ -1,5 +1,6 @@
-// Code comes from https://github.com/sambernard/react-preload,
-// Modifications are noted
+// Code comes from https://github.com/sambernard/react-preload
+// Code has been modified to retrieve assets via Usergrid. To do so,
+// ImageHelper and ImageCache have been refactored into classes.
 
 import { PropTypes, Component } from 'react';
 import ImageHelper from './ImageHelper';
@@ -51,6 +52,8 @@ class Preload extends Component {
         this._handleSuccess = this._handleSuccess.bind(this);
         this._handleError = this._handleError.bind(this);
         this._mounted = false;
+
+        this.imageHelper = new ImageHelper();
     }
 
     componentWillMount() {
@@ -62,7 +65,7 @@ class Preload extends Component {
     componentDidMount() {
         this._mounted = true;
         if (!this.state.ready) {
-            ImageHelper
+            this.imageHelper
                 .loadImages(this.props.images)
                 .then(this._handleSuccess, this._handleError);
 

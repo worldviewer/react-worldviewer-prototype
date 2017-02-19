@@ -62,7 +62,8 @@
     "react-animations": "^0.1.0",
     "react-dom": "^15.4.2",
     "react-preload": "^0.5.0",
-    "synchronize": "^2.0.0"
+    "synchronize": "^2.0.0",
+    "usergrid": "^2.0.0-rc.2"
   },
   "scripts": {
     "start": "node scripts/start.js",
