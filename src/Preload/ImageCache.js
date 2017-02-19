@@ -1,30 +1,9 @@
-import Usergrid from 'usergrid';
+import ug from '../Usergrid/UsergridHelper';
 
 class ImageCache {
 	constructor() {
 		this.hash = {};
 		this.cache = [];
-
-		this.endpoint = {
-			metacard: {
-				'singular': 'mcard',
-				'plural': 'mcards'
-			},
-			card: {
-				'singular': 'card',
-				'plural': 'cards'
-			}
-		};
-
-		this.init();
-	}
-
-	init() {
-		Usergrid.init({
-		    orgId: 'controversies-of-science',
-		    appId: 'sandbox',
-			URI: 'https://apibaas-trial.apigee.net'
-		});
 	}
 
 	add(url, options = {}) {
