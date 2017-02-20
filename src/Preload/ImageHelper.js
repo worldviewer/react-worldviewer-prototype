@@ -8,6 +8,16 @@ class ImageHelper {
     loadImage(url, options) {
         const image = this.imageCache.get(url, options);
 
+		let reader = new FileReader();
+
+		reader.onload = (function(aImg) {
+			return function(e) {
+				aImg.src = e.target.result;
+			};
+		})(image);
+
+		// reader.readAsDataURL(image);
+
         return new Promise((resolve, reject) => {
             const handleSuccess = () => {
                 resolve(image);
