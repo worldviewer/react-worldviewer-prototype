@@ -1,22 +1,22 @@
 import ImageCache from './ImageCache';
+import UsergridHelper from '../Usergrid/UsergridHelper';
 
 class ImageHelper {
 	constructor() {
-		this.imageCache = new ImageCache();	
+		this.imageCache = new ImageCache();
+		this.ug = new UsergridHelper();
+		this.ug.init();
 	}
 
     loadImage(url, options) {
         const image = this.imageCache.get(url, options);
 
-		let reader = new FileReader();
+        let asset = url.split('/'),
+        	len = asset.length,
+        	uuid = asset[len-1],
+        	folder = asset[len-2];
 
-		reader.onload = (function(aImg) {
-			return function(e) {
-				aImg.src = e.target.result;
-			};
-		})(image);
-
-		// reader.readAsDataURL(image);
+        this.ug.downloadAsset(folder, uuid);
 
         return new Promise((resolve, reject) => {
             const handleSuccess = () => {

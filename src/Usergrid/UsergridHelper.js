@@ -20,18 +20,20 @@ class UsergridHelper {
 			}
 		}
 
-		this.card = {
-			id: uuid,
-			metadata: {
-				name: null,
-				summary: null,
-				graphicsFolderName: null,
-				graphicsFolderUUID: null,
-				graphicType: null
-			},
-			UUIDHash: {},
-			graphics: []
-		};
+		if (uuid) {
+			this.card = {
+				id: uuid,
+				metadata: {
+					name: null,
+					summary: null,
+					graphicsFolderName: null,
+					graphicsFolderUUID: null,
+					graphicType: null
+				},
+				UUIDHash: {},
+				graphics: []
+			};
+		}
 	}
 
 	init() {
@@ -40,6 +42,35 @@ class UsergridHelper {
 		    appId: this.req.appId,
 			baseUrl: this.req.baseUrl
 		});
+	}
+
+	downloadAsset(folder, uuid) {
+		console.log('folder:')
+		console.log(folder);
+
+		console.log('uuid:');
+		console.log(uuid);
+
+	    // access the asset via entityWithAsset.asset 
+		return new Promise((resolve, reject) => {
+			this.client.GET(folder, uuid,
+				(error, usergridResponse, entity) => {
+
+				entity.downloadAsset(this.client, function(error, assetResponse, entityWithAsset) {
+					console.log('assetResponse:');
+					console.log(assetResponse);
+
+				    if (error) { 
+				        console.log('Error converting asset to image ...');
+				        console.log(error);
+
+				        reject();
+				    } else { 
+				    	resolve(entityWithAsset.asset);
+				    } 
+				});
+			})
+		})
 	}
 
 	getCardData() {

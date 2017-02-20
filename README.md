@@ -12,6 +12,21 @@ The static graphic that I'll be converting into an interactive, deep-zoomable in
 
 See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 
+Note that overlay graphics do not currently show on mobile -- but show fine on desktop.  This problem can also be demonstrated by the live demo at https://worldviewer.github.io/test/ (very simple demo code at https://github.com/worldviewer/test).
+
+The problem seems to relate to the fact that the backend I'm using -- Usergrid -- sends assets in the format ...
+
+```
+    https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics/26396ee5-f630-11e6-be71-0eec2415f3df
+```
+
+I have posted a question on this problem at Apigee's support forum here ...
+
+**Not able to download image assets to mobile from a Usergrid folder**
+https://community.apigee.com/questions/38153/not-able-to-download-image-assets-to-mobile-from-a.html
+
+It may turn out that the functionality I need is simply not available with the latest release of Usergrid.
+
 ### Part 1: Infographic Frontend
 
 - Since the 9 circled information bubbles are overlays, they require transparent backgrounds -- and therefore cannot be JPG's.  Their original PNG filesizes were quite large.  All 9 of these files were processed by TinyPNG.com, reducing their total PNG filesizes by 60%.  This was more than just a measure to reduce the total asset size; at the uncompressed PNG sizes, mobile browsers would commonly crash during load.
