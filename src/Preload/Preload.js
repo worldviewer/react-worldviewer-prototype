@@ -4,6 +4,7 @@
 
 import { PropTypes, Component } from 'react';
 import ImageHelper from './ImageHelper';
+import UsergridHelper from '../Usergrid/UsergridHelper';
 
 const propTypes = {
     // Rendered on success
@@ -12,8 +13,8 @@ const propTypes = {
     // Rendered during load
     loadingIndicator: PropTypes.node.isRequired,
 
-    // Array of image urls to be preloaded
-    images: PropTypes.array,
+    // Controversy card ID
+    cardId: PropTypes.string.isRequired,
 
     // If set, the preloader will automatically show
     // the children content after this amount of time
@@ -35,7 +36,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-    images: [],
     resolveOnError: true,
     mountChildren: true,
     loadingIndicator: null,
@@ -46,7 +46,9 @@ class Preload extends Component {
         super(props);
 
         this.state = {
-            ready: false,
+        	ready: false,
+        	card: null,
+        	urls: []
         };
 
         this._handleSuccess = this._handleSuccess.bind(this);
@@ -64,10 +66,31 @@ class Preload extends Component {
 
     componentDidMount() {
         this._mounted = true;
+
+		this.ug = new UsergridHelper(this.props.cardId);
+		this.ug.init();
+
         if (!this.state.ready) {
-            this.imageHelper
-                .loadImages(this.props.images)
-                .then(this._handleSuccess, this._handleError);
+			this.ug.getAllCardData()
+				.then(() => {
+					let card = this.ug.getCardData();
+
+					let urls = card.graphics.map(graphic =>
+						graphic['uuid']);
+
+					this.setState({
+						card: card,
+						urls: urls
+					});
+
+					let icon = card.graphics.filter((el,i) => 
+						{ return el['source'] === 'icon.png' });
+
+					this.props.setSlideHandler(card.graphics, icon[0]);
+
+					this.imageHelper.loadImages(urls)
+		            	.then(this._handleSuccess, this._handleError);
+				});
 
             if (this.props.autoResolveDelay && this.props.autoResolveDelay > 0) {
                 this.autoResolveTimeout = setTimeout(this._handleSuccess, this.props.autoResolveDelay);

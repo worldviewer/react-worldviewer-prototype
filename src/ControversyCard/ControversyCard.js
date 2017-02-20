@@ -128,7 +128,7 @@ var ControversyCard = React.createClass({
 						numleft={el.numleft}
 						numtop={el.numtop}
 						showOverlay={this.props.showOverlay && this.state.display[i]}
-						source={el.source}
+						source={el.uuid}
 						spin={this.state.spin}
 						top={el.top}
 						width={el.width} />
@@ -136,11 +136,11 @@ var ControversyCard = React.createClass({
 
 				<Icon
 					key='9'
-					left='78vw'
-					source={this.props.icon.source}
+					left={this.props.icon.left}
+					source={this.props.icon.uuid}
 					showOverlay={this.props.showOverlay}
-					top='67vw'
-					width='13vw' />
+					top={this.props.icon.top}
+					width={this.props.icon.width} />
 			</div>
 		);
 	}

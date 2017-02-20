@@ -2,7 +2,7 @@ import ImageCache from './ImageCache';
 
 class ImageHelper {
 	constructor() {
-		this.imageCache = new ImageCache();
+		this.imageCache = new ImageCache();	
 	}
 
     loadImage(url, options) {
@@ -34,7 +34,7 @@ class ImageHelper {
     }
 
     loadImages(urls, options) {
-        const promises = urls.map(url =>  this.loadImage(url, options));
+        const promises = urls.map(url => this.loadImage(url, options));
         return Promise.all(promises);
     }
 
