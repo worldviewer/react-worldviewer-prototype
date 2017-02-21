@@ -10,6 +10,14 @@ The static graphic that I'll be converting into an interactive, deep-zoomable in
 
 ## State of the Prototype
 
+I'm making the decision to switch this project over to MongoDB.  I've never used Mongo, but it looks similar enough to Usergrid that it should be quick to switch over my G+ scraper and pull my assets from a local MongoDB backend.
+
+I'm estimating that that will take around 6 hours total, whereas setting the hosted backend up should take another 3 hours.
+
+I'm going to keep this project in its current state on my local, and set up the new Mongo version in a new one, just in case some sort of responses to my Usergrid questions pop up along the way.
+
+## State of the Prototype (formerly on Usergrid)
+
 See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 
 Note that overlay graphics do not currently show on mobile -- but show fine on desktop.  This problem can also be demonstrated by the live demo at https://worldviewer.github.io/test/ (very simple demo code at https://github.com/worldviewer/test).
