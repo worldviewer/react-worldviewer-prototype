@@ -60,8 +60,8 @@ var App = React.createClass({
 
 	setSlides: function(slides, icon) {
 		this.setState({
-			slides: slides,
-			icon: icon
+			slides,
+			icon
 		});
 	},
 

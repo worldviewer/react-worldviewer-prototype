@@ -61,7 +61,7 @@ const DeepZoom = React.createClass({
 
 		this.setState({
 			cardStyle: {
-				width: width,
+				width,
 				height: height + 'vw'
 			}
 		});

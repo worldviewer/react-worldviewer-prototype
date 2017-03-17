@@ -25,7 +25,7 @@ class ImageCache {
 
 	stuff(urls, options) {
 	    if (urls.length > 0) {
-	        urls.map((url) => this.add(url, options));
+	        urls.map(url => this.add(url, options));
 	    }
 	}
 }

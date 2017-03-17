@@ -9,9 +9,9 @@ import Summary from '../Summary/Summary';
 var ControversyCard = React.createClass({
 	getInitialState: function() {
 		return {
-			spin: [false, false, false, false, false, false, false, false],
-			spinTimeouts: [0,0,0,0,0,0,0,0],
-			display: [false, false, false, false, false, false, false, false]
+			spin: Array.from({length:8}, el => false),
+			spinTimeouts: Array.from({length:8}, el => 0),
+			display: Array.from({length:8}, el => false)
 		}
 	},
 
@@ -21,8 +21,8 @@ var ControversyCard = React.createClass({
 		});
 
 		this.setState({
-			spin: [false, false, false, false, false, false, false, false],
-			spinTimeouts: [0,0,0,0,0,0,0,0]
+			spin: Array.from({length:8}, el => false),
+			spinTimeouts: Array.from({length:8}, el => 0)
 		});
 	},
 
@@ -32,7 +32,7 @@ var ControversyCard = React.createClass({
 		setTimeout(() => {
 			this.state.spin.forEach( (el, i) => {
 				let newTimeout = setTimeout(() => {
-					let newSpinState = [false, false, false, false, false, false, false, false];
+					let newSpinState = Array.from({length:8}, el => false);
 					newSpinState[i] = true;
 
 					this.setState({
