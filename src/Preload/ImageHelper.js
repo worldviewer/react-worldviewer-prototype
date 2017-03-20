@@ -1,11 +1,10 @@
 import ImageCache from './ImageCache';
-import UsergridHelper from '../Usergrid/UsergridHelper';
+import Backend from '../Backend/Backend';
 
 class ImageHelper {
 	constructor() {
 		this.imageCache = new ImageCache();
-		this.ug = new UsergridHelper();
-		this.ug.init();
+		this.backend = new Backend();
 	}
 
     loadImage(url, options) {

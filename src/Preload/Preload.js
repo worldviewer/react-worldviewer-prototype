@@ -4,7 +4,7 @@
 
 import { PropTypes, Component } from 'react';
 import ImageHelper from './ImageHelper';
-import UsergridHelper from '../Usergrid/UsergridHelper';
+import Backend from '../Backend/Backend';
 
 const propTypes = {
     // Rendered on success
@@ -67,20 +67,19 @@ class Preload extends Component {
     componentDidMount() {
         this._mounted = true;
 
-		this.ug = new UsergridHelper(this.props.cardId);
-		this.ug.init();
+		this.backend = new Backend();
 
         if (!this.state.ready) {
-			this.ug.getAllCardData()
+			this.backend.getAllCardData()
 				.then(() => {
-					let card = this.ug.getCardData();
+					let card = this.backend.getCardData();
 
 					let urls = card.graphics.map(graphic =>
 						graphic['uuid']);
 
 					this.setState({
-						card: card,
-						urls: urls
+						card,
+						urls
 					});
 
 					let icon = card.graphics.filter((el,i) => 
