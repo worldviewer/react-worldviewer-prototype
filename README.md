@@ -4,11 +4,21 @@ A GIS-inspired approach to visualizing discourse on scientific controversies, bu
 
 ## What is This Thing?
 
-The <a href="https://plus.google.com/collection/Yhn4Y">Controversies of Science G+ collection</a> is intended as a social network which aims to teach critical thinking in the sciences by immersing non-specialists into a number of complex scientific debates involving opposing worldviews.
+*"For citizens who want to take part in the democratic processes of a technological society, all the science they need to know about is controversial..."*
+
+- From the Preface to *The Golem - What You Should Know About Science*, by Harry M. Collins and Trevor Pinch
+
+The <a href="https://plus.google.com/collection/Yhn4Y">Controversies of Science G+ collection</a> is intended as a social network which aims to teach critical thinking in the sciences by immersing non-specialists into a number of complex scientific debates involving opposing worldviews.  It is modeled on current critical thinking in International Baccalaureate literature classes.
 
 It will double as a systematic effort to crowdsource information about scientific controversies, introducing a new form of science journalism intended to better help people to use science as a tool for thinking.
 
-A more detailed explanation of the problem this project is solving is explained after the prototype description.
+A third goal is to teach the patterns of scientific controversies and methods for formulating a personalized independent worldview in the sciences.  The premise is that this will support laypeople and specialists out of their domain seeking to navigate some novel complex scientific claim, and reduce susceptibility to weak or pseudoscientific claims.
+
+There is significant literature which supports the controversy-first approach to science education.  A good place to start is this recent article here:
+
+*<a href="https://medicalxpress.com/news/2017-03-dialogue-boost-critical.html">"Examining an issue as a debate or dialogue between two sides helps people apply deeper, more sophisticated reasoning</a>, according to new research published in Psychological Science, a journal of the Association for Psychological Science."*
+
+A far more detailed explanation of the problem this project is solving is explained after the prototype description.
 
 ## The Prototype Graphic
 
