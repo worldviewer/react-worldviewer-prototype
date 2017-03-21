@@ -12,7 +12,7 @@ The <a href="https://plus.google.com/collection/Yhn4Y">Controversies of Science 
 
 The project will evolve into a social network which aims to teach critical thinking in the sciences by immersing non-specialists into a variety of historical and even ongoing complex scientific debates involving opposing worldviews.  This approach is inspired by current critical thinking instruction in International Baccalaureate literature classes.
 
-The project will double as a systematic effort to crowdsource information about scientific controversies, by encouraging people to track the success or failure of controversial or challenged claims in the sciences.  In this regard, TCoS will introduce a new form of participatory science journalism intended to better help people to use science as a tool for thinking.
+The project will double as a systematic effort to crowdsource information about scientific controversies, by encouraging people to track the successes and failures of controversial or challenged claims in the sciences.  In this regard, TCoS will introduce a new form of participatory science journalism intended to better help people to use science as a tool for thinking.
 
 A third goal is to teach the patterns of scientific controversies and methods for refining a personalized, independent worldview in the sciences.  The premise is that this will support laypeople and specialists out of their domain seeking to navigate some novel complex scientific claim where the experts have been challenged.  There is reason to believe that this approach can as a consequence reduce peoples' susceptibility to weak or pseudoscientific claims.
 
@@ -96,8 +96,8 @@ An AWS S3 CDN bucket delivers static assets for the deep zoom image pyramid and 
 
 Those microservices repos are here:
 
-https://github.com/worldviewer/aws-lambda-mongo-cards-api
-https://github.com/worldviewer/aws-lambda-mongo-metacards-api
+- https://github.com/worldviewer/aws-lambda-mongo-cards-api
+- https://github.com/worldviewer/aws-lambda-mongo-metacards-api
 
 Typical controversy card JSON:
 
