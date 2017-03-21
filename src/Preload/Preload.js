@@ -75,17 +75,17 @@ class Preload extends Component {
 					let card = this.backend.getCardData();
 
 					let urls = card.graphics.map(graphic =>
-						graphic['uuid']);
+						this.backend.getAssetsUrlBase() + graphic['source']);
+
+                    let icon = card.icon;
 
 					this.setState({
 						card,
-						urls
+						urls,
+                        icon
 					});
 
-					let icon = card.graphics.filter((el,i) => 
-						{ return el['source'] === 'icon.png' });
-
-					this.props.setSlideHandler(card.graphics, icon[0]);
+					this.props.setSlideHandler(card.graphics, icon);
 
 					this.imageHelper.loadImages(urls)
 		            	.then(this._handleSuccess, this._handleError);

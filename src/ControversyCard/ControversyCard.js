@@ -5,9 +5,12 @@ import './ControversyCard.scss';
 import DeepZoom from '../DeepZoom/DeepZoom';
 import Title from '../Title/Title';
 import Summary from '../Summary/Summary';
+import Backend from '../Backend/Backend';
 
 var ControversyCard = React.createClass({
 	getInitialState: function() {
+		this.backend = new Backend();
+
 		return {
 			spin: Array.from({length:8}, el => false),
 			spinTimeouts: Array.from({length:8}, el => 0),
@@ -95,7 +98,7 @@ var ControversyCard = React.createClass({
 		return (
 			<div className="Deep-Zoom-Graphic">
 				<DeepZoom
-					url={process.env.PUBLIC_URL + "/pyramid_files/"}
+					url={this.props.pyramid}
 					onZoom={this.props.zoomHandler} />
 
 				<Title
@@ -128,7 +131,7 @@ var ControversyCard = React.createClass({
 						numleft={el.numleft}
 						numtop={el.numtop}
 						showOverlay={this.props.showOverlay && this.state.display[i]}
-						source={el.uuid}
+						source={this.backend.getAssetsUrlBase() + el.source}
 						spin={this.state.spin}
 						top={el.top}
 						width={el.width} />
@@ -137,7 +140,7 @@ var ControversyCard = React.createClass({
 				<Icon
 					key='9'
 					left={this.props.icon.left}
-					source={this.props.icon.uuid}
+					source={this.backend.getIconUrlBase() + this.props.icon.source}
 					showOverlay={this.props.showOverlay}
 					top={this.props.icon.top}
 					width={this.props.icon.width} />

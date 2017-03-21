@@ -10,13 +10,6 @@ class ImageHelper {
     loadImage(url, options) {
         const image = this.imageCache.get(url, options);
 
-        let asset = url.split('/'),
-        	len = asset.length,
-        	uuid = asset[len-1],
-        	folder = asset[len-2];
-
-        this.ug.downloadAsset(folder, uuid);
-
         return new Promise((resolve, reject) => {
             const handleSuccess = () => {
                 resolve(image);

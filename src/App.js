@@ -6,16 +6,25 @@ import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner';
 // import Preload from 'react-preload';
 import Preload from './Preload/Preload';
+import Backend from './Backend/Backend';
 
 var App = React.createClass({
 	getInitialState: function() {
+		this.backend = new Backend();
+
 		return {
 			// TODO: This UUID will eventually be programmatically discovered.
 			// For now, it is fixed to the Halton Arp card.
 			card: {
-				uuid: '5dd8d904-f6d8-11e6-9a38-0ad881f403bf'
+				uuid: '58b8f1f7b2ef4ddae2fb8b17'
 			},
-			icon: null,
+			pyramidUrl: this.backend.getPyramidUrl(),
+			icon: {
+				source: '',
+				left: '',
+				top: '',
+				width: ''
+			},
 			slides: [],
 			overlay: true,
 			allAssetsLoaded: false,
@@ -63,6 +72,8 @@ var App = React.createClass({
 			slides,
 			icon
 		});
+
+		console.log(this.state);
 	},
 
 	toggleOverlay: function(zoom) {
@@ -72,6 +83,7 @@ var App = React.createClass({
 	},
 
 	componentDidMount: function() {
+
 	},
 
 	toggleSlide: function() {
@@ -139,6 +151,7 @@ var App = React.createClass({
 
 					<ControversyCard
 						icon={this.state.icon}
+						pyramid={this.state.pyramidUrl}
 						slides={this.state.slides}
 						zoomHandler={this.toggleOverlay}
 						toggleSlideHandler={this.toggleSlide}

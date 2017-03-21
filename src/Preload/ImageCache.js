@@ -8,9 +8,9 @@ class ImageCache {
 	    if (!this.hash[url]) {
 	        this.hash[url] = new Image();
 
-	        // if (options.crossOrigin) {
-	        //     hash[url].crossOrigin = options.crossOrigin;
-	        // }
+	        if (options.crossOrigin) {
+	            this.hash[url].crossOrigin = options.crossOrigin;
+	        }
 
 	        this.hash[url].src = url;
 
