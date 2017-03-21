@@ -6,17 +6,26 @@ A GIS-inspired approach to visualizing discourse on scientific controversies, bu
 
 *"For citizens who want to take part in the democratic processes of a technological society, all the science they need to know about is controversial..."*
 
-- From the Preface to *The Golem - What You Should Know About Science*, by Harry M. Collins and Trevor Pinch
+(From the Preface to <a href="https://www.amazon.com/Golem-Should-About-Science-Classics/dp/1107604656/">*The Golem - What You Should Know About Science*</a>, by Harry M. Collins and Trevor Pinch)
 
-The <a href="https://plus.google.com/collection/Yhn4Y">Controversies of Science G+ collection</a> is intended as a social network which aims to teach critical thinking in the sciences by immersing non-specialists into a number of complex scientific debates involving opposing worldviews.  It is modeled on current critical thinking in International Baccalaureate literature classes.
+The <a href="https://plus.google.com/collection/Yhn4Y">Controversies of Science G+ collection</a> has several aims which are all directed at improving the way that people think and talk about science.
 
-It will double as a systematic effort to crowdsource information about scientific controversies, introducing a new form of science journalism intended to better help people to use science as a tool for thinking.
+The project will evolve into a social network which aims to teach critical thinking in the sciences by immersing non-specialists into a variety of historical and even ongoing complex scientific debates involving opposing worldviews.  This approach is inspired by current critical thinking instruction in International Baccalaureate literature classes.
 
-A third goal is to teach the patterns of scientific controversies and methods for formulating a personalized independent worldview in the sciences.  The premise is that this will support laypeople and specialists out of their domain seeking to navigate some novel complex scientific claim, and reduce susceptibility to weak or pseudoscientific claims.
+The project will double as a systematic effort to crowdsource information about scientific controversies, by encouraging people to track the success or failure of controversial or challenged claims in the sciences.  In this regard, TCoS will introduce a new form of participatory science journalism intended to better help people to use science as a tool for thinking.
 
-There is significant literature which supports the controversy-first approach to science education.  A good place to start is this recent article here:
+A third goal is to teach the patterns of scientific controversies and methods for refining a personalized, independent worldview in the sciences.  The premise is that this will support laypeople and specialists out of their domain seeking to navigate some novel complex scientific claim where the experts have been challenged.  There is reason to believe that this approach can as a consequence reduce peoples' susceptibility to weak or pseudoscientific claims.
+
+There is significant literature which supports the controversy-first approach to science education -- a fundamentally constructivist approach.  This approach contrasts sharply with positivist efforts to demarcate good from bad science, insofar as the demarcation is more distributed between the individual and experts.  A good place to start is this recent article here:
 
 *<a href="https://medicalxpress.com/news/2017-03-dialogue-boost-critical.html">"Examining an issue as a debate or dialogue between two sides helps people apply deeper, more sophisticated reasoning</a>, according to new research published in Psychological Science, a journal of the Association for Psychological Science."*
+
+While the original G+ collection has already demonstrated some successes towards these objectives, one of the most challenging aspects of teaching critical thinking is to motivate people to *want* to learn about alternative worldviews in the sciences -- a subject matter whose dry text-based format generally dissuades widespread interest.  The idea behind this current prototype is to ...
+
+- (1) enable the participatory aspects -- the crowdsourcing;
+- (2) to reduce through visualizations the cognitive load that the text-based approaches lead to;
+- (3) to identify an instructional technique that feels more like entertainment than education; and
+- (4) to identify a format for scientific controversies which is designed from scratch to support this niche's specific needs.
 
 A far more detailed explanation of the problem this project is solving is explained after the prototype description.
 
@@ -114,7 +123,7 @@ https://github.com/worldviewer/controversy-api-mongodb
 - Add additional UI layers for concept, propositional and model levels (switch between them using vertical swiping)
 - Wrap megaboilerplate with auth around prototype
 - What I am ultimately working towards with this prototype is something similar to https://github.com/Emigre/openseadragon-annotations.  I want to be able to annotate the image pyramid and persist those annotations (although my annotations will not be hand-drawn drawings -- but rather more like interactive GIS icons with text labels, and other more structured annotation elements).  Based on advice from Rishat from codementor.io, I should keep track of the absolute canvas-based coordinates at all times in my React state, and use that zoom level and calculated box to determine whether or not to render any particular annotation overlay.  With this approach in mind, it may not be necessary to refer to the implementation above (?).
-- Mix in Steam social network feed API
+- Mix in Stream social network feed API
 
 # The Backstory
 
