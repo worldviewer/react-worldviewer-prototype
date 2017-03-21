@@ -83,7 +83,7 @@ https://github.com/worldviewer/aws-lambda-mongo-metacards-api
 Typical controversy card JSON:
 
 <p align="center">
-    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/controversy-card-json.png" />
+    <img src="https://github.com/worldviewer/react-worldviewer-prototype/blob/master/doc/controversy-card-json.png" />
 </p>
 
 ### Part 4 - The Controversies of Science Scrape Script
