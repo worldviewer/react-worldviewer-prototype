@@ -119,7 +119,7 @@ var ControversyCard = React.createClass({
 
 				<Summary
 					showOverlay={this.props.showOverlay}>
-					He Was a Professional Astronomer Who<br/>Began his Career as Edwin Hubble's Assistant / While Compiling a List of Peculiar Galaxies, Arp Discovered that High-Redshift Quasars are Commonly Associated with or Even Connected by Filaments to Lower-Redshift Galaxies / Since the Big Bang Requires that Differences in Redshift Place the Objects at Different Locations, Astronomers Commonly Reject Arp's Claims / But if he is Right, then there Was No Big Bang
+					{this.props.summary}
 				</Summary>
 
 				{ this.props.slides.map( (el, i) => 

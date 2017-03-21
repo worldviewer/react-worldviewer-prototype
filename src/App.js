@@ -167,6 +167,7 @@ var App = React.createClass({
 					<ControversyCard
 						icon={this.state.card.metadata.icon}
 						title={this.state.card.metadata.name}
+						summary={this.state.card.metadata.summary}
 						pyramid={this.state.pyramidUrl}
 						slides={this.state.card.graphics}
 						zoomHandler={this.toggleOverlay}
