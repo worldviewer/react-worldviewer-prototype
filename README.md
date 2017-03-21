@@ -20,12 +20,12 @@ There is significant literature which supports the controversy-first approach to
 
 *<a href="https://medicalxpress.com/news/2017-03-dialogue-boost-critical.html">"Examining an issue as a debate or dialogue between two sides helps people apply deeper, more sophisticated reasoning</a>, according to new research published in Psychological Science, a journal of the Association for Psychological Science."*
 
-While the original G+ collection has already demonstrated some successes towards these objectives, one of the most challenging aspects of teaching critical thinking is to motivate people to *want* to learn about alternative worldviews in the sciences -- a subject matter whose dry text-based format generally dissuades widespread interest.  The idea behind this current prototype is to ...
+While the original G+ collection has already demonstrated some successes towards these objectives, one of the most challenging aspects of teaching critical thinking is to motivate people to *want* to learn about alternative worldviews in the sciences -- a subject matter whose dry text-based format generally dissuades widespread interest.  The idea behind this current prototype is ...
 
-- (1) enable the participatory aspects -- the crowdsourcing;
-- (2) to reduce through visualizations the cognitive load that the text-based approaches lead to;
-- (3) to identify an instructional technique that feels more like entertainment than education; and
-- (4) to identify a format for scientific controversies which is designed from scratch to support this niche's specific needs.
+- to enable the participatory aspects -- the crowdsourcing;
+- to reduce through visualizations the cognitive load that the text-based approaches lead to;
+- to identify an instructional technique that feels more like entertainment than education; and
+- to identify a format for scientific controversies which is designed from scratch to support this niche's specific needs.
 
 A far more detailed explanation of the problem this project is solving is explained after the prototype description.
 
