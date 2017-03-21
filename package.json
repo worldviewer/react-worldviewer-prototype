@@ -55,6 +55,7 @@
     "bezier-easing": "^2.0.3",
     "dotenv": "^2.0.0",
     "gsap": "^1.19.1",
+    "html-to-react": "^1.2.4",
     "mongodb": "^2.2.24",
     "path": "^0.12.7",
     "radium": "^0.18.1",

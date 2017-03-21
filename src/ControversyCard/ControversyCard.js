@@ -104,15 +104,17 @@ var ControversyCard = React.createClass({
 				<Title
 					key="left"
 					position="Left"
+					display={this.props.title.display.left}
 					showOverlay={this.props.showOverlay}>
-					Halton<br/>Arp
+					{this.props.title.display.left.markup}
 				</Title>
 
 				<Title
 					key="right"
 					position="Right"
+					display={this.props.title.display.right}
 					showOverlay={this.props.showOverlay}>
-					The<br/>Modern<br/>Galileo
+					{this.props.title.display.right.markup}
 				</Title>
 
 				<Summary

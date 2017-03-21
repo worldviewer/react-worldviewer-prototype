@@ -3,6 +3,9 @@ import './Title.scss';
 import TransitionGroup from 'react-addons-transition-group';
 import { TweenMax, Power1 } from 'gsap';
 
+// Permits HTML markup encoding in Title
+import { Parser as HtmlToReactParser } from 'html-to-react';
+
 var AnimatedTitle = React.createClass({
 	componentWillAppear: function(callback) {
 		const el = this.container;
@@ -47,12 +50,28 @@ var AnimatedTitle = React.createClass({
 	},
 
 	render: function() {
+		let htmlToReactParser = new HtmlToReactParser();
+
+		let cssStyles =
+			this.props.position === "Right" ? 
+			{
+				right: this.props.display.right,
+				top: this.props.display.top,
+				textAlign: "right"
+			} :
+			{
+				left: this.props.display.left,
+				top: this.props.display.top,
+				textAlign: "left"
+			}
+
 		return (
 			<p
 				className={"Title " + this.props.position}
 				ref={c => this.container = c}
+				style={cssStyles}
 			>
-				{this.props.children}
+				{htmlToReactParser.parse(this.props.children)}
 			</p>
 		)
 	}
@@ -63,7 +82,9 @@ var Title = React.createClass({
 		return (
 			<TransitionGroup component="div">
 				{this.props.showOverlay &&
-					<AnimatedTitle position={this.props.position}>
+					<AnimatedTitle
+						position={this.props.position}
+						display={this.props.display}>
 						{this.props.children}
 					</AnimatedTitle>
 				}

@@ -22,6 +22,20 @@ var App = React.createClass({
 						left: '',
 						top: '',
 						width: ''
+					},
+					name: {
+						display: {
+							left: {
+								left: '',
+								markup: '',
+								top: ''
+							},
+							right: {
+								right: '',
+								markup: '',
+								top: ''
+							}
+						}
 					}
 				},
 				graphics: []
@@ -152,6 +166,7 @@ var App = React.createClass({
 
 					<ControversyCard
 						icon={this.state.card.metadata.icon}
+						title={this.state.card.metadata.name}
 						pyramid={this.state.pyramidUrl}
 						slides={this.state.card.graphics}
 						zoomHandler={this.toggleOverlay}
