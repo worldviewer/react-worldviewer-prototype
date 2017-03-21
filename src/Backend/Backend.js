@@ -1,22 +1,23 @@
 // TODO: Create helper methods to retrieve metacards collection, so that
-// card uuid's can be selected from there.
+// card id's can be selected from there.
 class Backend {
-	constructor(uuid = '58b8f1f7b2ef4ddae2fb8b17') {
-		this.apiUrl = 'https://czlxg9sj34.execute-api.us-east-1.amazonaws.com/dev/cards/';
-		this.pyramidUrl = 'https://controversy-cards-assets.s3.amazonaws.com/';
-		this.assetsUrl = 'https://controversy-cards-assets.s3.amazonaws.com/';
+	constructor(id = '58b8f1f7b2ef4ddae2fb8b17') {
+		this.apiUrlBase = 'https://czlxg9sj34.execute-api.us-east-1.amazonaws.com/dev/cards/';
+		this.pyramidUrlBase = 'https://controversy-cards-assets.s3.amazonaws.com/';
+		this.assetsUrlBase = 'https://controversy-cards-assets.s3.amazonaws.com/';
 
 		this.card = {
-			id: uuid,
+			id: id,
 			metadata: {
 				name: null,
 				summary: null,
-				graphicType: null
+				graphicType: null,
+				icon: null
 			},
 			graphics: [],
-			pyramidUrl: this.pyramidUrl + uuid + '/pyramid_files/',
-			assetsUrl: this.assetsUrl + uuid + '/assets/',
-			iconUrl: this.assetsUrl + uuid + '/icon/'
+			pyramidUrl: this.pyramidUrlBase + id + '/pyramid_files/',
+			assetsUrl: this.assetsUrlBase + id + '/assets/',
+			iconUrl: this.assetsUrlBase + id + '/icon/'
 		};
 	}
 
@@ -39,14 +40,14 @@ class Backend {
 	saveMetaData(data) {
 		this.card.metadata.name = data['name'];
 		this.card.metadata.summary = data['summary'];
-		this.card.metadata.graphicType = data['graphicType'];
+		this.card.metadata.graphicType = data['graphic']['type'];
+		this.card.metadata.icon = data['graphic']['icon'];
 		this.card.graphics = data['graphic']['overlays']['assets'];
-		this.card.icon = data['graphic']['icon'];
 	}
 
 	getAllCardData() {
 		return new Promise((resolve, reject) => {
-			let cardRequest = new Request(this.apiUrl + this.card.id);
+			let cardRequest = new Request(this.apiUrlBase + this.card.id);
 
 			fetch(cardRequest)
 				.then(response => response.json())

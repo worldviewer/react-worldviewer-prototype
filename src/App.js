@@ -4,7 +4,6 @@ import ControversyCard from './ControversyCard/ControversyCard';
 import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner';
-// import Preload from 'react-preload';
 import Preload from './Preload/Preload';
 import Backend from './Backend/Backend';
 
@@ -13,19 +12,21 @@ var App = React.createClass({
 		this.backend = new Backend();
 
 		return {
-			// TODO: This UUID will eventually be programmatically discovered.
+			// TODO: This ID will eventually be programmatically discovered.
 			// For now, it is fixed to the Halton Arp card.
 			card: {
-				uuid: '58b8f1f7b2ef4ddae2fb8b17'
+				id: '58b8f1f7b2ef4ddae2fb8b17',
+				metadata: {
+					icon: {
+						source: '',
+						left: '',
+						top: '',
+						width: ''
+					}
+				},
+				graphics: []
 			},
 			pyramidUrl: this.backend.getPyramidUrl(),
-			icon: {
-				source: '',
-				left: '',
-				top: '',
-				width: ''
-			},
-			slides: [],
 			overlay: true,
 			allAssetsLoaded: false,
 			showNext: true,
@@ -67,12 +68,12 @@ var App = React.createClass({
 		}
 	},
 
-	setSlides: function(slides, icon) {
+	setSlides: function(card) {
 		this.setState({
-			slides,
-			icon
+			card
 		});
 
+		console.log('this.state:');
 		console.log(this.state);
 	},
 
@@ -141,7 +142,7 @@ var App = React.createClass({
 			<div className="App">
 
 				<Preload
-					cardId={this.state.card.uuid}
+					cardId={this.state.card.id}
 					setSlideHandler={this.setSlides}
 					loadingIndicator={loadSpinner}
 					onError={this.handleAssetLoadError}
@@ -150,9 +151,9 @@ var App = React.createClass({
 					mountChildren={true} >
 
 					<ControversyCard
-						icon={this.state.icon}
+						icon={this.state.card.metadata.icon}
 						pyramid={this.state.pyramidUrl}
-						slides={this.state.slides}
+						slides={this.state.card.graphics}
 						zoomHandler={this.toggleOverlay}
 						toggleSlideHandler={this.toggleSlide}
 						prevNextHandler={this.updateNextPrev}

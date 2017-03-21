@@ -85,7 +85,7 @@ class Preload extends Component {
                         icon
 					});
 
-					this.props.setSlideHandler(card.graphics, icon);
+					this.props.setSlideHandler(card);
 
 					this.imageHelper.loadImages(urls)
 		            	.then(this._handleSuccess, this._handleError);
