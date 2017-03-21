@@ -1,280 +1,110 @@
 # The Mobile-First Controversy Card Prototype
 
-A GIS-inspired approach to visualizing discourse on scientific controversies, inspired by Flemming Hansen and built in React.js for mobile devices
+A GIS-inspired approach to visualizing discourse on scientific controversies, built in React.js for mobile devices.
 
-The static graphic that I'll be converting into an interactive, deep-zoomable infographic ...
+## What is This Thing?
+
+The <a href="https://plus.google.com/collection/Yhn4Y">Controversies of Science G+ collection</a> is intended as a social network which aims to teach critical thinking in the sciences by immersing non-specialists into a number of complex scientific debates involving opposing worldviews.
+
+It will double as a systematic effort to crowdsource information about scientific controversies, introducing a new form of science journalism intended to better help people to use science as a tool for thinking.
+
+A more detailed explanation of the problem this project is solving is explained after the prototype description.
+
+## The Prototype Graphic
+
+The static graphic that I've chosen to convert into an interactive, deep-zoomable infographic ...
 
 <p align="center">
     <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/halton-arp-the-modern-galileo-bbal-card-7percent-rez.jpg" />
 </p>
 
-## State of the Prototype
+## The State of the Prototype
 
-I'm making the decision to switch this project over to MongoDB.  I've never used Mongo, but it looks similar enough to Usergrid that it should be quick to switch over my G+ scraper and pull my assets from a local MongoDB backend.
+See live mobile-friendly demo at https://worldviewer.github.io/react-worldviewer-prototype/.
 
-I'm estimating that that will take around 6 hours total, whereas setting the hosted backend up should take another 3 hours.
+This project has been recently transitioned from Apigee / Usergrid to MongoDB / AWS Lambda / AWS S3.
 
-I'm going to keep this project in its current state on my local, and set up the new Mongo version in a new one, just in case some sort of responses to my Usergrid questions pop up along the way.
+### Part 1: The Infographic Frontend
 
-## State of the Prototype (formerly on Usergrid)
+A common element for all of the enhanced controversy cards will be a deep-zoomable background which on zoom will eventually act as an interactive wall for discussion of the topic.
 
-See live demo at https://worldviewer.github.io/react-worldviewer-prototype/.
+#### The OpenSeadragon / DZI Deep Zoom Image Pyramid Background
 
-Note that overlay graphics do not currently show on mobile -- but show fine on desktop.  This problem can also be demonstrated by the live demo at https://worldviewer.github.io/test/ (very simple demo code at https://github.com/worldviewer/test).
+Clicking or pinching the background will zoom into it.
 
-The problem seems to relate to the fact that the backend I'm using -- Usergrid -- sends assets in the format ...
+The decision to use the OpenSeadragon/DZI deep zoom approach followed from the iPhone's viewport maximum-scale limitation of 10x zoom.  A prototype was constructed to test whether or not this would be sufficient to observe the smallest type within the existing graphics, and it was definitively observed to be a problem.  Since this 10x limit is non-negotiable, an alternative solution which could get us to far deeper zooms and far larger canvases was necessary.
 
-```
-    https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics/26396ee5-f630-11e6-be71-0eec2415f3df
-```
+MagickSlicer was used to generate a DZI image pyramid for the large background jpeg (similar to how GIS mapping software works).  In short, these tools solve the problem -- even for mobile devices -- by breaking the graphic up into a grid.  This permits the loading of select tiles rather than the entire image.
 
-I have posted a question on this problem at Apigee's support forum here ...
+That image pyramid is now successfully serving through React.js on both mobile and desktop devices.
 
-**Not able to download image assets to mobile from a Usergrid folder**
-https://community.apigee.com/questions/38153/not-able-to-download-image-assets-to-mobile-from-a.html
+OpenSeadragon supports a variety of tile sources.  It can work even with plain JPG images, but what I found through experimentation (and confirmed in the documentation) is that this is only true for desktop; zooming into a JPG image does not work on a mobile device.  The image will simply refuse to load.  Once the DZI pyramid image was created with MagickSlicer, the problem was resolved.
 
-It may turn out that the functionality I need is simply not available with the latest release of Usergrid.
-
-### Part 1: Infographic Frontend
-
-- Since the 9 circled information bubbles are overlays, they require transparent backgrounds -- and therefore cannot be JPG's.  Their original PNG filesizes were quite large.  All 9 of these files were processed by TinyPNG.com, reducing their total PNG filesizes by 60%.  This was more than just a measure to reduce the total asset size; at the uncompressed PNG sizes, mobile browsers would commonly crash during load.
-- The decision to use the OpenSeadragon/DZI deep zoom approach followed from the iPhone's viewport maximum-scale limitation of 10x zoom.  A prototype was constructed to test whether or not this would be sufficient to observe the smallest type within the existing graphics, and it was definitively observed to be a problem.  Since this 10x limit is non-negotiable, an alternative solution which could get us to far deeper zooms and far larger canvases was necessary.
-- MagickSlicer was used to generate a DZI image pyramid for the large background jpeg (similar to how GIS mapping software works).  In short, these tools solve the problem -- even for mobile devices -- by breaking the graphic up into a grid.  This permits the loading of select tiles rather than the entire image.
-- That image pyramid is now successfully serving through React.js on both mobile and desktop devices.
-- OpenSeadragon supports a variety of tile sources.  It can work even with plain JPG images, but what I found through experimentation (and confirmed in the documentation) is that this is only true for desktop; zooming into a JPG image does not work on a mobile device.  The image will simply refuse to load.  Once the DZI pyramid image was created with MagickSlicer, the problem was resolved.
-- The original graphic's text has been removed from that large background JPG, so that it can be rendered in HTML and CSS as an overlay on top of the large background jpeg.
-- As mentioned, all numbered bubbles have also been removed from the large background JPG, so that they too can be placed as overlays.
-- As the demo currently stands, the overlays all disappear when OpenSeadragon reports the zoom level to be more than 1.1.
-- There is a slight issue with Safari that is not a problem with Chrome, since Apple has decided to disable our ability to prevent UI scaling.  There is some controversy over Apple's decision to do this, and I believe my own prototype makes a case against that decision.  The problem is that we really need a way to prevent the UI from zooming via pinch, because it's not all that uncommon for a pinch to accidentally grab the UI rather than the OpenSeadragon canvas.
-- I've brought in ReactTransitionGroup and GSAP ("the Swiss Army knife of animation") in order to get a more fine-grained control over animations at both load and component mount/unmount.  The explanation for the refactor is based upon the solution <a href="https://medium.com/@cheapsteak/animations-with-reacttransitiongroup-4972ad7da286#.8lzv3vt8z">here</a>.  I've got a generic fade animation happening right now using MaxTween.fromTo(), but I'd like to use GSAP to get the animate.css effects working.  There are three things to understand about this ReactTransitionGroup approach:
-    (1) You must call the supplied callbacks that are supplied to the new lifecycle methods -- componentWillAppear, componentWillEnter, componentDidEnter, componentWillLeave and componentDidLeave -- after your animation ends, otherwise your component will enter but not leave (or leave but not enter).  I can validate that this is indeed the case.
-    (2) Because ReactTransitionGroup relies upon the new lifecycle methods which it introduces to exist, in order for these animations to link to those particular hooks, it's necessary to move the SomeComponents we want to animate into their own AnimatedSomeComponents.
-    (3) In the parent of AnimatedSomeComponent, SomeComponent, we must generate a ref attribute with `ref={c => this.container = c}` so that we can refer to the parent with `const el = this.container` inside of the child.
-- I've begun the process of setting up my backend to support requests for assets.  The very first step is to transfer the `/metacards` info into the `/cards` info, because we want to set up a route that relates to this specific cardId.  This is an example ...
-
-```
-    {
-      "type": "cards",
-      "name": "Halton Arp, the Modern Galileo",
-      "author": {
-        "lastTimeOnline": "1985-04-12T23:20:50.52Z",
-        "bio": "(MC) Master of Controversies",
-        "avatar": "https://lh3.googleusercontent.com/-7pSD5TEGt4g/AAAAAAAAAAI/AAAAAAAAACI/Cqefb4i8T3E/photo.jpg?sz=50",
-        "userId": 0,
-        "email": "paradigmsareconstructed@gmail.com",
-        "username": "Chris Reeve"
-      },
-      "graphicType": "bubbleOverlay",
-      "summary": "He Was a Professional Astronomer Who Began his Career as Edwin Hubble's Assistant / While Compiling a List of Peculiar Galaxies, Arp Discovered that High-Redshift Quasars are Commonly Associated with or Even Connected by Filaments to Lower-Redshift Galaxies / Since the Big Bang Requires that Differences in Redshift Place the Objects at Different Locations, Astronomers Commonly Reject Arp's Claims / But if he is Right, then there Was No Big Bang",
-      "thumbnail": "https://lh3.googleusercontent.com/-UJsVVpygCpg/WA2XbtJflgI/AAAAAAAAJAU/M0vr_EK-krkPjiWqudBnGA1T3loMC6TSgCJoC/w506-h750/halton-arp-the-modern-galileo-bbal-card.jpg",
-      "url": "https://lh3.googleusercontent.com/-UJsVVpygCpg/WA2XbtJflgI/AAAAAAAAJAU/M0vr_EK-krkPjiWqudBnGA1T3loMC6TSgCJoC/w7142-h9999/halton-arp-the-modern-galileo-bbal-card.jpg"
-    }
-```
-
-The following information required a number of attempts to nail down ...
-
-In order to upload an asset to the backend, we have to first set up a folder on the backend that's owned by a user.  Then, we curl the file into that folder, like this:
-
-```
-    curl -X POST -F name='<filename>' -F file=@<file_location> 'https://<baas_host_name>/<org>/<app>/<collection>/<entity>'
-```
-
-In our case ...
-
-```
-    curl -X POST -F name='bubble0.png' -F file=@bubble0.png 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/haltonarpgraphics'
-```
-
-We do that for each asset associated with the controversy card.
-
-We need to then tell Usergrid that this is a folder on the backend by doing a POST to `/folders` with ...
-
-```
-    {"name": "graphics",
-     "owner": "worldviewer",
-     "path": "/graphics"}
-```
-
-Now link the Halton Arp card to the `graphics` folder ...
-
-```
-    curl -X POST https://<baas_host_name>/<org>/<app>/<connecting_collection>/<connecting_entity>/<relationship>/<connected_entity>
-```
-
-More specifically:
-
-```
-    curl -X POST https://apibaas-trial.apigee.net/controversies-of-science/sandbox/cards/5dd8d904-f6d8-11e6-9a38-0ad881f403bf/embeds/d5136be4-f6d7-11e6-be71-0eec2415f3df
-```
-
-Now, to get the list of graphics, do this:
-
-```
-    curl -X GET https://<baas_host_name>/<org>/<app>/<collection>/<entity>/<relationship>
-```
-
-Or:
-
-```
-    curl -X GET https://apibaas-trial.apigee.net/controversies-of-science/sandbox/cards/5dd8d904-f6d8-11e6-9a38-0ad881f403bf/embeds
-```
-
-Then, within that response will be an `entities` array, and for each object in that array, there will be a `path` which designates a folder which we can append to our base URL to retrieve the JSON list of images -- in this case `/haltonarpgraphics`.
-
-So, to get a list of the graphics in this simple case ...
-
-```
-    curl -X POST https://apibaas-trial.apigee.net/controversies-of-science/sandbox/haltonarpgraphics
-```
-
-To get a specific graphic, we do a get on the folder path `/haltonarpgraphics` -- which gives us a JSON listing of all entities.
-
-```
-    curl -X GET https://apibaas-trial.apigee.net/controversies-of-science/sandbox/haltonarpgraphics
-```
-
-This process allows us to not have to keep track of all of these UUID's for each graphic.  We don't even need to know the folder name, since it's linked to the `/cards/{cardId}` route.  What we need to know is the cardId uuid -- which we can get by doing a get on `/metacards`.  This is all possible because we have created separate folders for each graphic.
-
-To download them as graphics with curl, we can match the uuid to the filename by checking the `name` property on the asset object, then download with the proper uuid ...
-
-```
-    curl -X GET -H 'Accept: image/png' 'https://<baas_host_name>/<org>/<app>/<collection>/<entity>/<relationship>'
-```
-
-Or:
-
-```
-    curl -X GET -H 'Accept: image/png' 'https://apibaas-trial.apigee.net/controversies-of-science/sandbox/haltonarpgraphics/769de745-f6d7-11e6-be71-0eec2415f3df'
-```
-
-So now, when I curl my new controversy card ...
-
-```
-    curl -X GET https://worldviewer-test.apigee.net/controversies-of-science/v1/cards/5dd8d904-f6d8-11e6-9a38-0ad881f403bf
-```
-
-... I can see my embeds ...
-
-```
-    {
-      "method": "GET",
-      "type": "card",
-      "uuid": "5dd8d904-f6d8-11e6-9a38-0ad881f403bf",
-      "name": "Halton Arp, the Modern Galileo",
-      "created": 1487531982924,
-      "modified": 1487531982924,
-      "author": {
-        "lastTimeOnline": "1985-04-12T23:20:50.52Z",
-        "bio": "(MC) Master of Controversies",
-        "avatar": "https://lh3.googleusercontent.com/-7pSD5TEGt4g/AAAAAAAAAAI/AAAAAAAAACI/Cqefb4i8T3E/photo.jpg?sz=50",
-        "userId": 0,
-        "email": "paradigmsareconstructed@gmail.com",
-        "username": "Chris Reeve"
-      },
-      "graphicType": "bubbleOverlay",
-      "metadata": {
-        "path": "/cards/5dd8d904-f6d8-11e6-9a38-0ad881f403bf",
-        "size": 1525,
-        "connections": {
-          "embeds": "/cards/5dd8d904-f6d8-11e6-9a38-0ad881f403bf/embeds"
-        }
-      },
-      "summary": "He Was a Professional Astronomer Who Began his Career as Edwin Hubble's Assistant / While Compiling a List of Peculiar Galaxies, Arp Discovered that High-Redshift Quasars are Commonly Associated with or Even Connected by Filaments to Lower-Redshift Galaxies / Since the Big Bang Requires that Differences in Redshift Place the Objects at Different Locations, Astronomers Commonly Reject Arp's Claims / But if he is Right, then there Was No Big Bang",
-      "thumbnail": "https://lh3.googleusercontent.com/-UJsVVpygCpg/WA2XbtJflgI/AAAAAAAAJAU/M0vr_EK-krkPjiWqudBnGA1T3loMC6TSgCJoC/w506-h750/halton-arp-the-modern-galileo-bbal-card.jpg",
-      "url": "https://lh3.googleusercontent.com/-UJsVVpygCpg/WA2XbtJflgI/AAAAAAAAJAU/M0vr_EK-krkPjiWqudBnGA1T3loMC6TSgCJoC/w7142-h9999/halton-arp-the-modern-galileo-bbal-card.jpg"
-    }
-```
-
-But, I have no way to access the embeds from here.  I need to create a new route on `/cards/{cardId}/graphics` that somehow gives them to me.
-
-A problem for the image pyramid, from ...
-
-http://docs.apigee.com/app-services/content/assets
-
-```
-    Only 1 asset can be attached to an entity.
-```
-
-That's probably not going to work for my large image pyramid folder of files.  I might have to set up a simple Node backend and deploy the pyramid to Heroku or Amazon AWS.
-
-### Part 2: Pre-fetching Images Before Loading the Controversy Card
-
-- My first attempt at prefetching was to set my loaded flag state based upon the result of all fetch promises returning ...
-
-```
-    componentDidMount: function() {
-        let promises = this.state.slides.map( (slide) => {
-            return fetch(slide.source);
-        });
-
-        return Promise.all(promises).then( (responses) => {
-            this.setState({
-                allAssetsLoaded: true
-            });     
-        }).catch( (error) => {
-            console.log('Error loading remote overlay resources ...');
-            console.log(error);
-        });
-    }
-```
-
-Whereas I was only having problems with low bandwidth loads, this approach worsened even my high bandwidth loads.  It totally kills all of my overlay loading animations even though all overlay assets load by about 3.5 seconds.
-
-I'm going to now try react-preload at https://www.npmjs.com/package/react-preload.
-
-This solution worked much better: Not only do the preloader and animations both work perfectly, but the load time is also much faster (2.25 seconds).  He's set up his own image cache component and looking at his code, it appears that he's not resolving the Promise until the image load event fires.  That's probably why my images were loading prematurely.
-
-I'm seeing a difference between mobile and desktop access to the API.  Desktop works perfectly, but on all mobile browsers, I get a 404 for this asset:
-
-```
-    <img src="https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics/26396ee5-f630-11e6-be71-0eec2415f3df">
-```
-
-What's unusual is that this is a totally valid URL.  This very well could be a cross-origin issue, and it might require me to go through the API gateway -- since the gateway is already set up to handle that problem.  That should at least be my first approach.
-
-Created a simple test page which replicates the problem, and it does not matter if I reduce the rendered pixel width to 200px.  The problem persists with this on mobile from Github Pages ...
-
-```
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Mobile Image Test</title>
-    </head>
-    <body>
-        <img style="width:200px" src="https://apibaas-trial.apigee.net/controversies-of-science/sandbox/graphics/26396ee5-f630-11e6-be71-0eec2415f3df">
-    </body>
-    </html>
-```
-
-What is very suspicious is that it says the size is 888 bytes.  I know that this file is around a megabyte, so it seems to me that the browser is not understanding that this is an image -- and it's downloading the JSON description of the image instead.  When I curl the asset from the command-line, the same thing will happen if I do not specify my content type.
-
-I believe I now understand the problem, and am going to try routing these assets through the API gateway.  Another indicator that there is a content type problem here is that in my Safari mobile developer tools, the image type is just "image" -- whereas it's more specifically labeled "png" in my desktop dev tools.
-
-After going through Apigee's examples and requests for help, it seems as though their API gateway is not really designed to act as a gateway for assets.  In every example I checked out, users are being advised to submit requests directly to Usergrid in order to interact with their assets -- rather than going through the API gateway.  I'm not sure if this is common in the world of API gateways, but the idea of exposing the backend to developers seems to eliminate the security advantages of using a gateway to begin with.
-
-I'm going to work on getting through my image display problem for now, but in the long term, I should probably reach out to Apigee to better understand what the correct approach should be here.
-
-My next approach is to use the Usergrid client to retrieve assets.
-
-### Part 3: The Node Backend
-
-
-## The Next Steps
-
-- *I doubt that this remains a problem, but I should check on a low bandwidth connection when I get a chance:* On low bandwidth connections, there is sometimes a flash of default font before the custom font loads.  What I should look into for this is use of a font load event.  There should be some sort of http status associated with the loading of the stylesheet (1 = loading, 2=ok,loaded, 3=redirect, 4=error, etc).  I may be able to use the above-mentioned `Promise.all()` to solve this same issue -- perhaps by initially styling the text as transparent (?).
-- As I build out my React-canvas interactions, I'll probably want to start storing a lot more information about the canvas within my state.
-- Identify the cause of that vertical scrollbar on desktop, and get rid of it when zoom into the canvas is activated.  This panning functionality already exists with OpenSeadragon.  In order to get rid of it, it is not enough to just specify `overflow: hidden`.  I also need to specify either a `height` or `max-height`.
-- I might decide, if necessary, to activate OpenSeadragon interactions with a tap on the graphic.  This would allow me to switch between the standard UI (and overlay) interactions, and OpenSeadragon interactions.  So far, it seems unnecessary.
-- What I am ultimately working towards with this prototype is something similar to https://github.com/Emigre/openseadragon-annotations.  I want to be able to annotate the image pyramid and persist those annotations (although my annotations will not be hand-drawn drawings -- but rather more like interactive GIS icons with text labels, and other more structured annotation elements).  Based on advice from Rishat from codementor.io, I should keep track of the absolute canvas-based coordinates at all times in my React state, and use that zoom level and calculated box to determine whether or not to render any particular annotation overlay.  With this approach in mind, it may not be necessary to refer to the implementation above (?).
-- There's a lot of work left to do with this, but also a fairly specific vision of what must be constructed.  For more details on what that vision is, read further.
-
-## Things Devs Should Know About OpenSeadragon
+#### Things Devs Should Know About OpenSeadragon
 
 - The path to the pyramid files must include a trailing slash (or the console will fill with tile errors).
 - The OpenSeadragon container must be specified in specific pixel amounts (or nothing will display).
 - Getting React.js to play with OpenSeadragon is no minor matter, as they are constructed on two very different notions: OpenSeadragon assumes that access to the DOM is readily available, whereas React of course begs to differ.  I'll over time be checking in with other React developers to get feedback on the current approach.
 - MagickSlicer generates a .dzi file and a directory.  The directory needs to be publicly accessible so that OpenSeadragon can reference the image pyramid by URL.  This is of course quite different from how most images are served.
 - I found that the easiest way to get the pyramid image data from the .dzi file into OpenSeadragon was to simply pass the XML directly into OpenSeadragon as parameters.  Once you do that, you can ditch the original .dzi file.  Looking at other online projects was very helpful for figuring this out.
+
+#### The Foreground Overlay Assets
+
+The interface will soon be refactored to be more slideshow-like.  Currently, the bubbles respond to clicks/taps by zooming.
+
+Since the 9 foreground information bubbles are overlays, they require transparent backgrounds -- and therefore cannot be JPG's.  The PNGs were processed by TinyPNG.com, reducing their total PNG filesizes by 60%.  This was more than just a measure to reduce the total asset size; at the uncompressed PNG sizes, mobile browsers would commonly crash during load.
+
+#### GSAP Animations via ReactTransitionGroup
+
+I've brought in ReactTransitionGroup and GSAP ("the Swiss Army knife of animation") in order to get a more fine-grained control over animations at both load and component mount/unmount.  The explanation for the refactor is based upon the solution <a href="https://medium.com/@cheapsteak/animations-with-reacttransitiongroup-4972ad7da286#.8lzv3vt8z">here</a>.  There are three things to know about the ReactTransitionGroup approach:
+    (1) You must call the supplied callbacks that are supplied to the new lifecycle methods -- componentWillAppear, componentWillEnter, componentDidEnter, componentWillLeave and componentDidLeave -- after your animation ends, otherwise your component will enter but not leave (or leave but not enter).  I can validate that this is indeed the case.
+    (2) Because ReactTransitionGroup relies upon the new lifecycle methods which it introduces to exist, in order for these animations to link to those particular hooks, it's necessary to move the SomeComponents we want to animate into their own AnimatedSomeComponents.
+    (3) In the parent of AnimatedSomeComponent, SomeComponent, we must generate a ref attribute with `ref={c => this.container = c}` so that we can refer to the parent with `const el = this.container` inside of the child.
+
+### Part 2 - The Usergrid Backend that Wasn't Meant to Be
+
+A more detailed explanation of this first attempt at setting up a backend is here:
+
+https://github.com/worldviewer/react-worldviewer-prototype-usergrid
+
+My initial experiences with Usergrid were sub-optimal.  The command-line syntax is unintuitive.  It's difficult to attach more than one file to a Usergrid entity.  And I made it all the way to a functional backend before it became apparent that there is an issue with retrieving images from a Usergrid backend to a mobile device.
+
+### Part 3 - The Shiny New Serverless AWS Lambda / S3 CDN / mLab MongoDB Backend
+
+The new backend is currently built out with two AWS Lambda Node.js microservice deployments for the pair of API endpoints which fetch data from a mongoDB database hosted on mLab.
+
+An AWS S3 CDN bucket delivers static assets for the deep zoom image pyramid and the graphic overlays.
+
+Those microservices repos are here:
+
+https://github.com/worldviewer/aws-lambda-mongo-cards-api
+https://github.com/worldviewer/aws-lambda-mongo-metacards-api
+
+Typical controversy card JSON:
+
+<p align="center">
+    <img src="https://github.com/worldviewer/open-layers-worldviewer/blob/master/doc/controversy-card-json.png" />
+</p>
+
+### Part 4 - The Controversies of Science Scrape Script
+
+While the social network is building out, new controversy cards will continue to post to the G+ collection.  A scraper script has been constructed to rapidly populate the mongo database.  That is here:
+
+https://github.com/worldviewer/controversy-api-mongodb
+
+## The Next Steps
+
+- Refactor into Redux
+- Set up React Router
+- Set up Slides from JSON to control Bubble zoom state machine
+- Add the Controversies of Science logo to splash screen
+- Add markdown modal to Bubble clicks (deliver portions of text at a time)
+- Record audio of the text
+- Add audio support to slideshow (audio timestamps should control slideshow)
+- Add additional UI layers for concept, propositional and model levels (switch between them using vertical swiping)
+- Wrap megaboilerplate with auth around prototype
+- What I am ultimately working towards with this prototype is something similar to https://github.com/Emigre/openseadragon-annotations.  I want to be able to annotate the image pyramid and persist those annotations (although my annotations will not be hand-drawn drawings -- but rather more like interactive GIS icons with text labels, and other more structured annotation elements).  Based on advice from Rishat from codementor.io, I should keep track of the absolute canvas-based coordinates at all times in my React state, and use that zoom level and calculated box to determine whether or not to render any particular annotation overlay.  With this approach in mind, it may not be necessary to refer to the implementation above (?).
+- Mix in Steam social network feed API
 
 # The Backstory
 
