@@ -9,7 +9,7 @@ const initialState = {
 		background: '',
 		overlay: ''
 	},
-	card: {
+	cards: {
 		id: '58b8f1f7b2ef4ddae2fb8b17',
 		metadata: {
 			icon: {
@@ -38,13 +38,23 @@ const initialState = {
 			overlay: '',
 			icon: ''
 		},
-		graphics: []
+		graphics: [
+			// {
+			// 	source: '',
+			// 	left: '',
+			// 	top: '',
+			// 	width: '',
+			// 	numleft: '',
+			// 	numtop: '',
+			// 	zIndex: 0
+			// }
+		]
 	},
-	overlay: {
+	overlays: {
 		active: true,
 		loaded: false
 	},
-	slide: {
+	slides: {
 		show: {
 			next: true,
 			prev: false
