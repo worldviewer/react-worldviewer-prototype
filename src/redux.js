@@ -28,16 +28,26 @@ const initialState = {
 				}
 			}
 		},
+		urls: {
+			background: '', // this.backend.getPyramidUrl()
+			overlay: '',
+			icon: ''
+		},
 		graphics: []
 	},
-	pyramidUrl: '', // this.backend.getPyramidUrl(),
-	overlay: true,
-	allAssetsLoaded: false,
-	showNext: true,
-	showPrev: false,
-	currentSlide: null,
-	activeSlide: false,
-	numSlides: 8	
+	overlay: {
+		active: true,
+		loaded: false
+	},
+	slide: {
+		show: {
+			next: true,
+			prev: false
+		},
+		current: null,
+		active: false,
+		num: 8
+	},
 };
 
 export const increment = () => {
