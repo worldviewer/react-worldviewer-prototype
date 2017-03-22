@@ -4,6 +4,11 @@ const types = {
 };
 
 const initialState = {
+	base: {
+		api: '',
+		background: '',
+		overlay: ''
+	},
 	card: {
 		id: '58b8f1f7b2ef4ddae2fb8b17',
 		metadata: {
@@ -29,7 +34,7 @@ const initialState = {
 			}
 		},
 		urls: {
-			background: '', // this.backend.getPyramidUrl()
+			background: '', // this.backend.getBackgroundUrl()
 			overlay: '',
 			icon: ''
 		},
@@ -48,6 +53,15 @@ const initialState = {
 		active: false,
 		num: 8
 	},
+	bubbles: {
+		numbers: {
+			spin: {
+				active: Array.from({length:8}, el => false),
+				timeouts: Array.from({length:8}, el => 0)
+			}
+		},
+		display: Array.from({length:8}, el => false)
+	}
 };
 
 export const increment = () => {

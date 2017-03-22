@@ -98,7 +98,7 @@ var ControversyCard = React.createClass({
 		return (
 			<div className="Deep-Zoom-Graphic">
 				<DeepZoom
-					url={this.props.pyramid}
+					url={this.props.background}
 					onZoom={this.props.zoomHandler} />
 
 				<Title
@@ -133,7 +133,7 @@ var ControversyCard = React.createClass({
 						numleft={el.numleft}
 						numtop={el.numtop}
 						showOverlay={this.props.showOverlay && this.state.display[i]}
-						source={this.backend.getAssetsUrlBase() + el.source}
+						source={this.backend.getOverlayBase() + el.source}
 						spin={this.state.spin}
 						top={el.top}
 						width={el.width} />
@@ -142,7 +142,7 @@ var ControversyCard = React.createClass({
 				<Icon
 					key='9'
 					left={this.props.icon.left}
-					source={this.backend.getIconUrlBase() + this.props.icon.source}
+					source={this.backend.getIconBase() + this.props.icon.source}
 					showOverlay={this.props.showOverlay}
 					top={this.props.icon.top}
 					width={this.props.icon.width} />

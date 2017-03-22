@@ -25,11 +25,11 @@ class Backend {
 		};
 	}
 
-	getPyramidUrl() {
+	getBackgroundUrl() {
 		return this.card.urls.background;
 	}
 
-	getAssetsUrlBase() {
+	getOverlayBase() {
 		return this.card.urls.overlay;
 	}
 
@@ -37,7 +37,7 @@ class Backend {
 		return this.card;
 	}
 
-	getIconUrlBase() {
+	getIconBase() {
 		return this.card.urls.icon;
 	}
 

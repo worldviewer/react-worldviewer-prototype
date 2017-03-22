@@ -39,7 +39,7 @@ var App = React.createClass({
 					}
 				},
 				urls: {
-					background: this.backend.getPyramidUrl(),
+					background: this.backend.getBackgroundUrl(),
 					overlay: '',
 					icon: ''
 				},
@@ -201,7 +201,7 @@ var App = React.createClass({
 						icon={this.state.card.metadata.icon}
 						title={this.state.card.metadata.name}
 						summary={this.state.card.metadata.summary}
-						pyramid={this.state.card.urls.background}
+						background={this.state.card.urls.background}
 						slides={this.state.card.graphics}
 						zoomHandler={this.toggleOverlay}
 						toggleSlideHandler={this.toggleSlide}

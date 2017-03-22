@@ -75,7 +75,7 @@ class Preload extends Component {
 					let card = this.backend.getCardData();
 
 					let urls = card.graphics.map(graphic =>
-						this.backend.getAssetsUrlBase() + graphic['source']);
+						this.backend.getOverlayBase() + graphic['source']);
 
                     let icon = card.icon;
 
