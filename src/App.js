@@ -63,57 +63,57 @@ var App = React.createClass({
 
 	prev: function() {
 		if (this.state.active) {
-			this.setState({
+			this.setState(Object.assign({}, this.state, {
 				slide: {
-					active: false					
+					active: false
 				}
-			});
+			}));
 		} else {
 			this.updateNextPrev(this.state.slide.current-1);
-			this.setState({
+			this.setState(Object.assign({}, this.state, {
 				slide: {
 					active: true					
 				}
-			});
+			}));
 		}
 	},
 
 	next: function() {
 		if (this.state.slide.active) {
-			this.setState({
+			this.setState(Object.assign({}, this.state, {
 				slide: {
 					active: false					
 				}
-			});
+			}));
 		} else if (this.state.slide.current === null) {
 			this.updateNextPrev(0);
-			this.setState({
+			this.setState(Object.assign({}, this.state, {
 				slide: {
 					active: true					
 				}
-			});
+			}));
 		} else {
 			this.updateNextPrev(this.state.slide.current+1);
-			this.setState({
+			this.setState(Object.assign({}, this.state, {
 				slide: {
 					active: true					
 				}
-			});
+			}));
 		}
 	},
 
 	setSlides: function(card) {
-		this.setState({
+		this.setState(Object.assign({}, this.state, {
 			card
-		});
+		}));
 	},
 
 	toggleOverlay: function(zoom) {
-		this.setState({
+		this.setState(Object.assign({}, this.state, {
 			overlay: {
 				active: zoom <= 1.1
 			}
-		});
+		}));
 	},
 
 	componentDidMount: function() {
@@ -121,11 +121,11 @@ var App = React.createClass({
 	},
 
 	toggleSlide: function() {
-		this.setState({
+		this.setState(Object.assign({}, this.state, {
 			slide: {
 				active: !this.state.slide.active
 			}
-		});
+		}));
 	},
 
 	updateNextPrev: function(slideNumber) {
@@ -134,7 +134,7 @@ var App = React.createClass({
 			', num: ' + this.state.slide.num);
 
 		if (slideNumber === 0 || slideNumber === null) {
-			this.setState({
+			this.setState(Object.assign({}, this.state, {
 				slide: {
 					show: {
 						next: true,
@@ -143,9 +143,9 @@ var App = React.createClass({
 					current: slideNumber,
 					active: true					
 				}
-			});
+			}));
 		} else if (slideNumber === this.state.slide.num-1) {
-			this.setState({
+			this.setState(Object.assign({}, this.state, {
 				slide: {
 					show: {
 						next: false,
@@ -154,9 +154,9 @@ var App = React.createClass({
 					current: slideNumber,
 					active: true					
 				}
-			});
+			}));
 		} else {
-			this.setState({
+			this.setState(Object.assign({}, this.state, {
 				slide: {
 					show: {
 						next: true,
@@ -165,7 +165,7 @@ var App = React.createClass({
 					current: slideNumber,
 					active: true					
 				}
-			});
+			}));
 		}
 	},
 

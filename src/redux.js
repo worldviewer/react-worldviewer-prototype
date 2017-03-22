@@ -1,6 +1,25 @@
 const types = {
-	INC: 'INC',
-	DEC: 'DEC'
+	SHOW_BUBBLE: 'SHOW_BUBBLE',
+	SPIN_BUBBLE_NUMBER: 'SPIN_BUBBLE_NUMBER',
+
+	HIDE_OVERLAY: 'HIDE_OVERLAY',
+	SHOW_OVERLAY: 'SHOW_OVERLAY',
+
+	CLICK_OVERLAY: 'CLICK_OVERLAY',
+
+	CLICK_ICON: 'CLICK_ICON',
+
+	NEXT_SLIDE: 'NEXT_SLIDE',
+	PREV_SLIDE: 'PREV_SLIDE',
+
+	FETCH_CARD: 'FETCH_CARD',
+	FETCH_CARD_ERROR: 'FETCH_CARD_ERROR',
+
+	FETCH_OVERLAY: 'FETCH_OVERLAY',
+	FETCH_OVERLAY_ERROR: 'FETCH_OVERLAY_ERROR',
+
+	FETCH_BACKGROUND: 'FETCH_BACKGROUND',
+	FETCH_BACKGROUND_ERROR: 'FETCH_BACKGROUND_ERROR'
 };
 
 const initialState = {
@@ -74,23 +93,16 @@ const initialState = {
 	}
 };
 
-export const increment = () => {
+export const clickOverlay = (num) => {
 	return {
-		type: types.INC
+		type: types.CLICK_OVERLAY,
+		payload: num
 	};
 };
 
 export default (state = initialState, action) => {
-	if (action.type === types.INC) {
-		return Object.assign({}, state, {
-			count: state.count + 1
-		});
-	}
-	if (action.type === types.DEC) {
-		return {
-			...state,
-			count: state.count - 1
-		};
+	if (action.type === types.CLICK_OVERLAY) {
+		return Object.assign({}, state);
 	}
 
 	return state;

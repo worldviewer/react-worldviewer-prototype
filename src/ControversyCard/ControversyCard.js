@@ -1,5 +1,5 @@
 import React from 'react';
-import Bubble from '../Bubble/Bubble';
+import BubbleState from '../Bubble/BubbleState';
 import Icon from '../Icon/Icon';
 import './ControversyCard.scss';
 import DeepZoom from '../DeepZoom/DeepZoom';
@@ -123,7 +123,7 @@ var ControversyCard = React.createClass({
 				</Summary>
 
 				{ this.props.slides.map( (el, i) => 
-					<Bubble
+					<BubbleState
 						active={this.props.currentSlide === i && this.props.activeSlide}
 						enterHandler={this.spinBubbleNumbers}
 						clickHandler={this.handleBubbleClick}
