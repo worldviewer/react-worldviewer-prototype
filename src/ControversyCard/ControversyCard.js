@@ -7,6 +7,7 @@ const mapStateToProps = (state, ownProps) => {
 		overlays: state.overlays,
 		slides: state.slides,
 		bubbles: state.bubbles,
+		bubbleNumbers: state.bubbleNumbers,
 		card: state.card
 	};
 };

@@ -88,13 +88,11 @@ const initialState = {
 		num: 8
 	},
 	bubbles: {
-		numbers: {
-			spin: {
-				active: Array.from({length:8}, el => false),
-				timeouts: Array.from({length:8}, el => 0)
-			}
-		},
 		display: Array.from({length:8}, el => false)
+	},
+	bubbleNumbers: {
+		active: Array.from({length:8}, el => false),
+		timeouts: Array.from({length:8}, el => 0)
 	}
 };
 
@@ -176,9 +174,9 @@ export function fetchCard(id, url) {
 	}
 } 
 
-export const clickOverlay = (num) => {
+export const clickBubble = (num) => {
 	return {
-		type: types.CLICK_OVERLAY,
+		type: types.CLICK_BUBBLE,
 		payload: num
 	};
 };
@@ -189,7 +187,7 @@ export default (state = initialState, action) => {
 			let newDisplayState = state.bubbles.display.slice();
 			newDisplayState[action.num] = true;
 
-			return deepAssign({}, state, {
+			return Object.assign({}, state, {
 				bubbles: {
 					display: newDisplayState
 				}
@@ -199,13 +197,10 @@ export default (state = initialState, action) => {
 			let newSpinState = Array.from({length:8}, el => false);
 			newSpinState[action.num] = true;
 
-			return deepAssign({}, state, {
-				bubbles: {
-					numbers: {
-						spin: {
-							active: newSpinState
-						}
-					}
+			return Object.assign({}, state, {
+				bubbleNumbers: {
+					active: newSpinState,
+					timeouts: state.bubbleNumbers.timeouts
 				}
 			});
 
@@ -213,28 +208,21 @@ export default (state = initialState, action) => {
 			let noSpin = Array.from({length:8}, el => false),
 				noSpinTimeouts = Array.from({length:8}, el => 0);
 
-			return deepAssign({}, state, {
-				bubbles: {
-					numbers: {
-						spin: {
-							active: noSpin,
-							timeouts: noSpinTimeouts
-						}
-					}
+			return Object.assign({}, state, {
+				bubbleNumbers: {
+					active: noSpin,
+					timeouts: noSpinTimeouts
 				}
 			});
 
 		case types.SET_SPIN_BUBBLE_NUMBER_TIMEOUT:
-			let newSpinTimeoutsState = state.bubbles.numbers.spin.timeouts.slice();
+			let newSpinTimeoutsState = state.bubbleNumbers.timeouts.slice();
 			newSpinTimeoutsState[action.num] = action.timeout;
 
-			return deepAssign({}, state, {
-				bubbles: {
-					numbers: {
-						spin: {
-							timeouts: newSpinTimeoutsState
-						}
-					}
+			return Object.assign({}, state, {
+				bubbleNumbers: {
+					active: state.bubbleNumbers.active,
+					timeouts: newSpinTimeoutsState
 				}
 			});
 
@@ -246,7 +234,7 @@ export default (state = initialState, action) => {
 			return deepAssign({}, state, 
 				{card: action.card});
 
-		case types.CLICK_OVERLAY:
+		case types.CLICK_BUBBLE:
 			return Object.assign({}, state);
 
 		default:

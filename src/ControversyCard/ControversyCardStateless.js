@@ -33,7 +33,7 @@ var ControversyCardStateless = React.createClass({
 		this.props.disableSpinBubbleNumbers();
 
 		setTimeout(() => {
-			this.props.bubbles.numbers.spin.active.forEach((el, num) => {
+			this.props.bubbleNumbers.active.forEach((el, num) => {
 				let newTimeout = setTimeout(() => {
 					this.props.spinBubbleNumber(num);
 				}, (num+1)*1000);
@@ -78,11 +78,11 @@ var ControversyCardStateless = React.createClass({
 			this.handleBubbleClick(nextProps.currentSlide);
 		}
 
-		console.log('this.props.bubbles.numbers.spin.active:');
-		console.log(nextProps.bubbles.numbers.spin.active);
+		console.log('this.props.bubbleNumbers.active:');
+		console.log(nextProps.bubbleNumbers.active);
 
-		console.log('this.props.bubbles.numbers.spin.timeouts');
-		console.log(nextProps.bubbles.numbers.spin.timeouts);
+		console.log('this.props.bubbleNumbers.timeouts');
+		console.log(nextProps.bubbleNumbers.timeouts);
 	},
 
 	render: function() {
@@ -116,7 +116,7 @@ var ControversyCardStateless = React.createClass({
 				{ this.props.card.graphics.map( (el, i) => 
 					<Bubble
 						active={this.props.currentSlide === i && this.props.activeSlide}
-						enterHandler={this.spinBubbleNumbers}
+						enterHandler={this.props.spinBubbleNumbers}
 						clickHandler={this.handleBubbleClick}
 						key={i}
 						left={el.left}
@@ -125,7 +125,7 @@ var ControversyCardStateless = React.createClass({
 						numtop={el.numtop}
 						showOverlay={this.props.showOverlay && this.props.bubbles.display[i]}
 						source={this.backend.getOverlayBase() + el.source}
-						spin={this.props.bubbles.numbers.spin.active}
+						spin={this.props.bubbleNumbers.active}
 						top={el.top}
 						width={el.width} />
 				)}
