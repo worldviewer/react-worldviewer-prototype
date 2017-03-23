@@ -1,5 +1,3 @@
-import deepAssign from 'deep-assign';
-
 const types = {
 	SHOW_BUBBLE: 'SHOW_BUBBLE',
 	SPIN_BUBBLE_NUMBER: 'SPIN_BUBBLE_NUMBER',
@@ -33,35 +31,24 @@ const initialState = {
 	},
 	card: {
 		id: '58b8f1f7b2ef4ddae2fb8b17',
-		metadata: {
-			icon: {
-				source: '',
-				left: '',
-				top: '',
-				width: ''
-			},
-			name: {
-				display: {
-					left: {
-						left: '',
-						markup: '',
-						top: ''
-					},
-					right: {
-						right: '',
-						markup: '',
-						top: ''
-					}
-				}
-			},
-			summary: '',
-			type: ''
+		icon: {
+			source: '',
+			left: '',
+			top: '',
+			width: ''
 		},
-		urls: {
-			background: 'https://controversy-cards-assets.s3.amazonaws.com/cards/58b8f1f7b2ef4ddae2fb8b17/pyramid_files/',
-			overlay: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/assets/',
-			icon: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/icon/'
+		nameLeft: {
+			left: '',
+			markup: '',
+			top: ''
 		},
+		nameRight: {
+			right: '',
+			markup: '',
+			top: ''
+		},
+		summary: '',
+		type: '',
 		graphics: [
 			// {
 			// 	source: '',
@@ -74,15 +61,18 @@ const initialState = {
 			// }
 		]
 	},
+	urls: {
+		background: 'https://controversy-cards-assets.s3.amazonaws.com/cards/58b8f1f7b2ef4ddae2fb8b17/pyramid_files/',
+		overlay: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/assets/',
+		icon: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/icon/'
+	},	
 	overlays: {
 		active: true,
 		loaded: false
 	},
 	slides: {
-		show: {
-			next: true,
-			prev: false
-		},
+		next: true,
+		prev: false,
 		current: null,
 		active: false,
 		num: 8
@@ -139,14 +129,13 @@ export const fetchCardError = (error) => {
 }
 
 export const fetchCardSuccess = (data) => {
-	let card = {
-		metadata: {}
-	};
+	let card = {};
 
-	card.metadata.name = data['name'];
-	card.metadata.summary = data['summary'];
-	card.metadata.type = data['graphic']['type'];
-	card.metadata.icon = data['graphic']['icon'];
+	card.nameLeft = data['name']['display']['left'];
+	card.nameRight = data['name']['display']['right'];
+	card.summary = data['summary'];
+	card.type = data['graphic']['type'];
+	card.icon = data['graphic']['icon'];
 	card.graphics = data['graphic']['overlays']['assets'];
 
 	return {
@@ -231,7 +220,7 @@ export default (state = initialState, action) => {
 			return state;
 
 		case types.FETCH_CARD_SUCCESS:
-			return deepAssign({}, state, 
+			return Object.assign({}, state, 
 				{card: action.card});
 
 		case types.CLICK_BUBBLE:

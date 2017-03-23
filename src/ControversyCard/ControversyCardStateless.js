@@ -11,23 +11,8 @@ var ControversyCardStateless = React.createClass({
 	getInitialState: function() {
 		this.backend = new Backend();
 
-		return {
-			spin: Array.from({length:8}, el => false),
-			spinTimeouts: Array.from({length:8}, el => 0),
-			display: Array.from({length:8}, el => false)
-		}
+		return {}
 	},
-
-	// disableSpinBubbleNumbers: function() {
-	// 	this.state.spinTimeouts.forEach( (timeout) => {
-	// 		clearTimeout(timeout);
-	// 	});
-
-	// 	this.setState({
-	// 		spin: Array.from({length:8}, el => false),
-	// 		spinTimeouts: Array.from({length:8}, el => 0)
-	// 	});
-	// },
 
 	spinBubbleNumbers: function() {
 		this.props.disableSpinBubbleNumbers();
@@ -58,10 +43,10 @@ var ControversyCardStateless = React.createClass({
 	},
 
 	handleBubbleClick: function(index) {
-		console.log('this.props.currentSlide: ' + this.props.currentSlide +
+		console.log('this.props.slides.current: ' + this.props.slides.current +
 			' index: ' + index);
 
-		if (index !== this.props.currentSlide) {
+		if (index !== this.props.slides.current) {
 			this.props.prevNextHandler(index);
 		} else {
 			this.props.toggleSlideHandler();
@@ -74,15 +59,9 @@ var ControversyCardStateless = React.createClass({
 	},
 
 	componentWillReceiveProps: function(nextProps) {
-		if (this.props.currentSlide !== nextProps.currentSlide) {
-			this.handleBubbleClick(nextProps.currentSlide);
+		if (this.props.slides.current !== nextProps.slides.current) {
+			this.handleBubbleClick(nextProps.slides.current);
 		}
-
-		console.log('this.props.bubbleNumbers.active:');
-		console.log(nextProps.bubbleNumbers.active);
-
-		console.log('this.props.bubbleNumbers.timeouts');
-		console.log(nextProps.bubbleNumbers.timeouts);
 	},
 
 	render: function() {
@@ -95,48 +74,48 @@ var ControversyCardStateless = React.createClass({
 				<Title
 					key="left"
 					position="Left"
-					display={this.props.title.display.left}
+					display={this.props.card.nameLeft}
 					showOverlay={this.props.showOverlay}>
-					{this.props.title.display.left.markup}
+					{this.props.card.nameLeft.markup}
 				</Title>
 
 				<Title
 					key="right"
 					position="Right"
-					display={this.props.title.display.right}
+					display={this.props.card.nameRight}
 					showOverlay={this.props.showOverlay}>
-					{this.props.title.display.right.markup}
+					{this.props.card.nameRight.markup}
 				</Title>
 
 				<Summary
 					showOverlay={this.props.showOverlay}>
-					{this.props.summary}
+					{this.props.card.summary}
 				</Summary>
 
-				{ this.props.card.graphics.map( (el, i) => 
+				{ this.props.card.graphics.map((graphic, i) => 
 					<Bubble
-						active={this.props.currentSlide === i && this.props.activeSlide}
+						active={this.props.slides.current === i && this.props.slides.active}
 						enterHandler={this.props.spinBubbleNumbers}
 						clickHandler={this.handleBubbleClick}
 						key={i}
-						left={el.left}
+						left={graphic.left}
 						bubbleNumber={i}
-						numleft={el.numleft}
-						numtop={el.numtop}
+						numleft={graphic.numleft}
+						numtop={graphic.numtop}
 						showOverlay={this.props.showOverlay && this.props.bubbles.display[i]}
-						source={this.backend.getOverlayBase() + el.source}
+						source={this.props.urls.overlay + graphic.source}
 						spin={this.props.bubbleNumbers.active}
-						top={el.top}
-						width={el.width} />
+						top={graphic.top}
+						width={graphic.width} />
 				)}
 
 				<Icon
 					key='9'
-					left={this.props.icon.left}
-					source={this.backend.getIconBase() + this.props.icon.source}
+					left={this.props.card.icon.left}
+					source={this.props.urls.icon + this.props.card.icon.source}
 					showOverlay={this.props.showOverlay}
-					top={this.props.icon.top}
-					width={this.props.icon.width} />
+					top={this.props.card.icon.top}
+					width={this.props.card.icon.width} />
 			</div>
 		);
 	}
