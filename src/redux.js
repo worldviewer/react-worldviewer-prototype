@@ -4,6 +4,7 @@ const types = {
 	SHOW_BUBBLE: 'SHOW_BUBBLE',
 	SPIN_BUBBLE_NUMBER: 'SPIN_BUBBLE_NUMBER',
 	DISABLE_SPIN_BUBBLE_NUMBERS: 'DISABLE_SPIN_BUBBLE_NUMBERS',
+	SET_SPIN_BUBBLE_NUMBER_TIMEOUT: 'SET_SPIN_BUBBLE_NUMBER_TIMEOUT',
 
 	HIDE_OVERLAY: 'HIDE_OVERLAY',
 	SHOW_OVERLAY: 'SHOW_OVERLAY',
@@ -101,10 +102,38 @@ const initialState = {
 	}
 };
 
+export const spinBubbleNumber = (num) => {
+	return {
+		type: types.SPIN_BUBBLE_NUMBER,
+		num
+	}
+}
+
+export const disableSpinBubbleNumbers = () => {
+	return {
+		type: types.DISABLE_SPIN_BUBBLE_NUMBERS
+	}
+};
+
+export const setSpinBubbleNumberTimeout = (num, timeout) => {
+	return {
+		type: types.SET_SPIN_BUBBLE_NUMBER_TIMEOUT,
+		num,
+		timeout
+	}
+}
+
 export const fetchCardRequest = (id) => {
 	return {
 		type: types.FETCH_CARD_REQUEST,
 		id
+	}
+}
+
+export const fetchCardError = (error) => {
+	return {
+		type: types.FETCH_CARD_ERROR,
+		error
 	}
 }
 
@@ -122,13 +151,6 @@ export const fetchCardSuccess = (data) => {
 	return {
 		type: types.FETCH_CARD_SUCCESS,
 		card
-	}
-}
-
-export const fetchCardError = (error) => {
-	return {
-		type: types.FETCH_CARD_ERROR,
-		error
 	}
 }
 
@@ -158,22 +180,22 @@ export const clickOverlay = (num) => {
 	};
 };
 
-export const disableSpinBubbleNumbers = () => {
-	return {
-		type: types.DISABLE_SPIN_BUBBLE_NUMBERS
-	}
-};
-
 export default (state = initialState, action) => {
 	switch(action.type) {
-		case types.CLICK_OVERLAY:
-			return Object.assign({}, state);
-		case types.FETCH_CARD_SUCCESS:
-			return deepAssign({}, state, 
-				{card: action.card});
-		case types.FETCH_CARD_ERROR:
-			console.log(action.error);
-			return state;
+		case types.SPIN_BUBBLE_NUMBER:
+			let newSpinState = Array.from({length:8}, el => false);
+			newSpinState[action.num] = true;
+
+			return deepAssign({}, state, {
+				bubbles: {
+					numbers: {
+						spin: {
+							active: newSpinState
+						}
+					}
+				}
+			});
+
 		case types.DISABLE_SPIN_BUBBLE_NUMBERS:
 			let noSpin = Array.from({length:8}, el => false),
 				noSpinTimeouts = Array.from({length:8}, el => 0);
@@ -188,6 +210,32 @@ export default (state = initialState, action) => {
 					}
 				}
 			});
+
+		case types.SET_SPIN_BUBBLE_NUMBER_TIMEOUT:
+			let newSpinTimeoutsState = state.bubbles.numbers.spin.timeouts.slice();
+			newSpinTimeoutsState[action.num] = action.timeout;
+
+			return deepAssign({}, state, {
+				bubbles: {
+					numbers: {
+						spin: {
+							timeouts: newSpinTimeoutsState
+						}
+					}
+				}
+			});
+
+		case types.FETCH_CARD_ERROR:
+			console.log(action.error);
+			return state;
+
+		case types.FETCH_CARD_SUCCESS:
+			return deepAssign({}, state, 
+				{card: action.card});
+
+		case types.CLICK_OVERLAY:
+			return Object.assign({}, state);
+
 		default:
 			return state;		
 	}

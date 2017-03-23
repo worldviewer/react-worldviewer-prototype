@@ -33,22 +33,12 @@ var ControversyCardStateless = React.createClass({
 		this.props.disableSpinBubbleNumbers();
 
 		setTimeout(() => {
-			this.state.spin.forEach( (el, i) => {
+			this.props.bubbles.numbers.spin.active.forEach((el, num) => {
 				let newTimeout = setTimeout(() => {
-					let newSpinState = Array.from({length:8}, el => false);
-					newSpinState[i] = true;
+					this.props.spinBubbleNumber(num);
+				}, (num+1)*1000);
 
-					this.setState({
-						spin: newSpinState
-					});
-				}, (i+1)*1000);
-
-				let spinTimeouts = this.state.spinTimeouts;
-				spinTimeouts[i] = newTimeout;
-
-				this.setState({
-					spinTimeouts: spinTimeouts
-				});
+				this.props.setSpinBubbleNumberTimeout(num, newTimeout);
 			});
 
 			// Reset the spin state to no spin
@@ -60,15 +50,15 @@ var ControversyCardStateless = React.createClass({
 
 	// If all bubbles are shown simultaneously, the animation frame rate drops
 	showBubbles: function() {
-		this.state.display.forEach( (el, i) => {
+		this.state.display.forEach( (el, num) => {
 			setTimeout(() => {
 				let newDisplayState = this.state.display;
-				newDisplayState[i] = true;
+				newDisplayState[num] = true;
 
 				this.setState({
 					display: newDisplayState
 				});
-			}, (i+1)*200);
+			}, (num+1)*200);
 		});
 	},
 
@@ -92,6 +82,12 @@ var ControversyCardStateless = React.createClass({
 		if (this.props.currentSlide !== nextProps.currentSlide) {
 			this.handleBubbleClick(nextProps.currentSlide);
 		}
+
+		console.log('this.props.bubbles.numbers.spin.active:');
+		console.log(nextProps.bubbles.numbers.spin.active);
+
+		console.log('this.props.bubbles.numbers.spin.timeouts');
+		console.log(nextProps.bubbles.numbers.spin.timeouts);
 	},
 
 	render: function() {
@@ -134,7 +130,7 @@ var ControversyCardStateless = React.createClass({
 						numtop={el.numtop}
 						showOverlay={this.props.showOverlay && this.state.display[i]}
 						source={this.backend.getOverlayBase() + el.source}
-						spin={this.state.spin}
+						spin={this.props.bubbles.numbers.spin.active}
 						top={el.top}
 						width={el.width} />
 				)}
