@@ -2,6 +2,11 @@
 
 A GIS-inspired approach to visualizing discourse on scientific controversies, built in React.js for mobile devices.
 
+Setting the project up is simple.  Go to the root folder with `package.json`, and type:
+
+    npm install
+    npm run start
+
 ## What is This Thing?
 
 *"For citizens who want to take part in the democratic processes of a technological society, all the science they need to know about is controversial..."*
@@ -28,6 +33,10 @@ While the original G+ collection has already demonstrated some successes towards
 - to identify a format for scientific controversies which is designed from scratch to support this niche's specific needs.
 
 A far more detailed explanation of the problem this project is solving is explained after the prototype description.
+
+<p align="center">
+    <img src="https://github.com/worldviewer/react-worldviewer-prototype/blob/master/doc/letter-ryan-dupee.png" />
+</p>
 
 ## The Prototype Graphic
 
