@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Bubble from './Bubble';
 import clickOverlay from '../redux';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
 	return {
 		overlays: state.overlays,
 		slides: state.slides,
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 	};
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
 		clickOverlay: (num) => {
 			return dispatch(clickOverlay(num));

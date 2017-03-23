@@ -6,12 +6,6 @@ import { TweenMax, Bounce, Elastic } from 'gsap';
 import NumberBubble from '../NumberBubble/NumberBubble';
 
 var AnimatedBubble = React.createClass({
-	contextTypes: function() {
-		return {
-			store: PropTypes.object.isRequired			
-		}
-	},
-
 	getInitialState: function() {
 		return {
 			left: this.props.left,
@@ -119,11 +113,18 @@ var AnimatedBubble = React.createClass({
 });
 
 var Bubble = React.createClass({
+	contextTypes: function() {
+		return {
+			store: PropTypes.object.isRequired			
+		}
+	},
+
 	render: function() {
 		const { store } = this.context;
 		// const state = store.getState();
 
-		console.log(store);
+		console.log(store); // this does not work
+		console.log(this.props.bubbles); // this DOES work
 
 		return (
 			<TransitionGroup component="div">
