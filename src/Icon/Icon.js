@@ -1,65 +1,27 @@
-import React from 'react';
-import TransitionGroup from 'react-addons-transition-group';
-import { TweenMax, Bounce } from 'gsap';
+import { connect } from 'react-redux';
+import IconStateless from './IconStateless';
+import clickOverlay from '../redux';
 
-var AnimatedIcon = React.createClass({
-	componentWillAppear: function(callback) {
-		const el = this.container;
-		TweenMax.fromTo(el, 2, {scale:0.5}, {scale:1.0, ease:Bounce.easeOut, onComplete: callback});
-	},
+const mapStateToProps = (state, ownProps) => {
+	return {
+		overlays: state.overlays,
+		slides: state.slides,
+		bubbles: state.bubbles,
+		card: state.card
+	};
+};
 
-	componentWillEnter: function(callback) {
-		const el = this.container;
-    	TweenMax.fromTo(el, 1.0, {opacity: 0}, {opacity: 1, onComplete: callback});		
-	},
-
-	componentDidEnter: function() {
-	},
-
-	componentWillLeave: function(callback) {
-	    const el = this.container;
-	    TweenMax.fromTo(el, 1.0, {opacity: 1}, {opacity: 0, onComplete: callback});		
-	},
-
-	componentDidLeave: function() {
-	},
-
-	render: function() {
-
-		let style = {
-			position: 'absolute',
-			left: this.props.left,
-			top: this.props.top,
-			width: this.props.width
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return {
+		clickOverlay: (num) => {
+			return dispatch(clickOverlay(num));
 		}
+	};
+};
 
-		return (
-			<img
-				alt="Figure"
-				className="Icon"
-				ref={c => this.container = c}
-				src={this.props.source}
-				style={style}
-			/>
-		)
-	}
-});
-
-var Icon = React.createClass({
-	render: function() {
-		return (
-			<TransitionGroup component="div">
-				{this.props.showOverlay &&
-					<AnimatedIcon
-						source={this.props.source}
-						left={this.props.left}
-						top={this.props.top}
-						width={this.props.width}
-					/>
-				}
-			</TransitionGroup>
-		);
-	}
-});
+const Icon = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(IconStateless);
 
 export default Icon;

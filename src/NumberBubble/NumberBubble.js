@@ -1,85 +1,27 @@
-import React from 'react';
-import TransitionGroup from 'react-addons-transition-group';
-import { TweenMax, Bounce } from 'gsap';
+import { connect } from 'react-redux';
+import NumberBubbleStateless from './NumberBubbleStateless';
+import clickOverlay from '../redux';
 
-var AnimatedNumberBubble = React.createClass({
-	spinBubble: function() {
-		const el = this.container;
-		TweenMax.fromTo(el, 0.5, {rotationY:0}, {rotationY:360});
-	},
+const mapStateToProps = (state, ownProps) => {
+	return {
+		overlays: state.overlays,
+		slides: state.slides,
+		bubbles: state.bubbles,
+		card: state.card
+	};
+};
 
-	componentWillAppear: function(callback) {
-		const el = this.container;
-		TweenMax.fromTo(el, 3.0, {scale:0}, {delay:1.5, scale:1.0, ease:Bounce.easeOut, onComplete: callback});
-	},
-
-	componentWillEnter: function(callback) {
-	},
-
-	componentDidEnter: function() {
-	},
-
-	componentWillLeave: function(callback) {
-	},
-
-	componentDidLeave: function() {
-	},
-
-	componentWillReceiveProps: function(nextProps) {
-		!this.props.spin && nextProps.spin && this.spinBubble();
-	},
-
-	render: function() {
-		// Corrects an issue with creating circles w/ border-radius on mobile devices
-		let roundedBorderStyle = {
-			backgroundColor: '#edf5f1',
-			border: '.5vw solid #edf5f1',
-			borderRadius: '50%',
-			height: '2vw',
-			left: this.props.left,
-			top: this.props.top,
-			position: 'absolute',
-			width: '2vw'
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return {
+		clickOverlay: (num) => {
+			return dispatch(clickOverlay(num));
 		}
+	};
+};
 
-		let bubbleNumberStyle = {
-			backgroundColor: '#edf5f1',
-			borderRadius: '50%',
-			height: '2vw',
-			position: 'absolute',
-			width: '2vw'
-		};
-
-		return (
-			<div
-				style={roundedBorderStyle}
-				ref={c => this.container = c}>
-				<div
-					alt="Slide Number"
-					className="Bubble-Number"
-					style={bubbleNumberStyle}>
-
-					<p>{this.props.bubbleNumber + 1}</p>
-				</div>
-			</div>
-		)
-	}
-});
-
-var NumberBubble = React.createClass({
-	render: function() {
-		return (
-			<TransitionGroup component="div">
-				{ this.props.showOverlay &&
-					<AnimatedNumberBubble
-						bubbleNumber={this.props.bubbleNumber}
-						left={this.props.left}
-						top={this.props.top}
-						spin={this.props.spin} />
-				}
-			</TransitionGroup>
-		);
-	}
-});
+const NumberBubble = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(NumberBubbleStateless);
 
 export default NumberBubble;

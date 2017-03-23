@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import reducer from './redux.js';
 
-import AppState from './AppState';
+import App from './App';
 import './index.scss';
 
 const middlewareStoreEnhancer = applyMiddleware(
@@ -27,7 +27,7 @@ const store = createStore(
 
 ReactDOM.render(
 	<Provider store={store}>
-		<AppState />
+		<App />
 	</Provider>,
 	document.getElementById('root')
 );

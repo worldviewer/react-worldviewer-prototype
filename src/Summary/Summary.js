@@ -1,54 +1,27 @@
-import React from 'react';
-import './Summary.scss';
-import TransitionGroup from 'react-addons-transition-group';
-import { TweenMax, Power1 } from 'gsap';
+import { connect } from 'react-redux';
+import SummaryStateless from './SummaryStateless';
+import clickOverlay from '../redux';
 
-var AnimatedSummary = React.createClass({
-	componentWillAppear: function(callback) {
-		const el = this.container;
-		TweenMax.from(el, 1.0, { delay:1, y:300, opacity:0, ease:Power1.easeInOut, onComplete: callback });
-	},
+const mapStateToProps = (state, ownProps) => {
+	return {
+		overlays: state.overlays,
+		slides: state.slides,
+		bubbles: state.bubbles,
+		card: state.card
+	};
+};
 
-	componentWillEnter: function(callback) {
-		const el = this.container;
-    	TweenMax.from(el, 1.0, { delay:1, y:300, opacity:0, ease:Power1.easeInOut, onComplete: callback });		
-	},
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return {
+		clickOverlay: (num) => {
+			return dispatch(clickOverlay(num));
+		}
+	};
+};
 
-	componentDidEnter: function() {
-	},
-
-	componentWillLeave: function(callback) {
-	    const el = this.container;
-	    TweenMax.to(el, 1.0, { y:300, opacity:0, ease:Power1.easeInOut, onComplete: callback });	
-	},
-
-	componentDidLeave: function() {
-	},
-
-	render: function() {
-		return (
-			<p
-				className={"Summary " + this.props.position}
-				ref={c => this.container = c}
-			>
-				{this.props.children}
-			</p>
-		)
-	}
-});
-
-var Summary = React.createClass({
-	render: function() {
-		return (
-			<TransitionGroup component="div">
-				{ this.props.showOverlay &&
-					<AnimatedSummary>
-						{this.props.children}
-					</AnimatedSummary>
-				}
-			</TransitionGroup>
-		);
-	}
-});
+const Summary = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(SummaryStateless);
 
 export default Summary;
