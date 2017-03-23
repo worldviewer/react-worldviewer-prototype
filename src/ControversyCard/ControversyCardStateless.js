@@ -18,19 +18,19 @@ var ControversyCardStateless = React.createClass({
 		}
 	},
 
-	disableSpinBubbleNumbers: function() {
-		this.state.spinTimeouts.forEach( (timeout) => {
-			clearTimeout(timeout);
-		});
+	// disableSpinBubbleNumbers: function() {
+	// 	this.state.spinTimeouts.forEach( (timeout) => {
+	// 		clearTimeout(timeout);
+	// 	});
 
-		this.setState({
-			spin: Array.from({length:8}, el => false),
-			spinTimeouts: Array.from({length:8}, el => 0)
-		});
-	},
+	// 	this.setState({
+	// 		spin: Array.from({length:8}, el => false),
+	// 		spinTimeouts: Array.from({length:8}, el => 0)
+	// 	});
+	// },
 
 	spinBubbleNumbers: function() {
-		this.disableSpinBubbleNumbers();
+		this.props.disableSpinBubbleNumbers();
 
 		setTimeout(() => {
 			this.state.spin.forEach( (el, i) => {
@@ -53,7 +53,7 @@ var ControversyCardStateless = React.createClass({
 
 			// Reset the spin state to no spin
 			setTimeout(() => {
-				this.disableSpinBubbleNumbers();
+				this.props.disableSpinBubbleNumbers();
 			}, 9000);
 		}, 5000);
 	},

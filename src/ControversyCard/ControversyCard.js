@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ControversyCardStateless from './ControversyCardStateless';
-import clickOverlay from '../redux';
+import { disableSpinBubbleNumbers } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -13,8 +13,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		clickOverlay: (num) => {
-			return dispatch(clickOverlay(num));
+		disableSpinBubbleNumbers: () => {
+			return dispatch(disableSpinBubbleNumbers());
 		}
 	};
 };

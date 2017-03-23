@@ -3,6 +3,7 @@ import deepAssign from 'deep-assign';
 const types = {
 	SHOW_BUBBLE: 'SHOW_BUBBLE',
 	SPIN_BUBBLE_NUMBER: 'SPIN_BUBBLE_NUMBER',
+	DISABLE_SPIN_BUBBLE_NUMBERS: 'DISABLE_SPIN_BUBBLE_NUMBERS',
 
 	HIDE_OVERLAY: 'HIDE_OVERLAY',
 	SHOW_OVERLAY: 'SHOW_OVERLAY',
@@ -157,6 +158,12 @@ export const clickOverlay = (num) => {
 	};
 };
 
+export const disableSpinBubbleNumbers = () => {
+	return {
+		type: types.DISABLE_SPIN_BUBBLE_NUMBERS
+	}
+};
+
 export default (state = initialState, action) => {
 	switch(action.type) {
 		case types.CLICK_OVERLAY:
@@ -167,6 +174,20 @@ export default (state = initialState, action) => {
 		case types.FETCH_CARD_ERROR:
 			console.log(action.error);
 			return state;
+		case types.DISABLE_SPIN_BUBBLE_NUMBERS:
+			let noSpin = Array.from({length:8}, el => false),
+				noSpinTimeouts = Array.from({length:8}, el => 0);
+
+			return deepAssign({}, state, {
+				bubbles: {
+					numbers: {
+						spin: {
+							active: noSpin,
+							timeouts: noSpinTimeouts
+						}
+					}
+				}
+			});
 		default:
 			return state;		
 	}
