@@ -6,6 +6,7 @@ import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner';
 import Preload from './Preload/Preload';
 import Backend from './Backend/Backend';
+import { fetchCard } from './redux';
 
 var App = React.createClass({
 	getInitialState: function() {
@@ -117,7 +118,8 @@ var App = React.createClass({
 	},
 
 	componentDidMount: function() {
-
+		console.log('fetching ...');
+		fetchCard(this.state.card.id, this.state.card.urls.background);
 	},
 
 	toggleSlide: function() {

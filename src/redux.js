@@ -27,11 +27,11 @@ const types = {
 
 const initialState = {
 	base: {
-		api: '',
-		background: '',
-		overlay: ''
+		api: 'https://czlxg9sj34.execute-api.us-east-1.amazonaws.com/dev/cards/',
+		background: 'https://controversy-cards-assets.s3.amazonaws.com/',
+		overlay: 'https://controversy-cards-assets.s3.amazonaws.com/'
 	},
-	cards: {
+	card: {
 		id: '58b8f1f7b2ef4ddae2fb8b17',
 		metadata: {
 			icon: {
@@ -53,12 +53,14 @@ const initialState = {
 						top: ''
 					}
 				}
-			}
+			},
+			summary: '',
+			type: ''
 		},
 		urls: {
-			background: '', // this.backend.getBackgroundUrl()
-			overlay: '',
-			icon: ''
+			background: 'https://controversy-cards-assets.s3.amazonaws.com/cards/58b8f1f7b2ef4ddae2fb8b17/pyramid_files/',
+			overlay: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/assets/',
+			icon: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/icon/'
 		},
 		graphics: [
 			// {
@@ -96,12 +98,47 @@ const initialState = {
 	}
 };
 
-export const fetchCard = (id) => {
+export const fetchCardRequest = (id) => {
 	return {
 		type: types.FETCH_CARD_REQUEST,
-		payload: {}
+		id
 	}
 }
+
+export const fetchCardSuccess = (card) => {
+	return {
+		type: types.FETCH_CARD_SUCCESS,
+		card
+	}
+}
+
+export const fetchCardError = (error) => {
+	return {
+		type: types.FETCH_CARD_ERROR,
+		error
+	}
+}
+
+export function fetchCard(id, url) {
+	console.log('in fetchCard');
+
+	return function(dispatch) {
+		dispatch(fetchCardRequest(id));
+
+		// let cardRequest = new Request(this.base.api + this.card.id);
+
+		return fetch(url)
+			.then(response => response.json())
+			.then(json => {
+				console.log(json);
+				// this.saveMetaData(json['body'][0]);
+				dispatch(fetchCardSuccess(json['body'][0]));
+			})
+			.catch(error => {
+				dispatch(fetchCardError(error));
+			});
+	}
+} 
 
 export const clickOverlay = (num) => {
 	return {
@@ -111,9 +148,16 @@ export const clickOverlay = (num) => {
 };
 
 export default (state = initialState, action) => {
-	if (action.type === types.CLICK_OVERLAY) {
-		return Object.assign({}, state);
+	switch(action.type) {
+		case types.CLICK_OVERLAY:
+			return Object.assign({}, state);
+		case types.FETCH_CARD_SUCCESS:
+			return Object.assign({}, state, 
+				{card: action.card});
+		case types.FETCH_CARD_ERROR:
+			console.log(action.error);
+			return state;
+		default:
+			return state;		
 	}
-
-	return state;
 };

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import fetchCard from '../redux';
+import * from '../redux';
 import StatelessBackend from './Backend';
 
 const mapStateToProps = (state, ownProps) => {
@@ -10,9 +10,18 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		fetchCard: (id) => {
-			return dispatch(fetchCard(id));
+		fetchCard: (id, url) => {
+			return dispatch(fetchCard(id, url));
 		}
+		fetchCardRequest: (id) => {
+			return dispatch(fetchCardRequest(id));
+		}
+		fetchCardSuccess: () => {
+			return dispatch(fetchCardSuccess());
+		}
+		fetchCardError: () => {
+			return dispatch(fetchCardError());
+		}				
 	};
 };
 

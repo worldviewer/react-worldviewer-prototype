@@ -113,8 +113,6 @@ var AnimatedBubble = React.createClass({
 
 var Bubble = React.createClass({
 	render: function() {
-		console.log(this.props);
-
 		return (
 			<TransitionGroup component="div">
 				{ this.props.showOverlay &&
