@@ -50,14 +50,9 @@ var ControversyCardStateless = React.createClass({
 
 	// If all bubbles are shown simultaneously, the animation frame rate drops
 	showBubbles: function() {
-		this.state.display.forEach( (el, num) => {
+		this.props.bubbles.display.forEach((el, num) => {
 			setTimeout(() => {
-				let newDisplayState = this.state.display;
-				newDisplayState[num] = true;
-
-				this.setState({
-					display: newDisplayState
-				});
+				this.props.showBubble(num);
 			}, (num+1)*200);
 		});
 	},
@@ -128,7 +123,7 @@ var ControversyCardStateless = React.createClass({
 						bubbleNumber={i}
 						numleft={el.numleft}
 						numtop={el.numtop}
-						showOverlay={this.props.showOverlay && this.state.display[i]}
+						showOverlay={this.props.showOverlay && this.props.bubbles.display[i]}
 						source={this.backend.getOverlayBase() + el.source}
 						spin={this.props.bubbles.numbers.spin.active}
 						top={el.top}

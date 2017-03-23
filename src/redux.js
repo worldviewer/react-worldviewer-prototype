@@ -5,11 +5,7 @@ const types = {
 	SPIN_BUBBLE_NUMBER: 'SPIN_BUBBLE_NUMBER',
 	DISABLE_SPIN_BUBBLE_NUMBERS: 'DISABLE_SPIN_BUBBLE_NUMBERS',
 	SET_SPIN_BUBBLE_NUMBER_TIMEOUT: 'SET_SPIN_BUBBLE_NUMBER_TIMEOUT',
-
-	HIDE_OVERLAY: 'HIDE_OVERLAY',
-	SHOW_OVERLAY: 'SHOW_OVERLAY',
-
-	CLICK_OVERLAY: 'CLICK_OVERLAY',
+	CLICK_BUBBLE: 'CLICK_BUBBLE',
 
 	CLICK_ICON: 'CLICK_ICON',
 
@@ -102,6 +98,13 @@ const initialState = {
 	}
 };
 
+export const showBubble = (num) => {
+	return {
+		type: types.SHOW_BUBBLE,
+		num
+	}
+}
+
 export const spinBubbleNumber = (num) => {
 	return {
 		type: types.SPIN_BUBBLE_NUMBER,
@@ -182,6 +185,16 @@ export const clickOverlay = (num) => {
 
 export default (state = initialState, action) => {
 	switch(action.type) {
+		case types.SHOW_BUBBLE:
+			let newDisplayState = state.bubbles.display.slice();
+			newDisplayState[action.num] = true;
+
+			return deepAssign({}, state, {
+				bubbles: {
+					display: newDisplayState
+				}
+			});
+
 		case types.SPIN_BUBBLE_NUMBER:
 			let newSpinState = Array.from({length:8}, el => false);
 			newSpinState[action.num] = true;
