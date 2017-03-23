@@ -1,3 +1,5 @@
+import deepAssign from 'deep-assign';
+
 const types = {
 	SHOW_BUBBLE: 'SHOW_BUBBLE',
 	SPIN_BUBBLE_NUMBER: 'SPIN_BUBBLE_NUMBER',
@@ -105,7 +107,17 @@ export const fetchCardRequest = (id) => {
 	}
 }
 
-export const fetchCardSuccess = (card) => {
+export const fetchCardSuccess = (data) => {
+	let card = {
+		metadata: {}
+	};
+
+	card.metadata.name = data['name'];
+	card.metadata.summary = data['summary'];
+	card.metadata.type = data['graphic']['type'];
+	card.metadata.icon = data['graphic']['icon'];
+	card.graphics = data['graphic']['overlays']['assets'];
+
 	return {
 		type: types.FETCH_CARD_SUCCESS,
 		card
@@ -120,18 +132,16 @@ export const fetchCardError = (error) => {
 }
 
 export function fetchCard(id, url) {
-	console.log('in fetchCard');
-
-	return function(dispatch) {
+	return dispatch => {
 		dispatch(fetchCardRequest(id));
 
-		// let cardRequest = new Request(this.base.api + this.card.id);
+		let cardRequest = new Request(url);
 
-		return fetch(url)
+		return fetch(cardRequest)
 			.then(response => response.json())
 			.then(json => {
+				console.log('thunk result:');
 				console.log(json);
-				// this.saveMetaData(json['body'][0]);
 				dispatch(fetchCardSuccess(json['body'][0]));
 			})
 			.catch(error => {
@@ -152,7 +162,7 @@ export default (state = initialState, action) => {
 		case types.CLICK_OVERLAY:
 			return Object.assign({}, state);
 		case types.FETCH_CARD_SUCCESS:
-			return Object.assign({}, state, 
+			return deepAssign({}, state, 
 				{card: action.card});
 		case types.FETCH_CARD_ERROR:
 			console.log(action.error);

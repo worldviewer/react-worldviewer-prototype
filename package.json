@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "bezier-easing": "^2.0.3",
+    "deep-assign": "^2.0.0",
     "dotenv": "^2.0.0",
     "gsap": "^1.19.1",
     "html-to-react": "^1.2.4",

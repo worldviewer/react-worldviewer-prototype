@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import './App.scss';
 import ControversyCard from './ControversyCard/ControversyCard';
 import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
@@ -119,7 +119,7 @@ var App = React.createClass({
 
 	componentDidMount: function() {
 		console.log('fetching ...');
-		fetchCard(this.state.card.id, this.state.card.urls.background);
+		this.props.fetchCard(this.props.card.id, this.props.base.api + this.props.card.id);
 	},
 
 	toggleSlide: function() {
