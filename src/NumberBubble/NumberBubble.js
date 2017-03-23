@@ -59,7 +59,7 @@ var AnimatedNumberBubble = React.createClass({
 					className="Bubble-Number"
 					style={bubbleNumberStyle}>
 
-					<p>{this.props.num + 1}</p>
+					<p>{this.props.bubbleNumber + 1}</p>
 				</div>
 			</div>
 		)
@@ -72,7 +72,7 @@ var NumberBubble = React.createClass({
 			<TransitionGroup component="div">
 				{ this.props.showOverlay &&
 					<AnimatedNumberBubble
-						num={this.props.num}
+						bubbleNumber={this.props.bubbleNumber}
 						left={this.props.left}
 						top={this.props.top}
 						spin={this.props.spin} />

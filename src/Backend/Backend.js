@@ -1,6 +1,6 @@
 // TODO: Create helper methods to retrieve metacards collection, so that
 // card id's can be selected from there.
-class Backend {
+class StatelessBackend {
 	constructor(id = '58b8f1f7b2ef4ddae2fb8b17') {
 		this.base = {
 			api: 'https://czlxg9sj34.execute-api.us-east-1.amazonaws.com/dev/cards/',
@@ -68,4 +68,4 @@ class Backend {
 	}
 }
 
-export default Backend;
+export default StatelessBackend;
