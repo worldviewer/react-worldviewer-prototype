@@ -1,5 +1,4 @@
 import React from 'react';
-import { PropTypes } from 'react';
 import './Bubble.scss';
 import TransitionGroup from 'react-addons-transition-group';
 import { TweenMax, Bounce, Elastic } from 'gsap';
@@ -27,7 +26,7 @@ var AnimatedBubble = React.createClass({
 
 	// Send just one time for all 8 Bubbles
 	componentDidEnter: function() {
-		if (this.props.num === 0) {
+		if (this.props.bubbleNumber === 0) {
 			this.props.enterHandler();
 		}
 	},
@@ -95,17 +94,17 @@ var AnimatedBubble = React.createClass({
 			<div style={divStyle} ref={c => this.container = c}>
 				<img
 					alt="Figure"
-					className={"Bubble Bubble" + this.props.num}
-					onClick={this.getComponent.bind(this, this.props.num)}
+					className={"Bubble Bubble" + this.props.bubbleNumber}
+					onClick={this.getComponent.bind(this, this.props.bubbleNumber)}
 					src={this.props.source}
 					style={imgStyle} />
 
 				<NumberBubble
-					key={this.props.num}
+					key={this.props.bubbleNumber}
 					left={this.props.numleft}
-					num={this.props.num}
+					bubbleNumber={this.props.bubbleNumber}
 					showOverlay={this.props.showOverlay}
-					spin={this.props.spin[this.props.num]}
+					spin={this.props.spin[this.props.bubbleNumber]}
 					top={this.props.numtop} />
 			</div>
 		)
@@ -113,18 +112,8 @@ var AnimatedBubble = React.createClass({
 });
 
 var Bubble = React.createClass({
-	contextTypes: function() {
-		return {
-			store: PropTypes.object.isRequired			
-		}
-	},
-
 	render: function() {
-		const { store } = this.context;
-		// const state = store.getState();
-
-		console.log(store); // this does not work
-		console.log(this.props.bubbles); // this DOES work
+		console.log(this.props);
 
 		return (
 			<TransitionGroup component="div">
@@ -133,9 +122,9 @@ var Bubble = React.createClass({
 						active={this.props.active}
 						clickHandler={this.props.clickHandler}
 						enterHandler={this.props.enterHandler}
-						key={this.props.num}
+						key={this.props.bubbleNumber}
 						left={this.props.left}
-						num={this.props.num}
+						bubbleNumber={this.props.bubbleNumber}
 						numleft={this.props.numleft}
 						numtop={this.props.numtop}
 						showOverlay={this.props.showOverlay}
