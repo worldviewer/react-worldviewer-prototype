@@ -35,7 +35,7 @@ While the original G+ collection has already demonstrated some successes towards
 A far more detailed explanation of the problem this project is solving is explained after the prototype description.
 
 <p align="center">
-    <img src="https://github.com/worldviewer/react-worldviewer-prototype/blob/master/doc/letter-ryan-dupee.png" />
+    <img src="https://github.com/worldviewer/react-worldviewer-prototype/blob/master/doc/letter-from-ryan-dupee.png" />
 </p>
 
 ## The Prototype Graphic
