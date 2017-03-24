@@ -5,15 +5,6 @@ import { TweenMax, Bounce, Elastic } from 'gsap';
 import NumberBubble from '../NumberBubble/NumberBubble';
 
 var AnimatedBubble = React.createClass({
-	getInitialState: function() {
-		return {
-			left: this.props.left,
-			top: this.props.top,
-			width: this.props.width,
-			zIndex: 2
-		}
-	},
-
 	componentWillAppear: function(callback) {
 		const el = this.container;
 		TweenMax.fromTo(el, 2, {scale:0, opacity:0}, {scale:1, opacity:1, ease:Bounce.easeOut, onComplete: callback});
@@ -51,39 +42,43 @@ var AnimatedBubble = React.createClass({
 		this.props.clickHandler(index);
 	},
 
+	// TODO: Refactor hardcoded zoom values when slideshow
+	// state machine is created
 	zoomBubble: function() {
 		const el = this.container;
+
+		this.props.zoomBubble(
+			this.props.zoomBubble,
+			'2vw',
+			'20vw',
+			'96vw',
+			10
+		);
+
 		TweenMax.fromTo(el, 2, {width:this.props.width, left:this.props.left, top:this.props.top, zIndex:2},
 			{width:'96vw', left:'2vw', top:'20vw', zIndex:10, ease:Elastic.easeOut});
-
-		this.setState({
-			left: '2vw',
-			top: '20vw',
-			width: '96vw',
-			zIndex: 10
-		});
 	},
 
+	// TODO: Refactor hardcoded zoom values when slideshow
+	// state machine is created
 	unzoomBubble: function() {
 		const el = this.container;
+
+		this.props.unZoomBubble();
+
 		TweenMax.fromTo(el, 2, {width:'96vw', left:'2vw', top:'20vw', zIndex: 10},
 			{width:this.props.width, left:this.props.left, top:this.props.top, zIndex:2, ease:Elastic.easeIn});
-
-		this.setState({
-			left: this.props.left,
-			top: this.props.top,
-			width: this.props.width,
-			zIndex: 2
-		});
 	},
 
 	render: function() {
+		let graphic = this.props.card.graphics[this.props.bubbleNumber];
+
 		let divStyle = {
-			left: this.state.left,
+			left: this.props.bubbles.zoom.left || graphic.left,
 			position: 'absolute',
-			top: this.state.top,
-			width: this.state.width,
-			zIndex: this.state.zIndex
+			top: this.props.bubbles.zoom.top || graphic.top,
+			width: this.props.bubbles.zoom.width || graphic.width,
+			zIndex: this.props.bubbles.zoom.zIndex || graphic.zIndex
 		};
 
 		let imgStyle = {
@@ -117,6 +112,8 @@ var BubbleStateless = React.createClass({
 			<TransitionGroup component="div">
 				{ this.props.showOverlay &&
 					<AnimatedBubble
+						card={this.props.card}
+						bubbles={this.props.bubbles}
 						active={this.props.active}
 						clickHandler={this.props.clickHandler}
 						enterHandler={this.props.enterHandler}

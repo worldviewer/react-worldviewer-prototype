@@ -3,7 +3,10 @@ const types = {
 	SPIN_BUBBLE_NUMBER: 'SPIN_BUBBLE_NUMBER',
 	DISABLE_SPIN_BUBBLE_NUMBERS: 'DISABLE_SPIN_BUBBLE_NUMBERS',
 	SET_SPIN_BUBBLE_NUMBER_TIMEOUT: 'SET_SPIN_BUBBLE_NUMBER_TIMEOUT',
+
 	CLICK_BUBBLE: 'CLICK_BUBBLE',
+	ZOOM_BUBBLE: 'ZOOM_BUBBLE',
+	UNZOOM_BUBBLE: 'UNZOOM_BUBBLE',
 
 	CLICK_ICON: 'CLICK_ICON',
 
@@ -29,6 +32,7 @@ const initialState = {
 		background: 'https://controversy-cards-assets.s3.amazonaws.com/',
 		overlay: 'https://controversy-cards-assets.s3.amazonaws.com/'
 	},
+
 	card: {
 		id: '58b8f1f7b2ef4ddae2fb8b17',
 		icon: {
@@ -61,15 +65,18 @@ const initialState = {
 			// }
 		]
 	},
+
 	urls: {
 		background: 'https://controversy-cards-assets.s3.amazonaws.com/cards/58b8f1f7b2ef4ddae2fb8b17/pyramid_files/',
 		overlay: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/assets/',
 		icon: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/icon/'
-	},	
+	},
+
 	overlays: {
 		active: true,
 		loaded: false
 	},
+
 	slides: {
 		next: true,
 		prev: false,
@@ -77,9 +84,19 @@ const initialState = {
 		active: false,
 		num: 8
 	},
+
+	// Place zoom bubble state here so we preserve the original
 	bubbles: {
-		display: Array.from({length:8}, el => false)
+		display: Array.from({length:8}, el => false),
+		zoom: {
+			num: null,
+			left: null,
+			top: null,
+			width: null,
+			zIndex: null
+		}
 	},
+
 	bubbleNumbers: {
 		active: Array.from({length:8}, el => false),
 		timeouts: Array.from({length:8}, el => 0)
@@ -166,8 +183,25 @@ export function fetchCard(id, url) {
 export const clickBubble = (num) => {
 	return {
 		type: types.CLICK_BUBBLE,
-		payload: num
+		num
 	};
+};
+
+export const zoomBubble = (num, left, top, width, zIndex) => {
+	return {
+		type: types.ZOOM_BUBBLE,
+		num,
+		left,
+		top,
+		width,
+		zIndex
+	}
+};
+
+export const unZoomBubble = () => {
+	return {
+		type: types.UNZOOM_BUBBLE
+	}
 };
 
 export default (state = initialState, action) => {
@@ -178,7 +212,8 @@ export default (state = initialState, action) => {
 
 			return Object.assign({}, state, {
 				bubbles: {
-					display: newDisplayState
+					display: newDisplayState,
+					zoom: state.bubbles.zoom
 				}
 			});
 
@@ -225,6 +260,28 @@ export default (state = initialState, action) => {
 
 		case types.CLICK_BUBBLE:
 			return Object.assign({}, state);
+
+		case types.ZOOM_BUBBLE:
+			return Object.assign({}, state, {
+				bubbles: {
+					display: state.bubbles.display,
+					zoom: {
+						num: action.num,
+						left: action.left,
+						top: action.top,
+						width: action.width,
+						zIndex: action.zIndex
+					}
+				}
+			});
+
+		case types.UNZOOM_BUBBLE:
+			return Object.assign({}, state, {
+				bubbles: {
+					display: state.bubbles.display,
+					zoom: null
+				}
+			});
 
 		default:
 			return state;		
