@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
-import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError } from './redux';
+import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError, nextSlide, prevSlide } from './redux';
 import AppStateless from './AppStateless';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
 		card: state.card,
 		base: state.base,
-		overlays: state.overlays
+		overlays: state.overlays,
+		slides: state.slides
 	};
 };
 
@@ -23,7 +24,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		fetchCardError: (error) => {
 			return dispatch(fetchCardError(error));
-		}		
+		},
+		nextSlide: () => {
+			return dispatch(nextSlide());
+		},
+		prevSlide: () => {
+			return dispatch(prevSlide());
+		}
 	};
 };
 

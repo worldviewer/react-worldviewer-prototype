@@ -1,10 +1,8 @@
 import ImageCache from './ImageCache';
-import Backend from '../Backend/Backend';
 
 class ImageHelper {
 	constructor() {
 		this.imageCache = new ImageCache();
-		this.backend = new Backend();
 	}
 
     loadImage(url, options) {

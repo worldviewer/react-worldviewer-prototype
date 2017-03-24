@@ -11,9 +11,11 @@ const types = {
 	CLICK_ICON: 'CLICK_ICON',
 
 	TOGGLE_OVERLAY_STATE: 'TOGGLE_OVERLAY_STATE',
+	TOGGLE_OVERLAY_ACTIVE: 'TOGGLE_OVERLAY_ACTIVE',
 
 	NEXT_SLIDE: 'NEXT_SLIDE',
 	PREV_SLIDE: 'PREV_SLIDE',
+	UPDATE_NEXT_PREV: 'UPDATE_NEXT_PREV',
 
 	FETCH_CARD_REQUEST: 'FETCH_CARD_REQUEST',
 	FETCH_CARD_ERROR: 'FETCH_CARD_ERROR',
@@ -212,9 +214,36 @@ export const toggleOverlayState = (zoom) => {
 		type: types.TOGGLE_OVERLAY_STATE,
 		active: zoom <= 1.1
 	}
-}
+};
+
+export const nextSlide = () => {
+	return {
+		type: types.NEXT_SLIDE
+	}
+};
+
+export const prevSlide = () => {
+	return {
+		type: types.PREV_SLIDE
+	}
+};
+
+export const updateNextPrev = (slide) => {
+	return {
+		type: types.UPDATE_NEXT_PREV,
+		slide
+	}
+};
+
+export const toggleOverlayActive = () => {
+	return {
+		type: types.TOGGLE_OVERLAY_ACTIVE
+	}
+};
 
 export default (state = initialState, action) => {
+	let slides;
+
 	switch(action.type) {
 		case types.SHOW_BUBBLE:
 			let newDisplayState = state.bubbles.display.slice();
@@ -270,7 +299,9 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, {card});
 
 		case types.CLICK_BUBBLE:
-			return Object.assign({}, state);
+			slides = Object.assign({}, state.slides, {current: action.num});
+			updateNextPrev(action.num);
+			return Object.assign({}, state, {slides});
 
 		case types.ZOOM_BUBBLE:
 			return Object.assign({}, state, {
@@ -301,6 +332,69 @@ export default (state = initialState, action) => {
 					loaded: state.overlays.loaded
 				}
 			});
+
+		case types.TOGGLE_OVERLAY_ACTIVE:
+			slides = Object.assign({}, state.slides, {active: !state.slides.active});
+
+			return Object.assign({}, state, {slides});
+
+		case types.UPDATE_NEXT_PREV:
+			console.log('slideNumber: ' + action.slide +
+				' this.state.slides.current: ' + state.slides.current +
+				', num: ' + state.slides.num);
+
+			if (action.slide === 0 || action.slide === null) {
+				slides = {
+					next: true,
+					prev: false,
+					current: action.slide,
+					active: true,
+					num: state.slides.num				
+				};
+			} else if (action.slide === state.slides.num-1) {
+				slides = {
+					next: false,
+					prev: true,
+					current: action.slide,
+					active: true,
+					num: state.slides.num
+				};
+			} else {
+				slides = {
+					next: true,
+					prev: true,
+					current: action.slide,
+					active: true,
+					num: state.slides.num
+				};
+			}
+
+			return Object.assign({}, state, {slides: slides});
+
+		case types.NEXT_SLIDE:
+			if (this.state.slides.active) {
+				slides = Object.assign({}, state.slides, {active: false});
+			} else if (this.state.slides.current === null) {
+				updateNextPrev(0);
+				slides = Object.assign({}, state.slides, {active: true});
+			} else {
+				updateNextPrev(state.slides.current+1);
+				slides = Object.assign({}, state.slides, {active: true});
+			}
+
+			return Object.assign({}, state, {slides: slides});			
+
+		case types.PREV_SLIDE:
+			if (state.slides.active) {
+				slides = Object.assign({}, state.slides, {active: false});
+			} else {
+				slides = Object.assign({}, state.slides, {
+					active: true
+				});
+				updateNextPrev(state.slides.current-1);
+			}
+
+			return Object.assign({}, state, {slides: slides});
 
 		default:
 			return state;		

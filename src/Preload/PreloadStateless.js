@@ -87,7 +87,7 @@ class PreloadStateless extends Component {
                         icon
 					});
 
-					this.props.setSlideHandler(card);
+					// this.props.setSlideHandler(card);
 
 					this.imageHelper.loadImages(urls)
 		            	.then(this._handleSuccess, this._handleError);

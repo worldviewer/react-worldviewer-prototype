@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			return dispatch(clickBubble(num));
 		},
 		zoomBubble: (num, left, top, width, zIndex) => {
+			console.log('zooming in bubble');
 			return dispatch(zoomBubble(num, left, top, width, zIndex));
 		},
 		unZoomBubble: () => {

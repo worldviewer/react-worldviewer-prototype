@@ -34,7 +34,7 @@ var AnimatedBubble = React.createClass({
 		if (!this.props.active && nextProps.active) {
 			this.zoomBubble();
 		} else if (this.props.active && !nextProps.active) {
-			this.unzoomBubble();
+			this.unZoomBubble();
 		}		
 	},
 
@@ -48,7 +48,7 @@ var AnimatedBubble = React.createClass({
 		const el = this.container;
 
 		this.props.zoomBubble(
-			this.props.zoomBubble,
+			this.props.bubbleNumber,
 			'2vw',
 			'20vw',
 			'96vw',
@@ -61,7 +61,7 @@ var AnimatedBubble = React.createClass({
 
 	// TODO: Refactor hardcoded zoom values when slideshow
 	// state machine is created
-	unzoomBubble: function() {
+	unZoomBubble: function() {
 		const el = this.container;
 
 		this.props.unZoomBubble();
@@ -71,17 +71,15 @@ var AnimatedBubble = React.createClass({
 	},
 
 	render: function() {
-		console.log('zoom:');
-		console.log(this.props.bubbles.zoom);
-
-		let graphic = this.props.card.graphics[this.props.bubbleNumber];
+		let graphic = this.props.card.graphics[this.props.bubbleNumber],
+			zoom = this.props.slides.current === this.props.bubbleNumber ? this.props.bubbles.zoom : null;
 
 		let divStyle = {
-			left: this.props.bubbles.zoom.left || graphic.left,
+			left: (zoom && zoom.left) || graphic.left,
 			position: 'absolute',
-			top: this.props.bubbles.zoom.top || graphic.top,
-			width: this.props.bubbles.zoom.width || graphic.width,
-			zIndex: this.props.bubbles.zoom.zIndex || graphic.zIndex
+			top: (zoom && zoom.top) || graphic.top,
+			width: (zoom && zoom.width) || graphic.width,
+			zIndex: (zoom && zoom.zIndex) || graphic.zIndex
 		};
 
 		let imgStyle = {
@@ -129,7 +127,10 @@ var BubbleStateless = React.createClass({
 						source={this.props.source}
 						spin={this.props.spin}
 						top={this.props.top}
-						width={this.props.width} />
+						width={this.props.width}
+						zoomBubble={this.props.zoomBubble}
+						unZoomBubble={this.props.unZoomBubble}
+						slides={this.props.slides} />
 				}
 			</TransitionGroup>
 		);

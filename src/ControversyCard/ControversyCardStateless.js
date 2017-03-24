@@ -5,15 +5,8 @@ import './ControversyCard.scss';
 import DeepZoom from '../DeepZoom/DeepZoom';
 import Title from '../Title/Title';
 import Summary from '../Summary/Summary';
-import Backend from '../Backend/Backend';
 
 var ControversyCardStateless = React.createClass({
-	getInitialState: function() {
-		this.backend = new Backend();
-
-		return {}
-	},
-
 	spinBubbleNumbers: function() {
 		this.props.disableSpinBubbleNumbers();
 
@@ -47,9 +40,9 @@ var ControversyCardStateless = React.createClass({
 			' index: ' + index);
 
 		if (index !== this.props.slides.current) {
-			this.props.prevNextHandler(index);
+			this.props.updateNextPrev(index);
 		} else {
-			this.props.toggleSlideHandler();
+			this.props.toggleOverlayActive();
 		}
 	},
 
@@ -73,22 +66,22 @@ var ControversyCardStateless = React.createClass({
 				<Title
 					key="left"
 					position="Left"
-					display={this.props.card.nameLeft}
+					display={this.props.titleLeft}
 					showOverlay={this.props.showOverlay}>
-					{this.props.card.nameLeft.markup}
+					{this.props.titleLeft.markup}
 				</Title>
 
 				<Title
 					key="right"
 					position="Right"
-					display={this.props.card.nameRight}
+					display={this.props.titleRight}
 					showOverlay={this.props.showOverlay}>
-					{this.props.card.nameRight.markup}
+					{this.props.titleRight.markup}
 				</Title>
 
 				<Summary
 					showOverlay={this.props.showOverlay}>
-					{this.props.card.summary}
+					{this.props.summary}
 				</Summary>
 
 				{ this.props.card.graphics.map((graphic, i) => 
