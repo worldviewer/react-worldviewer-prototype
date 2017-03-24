@@ -71,6 +71,9 @@ var AnimatedBubble = React.createClass({
 	},
 
 	render: function() {
+		console.log('zoom:');
+		console.log(this.props.bubbles.zoom);
+
 		let graphic = this.props.card.graphics[this.props.bubbleNumber];
 
 		let divStyle = {

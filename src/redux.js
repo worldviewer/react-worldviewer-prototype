@@ -10,6 +10,8 @@ const types = {
 
 	CLICK_ICON: 'CLICK_ICON',
 
+	TOGGLE_OVERLAY_STATE: 'TOGGLE_OVERLAY_STATE',
+
 	NEXT_SLIDE: 'NEXT_SLIDE',
 	PREV_SLIDE: 'PREV_SLIDE',
 
@@ -100,6 +102,12 @@ const initialState = {
 	bubbleNumbers: {
 		active: Array.from({length:8}, el => false),
 		timeouts: Array.from({length:8}, el => 0)
+	},
+
+	background: {
+		isZoomedOut: true,
+		width: '100vw',
+		height: '140vw'
 	}
 };
 

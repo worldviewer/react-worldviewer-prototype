@@ -17,25 +17,23 @@ var AppStateless = React.createClass({
 			// For now, it is fixed to the Halton Arp card.
 			card: {
 				id: '58b8f1f7b2ef4ddae2fb8b17',
-				metadata: {
-					icon: {
-						source: '',
-						left: '',
-						top: '',
-						width: ''
-					},
-					name: {
-						display: {
-							left: {
-								left: '',
-								markup: '',
-								top: ''
-							},
-							right: {
-								right: '',
-								markup: '',
-								top: ''
-							}
+				icon: {
+					source: '',
+					left: '',
+					top: '',
+					width: ''
+				},
+				name: {
+					display: {
+						left: {
+							left: '',
+							markup: '',
+							top: ''
+						},
+						right: {
+							right: '',
+							markup: '',
+							top: ''
 						}
 					}
 				},
@@ -46,15 +44,13 @@ var AppStateless = React.createClass({
 				},
 				graphics: []
 			},
-			overlay: {
+			overlays: {
 				active: true,
 				loaded: false
 			},
-			slide: {
-				show: {
-					next: true,
-					prev: false
-				},
+			slides: {
+				next: true,
+				prev: false,
 				current: null,
 				active: false,
 				num: 8			
@@ -65,14 +61,14 @@ var AppStateless = React.createClass({
 	prev: function() {
 		if (this.state.active) {
 			this.setState(Object.assign({}, this.state, {
-				slide: {
+				slides: {
 					active: false
 				}
 			}));
 		} else {
-			this.updateNextPrev(this.state.slide.current-1);
+			this.updateNextPrev(this.state.slides.current-1);
 			this.setState(Object.assign({}, this.state, {
-				slide: {
+				slides: {
 					active: true					
 				}
 			}));
@@ -80,23 +76,23 @@ var AppStateless = React.createClass({
 	},
 
 	next: function() {
-		if (this.state.slide.active) {
+		if (this.state.slides.active) {
 			this.setState(Object.assign({}, this.state, {
-				slide: {
+				slides: {
 					active: false					
 				}
 			}));
-		} else if (this.state.slide.current === null) {
+		} else if (this.state.slides.current === null) {
 			this.updateNextPrev(0);
 			this.setState(Object.assign({}, this.state, {
-				slide: {
+				slides: {
 					active: true					
 				}
 			}));
 		} else {
 			this.updateNextPrev(this.state.slide.current+1);
 			this.setState(Object.assign({}, this.state, {
-				slide: {
+				slides: {
 					active: true					
 				}
 			}));
@@ -111,7 +107,7 @@ var AppStateless = React.createClass({
 
 	toggleOverlay: function(zoom) {
 		this.setState(Object.assign({}, this.state, {
-			overlay: {
+			overlays: {
 				active: zoom <= 1.1
 			}
 		}));
@@ -124,46 +120,40 @@ var AppStateless = React.createClass({
 
 	toggleSlide: function() {
 		this.setState(Object.assign({}, this.state, {
-			slide: {
-				active: !this.state.slide.active
+			slides: {
+				active: !this.state.slides.active
 			}
 		}));
 	},
 
 	updateNextPrev: function(slideNumber) {
 		console.log('slideNumber: ' + slideNumber +
-			' this.state.slide.current: ' + this.state.slide.current +
-			', num: ' + this.state.slide.num);
+			' this.state.slides.current: ' + this.state.slides.current +
+			', num: ' + this.state.slides.num);
 
 		if (slideNumber === 0 || slideNumber === null) {
 			this.setState(Object.assign({}, this.state, {
-				slide: {
-					show: {
-						next: true,
-						prev: false
-					},
+				slides: {
+					next: true,
+					prev: false,
 					current: slideNumber,
 					active: true					
 				}
 			}));
 		} else if (slideNumber === this.state.slide.num-1) {
 			this.setState(Object.assign({}, this.state, {
-				slide: {
-					show: {
-						next: false,
-						prev: true
-					},
+				slides: {
+					next: false,
+					prev: true,
 					current: slideNumber,
 					active: true					
 				}
 			}));
 		} else {
 			this.setState(Object.assign({}, this.state, {
-				slide: {
-					show: {
-						next: true,
-						prev: true
-					},
+				slides: {
+					next: true,
+					prev: true,
 					current: slideNumber,
 					active: true					
 				}
@@ -182,7 +172,7 @@ var AppStateless = React.createClass({
 
 	render: function() {
 		let prevNextStyle = {
-			display: this.state.overlay.active ? 'block' : 'none'
+			display: this.state.overlays.active ? 'block' : 'none'
 		}
 
 		let loadSpinner = (<Spinner />);
@@ -200,21 +190,21 @@ var AppStateless = React.createClass({
 					mountChildren={true} >
 
 					<ControversyCard
-						icon={this.state.card.metadata.icon}
-						title={this.state.card.metadata.name}
-						summary={this.state.card.metadata.summary}
+						icon={this.state.card.icon}
+						title={this.state.card.name}
+						summary={this.state.card.summary}
 						background={this.state.card.urls.background}
 						slides={this.state.card.graphics}
 						zoomHandler={this.toggleOverlay}
 						toggleSlideHandler={this.toggleSlide}
 						prevNextHandler={this.updateNextPrev}
-						currentSlide={this.state.slide.current}
-						activeSlide={this.state.slide.active}
-						showOverlay={this.state.overlay.active} />
+						currentSlide={this.state.slides.current}
+						activeSlide={this.state.slides.active}
+						showOverlay={this.state.overlays.active} />
 
 				</Preload>
 
-				{ this.state.slide.show.prev &&
+				{ this.state.slides.prev &&
 					<div 
 						onClick={this.prev}
 						className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5"
@@ -222,7 +212,7 @@ var AppStateless = React.createClass({
 					</div>
 				}
 
-				{ this.state.slide.show.next &&
+				{ this.state.slides.next &&
                     <div
                     	onClick={this.next}
                     	className="md-next md-np md-n mbsc-ic mbsc-ic-arrow-right5"
