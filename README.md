@@ -52,6 +52,12 @@ See live mobile-friendly demo at https://worldviewer.github.io/react-worldviewer
 
 This project has been recently transitioned from Apigee / Usergrid to MongoDB / AWS Lambda / AWS S3.
 
+The bulk of the refactor into Redux is now complete.  A small amount of previous/next functionality was lost in the refactor, and on my second pass, I will clean up the props and handler passing between components.
+
+The next step is to completely overhaul the way I am handling slides.  The problem is that the content is not always legible, and I'll be addressing this by expanding the number of slide states to zoom into parts of the bubbles.
+
+I'll also need to make space for a markdown description modal.
+
 ### Part 1: The Infographic Frontend
 
 A common element for all of the enhanced controversy cards will be a deep-zoomable background which on zoom will eventually act as an interactive wall for discussion of the topic.
