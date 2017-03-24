@@ -5,7 +5,8 @@ import AppStateless from './AppStateless';
 const mapStateToProps = (state, ownProps) => {
 	return {
 		card: state.card,
-		base: state.base
+		base: state.base,
+		overlays: state.overlays
 	};
 };
 
@@ -22,7 +23,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		fetchCardError: (error) => {
 			return dispatch(fetchCardError(error));
-		}				
+		}		
 	};
 };
 

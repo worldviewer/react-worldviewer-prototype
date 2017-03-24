@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import DeepZoomStateless from './DeepZoomStateless';
-import clickOverlay from '../redux';
+import { toggleOverlayState } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -13,8 +13,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		clickOverlay: (num) => {
-			return dispatch(clickOverlay(num));
+		toggleOverlayState: (zoom) => {
+			return dispatch(toggleOverlayState(zoom));
 		}
 	};
 };

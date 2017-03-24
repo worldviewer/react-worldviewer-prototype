@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import './App.scss';
 import ControversyCard from './ControversyCard/ControversyCard';
 import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
@@ -6,7 +6,6 @@ import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner';
 import Preload from './Preload/Preload';
 import Backend from './Backend/Backend';
-import { fetchCard } from './redux';
 
 var AppStateless = React.createClass({
 	getInitialState: function() {
@@ -105,17 +104,7 @@ var AppStateless = React.createClass({
 		}));
 	},
 
-	toggleOverlay: function(zoom) {
-		this.setState(Object.assign({}, this.state, {
-			overlays: {
-				active: zoom <= 1.1
-			}
-		}));
-	},
-
 	componentDidMount: function() {
-		console.log('fetching ...');
-		this.props.fetchCard(this.props.card.id, this.props.base.api + this.props.card.id);
 	},
 
 	toggleSlide: function() {
@@ -181,7 +170,7 @@ var AppStateless = React.createClass({
 			<div className="App">
 
 				<Preload
-					cardId={this.state.card.id}
+					cardId={this.props.card.id}
 					setSlideHandler={this.setSlides}
 					loadingIndicator={loadSpinner}
 					onError={this.handleAssetLoadError}
@@ -193,9 +182,7 @@ var AppStateless = React.createClass({
 						icon={this.state.card.icon}
 						title={this.state.card.name}
 						summary={this.state.card.summary}
-						background={this.state.card.urls.background}
 						slides={this.state.card.graphics}
-						zoomHandler={this.toggleOverlay}
 						toggleSlideHandler={this.toggleSlide}
 						prevNextHandler={this.updateNextPrev}
 						currentSlide={this.state.slides.current}

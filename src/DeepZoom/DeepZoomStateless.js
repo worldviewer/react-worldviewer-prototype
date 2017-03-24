@@ -8,8 +8,7 @@ const DeepZoomStateless = React.createClass({
 			cardStyle: {
 				width: '100vw',
 				height: '140vw'
-			},
-			isZoomedOut: true
+			}
 		}
 	},
 
@@ -50,8 +49,7 @@ const DeepZoomStateless = React.createClass({
 	// Change overlays based on OpenSeadragon events
 	setupZoomHandler: function(viewer) {
 		viewer.addHandler('zoom', (data) => {
-			this.setState( {isZoomedOut: data.zoom} );
-			this.props.onZoom(data.zoom);
+			this.props.toggleOverlayState(data.zoom);
 		});
 	},
 

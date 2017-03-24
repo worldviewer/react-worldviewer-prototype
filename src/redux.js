@@ -69,7 +69,8 @@ const initialState = {
 	},
 
 	urls: {
-		background: 'https://controversy-cards-assets.s3.amazonaws.com/cards/58b8f1f7b2ef4ddae2fb8b17/pyramid_files/',
+		api: 'https://czlxg9sj34.execute-api.us-east-1.amazonaws.com/dev/cards/',
+		background: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/pyramid_files/',
 		overlay: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/assets/',
 		icon: 'https://controversy-cards-assets.s3.amazonaws.com/58b8f1f7b2ef4ddae2fb8b17/icon/'
 	},
@@ -102,12 +103,6 @@ const initialState = {
 	bubbleNumbers: {
 		active: Array.from({length:8}, el => false),
 		timeouts: Array.from({length:8}, el => 0)
-	},
-
-	background: {
-		isZoomedOut: true,
-		width: '100vw',
-		height: '140vw'
 	}
 };
 
@@ -212,6 +207,13 @@ export const unZoomBubble = () => {
 	}
 };
 
+export const toggleOverlayState = (zoom) => {
+	return {
+		type: types.TOGGLE_OVERLAY_STATE,
+		active: zoom <= 1.1
+	}
+}
+
 export default (state = initialState, action) => {
 	switch(action.type) {
 		case types.SHOW_BUBBLE:
@@ -263,8 +265,9 @@ export default (state = initialState, action) => {
 			return state;
 
 		case types.FETCH_CARD_SUCCESS:
-			return Object.assign({}, state, 
-				{card: action.card});
+			let card = Object.assign({}, state.card, action.card);
+
+			return Object.assign({}, state, {card});
 
 		case types.CLICK_BUBBLE:
 			return Object.assign({}, state);
@@ -288,6 +291,14 @@ export default (state = initialState, action) => {
 				bubbles: {
 					display: state.bubbles.display,
 					zoom: null
+				}
+			});
+
+		case types.TOGGLE_OVERLAY_STATE:
+			return Object.assign({}, state, {
+				overlays: {
+					active: action.active,
+					loaded: state.overlays.loaded
 				}
 			});
 

@@ -68,8 +68,7 @@ var ControversyCardStateless = React.createClass({
 		return (
 			<div className="Deep-Zoom-Graphic">
 				<DeepZoom
-					url={this.props.background}
-					onZoom={this.props.zoomHandler} />
+					url={this.props.urls.background} />
 
 				<Title
 					key="left"
@@ -95,7 +94,7 @@ var ControversyCardStateless = React.createClass({
 				{ this.props.card.graphics.map((graphic, i) => 
 					<Bubble
 						active={this.props.slides.current === i && this.props.slides.active}
-						enterHandler={this.props.spinBubbleNumbers}
+						enterHandler={this.spinBubbleNumbers}
 						clickHandler={this.handleBubbleClick}
 						key={i}
 						left={graphic.left}
