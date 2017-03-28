@@ -90,6 +90,38 @@ const initialState = {
 		num: 8
 	},
 
+	slideshow: [
+		{
+			text: {
+				unicode: "",				
+			},
+			bubble: {
+				number: null,
+				background: null,
+				zoom: null,
+				left: null,
+				top: null,
+				width: null,
+				zIndex: null
+			},
+			audio: null,
+			quote: {
+				number: null,
+				background: null,
+				zoom: null,
+				left: null,
+				top: null,
+				width: null,
+				zIndex: null
+			},
+			footnotes: [
+				{
+					markup: ""
+				}
+			]
+		}
+	],
+
 	// Place zoom bubble state here so we preserve the original
 	bubbles: {
 		display: Array.from({length:8}, el => false),
@@ -372,9 +404,9 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, {slides: slides});
 
 		case types.NEXT_SLIDE:
-			if (this.state.slides.active) {
+			if (state.slides.active) { // if a bubble is zoomed
 				slides = Object.assign({}, state.slides, {active: false});
-			} else if (this.state.slides.current === null) {
+			} else if (state.slides.current === null) {
 				updateNextPrev(0);
 				slides = Object.assign({}, state.slides, {active: true});
 			} else {
