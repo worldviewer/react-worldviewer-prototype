@@ -76,8 +76,7 @@ const initialState = {
 	slides: {
 		next: true,
 		prev: false,
-		currentSlide: 0,
-		currentBubble: 0, // When an active bubble is clicked, forward to next slide w/ a different bubble number
+		current: 0,
 
 		active: false, // Refactor: This should be a number
 		num: 8 // Remove this with slideshow refactor
@@ -274,93 +273,117 @@ export default (state = initialState, action) => {
 			let newDisplayState = state.bubbles.display.slice();
 			newDisplayState[action.num] = true;
 
-			return Object.assign({}, state, {
+			return {
+				...state,
 				bubbles: {
-					display: newDisplayState,
-					zoom: state.bubbles.zoom
+					...state.bubbles,
+					display: newDisplayState
 				}
-			});
+			};
 
 		case types.SPIN_BUBBLE_NUMBER:
 			let newSpinState = Array.from({length:8}, el => false);
 			newSpinState[action.num] = true;
 
-			return Object.assign({}, state, {
+			return {
+				...state,
 				bubbleNumbers: {
-					active: newSpinState,
-					timeouts: state.bubbleNumbers.timeouts
+					...state.bubbleNumbers,
+					active: newSpinState
 				}
-			});
+			};
 
 		case types.DISABLE_SPIN_BUBBLE_NUMBERS:
 			let noSpin = Array.from({length:8}, el => false),
 				noSpinTimeouts = Array.from({length:8}, el => 0);
 
-			return Object.assign({}, state, {
+			return {
+				...state,
 				bubbleNumbers: {
+					...state.bubbleNumbers,
 					active: noSpin,
 					timeouts: noSpinTimeouts
 				}
-			});
+			};
 
 		case types.SET_SPIN_BUBBLE_NUMBER_TIMEOUT:
 			let newSpinTimeoutsState = state.bubbleNumbers.timeouts.slice();
 			newSpinTimeoutsState[action.num] = action.timeout;
 
-			return Object.assign({}, state, {
+			return {
+				...state,
 				bubbleNumbers: {
+					...state.bubbleNumbers,
 					active: state.bubbleNumbers.active,
 					timeouts: newSpinTimeoutsState
 				}
-			});
+			};
 
 		case types.FETCH_CARD_ERROR:
 			console.log(action.error);
 			return state;
 
 		case types.FETCH_CARD_SUCCESS:
-			let card = Object.assign({}, state.card, action.card);
-
-			return Object.assign({}, state, {card}, {slideshow: action.slideshow});
+			return {
+				...state, 
+				card: {
+					...state.card,
+					...action.card
+				},
+				slideshow: action.slideshow
+			};
 
 		case types.CLICK_BUBBLE:
-			slides = Object.assign({}, state.slides, {current: action.num});
-			updateNextPrev(action.num);
-			return Object.assign({}, state, {slides});
+			updateNextPrev(action.num); // ANTI-PATTERN! Refactor ...
+
+			return {
+				...state,
+				slides: {
+					...state.slides,
+					current: action.num
+				}
+			};
 
 		case types.ZOOM_BUBBLE:
-			return Object.assign({}, state, {
+			return {
+				...state,
 				bubbles: {
-					display: state.bubbles.display,
+					...state.bubbles,
 					zoom: {
 						num: action.num,
 						left: action.left,
 						top: action.top,
-						width: action.width
+						width: action.width						
 					}
 				}
-			});
+			};
 
 		case types.UNZOOM_BUBBLE:
-			return Object.assign({}, state, {
+			return {
+				...state,
 				bubbles: {
 					display: state.bubbles.display,
 					zoom: null
 				}
-			});
+			};
 
 		case types.TOGGLE_OVERLAY_STATE:
-			return Object.assign({}, state, {
+			return {
+				...state,
 				overlays: {
 					active: action.active,
-					loaded: state.overlays.loaded
+					loaded: state.overlays.loaded					
 				}
-			});
+			};
 
 		case types.TOGGLE_OVERLAY_ACTIVE:
-			slides = Object.assign({}, state.slides, {active: !state.slides.active});
-
-			return Object.assign({}, state, {slides});
+			return {
+				...state,
+				slides: {
+					...state.slides,
+					active: !state.slides.active
+				}
+			};
 
 		case types.UPDATE_NEXT_PREV:
 			console.log('slideNumber: ' + action.slide +
@@ -393,9 +416,27 @@ export default (state = initialState, action) => {
 				};
 			}
 
-			return Object.assign({}, state, {slides: slides});
+			return {
+				...state,
+				slides: {
+					...state.slides
+				},
+				slides: slides
+			};
 
 		case types.NEXT_SLIDE:
+			let next = state.slides.current < state.slideshow.length ?
+				state.slides.current+1 :
+				state.slides.current;
+
+			return {
+				...state,
+				slides: {
+					...state.slides,
+					current: next
+				}
+			};
+
 			// if (state.slides.active) { // if a bubble is zoomed
 			// 	slides = Object.assign({}, state.slides, {active: false});
 			// } else if (state.slides.current === null) {
@@ -409,6 +450,18 @@ export default (state = initialState, action) => {
 			// return Object.assign({}, state, {slides: slides});			
 
 		case types.PREV_SLIDE:
+			let previous = state.slides.current > 0 ?
+				state.slides.current-1 :
+				0;
+
+			return {
+				...state,
+				slides: {
+					...state.slides,
+					current: previous
+				}
+			};
+
 			// if (state.slides.active) {
 			// 	slides = Object.assign({}, state.slides, {active: false});
 			// } else {
