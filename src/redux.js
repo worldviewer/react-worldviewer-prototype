@@ -19,15 +19,7 @@ const types = {
 
 	FETCH_CARD_REQUEST: 'FETCH_CARD_REQUEST',
 	FETCH_CARD_ERROR: 'FETCH_CARD_ERROR',
-	FETCH_CARD_SUCCESS: 'FETCH_CARD_SUCCESS',
-
-	FETCH_OVERLAY_REQUEST: 'FETCH_OVERLAY_REQUEST',
-	FETCH_OVERLAY_ERROR: 'FETCH_OVERLAY_ERROR',
-	FETCH_OVERLAY_SUCCESS: 'FETCH_OVERLAY_SUCCESS',
-
-	FETCH_BACKGROUND_REQUEST: 'FETCH_BACKGROUND_REQUEST',
-	FETCH_BACKGROUND_ERROR: 'FETCH_BACKGROUND_ERROR',
-	FETCH_BACKGROUND_SUCCESS: 'FETCH_BACKGROUND_SUCCESS'
+	FETCH_CARD_SUCCESS: 'FETCH_CARD_SUCCESS'
 };
 
 const initialState = {
@@ -64,8 +56,7 @@ const initialState = {
 			// 	top: '',
 			// 	width: '',
 			// 	numleft: '',
-			// 	numtop: '',
-			// 	zIndex: 0
+			// 	numtop: ''
 			// }
 		]
 	},
@@ -85,47 +76,46 @@ const initialState = {
 	slides: {
 		next: true,
 		prev: false,
-		current: null,
-		active: false,
-		num: 8
+		currentSlide: 0,
+		currentBubble: 0, // When an active bubble is clicked, forward to next slide w/ a different bubble number
+
+		active: false, // Refactor: This should be a number
+		num: 8 // Remove this with slideshow refactor
 	},
 
 	slideshow: [
-		{
-			text: {
-				unicode: "",				
-			},
-			bubble: {
-				number: null,
-				background: null,
-				zoom: null,
-				left: null,
-				top: null,
-				width: null,
-				zIndex: null
-			},
-			audio: null,
-			quote: {
-				number: null,
-				background: null,
-				zoom: null,
-				left: null,
-				top: null,
-				width: null,
-				zIndex: null
-			},
-			footnotes: [
-				{
-					markup: ""
-				}
-			]
-		}
+		// {
+		// 	text: {
+		// 		unicode: "",				
+		// 	},
+		// 	bubble: {
+		// 		number: null,
+		// 		left: null,
+		// 		top: null,
+		// 		width: null
+		// 	},
+		// 	audio: null,
+		// 	quotes: {
+		// 		number: null,
+		// 		background: null,
+		// 		zoom: null,
+		// 		left: null,
+		// 		top: null,
+		// 		width: null,
+		// 		zIndex: null
+		// 	},
+		// 	footnotes: [
+		// 		{
+		// 			markup: ""
+		// 		}
+		// 	]
+		// }
 	],
 
-	// Place zoom bubble state here so we preserve the original
-	bubbles: {
+	// Refactor: Delete
+	bubbles: { 
 		display: Array.from({length:8}, el => false),
-		zoom: {
+		zoom: { 
 			num: null,
 			left: null,
 			top: null,
@@ -192,9 +182,12 @@ export const fetchCardSuccess = (data) => {
 	card.icon = data['graphic']['icon'];
 	card.graphics = data['graphic']['overlays']['assets'];
 
+	let slideshow = data['graphic']['slideshow'];
+
 	return {
 		type: types.FETCH_CARD_SUCCESS,
-		card
+		card,
+		slideshow
 	}
 }
 
@@ -328,7 +321,7 @@ export default (state = initialState, action) => {
 		case types.FETCH_CARD_SUCCESS:
 			let card = Object.assign({}, state.card, action.card);
 
-			return Object.assign({}, state, {card});
+			return Object.assign({}, state, {card}, {slideshow: action.slideshow});
 
 		case types.CLICK_BUBBLE:
 			slides = Object.assign({}, state.slides, {current: action.num});
@@ -343,8 +336,7 @@ export default (state = initialState, action) => {
 						num: action.num,
 						left: action.left,
 						top: action.top,
-						width: action.width,
-						zIndex: action.zIndex
+						width: action.width
 					}
 				}
 			});
@@ -404,29 +396,29 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, {slides: slides});
 
 		case types.NEXT_SLIDE:
-			if (state.slides.active) { // if a bubble is zoomed
-				slides = Object.assign({}, state.slides, {active: false});
-			} else if (state.slides.current === null) {
-				updateNextPrev(0);
-				slides = Object.assign({}, state.slides, {active: true});
-			} else {
-				updateNextPrev(state.slides.current+1);
-				slides = Object.assign({}, state.slides, {active: true});
-			}
+			// if (state.slides.active) { // if a bubble is zoomed
+			// 	slides = Object.assign({}, state.slides, {active: false});
+			// } else if (state.slides.current === null) {
+			// 	updateNextPrev(0);
+			// 	slides = Object.assign({}, state.slides, {active: true});
+			// } else {
+			// 	updateNextPrev(state.slides.current+1);
+			// 	slides = Object.assign({}, state.slides, {active: true});
+			// }
 
-			return Object.assign({}, state, {slides: slides});			
+			// return Object.assign({}, state, {slides: slides});			
 
 		case types.PREV_SLIDE:
-			if (state.slides.active) {
-				slides = Object.assign({}, state.slides, {active: false});
-			} else {
-				slides = Object.assign({}, state.slides, {
-					active: true
-				});
-				updateNextPrev(state.slides.current-1);
-			}
+			// if (state.slides.active) {
+			// 	slides = Object.assign({}, state.slides, {active: false});
+			// } else {
+			// 	slides = Object.assign({}, state.slides, {
+			// 		active: true
+			// 	});
+			// 	updateNextPrev(state.slides.current-1);
+			// }
 
-			return Object.assign({}, state, {slides: slides});
+			// return Object.assign({}, state, {slides: slides});
 
 		default:
 			return state;		
