@@ -54,13 +54,15 @@ This project has been recently transitioned from Apigee / Usergrid to MongoDB / 
 
 It's also now fully transitioned into Redux with a slideshow that can accommodate both direct interaction with overlays (the bubbles), as well as next/previous handling.  Each overlay can now accommodate an adjustable number of slides.  Deactivating an active overlay advances the slideshow to the next overlay -- similar to the way in which chapters function for a book.
 
-The next step is to populate this multi-level state machine encoded into Redux with the overlay zoom data ...
+Parameterized overlay zooms are now done -- meaning that I can now pan and zoom through each bubble, from one slide to the next using the Greensock Animation Platform.
 
-- parameterized overlay zooms (these are those bubbles)
+The next step is to visualize the multi-level state machine data that's encoded into Redux for ...
+
 - chunked text explanations
-- audio narration
 - fullscreen quotes
 - footnotes
+
+I may delay adding audio to a later point.
 
 By the end of this stage of the process, the meaning of the content will finally become clear.  That's when this will stop being just a strange toy, and start to exhibit the feel of an actual interactive infographic.
 
