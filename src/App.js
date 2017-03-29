@@ -7,7 +7,9 @@ const mapStateToProps = (state, ownProps) => {
 		card: state.card,
 		base: state.base,
 		overlays: state.overlays,
-		slides: state.slides
+		slides: state.slides,
+		controls: state.controls,
+		slideshow: state.slideshow
 	};
 };
 

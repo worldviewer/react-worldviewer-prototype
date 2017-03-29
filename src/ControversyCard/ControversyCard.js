@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ControversyCardStateless from './ControversyCardStateless';
-import { showBubble, spinBubbleNumber, disableSpinBubbleNumbers, setSpinBubbleNumberTimeout, toggleOverlayActive, updateNextPrev, clickBubble } from '../redux';
+import { showBubble, spinBubbleNumber, disableSpinBubbleNumbers, setSpinBubbleNumberTimeout, toggleOverlayActive, clickBubble } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -9,7 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 		bubbles: state.bubbles,
 		bubbleNumbers: state.bubbleNumbers,
 		card: state.card,
-		urls: state.urls
+		urls: state.urls,
+		slideshow: state.slideshow
 	};
 };
 
@@ -29,9 +30,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		toggleOverlayActive: () => {
 			return dispatch(toggleOverlayActive());
-		},
-		updateNextPrev: (slide) => {
-			return dispatch(updateNextPrev(slide));
 		},
 		clickBubble: (num) => {
 			return dispatch(clickBubble(num));

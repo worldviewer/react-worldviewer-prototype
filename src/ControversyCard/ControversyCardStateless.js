@@ -36,11 +36,8 @@ var ControversyCardStateless = React.createClass({
 	},
 
 	handleBubbleClick: function(index) {
-		console.log('this.props.slides.current: ' + this.props.slides.current +
-			' index: ' + index);
-
 		if (index !== this.props.slides.current) {
-			this.props.updateNextPrev(index);
+			this.props.clickBubble(index);
 		} else {
 			this.props.toggleOverlayActive();
 		}
@@ -53,6 +50,9 @@ var ControversyCardStateless = React.createClass({
 
 	componentWillReceiveProps: function(nextProps) {
 		if (this.props.slides.current !== nextProps.slides.current) {
+			console.log('this.props.slides.current: ', this.props.slides.current);
+			console.log('nextProps.slides.current: ', nextProps.slides.current);
+
 			this.handleBubbleClick(nextProps.slides.current);
 		}
 	},
@@ -84,21 +84,30 @@ var ControversyCardStateless = React.createClass({
 					{this.props.summary}
 				</Summary>
 
-				{ this.props.card.graphics.map((graphic, i) => 
-					<Bubble
-						active={this.props.slides.current === i && this.props.slides.active}
+				{ this.props.card.graphics.map((graphic, i) => {
+					let slide = this.props.slideshow ?
+						this.props.slideshow[this.props.slides.current].bubble :
+						null;
+
+					let { top, left, width } = slide ?
+						slide :
+						graphic;
+
+					return (<Bubble
+						active={slide !== null && slide.number === i}
 						enterHandler={this.spinBubbleNumbers}
 						clickHandler={this.handleBubbleClick}
 						key={i}
-						left={graphic.left}
+						left={left}
 						bubbleNumber={i}
 						numleft={graphic.numleft}
 						numtop={graphic.numtop}
 						showOverlay={this.props.showOverlay && this.props.bubbles.display[i]}
 						source={this.props.urls.overlay + graphic.source}
 						spin={this.props.bubbleNumbers.active}
-						top={graphic.top}
-						width={graphic.width} />
+						top={top}
+						width={width} />)
+					}
 				)}
 
 				<Icon

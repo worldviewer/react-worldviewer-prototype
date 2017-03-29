@@ -42,14 +42,13 @@ var AppStateless = React.createClass({
 						titleLeft={this.props.card.nameLeft}
 						titleRight={this.props.card.nameRight}
 						summary={this.props.card.summary}
-						slides={this.props.card.graphics}
 						currentSlide={this.props.slides.current}
 						activeSlide={this.props.slides.active}
 						showOverlay={this.props.overlays.active} />
 
 				</Preload>
 
-				{this.props.slides.prev &&
+				{this.props.controls.prev &&
 					<div 
 						onClick={this.props.prevSlide}
 						className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5"
@@ -57,7 +56,7 @@ var AppStateless = React.createClass({
 					</div>
 				}
 
-				{this.props.slides.next &&
+				{this.props.controls.next &&
                     <div
                     	onClick={this.props.nextSlide}
                     	className="md-next md-np md-n mbsc-ic mbsc-ic-arrow-right5"

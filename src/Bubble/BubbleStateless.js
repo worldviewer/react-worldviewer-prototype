@@ -30,56 +30,149 @@ var AnimatedBubble = React.createClass({
 	componentDidLeave: function() {
 	},
 
+	currentSlide: function() {
+		return this.props.slideshow[this.props.slides.current].bubble;
+	},
+
+	nextSlide: function(nextProps) {
+		return nextProps.slideshow[nextProps.slides.current].bubble;
+	},
+
+	originalSlideState: function() {
+		return this.props.card.graphics[this.props.bubbleNumber];
+	},
+
+	bubbleIsActive: function(bubbleNumber, slide) {
+		return bubbleNumber === slide.number;
+	},
+
+	zoomsAreSame: function(from, to) {
+		if (from.width === to.width &&
+			from.top === to.top &&
+			from.left === to.left) {
+			return true;
+		} else {
+			return false;
+		}
+	},
+
+	// Pay close attention to what is current and previous here ...
 	componentWillReceiveProps: function(nextProps) {
-		if (!this.props.active && nextProps.active) {
-			this.zoomBubble();
-		} else if (this.props.active && !nextProps.active) {
-			this.unZoomBubble();
-		}		
+		let num, slide;
+
+		if (this.props.slides.current !== nextProps.slides.current) {
+			if (!this.currentSlide()) { // from unzoomed
+				num = nextProps.bubbleNumber;
+				slide = this.nextSlide(nextProps);
+				this.bubbleIsActive(num, slide) && this.zoom(nextProps);
+
+			} else if (this.nextSlide(nextProps)) { // to/from zoomed
+				num = this.props.bubbleNumber;
+				slide = this.currentSlide();
+				this.bubbleIsActive(num, slide) && this.scale(nextProps);
+
+			} else { // from zoomed / to unzoomed
+				num = this.props.bubbleNumber;
+				slide = this.currentSlide();
+				this.bubbleIsActive(num, slide) && this.unzoom();
+			}
+		}
 	},
 
 	getComponent: function(index) {
 		this.props.clickHandler(index);
 	},
 
-	// TODO: Refactor hardcoded zoom values when slideshow
-	// state machine is created
-	zoomBubble: function() {
+	zoom: function(nextProps) {
 		const el = this.container;
 
-		this.props.zoomBubble(
-			this.props.bubbleNumber,
-			'2vw',
-			'20vw',
-			'96vw',
-			10
-		);
+		console.log('zoom');
 
-		TweenMax.fromTo(el, 2, {width:this.props.width, left:this.props.left, top:this.props.top, zIndex:2},
-			{width:'96vw', left:'2vw', top:'20vw', zIndex:10, ease:Elastic.easeOut});
+		let { left, top, width } = this.originalSlideState(),
+			from = { left:left, top:top, width:width },
+			to = this.nextSlide(nextProps);
+
+		console.log('from: ', from);
+		console.log('to: ', to);
+
+		if (!this.zoomsAreSame(from, to)) {
+			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:2},
+					{width:to.width, left:to.left, top:to.top, zIndex:10, ease:Elastic.easeOut});
+		}
+	},
+
+	unzoom: function() {
+		const el = this.container;
+
+		console.log('unzoom');
+
+		let { left, top, width } = this.originalSlideState(),
+			to = { left:left, top:top, width:width },
+			from = this.currentSlide();
+
+		console.log('from: ', from);
+		console.log('to: ', to);
+
+		if (!this.zoomsAreSame(from, to)) {
+			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:10},
+					{width:to.width, left:to.left, top:to.top, zIndex:2, ease:Elastic.easeIn});
+		}
+	},
+
+	scale: function(nextProps) {
+		const el = this.container;
+
+		console.log('scale');
+
+		let to = this.nextSlide(nextProps),
+			from = this.currentSlide();
+
+		console.log('from: ', from);
+		console.log('to: ', to);
+
+		if (!this.zoomsAreSame(from, to)) {
+			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top},
+					{width:to.width, left:to.left, top:to.top, ease:Elastic.easeOut});
+		}
 	},
 
 	// TODO: Refactor hardcoded zoom values when slideshow
 	// state machine is created
-	unZoomBubble: function() {
-		const el = this.container;
+	// zoomBubble: function() {
+	// 	const el = this.container;
 
-		this.props.unZoomBubble();
+	// 	this.props.zoomBubble(
+	// 		this.props.bubbleNumber,
+	// 		'2vw',
+	// 		'20vw',
+	// 		'96vw',
+	// 		10
+	// 	);
 
-		TweenMax.fromTo(el, 2, {width:'96vw', left:'2vw', top:'20vw', zIndex: 10},
-			{width:this.props.width, left:this.props.left, top:this.props.top, zIndex:2, ease:Elastic.easeIn});
-	},
+	// 	TweenMax.fromTo(el, 2, {width:this.props.width, left:this.props.left, top:this.props.top, zIndex:2},
+	// 		{width:'96vw', left:'2vw', top:'20vw', zIndex:10, ease:Elastic.easeOut});
+	// },
+
+	// TODO: Refactor hardcoded zoom values when slideshow
+	// state machine is created
+	// unZoomBubble: function() {
+	// 	const el = this.container;
+
+	// 	this.props.unZoomBubble();
+
+	// 	TweenMax.fromTo(el, 2, {width:'96vw', left:'2vw', top:'20vw', zIndex: 10},
+	// 		{width:this.props.width, left:this.props.left, top:this.props.top, zIndex:2, ease:Elastic.easeIn});
+	// },
 
 	render: function() {
-		let graphic = this.props.card.graphics[this.props.bubbleNumber],
-			zoom = this.props.slides.current === this.props.bubbleNumber ? this.props.bubbles.zoom : null;
+		let original = this.originalSlideState(),
+			isActive = this.props.slideShow && this.bubbleIsActive(this.props.bubbleNumber, this.currentSlide());
 
 		let divStyle = {
-			left: (zoom && zoom.left) || graphic.left,
+			left: (isActive && this.currentSlide().left) || original.left,
 			position: 'absolute',
-			top: (zoom && zoom.top) || graphic.top,
-			width: (zoom && zoom.width) || graphic.width,
-			zIndex: (zoom && zoom.zIndex) || graphic.zIndex
+			top: (isActive && this.currentSlide().top) || original.top,
+			width: (isActive && this.currentSlide().width) || original.width
 		};
 
 		let imgStyle = {
@@ -114,6 +207,7 @@ var BubbleStateless = React.createClass({
 				{ this.props.showOverlay &&
 					<AnimatedBubble
 						card={this.props.card}
+						slideshow={this.props.slideshow}
 						bubbles={this.props.bubbles}
 						active={this.props.active}
 						clickHandler={this.props.clickHandler}
@@ -128,9 +222,8 @@ var BubbleStateless = React.createClass({
 						spin={this.props.spin}
 						top={this.props.top}
 						width={this.props.width}
-						zoomBubble={this.props.zoomBubble}
-						unZoomBubble={this.props.unZoomBubble}
-						slides={this.props.slides} />
+						slides={this.props.slides}
+						/>
 				}
 			</TransitionGroup>
 		);
