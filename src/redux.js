@@ -344,6 +344,15 @@ export default (state = initialState, action) => {
 				}
 			};
 
+		case types.TOGGLE_OVERLAY_STATE:
+			return {
+				...state,
+				overlays: {
+					...state.overlays,
+					active: action.active
+				}
+			};
+
 		case types.NEXT_SLIDE:
 			isEnd = state.slides.current === state.slideshow.length-1;
 

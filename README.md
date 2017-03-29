@@ -103,6 +103,16 @@ I've brought in ReactTransitionGroup and GSAP ("the Swiss Army knife of animatio
     (2) Because ReactTransitionGroup relies upon the new lifecycle methods which it introduces to exist, in order for these animations to link to those particular hooks, it's necessary to move the SomeComponents we want to animate into their own AnimatedSomeComponents.
     (3) In the parent of AnimatedSomeComponent, SomeComponent, we must generate a ref attribute with `ref={c => this.container = c}` so that we can refer to the parent with `const el = this.container` inside of the child.
 
+A Note on Console Warnings:
+
+There is a line in `ReactTransitionGroup.js` which causes numerous console errors.  To resolve it, line 59 of that file has been changed to:
+
+    if (component && component.componentDidAppear) {
+
+... from ...
+
+      if (component.componentDidAppear) {
+
 ### Part 2 - The Usergrid Backend that Wasn't Meant to Be
 
 A more detailed explanation of this first attempt at setting up a backend is here:
