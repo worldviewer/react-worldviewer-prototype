@@ -52,15 +52,17 @@ See live mobile-friendly demo at https://worldviewer.github.io/react-worldviewer
 
 This project has been recently transitioned from Apigee / Usergrid to MongoDB / AWS Lambda / AWS S3.
 
-The bulk of the refactor into Redux is now complete.  A small amount of previous/next functionality was lost in the refactor (which I'll ignore since I'm about to completely refactor the slides).  I will take another look at the props and handler passing between components at a future date.
+It's also now fully transitioned into Redux with a slideshow that can accommodate both direct interaction with overlays (the bubbles), as well as next/previous handling.  Each overlay can now accommodate an adjustable number of slides.  Deactivating an active overlay advances the slideshow to the next overlay -- similar to the way in which chapters function for a book.
 
-What I am most focused on at the moment is a complete overhaul of the way I am handling slides.  What is coming is a a multi-level state machine encoded into Redux which can accommodate ...
+The next step is to populate this multi-level state machine encoded into Redux with the overlay zoom data ...
 
-- parameterized bubble zooms
+- parameterized overlay zooms (these are those bubbles)
 - chunked text explanations
 - audio narration
 - fullscreen quotes
 - footnotes
+
+By the end of this stage of the process, the meaning of the content will finally become clear.  That's when this will stop being just a strange toy, and start to exhibit the feel of an actual interactive infographic.
 
 ### Part 1: The Infographic Frontend
 

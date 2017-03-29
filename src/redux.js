@@ -4,10 +4,7 @@ const types = {
 	DISABLE_SPIN_BUBBLE_NUMBERS: 'DISABLE_SPIN_BUBBLE_NUMBERS',
 	SET_SPIN_BUBBLE_NUMBER_TIMEOUT: 'SET_SPIN_BUBBLE_NUMBER_TIMEOUT',
 	DEACTIVATE_BUBBLE: 'DEACTIVATE_BUBBLE',
-
 	CLICK_BUBBLE: 'CLICK_BUBBLE',
-	ZOOM_BUBBLE: 'ZOOM_BUBBLE',
-	UNZOOM_BUBBLE: 'UNZOOM_BUBBLE',
 
 	CLICK_ICON: 'CLICK_ICON',
 
@@ -15,7 +12,6 @@ const types = {
 
 	NEXT_SLIDE: 'NEXT_SLIDE',
 	PREV_SLIDE: 'PREV_SLIDE',
-	UPDATE_NEXT_PREV: 'UPDATE_NEXT_PREV',
 
 	FETCH_CARD_REQUEST: 'FETCH_CARD_REQUEST',
 	FETCH_CARD_ERROR: 'FETCH_CARD_ERROR',
@@ -54,16 +50,7 @@ const initialState = {
 		},
 		summary: '',
 		type: '',
-		graphics: [
-			// {
-			// 	source: '',
-			// 	left: '',
-			// 	top: '',
-			// 	width: '',
-			// 	numleft: '',
-			// 	numtop: ''
-			// }
-		]
+		graphics: []
 	},
 
 	urls: {
@@ -82,43 +69,14 @@ const initialState = {
 		current: 0,
 		previous: null, // This is necessary for TweenMax transitions
 		firsts: {},
-
-		active: false, // Refactor: This should be a number
+		active: false,
 		num: 0
 	},
 
-	slideshow: [
-		// {
-		// 	text: {
-		// 		unicode: "",				
-		// 	},
-		// 	bubble: {
-		// 		number: null,
-		// 		left: null,
-		// 		top: null,
-		// 		width: null
-		// 	},
-		// 	audio: null,
-		// 	quotes: {
-		// 		number: null,
-		// 		background: null,
-		// 		zoom: null,
-		// 		left: null,
-		// 		top: null,
-		// 		width: null,
-		// 		zIndex: null
-		// 	},
-		// 	footnotes: [
-		// 		{
-		// 			markup: ""
-		// 		}
-		// 	]
-		// }
-	],
+	slideshow: [],
 
-	// Refactor: Delete
 	bubbles: { 
-		display: Array.from({length:8}, el => false)
+		display: Array.from({length:8}, el => false) // Used on component mount
 	},
 
 	bubbleNumbers: {
@@ -212,23 +170,6 @@ export const clickBubble = (num) => {
 		type: types.CLICK_BUBBLE,
 		num
 	};
-};
-
-export const zoomBubble = (num, left, top, width, zIndex) => {
-	return {
-		type: types.ZOOM_BUBBLE,
-		num,
-		left,
-		top,
-		width,
-		zIndex
-	}
-};
-
-export const unZoomBubble = () => {
-	return {
-		type: types.UNZOOM_BUBBLE
-	}
 };
 
 export const toggleOverlayState = (zoom) => {
@@ -383,29 +324,6 @@ export default (state = initialState, action) => {
 					}
 				},
 				controls: controls
-			};
-
-		case types.ZOOM_BUBBLE:
-			return {
-				...state,
-				bubbles: {
-					...state.bubbles,
-					zoom: {
-						num: action.num,
-						left: action.left,
-						top: action.top,
-						width: action.width						
-					}
-				}
-			};
-
-		case types.UNZOOM_BUBBLE:
-			return {
-				...state,
-				bubbles: {
-					display: state.bubbles.display,
-					zoom: null
-				}
 			};
 
 		case types.DEACTIVATE_BUBBLE:

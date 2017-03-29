@@ -17,8 +17,6 @@ class ImageHelper {
             };
 
             if (image.complete) {
-                // image is loaded, go ahead and change the state
-
                 if(image.naturalWidth && image.naturalHeight) {
                     // successful load
                     handleSuccess();

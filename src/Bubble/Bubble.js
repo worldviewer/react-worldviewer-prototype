@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import BubbleStateless from './BubbleStateless';
-import { clickBubble, zoomBubble, unZoomBubble } from '../redux';
+import { clickBubble } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -18,13 +18,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
 		clickBubble: (num) => {
 			return dispatch(clickBubble(num));
-		},
-		zoomBubble: (num, left, top, width, zIndex) => {
-			console.log('zooming in bubble');
-			return dispatch(zoomBubble(num, left, top, width, zIndex));
-		},
-		unZoomBubble: () => {
-			return dispatch(unZoomBubble());
 		}
 	};
 };

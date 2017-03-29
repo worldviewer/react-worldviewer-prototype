@@ -1,10 +1,8 @@
 // Code comes from https://github.com/sambernard/react-preload
-// Code has been modified to retrieve assets via Usergrid. To do so,
-// ImageHelper and ImageCache have been refactored into classes.
+// Code has been modified in certain places.
 
 import { PropTypes, Component } from 'react';
 import ImageHelper from './ImageHelper';
-// import Backend from '../Backend/Backend';
 
 const propTypes = {
     // Rendered on success
@@ -67,13 +65,9 @@ class PreloadStateless extends Component {
     componentDidMount() {
         this._mounted = true;
 
-		// this.backend = new Backend();
-
         if (!this.state.ready) {
 			this.props.fetchCard(this.props.card.id, this.props.base.api + this.props.card.id)
 				.then(() => {
-                    console.log('fetchCard in Preload');
-
 					let card = this.props.card;
 
 					let urls = this.props.card.graphics.map(graphic =>
@@ -86,8 +80,6 @@ class PreloadStateless extends Component {
 						urls,
                         icon
 					});
-
-					// this.props.setSlideHandler(card);
 
 					this.imageHelper.loadImages(urls)
 		            	.then(this._handleSuccess, this._handleError);
