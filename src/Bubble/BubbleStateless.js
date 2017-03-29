@@ -1,7 +1,7 @@
 import React from 'react';
 import './Bubble.scss';
 import TransitionGroup from 'react-addons-transition-group';
-import { TweenMax, Bounce, Elastic } from 'gsap';
+import { TweenMax, Bounce, Elastic, Power0 } from 'gsap';
 import NumberBubble from '../NumberBubble/NumberBubble';
 
 var AnimatedBubble = React.createClass({
@@ -127,8 +127,8 @@ var AnimatedBubble = React.createClass({
 			from = this.currentSlide();
 
 		if (!this.zoomsAreSame(from, to)) {
-			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top},
-					{width:to.width, left:to.left, top:to.top, ease:Elastic.easeOut});
+			TweenMax.fromTo(el, 6, {width:from.width, left:from.left, top:from.top},
+					{width:to.width, left:to.left, top:to.top, ease:Power0.easeNone});
 		}
 	},
 
