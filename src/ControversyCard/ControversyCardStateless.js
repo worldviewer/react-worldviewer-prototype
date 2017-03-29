@@ -35,11 +35,19 @@ var ControversyCardStateless = React.createClass({
 		});
 	},
 
-	handleBubbleClick: function(index) {
-		if (index !== this.props.slides.current) {
-			this.props.clickBubble(index);
-		} else {
-			this.props.toggleOverlayActive();
+	currentSlide: function() {
+		return this.props.slideshow[this.props.slides.current].bubble;
+	},
+
+	nextSlide: function(nextProps) {
+		return nextProps.slideshow[nextProps.slides.current].bubble;
+	},
+
+	handleBubbleClick: function(bubbleNumber) {
+		if (this.currentSlide() && bubbleNumber === this.currentSlide().number) {
+			this.props.deactivateBubble();
+		} else if (!this.currentSlide() || bubbleNumber !== this.currentSlide().number) {
+			this.props.clickBubble(bubbleNumber);
 		}
 	},
 
@@ -48,12 +56,13 @@ var ControversyCardStateless = React.createClass({
 		this.spinBubbleNumbers();		
 	},
 
+	// When active bubble is clicked, deactivate
 	componentWillReceiveProps: function(nextProps) {
-		if (this.props.slides.current !== nextProps.slides.current) {
-			console.log('this.props.slides.current: ', this.props.slides.current);
-			console.log('nextProps.slides.current: ', nextProps.slides.current);
-
-			this.handleBubbleClick(nextProps.slides.current);
+		if (this.props.slides.current !== nextProps.slides.current &&
+			this.props.slides.active && !nextProps.slides.active) {
+			if (!this.nextSlide(nextProps)) {
+				this.props.deactivateBubble();
+			}
 		}
 	},
 

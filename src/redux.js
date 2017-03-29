@@ -3,6 +3,7 @@ const types = {
 	SPIN_BUBBLE_NUMBER: 'SPIN_BUBBLE_NUMBER',
 	DISABLE_SPIN_BUBBLE_NUMBERS: 'DISABLE_SPIN_BUBBLE_NUMBERS',
 	SET_SPIN_BUBBLE_NUMBER_TIMEOUT: 'SET_SPIN_BUBBLE_NUMBER_TIMEOUT',
+	DEACTIVATE_BUBBLE: 'DEACTIVATE_BUBBLE',
 
 	CLICK_BUBBLE: 'CLICK_BUBBLE',
 	ZOOM_BUBBLE: 'ZOOM_BUBBLE',
@@ -11,7 +12,6 @@ const types = {
 	CLICK_ICON: 'CLICK_ICON',
 
 	TOGGLE_OVERLAY_STATE: 'TOGGLE_OVERLAY_STATE',
-	TOGGLE_OVERLAY_ACTIVE: 'TOGGLE_OVERLAY_ACTIVE',
 
 	NEXT_SLIDE: 'NEXT_SLIDE',
 	PREV_SLIDE: 'PREV_SLIDE',
@@ -81,6 +81,7 @@ const initialState = {
 	slides: {
 		current: 0,
 		previous: null, // This is necessary for TweenMax transitions
+		firsts: {},
 
 		active: false, // Refactor: This should be a number
 		num: 0
@@ -249,14 +250,16 @@ export const prevSlide = () => {
 	}
 };
 
-export const toggleOverlayActive = () => {
+export const deactivateBubble = () => {
 	return {
-		type: types.TOGGLE_OVERLAY_ACTIVE
+		type: types.DEACTIVATE_BUBBLE
 	}
 };
 
 export default (state = initialState, action) => {
-	let controls;
+	let controls,
+		isEnd,
+		isBeginning;
 
 	switch(action.type) {
 		case types.SHOW_BUBBLE:
@@ -314,6 +317,23 @@ export default (state = initialState, action) => {
 			return state;
 
 		case types.FETCH_CARD_SUCCESS:
+			let firsts = {},
+				curBubbleNum,
+				prevBubbleNum,
+				curSlide,
+				prevSlide;
+
+			for (var i=1; i<action.slideshow.length; i++) {
+				curSlide = action.slideshow[i].bubble;
+				prevSlide = action.slideshow[i-1].bubble;
+				curBubbleNum = curSlide ? curSlide.number : null;
+				prevBubbleNum = prevSlide ? prevSlide.number : null;
+
+				if (curBubbleNum !== null && prevBubbleNum === null) {
+					firsts[curBubbleNum] = i;
+				}
+			}
+
 			return {
 				...state, 
 				card: {
@@ -323,17 +343,46 @@ export default (state = initialState, action) => {
 				slideshow: action.slideshow,
 				slides: {
 					...state.slides,
-					num: action.slideshow.length
+					num: action.slideshow.length,
+					firsts: firsts
 				}
 			};
 
 		case types.CLICK_BUBBLE:
+			let current = state.slides.firsts[action.num];
+
+			isEnd = current === state.slideshow.length-1;
+			isBeginning = current === 0;
+
+			if (isEnd) {
+				controls = {
+					next: false,
+					prev: true					
+				};
+			} else if (isBeginning) {
+				controls = {
+					next: true,
+					prev: false
+				};
+			} else {
+				controls = {
+					next: true,
+					prev: true
+				};
+			}
+
 			return {
 				...state,
 				slides: {
 					...state.slides,
-					current: action.num
-				}
+					active: !state.slides.active,
+					current: state.slides.firsts[action.num],
+					previous: {
+						...state.slideshow[state.slides.current].bubble || null,
+						num: state.slides.current
+					}
+				},
+				controls: controls
 			};
 
 		case types.ZOOM_BUBBLE:
@@ -359,26 +408,26 @@ export default (state = initialState, action) => {
 				}
 			};
 
-		case types.TOGGLE_OVERLAY_STATE:
-			return {
-				...state,
-				overlays: {
-					...state.overlays,
-					active: action.active				
-				}
-			};
+		case types.DEACTIVATE_BUBBLE:
+			// If the user has deactivated the slide, then advance current to next bubble
+			let jump = state.slides.current,
+				firstSlides = Object.values(state.slides.firsts);
 
-		case types.TOGGLE_OVERLAY_ACTIVE:
+			while (!firstSlides.includes(jump) && jump < state.slides.num) {
+				++jump
+			}
+
 			return {
 				...state,
 				slides: {
 					...state.slides,
-					active: !state.slides.active
+					current: jump-1,
+					active: false
 				}
 			};
 
 		case types.NEXT_SLIDE:
-			let isEnd = state.slides.current === state.slideshow.length-1;
+			isEnd = state.slides.current === state.slideshow.length-1;
 
 			let next = isEnd ?
 				state.slides.current :
@@ -398,6 +447,7 @@ export default (state = initialState, action) => {
 				...state,
 				slides: {
 					...state.slides,
+					active: true,
 					current: next,
 					previous: {
 						...state.slideshow[state.slides.current].bubble || null,
@@ -408,7 +458,7 @@ export default (state = initialState, action) => {
 			};
 
 		case types.PREV_SLIDE:
-			let isBeginning = state.slides.current === 0;
+			isBeginning = state.slides.current === 0;
 
 			let previous = isBeginning ?
 				0 :
@@ -428,6 +478,7 @@ export default (state = initialState, action) => {
 				...state,
 				slides: {
 					...state.slides,
+					active: true,
 					current: previous,
 					previous: {
 						...state.slideshow[state.slides.current].bubble || null,

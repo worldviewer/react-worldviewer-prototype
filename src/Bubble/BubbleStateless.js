@@ -43,7 +43,7 @@ var AnimatedBubble = React.createClass({
 	},
 
 	bubbleIsActive: function(bubbleNumber, slide) {
-		return bubbleNumber === slide.number;
+		return slide && (bubbleNumber === slide.number);
 	},
 
 	zoomsAreSame: function(from, to) {
@@ -60,7 +60,18 @@ var AnimatedBubble = React.createClass({
 	componentWillReceiveProps: function(nextProps) {
 		let num, slide;
 
-		if (this.props.slides.current !== nextProps.slides.current) {
+		if (this.props.slides.active && !nextProps.slides.active) { // direct click unzoom
+			num = this.props.bubbleNumber;
+			slide = this.currentSlide();
+			this.bubbleIsActive(num, slide) && this.unzoom();
+
+		} else if (!this.props.slides.active && nextProps.slides.active) { // direct click zoom
+			num = nextProps.bubbleNumber;
+			slide = this.nextSlide(nextProps);
+			this.bubbleIsActive(num, slide) && this.zoom(nextProps);
+
+		} else if (this.props.slides.current !== nextProps.slides.current) {
+
 			if (!this.currentSlide()) { // from unzoomed
 				num = nextProps.bubbleNumber;
 				slide = this.nextSlide(nextProps);
@@ -79,21 +90,16 @@ var AnimatedBubble = React.createClass({
 		}
 	},
 
-	getComponent: function(index) {
-		this.props.clickHandler(index);
+	getComponent: function(bubbleNumber) {
+		this.props.clickHandler(bubbleNumber);
 	},
 
 	zoom: function(nextProps) {
 		const el = this.container;
 
-		console.log('zoom');
-
 		let { left, top, width } = this.originalSlideState(),
 			from = { left:left, top:top, width:width },
 			to = this.nextSlide(nextProps);
-
-		console.log('from: ', from);
-		console.log('to: ', to);
 
 		if (!this.zoomsAreSame(from, to)) {
 			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:2},
@@ -104,14 +110,9 @@ var AnimatedBubble = React.createClass({
 	unzoom: function() {
 		const el = this.container;
 
-		console.log('unzoom');
-
 		let { left, top, width } = this.originalSlideState(),
 			to = { left:left, top:top, width:width },
 			from = this.currentSlide();
-
-		console.log('from: ', from);
-		console.log('to: ', to);
 
 		if (!this.zoomsAreSame(from, to)) {
 			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:10},
@@ -122,47 +123,14 @@ var AnimatedBubble = React.createClass({
 	scale: function(nextProps) {
 		const el = this.container;
 
-		console.log('scale');
-
 		let to = this.nextSlide(nextProps),
 			from = this.currentSlide();
-
-		console.log('from: ', from);
-		console.log('to: ', to);
 
 		if (!this.zoomsAreSame(from, to)) {
 			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top},
 					{width:to.width, left:to.left, top:to.top, ease:Elastic.easeOut});
 		}
 	},
-
-	// TODO: Refactor hardcoded zoom values when slideshow
-	// state machine is created
-	// zoomBubble: function() {
-	// 	const el = this.container;
-
-	// 	this.props.zoomBubble(
-	// 		this.props.bubbleNumber,
-	// 		'2vw',
-	// 		'20vw',
-	// 		'96vw',
-	// 		10
-	// 	);
-
-	// 	TweenMax.fromTo(el, 2, {width:this.props.width, left:this.props.left, top:this.props.top, zIndex:2},
-	// 		{width:'96vw', left:'2vw', top:'20vw', zIndex:10, ease:Elastic.easeOut});
-	// },
-
-	// TODO: Refactor hardcoded zoom values when slideshow
-	// state machine is created
-	// unZoomBubble: function() {
-	// 	const el = this.container;
-
-	// 	this.props.unZoomBubble();
-
-	// 	TweenMax.fromTo(el, 2, {width:'96vw', left:'2vw', top:'20vw', zIndex: 10},
-	// 		{width:this.props.width, left:this.props.left, top:this.props.top, zIndex:2, ease:Elastic.easeIn});
-	// },
 
 	render: function() {
 		let original = this.originalSlideState(),
@@ -210,6 +178,7 @@ var BubbleStateless = React.createClass({
 						slideshow={this.props.slideshow}
 						bubbles={this.props.bubbles}
 						active={this.props.active}
+						clickBubble={this.props.clickBubble}
 						clickHandler={this.props.clickHandler}
 						enterHandler={this.props.enterHandler}
 						key={this.props.bubbleNumber}
