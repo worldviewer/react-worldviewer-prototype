@@ -1,18 +1,18 @@
 import React from 'react';
-import Bubble from '../Bubble/Bubble';
-import Icon from '../Icon/Icon';
+import Bubble from '../Bubble/Bubble.jsx';
+import Icon from '../Icon/Icon.jsx';
 import './ControversyCard.scss';
-import DeepZoom from '../DeepZoom/DeepZoom';
-import Title from '../Title/Title';
-import Summary from '../Summary/Summary';
+import DeepZoom from '../DeepZoom/DeepZoom.jsx';
+import Title from '../Title/Title.jsx';
+import Summary from '../Summary/Summary.jsx';
 
-var ControversyCardStateless = React.createClass({
+const ControversyCardStateless = React.createClass({
 	spinBubbleNumbers: function() {
 		this.props.disableSpinBubbleNumbers();
 
 		setTimeout(() => {
 			this.props.bubbleNumbers.active.forEach((el, num) => {
-				let newTimeout = setTimeout(() => {
+				const newTimeout = setTimeout(() => {
 					this.props.spinBubbleNumber(num);
 				}, (num+1)*1000);
 
@@ -95,11 +95,11 @@ var ControversyCardStateless = React.createClass({
 				</Summary>
 
 				{ this.props.card.graphics.map((graphic, i) => {
-					let slide = this.props.slideshow ?
-						this.props.slideshow[this.props.slides.current].bubble :
+					const slide = this.props.slideshow ?
+						this.currentSlide() :
 						null;
 
-					let { top, left, width } = slide ?
+					const { top, left, width } = slide ?
 						slide :
 						graphic;
 

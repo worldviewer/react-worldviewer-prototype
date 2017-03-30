@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import DeepZoomStateless from './DeepZoomStateless';
+import DeepZoomStateless from './DeepZoomStateless.jsx';
 import { toggleOverlayState } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {

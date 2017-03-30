@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import IconStateless from './IconStateless';
+import IconStateless from './IconStateless.jsx';
 import clickOverlay from '../redux';
 
 const mapStateToProps = (state, ownProps) => {

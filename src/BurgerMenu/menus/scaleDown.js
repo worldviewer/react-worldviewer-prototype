@@ -1,4 +1,4 @@
-import menuFactory from '../menuFactory';
+import menuFactory from '../menuFactory.jsx';
 
 const styles = {
 

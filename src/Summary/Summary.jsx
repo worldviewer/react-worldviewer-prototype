@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SummaryStateless from './SummaryStateless';
+import SummaryStateless from './SummaryStateless.jsx';
 import clickSummary from '../redux';
 
 const mapStateToProps = (state, ownProps) => {

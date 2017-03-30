@@ -153,7 +153,7 @@ export const fetchCardSuccess = (data) => {
 	card.text = data['text']['unicode'];
 	card.url = data['gplus']['url'];
 
-	let slideshow = data['graphic']['slideshow'];
+	const slideshow = data['graphic']['slideshow'];
 
 	return {
 		type: types.FETCH_CARD_SUCCESS,
@@ -166,13 +166,12 @@ export function fetchCard(id, url) {
 	return dispatch => {
 		dispatch(fetchCardRequest(id));
 
-		let cardRequest = new Request(url);
+		const cardRequest = new Request(url);
 
 		return fetch(cardRequest)
 			.then(response => response.json())
 			.then(json => {
-				console.log('thunk result:');
-				console.log(json);
+				console.log('thunk result: ', json);
 				dispatch(fetchCardSuccess(json['body'][0]));
 			})
 			.catch(error => {
@@ -256,7 +255,8 @@ export default (state = initialState, action) => {
 			};
 
 		case types.DISABLE_SPIN_BUBBLE_NUMBERS:
-			let noSpin = Array.from({length:8}, el => false),
+			const
+				noSpin = Array.from({length:8}, el => false),
 				noSpinTimeouts = Array.from({length:8}, el => 0);
 
 			return {
@@ -318,7 +318,7 @@ export default (state = initialState, action) => {
 			};
 
 		case types.CLICK_BUBBLE:
-			let current = state.slides.firsts[action.num];
+			const current = state.slides.firsts[action.num];
 
 			isEnd = current === state.slideshow.length-1;
 			isBeginning = current === 0;
@@ -356,8 +356,8 @@ export default (state = initialState, action) => {
 
 		case types.DEACTIVATE_BUBBLE:
 			// If the user has deactivated the slide, then advance current to next bubble
-			let jump = state.slides.current,
-				firstSlides = Object.values(state.slides.firsts);
+			let jump = state.slides.current
+			const firstSlides = Object.values(state.slides.firsts);
 
 			while (!firstSlides.includes(jump) && jump < state.slides.num) {
 				++jump
@@ -402,7 +402,8 @@ export default (state = initialState, action) => {
 		case types.NEXT_SLIDE:
 			isEnd = state.slides.current === state.slideshow.length-1;
 
-			let next = isEnd ?
+			const
+				next = isEnd ?
 				state.slides.current :
 				state.slides.current+1;
 
@@ -433,8 +434,8 @@ export default (state = initialState, action) => {
 		case types.PREV_SLIDE:
 			isBeginning = state.slides.current === 0;
 
-			let previous = isBeginning ?
-				0 :
+			const
+				previous = isBeginning ? 0 :
 				state.slides.current-1;
 
 			controls = isBeginning ?

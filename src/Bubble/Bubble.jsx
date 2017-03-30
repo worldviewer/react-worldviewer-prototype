@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import BubbleStateless from './BubbleStateless';
+import BubbleStateless from './BubbleStateless.jsx';
 import { clickBubble } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {

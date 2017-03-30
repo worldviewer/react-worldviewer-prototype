@@ -2,9 +2,9 @@ import React from 'react';
 import './Bubble.scss';
 import TransitionGroup from 'react-addons-transition-group';
 import { TweenMax, Bounce, Elastic, Power0 } from 'gsap';
-import NumberBubble from '../NumberBubble/NumberBubble';
+import NumberBubble from '../NumberBubble/NumberBubble.jsx';
 
-var AnimatedBubble = React.createClass({
+const AnimatedBubble = React.createClass({
 	componentWillAppear: function(callback) {
 		const el = this.container;
 		TweenMax.fromTo(el, 2, {scale:0, opacity:0}, {scale:1, opacity:1, ease:Bounce.easeOut, onComplete: callback});
@@ -97,7 +97,7 @@ var AnimatedBubble = React.createClass({
 	zoom: function(nextProps) {
 		const el = this.container;
 
-		let { left, top, width } = this.originalSlideState(),
+		const { left, top, width } = this.originalSlideState(),
 			from = { left:left, top:top, width:width },
 			to = this.nextSlide(nextProps);
 
@@ -110,7 +110,7 @@ var AnimatedBubble = React.createClass({
 	unzoom: function() {
 		const el = this.container;
 
-		let { left, top, width } = this.originalSlideState(),
+		const { left, top, width } = this.originalSlideState(),
 			to = { left:left, top:top, width:width },
 			from = this.currentSlide();
 
@@ -123,7 +123,7 @@ var AnimatedBubble = React.createClass({
 	scale: function(nextProps) {
 		const el = this.container;
 
-		let to = this.nextSlide(nextProps),
+		const to = this.nextSlide(nextProps),
 			from = this.currentSlide();
 
 		if (!this.zoomsAreSame(from, to)) {
@@ -133,17 +133,17 @@ var AnimatedBubble = React.createClass({
 	},
 
 	render: function() {
-		let original = this.originalSlideState(),
+		const original = this.originalSlideState(),
 			isActive = this.props.slideShow && this.bubbleIsActive(this.props.bubbleNumber, this.currentSlide());
 
-		let divStyle = {
+		const divStyle = {
 			left: (isActive && this.currentSlide().left) || original.left,
 			position: 'absolute',
 			top: (isActive && this.currentSlide().top) || original.top,
 			width: (isActive && this.currentSlide().width) || original.width
 		};
 
-		let imgStyle = {
+		const imgStyle = {
 			width: '100%'
 		};
 
@@ -168,7 +168,7 @@ var AnimatedBubble = React.createClass({
 	}
 });
 
-var BubbleStateless = React.createClass({
+const BubbleStateless = React.createClass({
 	render: function() {
 		return (
 			<TransitionGroup component="div">

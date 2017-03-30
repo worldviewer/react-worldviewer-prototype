@@ -2,7 +2,7 @@ import React from 'react';
 import TransitionGroup from 'react-addons-transition-group';
 import { TweenMax, Bounce } from 'gsap';
 
-var AnimatedNumberBubble = React.createClass({
+const AnimatedNumberBubble = React.createClass({
 	spinBubble: function() {
 		const el = this.container;
 		TweenMax.fromTo(el, 0.5, {rotationY:0}, {rotationY:360});
@@ -31,7 +31,7 @@ var AnimatedNumberBubble = React.createClass({
 
 	render: function() {
 		// Corrects an issue with creating circles w/ border-radius on mobile devices
-		let roundedBorderStyle = {
+		const roundedBorderStyle = {
 			backgroundColor: '#edf5f1',
 			border: '.5vw solid #edf5f1',
 			borderRadius: '50%',
@@ -42,7 +42,7 @@ var AnimatedNumberBubble = React.createClass({
 			width: '2vw'
 		}
 
-		let bubbleNumberStyle = {
+		const bubbleNumberStyle = {
 			backgroundColor: '#edf5f1',
 			borderRadius: '50%',
 			height: '2vw',
@@ -66,7 +66,7 @@ var AnimatedNumberBubble = React.createClass({
 	}
 });
 
-var NumberBubbleStateless = React.createClass({
+const NumberBubbleStateless = React.createClass({
 	render: function() {
 		return (
 			<TransitionGroup component="div">

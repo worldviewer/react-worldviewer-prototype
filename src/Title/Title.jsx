@@ -6,7 +6,7 @@ import { TweenMax, Power1 } from 'gsap';
 // Permits HTML markup encoding in Title
 import { Parser as HtmlToReactParser } from 'html-to-react';
 
-var AnimatedTitle = React.createClass({
+const AnimatedTitle = React.createClass({
 	componentWillAppear: function(callback) {
 		const el = this.container;
 
@@ -50,7 +50,7 @@ var AnimatedTitle = React.createClass({
 	},
 
 	render: function() {
-		let htmlToReactParser = new HtmlToReactParser();
+		let h = new HtmlToReactParser();
 
 		let cssStyles =
 			this.props.position === "Right" ? 
@@ -66,18 +66,18 @@ var AnimatedTitle = React.createClass({
 			}
 
 		return (
-			<p
-				className={"Title " + this.props.position}
+			<p className={"Title " + this.props.position}
 				ref={c => this.container = c}
-				style={cssStyles}
-			>
-				{htmlToReactParser.parse(this.props.children)}
+				style={cssStyles}>
+
+				{h.parse(this.props.children)}
+
 			</p>
 		)
 	}
 });
 
-var Title = React.createClass({
+const Title = React.createClass({
 	render: function() {
 		return (
 			<TransitionGroup component="div">

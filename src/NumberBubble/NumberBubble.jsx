@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import NumberBubbleStateless from './NumberBubbleStateless';
+import NumberBubbleStateless from './NumberBubbleStateless.jsx';
 import clickOverlay from '../redux';
 
 const mapStateToProps = (state, ownProps) => {

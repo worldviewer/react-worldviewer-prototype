@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError } from '../redux';
-import PreloadStateless from './PreloadStateless';
+import PreloadStateless from './PreloadStateless.jsx';
 
 const mapStateToProps = (state, ownProps) => {
 	return {

@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import ControversyCardStateless from './ControversyCardStateless';
-import { showBubble, spinBubbleNumber, disableSpinBubbleNumbers, setSpinBubbleNumberTimeout, deactivateBubble, clickBubble, clickSummary } from '../redux';
+import ControversyCardStateless from './ControversyCardStateless.jsx';
+import { showBubble, spinBubbleNumber, disableSpinBubbleNumbers,
+	setSpinBubbleNumberTimeout, deactivateBubble, clickBubble,
+	clickSummary } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {

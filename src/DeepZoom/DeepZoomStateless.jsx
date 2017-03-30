@@ -40,7 +40,7 @@ const DeepZoomStateless = React.createClass({
 			}
 		});
 
-		let resize = () => this.setupResizeHandler();
+		const resize = () => this.setupResizeHandler();
 
 		window.addEventListener('resize', resize);
 		this.setupZoomHandler(this.viewer);
@@ -54,7 +54,8 @@ const DeepZoomStateless = React.createClass({
 	},
 
 	setupResizeHandler: function() {
-		let width = this.refs.clientWidth,
+		const
+			width = this.refs.clientWidth,
 			height = parseInt(width, 10)*1.4;
 
 		this.setState({

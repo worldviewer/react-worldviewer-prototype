@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Radium from 'radium';
 import baseStyles from './baseStyles';
-import BurgerIcon from './BurgerIcon';
-import CrossIcon from './CrossIcon';
+import BurgerIcon from './BurgerIcon.jsx';
+import CrossIcon from './CrossIcon.jsx';
 
 export default (styles) => {
 

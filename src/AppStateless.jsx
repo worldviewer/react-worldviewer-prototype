@@ -1,18 +1,17 @@
 import React from 'react';
 import './App.scss';
-import ControversyCard from './ControversyCard/ControversyCard';
+import ControversyCard from './ControversyCard/ControversyCard.jsx';
 import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 import './mobiscroll/mobiscroll-prevnext.scss';
-import Spinner from './Spinner/Spinner';
-import Preload from './Preload/Preload';
-// import { StickyContainer, Sticky } from 'react-sticky';
+import Spinner from './Spinner/Spinner.jsx';
+import Preload from './Preload/Preload.jsx';
 
-var Menu = require('./BurgerMenu/menus/scaleDown').default;
+const Menu = require('./BurgerMenu/menus/scaleDown').default;
 
 // Permits HTML markup encoding in controversy card text
 import { Parser as HtmlToReactParser } from 'html-to-react';
 
-var AppStateless = React.createClass({
+const AppStateless = React.createClass({
 	componentDidMount: function() {
 	},
 
@@ -36,21 +35,23 @@ var AppStateless = React.createClass({
 	},
 
 	render: function() {
-		let h = new HtmlToReactParser();
-
-		let prevNextStyle = {
-			display: this.props.overlays.active ? 'block' : 'none'
-		}
-
-		let loadSpinner = (<Spinner />),
+		const
+			h = new HtmlToReactParser(),
+			loadSpinner = (<Spinner />),
 			isFirstPage = this.props.slides.current === 0,
 			currentSlide = this.props.slideshow[this.props.slides.current] || 0,
-			isText = this.props.slideshow &&
+
+			hasText = this.props.slideshow &&
 				currentSlide &&
 				currentSlide.text,
-			showBurger = !this.props.overlays.active || (!isFirstPage && isText) ?
+
+			showBurger = !this.props.overlays.active || (!isFirstPage && hasText) ?
 				true :
-				false;
+				false,
+
+			prevNextStyle = {
+				display: this.props.overlays.active ? 'block' : 'none'
+			}
 
 		return (
 			<div className="App" id="outer-container">
@@ -64,7 +65,7 @@ var AppStateless = React.createClass({
 
 					{isFirstPage ?
 						h.parse(this.props.card.text) :
-						isText &&
+						hasText &&
 						h.parse(currentSlide.text.unicode)}
 
 					<hr className="footnotes-line" />
