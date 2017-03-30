@@ -5,16 +5,18 @@ const BurgerIcon = Radium(React.createClass({
 
   propTypes: {
     customIcon: React.PropTypes.element,
-    styles: React.PropTypes.object
+    styles: React.PropTypes.object,
+    burgerToggle: React.PropTypes.bool
   },
 
   getLineStyle(index) {
     return {
       position: 'absolute',
-      height: '20%',
-      left: 0,
-      right: 0,
-      top: 20 * (index * 2) + '%',
+      height: '5%',
+      width: '40%',
+      left: 20,
+      right: 20,
+      top: 10 * (index * 2) + '%',
       opacity: this.state.hover ? 0.6 : 1
     };
   },
@@ -34,6 +36,8 @@ const BurgerIcon = Radium(React.createClass({
   },
 
   render() {
+    console.log(this.props.burgerToggle);
+
     let icon;
     let buttonStyle = {
       position: 'absolute',
@@ -48,6 +52,19 @@ const BurgerIcon = Radium(React.createClass({
       fontSize: 8
     };
 
+    let burgerBoxStyle = {
+      width: '70px',
+      height: '35px',
+      background: 'rgba(0, 0, 0, 0.5)',
+      display: this.props.burgerToggle ? 'block' : 'none'
+    };
+
+    let barsStyle = {
+      top: '9px',
+      height: '100%',
+      position: 'relative'
+    };
+
     if (this.props.customIcon) {
       let extraProps = {
         className: 'bm-icon',
@@ -56,16 +73,16 @@ const BurgerIcon = Radium(React.createClass({
       icon = React.cloneElement(this.props.customIcon, extraProps);
     } else {
       icon = (
-        <span>
+        <div style={barsStyle}>
           <span className="bm-burger-bars" style={[this.getLineStyle(0), this.props.styles.bmBurgerBars]} />
           <span className="bm-burger-bars" style={[this.getLineStyle(1), this.props.styles.bmBurgerBars]} />
           <span className="bm-burger-bars" style={[this.getLineStyle(2), this.props.styles.bmBurgerBars]} />
-        </span>
+        </div>
       );
     }
 
     return (
-      <div className="bm-burger-button" style={[{zIndex: 1}, this.props.styles.bmBurgerButton]}>
+      <div className="bm-burger-button" style={[{zIndex: 1}, this.props.styles.bmBurgerButton, burgerBoxStyle]}>
         {icon}
         <button onClick={this.props.onClick}
           onMouseEnter={this.handleHover}

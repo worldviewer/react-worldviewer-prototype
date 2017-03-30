@@ -21,7 +21,8 @@ export default (styles) => {
       pageWrapId: styles && styles.pageWrap ? React.PropTypes.string.isRequired : React.PropTypes.string,
       right: React.PropTypes.bool,
       styles: React.PropTypes.object,
-      width: React.PropTypes.number
+      width: React.PropTypes.string,
+      burgerToggle: React.PropTypes.bool
     },
 
     toggleMenu() {
@@ -217,7 +218,7 @@ export default (styles) => {
             ) : null}
           </div>
           {this.props.customBurgerIcon !== false ? (
-            <BurgerIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customBurgerIcon} />
+            <BurgerIcon burgerToggle={this.props.burgerToggle} onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customBurgerIcon} />
           ) : null}
         </div>
       );

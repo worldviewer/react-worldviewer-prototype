@@ -48,10 +48,10 @@ var AppStateless = React.createClass({
 
 				<Menu pageWrapId="page-wrap"
 					outerContainerId="outer-container"
-					customBurgerIcon={false}
 					isOpen={this.props.menu.open}
-					width={'50vw'}
-					onStateChange={this.isMenuOpen}>
+					width={'75vw'}
+					onStateChange={this.isMenuOpen}
+					burgerToggle={!this.props.overlays.active}>
 
 					{htmlToReactParser.parse(this.props.card.text)}
 
