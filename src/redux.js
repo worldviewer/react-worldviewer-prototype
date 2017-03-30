@@ -1,3 +1,4 @@
+// ES7 shim for Object.values
 import values from 'object.values';
 
 if (!Object.values) {

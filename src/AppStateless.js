@@ -5,7 +5,8 @@ import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner';
 import Preload from './Preload/Preload';
-import { scaleDown as Menu } from 'react-burger-menu';
+
+var Menu = require('./BurgerMenu/menus/scaleDown').default;
 
 // Permits HTML markup encoding in Title
 import { Parser as HtmlToReactParser } from 'html-to-react';
@@ -49,12 +50,10 @@ var AppStateless = React.createClass({
 					outerContainerId="outer-container"
 					customBurgerIcon={false}
 					isOpen={this.props.menu.open}
-					width={300}
+					width={'50vw'}
 					onStateChange={this.isMenuOpen}>
 
-					<a id="home" className="menu-item" href={this.props.card.url} target="_blank">
-						{htmlToReactParser.parse(this.props.card.text)}</a>
-					<a onClick={this.showSettings} className="menu-item--small" href="">Settings</a>
+					{htmlToReactParser.parse(this.props.card.text)}
 
 				</Menu>
 
