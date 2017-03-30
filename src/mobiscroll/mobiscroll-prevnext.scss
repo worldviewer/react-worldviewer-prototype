@@ -15,9 +15,14 @@
     color: #fff;
     cursor: pointer;
     z-index: 100;
+    opacity: 1;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+}
+
+.mbsc-ic-arrow-right5:hover::before {
+    opacity: 0.6;
 }
 
 .md-n {
