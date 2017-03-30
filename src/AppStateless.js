@@ -43,7 +43,7 @@ var AppStateless = React.createClass({
 					outerContainerId="outer-container"
 					customBurgerIcon={false}
 					isOpen={this.props.menu.open}
-					width={500}>
+					width={300}>
 
 					<a id="home" className="menu-item" href="/">{htmlToReactParser.parse(this.props.card.text)}</a>
 					<a onClick={this.showSettings} className="menu-item--small" href="">Settings</a>
