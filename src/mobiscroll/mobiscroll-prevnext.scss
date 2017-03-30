@@ -21,7 +21,8 @@
     -ms-user-select: none;
 }
 
-.mbsc-ic-arrow-right5:hover::before {
+.mbsc-ic-arrow-right5:hover::before,
+.mbsc-ic-arrow-left5:hover::before {
     opacity: 0.6;
 }
 

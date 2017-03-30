@@ -5,10 +5,11 @@ import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner';
 import Preload from './Preload/Preload';
+import { StickyContainer, Sticky } from 'react-sticky';
 
 var Menu = require('./BurgerMenu/menus/scaleDown').default;
 
-// Permits HTML markup encoding in Title
+// Permits HTML markup encoding in controversy card text
 import { Parser as HtmlToReactParser } from 'html-to-react';
 
 var AppStateless = React.createClass({
@@ -49,11 +50,13 @@ var AppStateless = React.createClass({
 				<Menu pageWrapId="page-wrap"
 					outerContainerId="outer-container"
 					isOpen={this.props.menu.open}
-					width={'75vw'}
+					width='75vw'
 					onStateChange={this.isMenuOpen}
 					burgerToggle={!this.props.overlays.active}>
 
-					{htmlToReactParser.parse(this.props.card.text)}
+					<StickyContainer>
+						{htmlToReactParser.parse(this.props.card.text)}
+					</StickyContainer>
 
 				</Menu>
 

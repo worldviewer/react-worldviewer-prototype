@@ -36,8 +36,6 @@ const BurgerIcon = Radium(React.createClass({
   },
 
   render() {
-    console.log(this.props.burgerToggle);
-
     let icon;
     let buttonStyle = {
       position: 'absolute',
