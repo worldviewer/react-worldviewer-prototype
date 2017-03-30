@@ -8,6 +8,7 @@ const types = {
 
 	CLICK_ICON: 'CLICK_ICON',
 	CLICK_SUMMARY: 'CLICK_SUMMARY',
+	CLOSE_MENU: 'CLOSE_MENU',
 
 	TOGGLE_OVERLAY_STATE: 'TOGGLE_OVERLAY_STATE',
 
@@ -37,6 +38,7 @@ const initialState = {
 
 	card: {
 		id: '58b8f1f7b2ef4ddae2fb8b17',
+		url: '',
 		icon: {
 			source: '',
 			left: '',
@@ -142,6 +144,7 @@ export const fetchCardSuccess = (data) => {
 	card.icon = data['graphic']['icon'];
 	card.graphics = data['graphic']['overlays']['assets'];
 	card.text = data['text']['unicode'];
+	card.url = data['gplus']['url'];
 
 	let slideshow = data['graphic']['slideshow'];
 
@@ -181,6 +184,12 @@ export const clickBubble = (num) => {
 export const clickSummary = () => {
 	return {
 		type: types.CLICK_SUMMARY
+	}
+}
+
+export const closeMenu = () => {
+	return {
+		type: types.CLOSE_MENU
 	}
 }
 
@@ -362,6 +371,15 @@ export default (state = initialState, action) => {
 				menu: {
 					...state.menu,
 					open: true
+				}
+			};
+
+		case types.CLOSE_MENU:
+			return {
+				...state,
+				menu: {
+					...state.menu,
+					open: false
 				}
 			};
 

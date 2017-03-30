@@ -27,6 +27,12 @@ var AppStateless = React.createClass({
 		event.preventDefault();
 	},
 
+	isMenuOpen: function(state) {
+		if (!state.isOpen) {
+			this.props.closeMenu();
+		}
+	},
+
 	render: function() {
 		let htmlToReactParser = new HtmlToReactParser();
 
@@ -43,9 +49,11 @@ var AppStateless = React.createClass({
 					outerContainerId="outer-container"
 					customBurgerIcon={false}
 					isOpen={this.props.menu.open}
-					width={300}>
+					width={300}
+					onStateChange={this.isMenuOpen}>
 
-					<a id="home" className="menu-item" href="/">{htmlToReactParser.parse(this.props.card.text)}</a>
+					<a id="home" className="menu-item" href={this.props.card.url} target="_blank">
+						{htmlToReactParser.parse(this.props.card.text)}</a>
 					<a onClick={this.showSettings} className="menu-item--small" href="">Settings</a>
 
 				</Menu>

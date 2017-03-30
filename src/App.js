@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError, nextSlide, prevSlide } from './redux';
+import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError, nextSlide, prevSlide, closeMenu } from './redux';
 import AppStateless from './AppStateless';
 
 const mapStateToProps = (state, ownProps) => {
@@ -33,6 +33,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		prevSlide: () => {
 			return dispatch(prevSlide());
+		},
+		closeMenu: () => {
+			return dispatch(closeMenu());
 		}
 	};
 };
