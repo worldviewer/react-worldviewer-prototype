@@ -100,6 +100,12 @@ In the process of refactoring, some mobile functionality was at one point lost i
     <img src="https://github.com/worldviewer/react-worldviewer-prototype/blob/master/doc/object-values-not-a-function.png" />
 </p>
 
+#### The Burger Menu
+
+I've coopted the npm package, `react-burger-menu` for displaying text.  Since this package was designed to host links -- and breaks when text is displayed -- I've brought the package into my project so that I can make significant edits to it.
+
+The code works great, but contains a lot of unnecessary bits which will be cleaned up at a later date.  The text can be accessed in two different ways: by clicking the <Summary /> component or the burger icon which appears during deep zoom.
+
 #### GSAP Animations via ReactTransitionGroup
 
 I've brought in ReactTransitionGroup and GSAP ("the Swiss Army knife of animation") in order to get a more fine-grained control over animations at both load and component mount/unmount.  The explanation for the refactor is based upon the solution <a href="https://medium.com/@cheapsteak/animations-with-reacttransitiongroup-4972ad7da286#.8lzv3vt8z">here</a>.  There are three things to know about the ReactTransitionGroup approach:
@@ -150,15 +156,14 @@ https://github.com/worldviewer/controversy-api-mongodb
 
 ## The Next Steps
 
-- Refactor into Redux
 - Set up React Router
 - Set up Slides from JSON to control Bubble zoom state machine
 - Add the Controversies of Science logo to splash screen
-- Add markdown modal to Bubble clicks (deliver portions of text at a time)
+- Add controversy card text (deliver portions of text at a time)
 - Record audio of the text
 - Add audio support to slideshow (audio timestamps should control slideshow)
 - Add additional UI layers for concept, propositional and model levels (switch between them using vertical swiping)
-- Wrap megaboilerplate with auth around prototype
+- Wrap megaboilerplate with auth around prototype (auth is only necessary to contribute -- not to read)
 - What I am ultimately working towards with this prototype is something similar to https://github.com/Emigre/openseadragon-annotations.  I want to be able to annotate the image pyramid and persist those annotations (although my annotations will not be hand-drawn drawings -- but rather more like interactive GIS icons with text labels, and other more structured annotation elements).  Based on advice from Rishat from codementor.io, I should keep track of the absolute canvas-based coordinates at all times in my React state, and use that zoom level and calculated box to determine whether or not to render any particular annotation overlay.  With this approach in mind, it may not be necessary to refer to the implementation above (?).
 - Mix in Stream social network feed API
 
