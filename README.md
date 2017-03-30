@@ -111,7 +111,7 @@ There is a line in `ReactTransitionGroup.js` which causes numerous console error
 
 ... from ...
 
-      if (component.componentDidAppear) {
+    if (component.componentDidAppear) {
 
 ### Part 2 - The Usergrid Backend that Wasn't Meant to Be
 
