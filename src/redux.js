@@ -1,3 +1,9 @@
+import values from 'object.values';
+
+if (!Object.values) {
+    values.shim();
+}
+
 const types = {
 	SHOW_BUBBLE: 'SHOW_BUBBLE',
 	SPIN_BUBBLE_NUMBER: 'SPIN_BUBBLE_NUMBER',
