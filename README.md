@@ -92,9 +92,13 @@ OpenSeadragon supports a variety of tile sources.  It can work even with plain J
 
 #### The Foreground Overlay Assets
 
-The interface will soon be refactored to be more slideshow-like.  Currently, the bubbles respond to clicks/taps by zooming.
-
 Since the 9 foreground information bubbles are overlays, they require transparent backgrounds -- and therefore cannot be JPG's.  The PNGs were processed by TinyPNG.com, reducing their total PNG filesizes by 60%.  This was more than just a measure to reduce the total asset size; at the uncompressed PNG sizes, mobile browsers would commonly crash during load.
+
+In the process of refactoring, some mobile functionality was at one point lost in that attempts to unzoom the bubbles no longer worked on either Safari or Chrome.  Safari's mobile developer tools proved incredibly useful for troubleshooting the problem ...
+
+<p align="center">
+    <img src="https://github.com/worldviewer/react-worldviewer-prototype/blob/master/doc/object-values-not-a-function.png" />
+</p>
 
 #### GSAP Animations via ReactTransitionGroup
 
