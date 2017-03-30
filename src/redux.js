@@ -7,6 +7,7 @@ const types = {
 	CLICK_BUBBLE: 'CLICK_BUBBLE',
 
 	CLICK_ICON: 'CLICK_ICON',
+	CLICK_SUMMARY: 'CLICK_SUMMARY',
 
 	TOGGLE_OVERLAY_STATE: 'TOGGLE_OVERLAY_STATE',
 
@@ -28,6 +29,10 @@ const initialState = {
 	controls: {
 		next: true,
 		prev: false
+	},
+
+	menu: {
+		open: false
 	},
 
 	card: {
@@ -136,6 +141,7 @@ export const fetchCardSuccess = (data) => {
 	card.type = data['graphic']['type'];
 	card.icon = data['graphic']['icon'];
 	card.graphics = data['graphic']['overlays']['assets'];
+	card.text = data['text']['unicode'];
 
 	let slideshow = data['graphic']['slideshow'];
 
@@ -171,6 +177,12 @@ export const clickBubble = (num) => {
 		num
 	};
 };
+
+export const clickSummary = () => {
+	return {
+		type: types.CLICK_SUMMARY
+	}
+}
 
 export const toggleOverlayState = (zoom) => {
 	return {
@@ -341,6 +353,15 @@ export default (state = initialState, action) => {
 					...state.slides,
 					current: jump-1,
 					active: false
+				}
+			};
+
+		case types.CLICK_SUMMARY:
+			return {
+				...state,
+				menu: {
+					...state.menu,
+					open: true
 				}
 			};
 

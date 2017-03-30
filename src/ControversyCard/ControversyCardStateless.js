@@ -89,7 +89,8 @@ var ControversyCardStateless = React.createClass({
 				</Title>
 
 				<Summary
-					showOverlay={this.props.showOverlay}>
+					showOverlay={this.props.showOverlay}
+					openMenu={this.props.clickSummary}>
 					{this.props.summary}
 				</Summary>
 

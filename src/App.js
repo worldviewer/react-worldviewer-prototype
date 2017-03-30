@@ -9,7 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 		overlays: state.overlays,
 		slides: state.slides,
 		controls: state.controls,
-		slideshow: state.slideshow
+		slideshow: state.slideshow,
+		menu: state.menu
 	};
 };
 
