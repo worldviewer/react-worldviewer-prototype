@@ -21,7 +21,7 @@ let styles = {
     return {
       position: 'fixed',
       right: right ? 0 : 'inherit',
-      zIndex: 2,
+      zIndex: 20,
       width,
       height: '100%',
       transform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',

@@ -1,5 +1,36 @@
-.App {
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato-Regular.woff2') format('woff2'),
+    	 url('../fonts/Lato-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato-Heavy.woff2') format('woff2'),
+    	 url('../fonts/Lato-Heavy.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato-Italic.woff2') format('woff2'),
+    	 url('../fonts/Lato-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato-HeavyItalic.woff2') format('woff2'),
+    	 url('../fonts/Lato-HeavyItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+.App {
 	/* Position and sizing of burger button */
 	.bm-burger-button {
 		position: fixed;
@@ -28,16 +59,13 @@
 
 	/* General sidebar styles */
 	.bm-menu {
+		font-family: 'Lato', 'Helvetica';
 		background: #fff;
 		padding: 2.5em 1.5em 0;
-		font-size: 0.8em;
+		font-size: 1.0em;
+		line-height: 1.4em;
 		overflow-y: auto;
 		overflow-x: hidden;
-
-		a {
-			text-decoration: none;
-			color: #000;
-		}
 	}
 
 	/* Morph shape necessary with bubble or elastic */
@@ -56,4 +84,7 @@
 		background: rgba(0, 0, 0, 0.3);
 	}
 
+	.footnotes-line {
+		margin: 20px 0;
+	}
 }

@@ -5,7 +5,7 @@ import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner';
 import Preload from './Preload/Preload';
-import { StickyContainer, Sticky } from 'react-sticky';
+// import { StickyContainer, Sticky } from 'react-sticky';
 
 var Menu = require('./BurgerMenu/menus/scaleDown').default;
 
@@ -36,13 +36,21 @@ var AppStateless = React.createClass({
 	},
 
 	render: function() {
-		let htmlToReactParser = new HtmlToReactParser();
+		let h = new HtmlToReactParser();
 
 		let prevNextStyle = {
 			display: this.props.overlays.active ? 'block' : 'none'
 		}
 
-		let loadSpinner = (<Spinner />);
+		let loadSpinner = (<Spinner />),
+			isFirstPage = this.props.slides.current === 0,
+			currentSlide = this.props.slideshow[this.props.slides.current] || 0,
+			isText = this.props.slideshow &&
+				currentSlide &&
+				currentSlide.text,
+			showBurger = !this.props.overlays.active || (!isFirstPage && isText) ?
+				true :
+				false;
 
 		return (
 			<div className="App" id="outer-container">
@@ -52,12 +60,20 @@ var AppStateless = React.createClass({
 					isOpen={this.props.menu.open}
 					width='75vw'
 					onStateChange={this.isMenuOpen}
-					burgerToggle={!this.props.overlays.active}>
+					burgerToggle={showBurger}>
 
-					<StickyContainer>
-						{htmlToReactParser.parse(this.props.card.text)}
-					</StickyContainer>
+					{isFirstPage ?
+						h.parse(this.props.card.text) :
+						isText &&
+						h.parse(currentSlide.text.unicode)}
 
+					<hr className="footnotes-line" />
+
+					<div className="footnotes">
+						{!isFirstPage && currentSlide.footnotes.map((note,i) => 
+							<p key={i}>{h.parse(note.markup)}</p>
+						)}
+					</div>
 				</Menu>
 
 				<main id="page-wrap">
