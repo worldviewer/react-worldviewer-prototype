@@ -104,7 +104,7 @@ In the process of refactoring, some mobile functionality was at one point lost i
 
 I've coopted the npm package, `react-burger-menu` for displaying text.  Since this package was designed to host links -- and breaks when text is displayed -- I've brought the package into my project so that I can make significant edits to it.
 
-The code works great, but contains a lot of unnecessary bits which will be cleaned up at a later date.  The text can be accessed in two different ways: by clicking the <Summary /> component or the burger icon which appears during deep zoom.
+The code works great, but contains a lot of unnecessary bits which will be cleaned up at a later date.  The text can be accessed in two different ways: by clicking the Summary component or the burger icon which appears during deep zoom.
 
 #### GSAP Animations via ReactTransitionGroup
 
