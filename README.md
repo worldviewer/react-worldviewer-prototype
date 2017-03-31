@@ -56,13 +56,7 @@ It's also now fully transitioned into Redux with a slideshow that can accommodat
 
 Parameterized overlay zooms are now done -- meaning that I can now pan and zoom through each bubble, from one slide to the next using the Greensock Animation Platform.
 
-The next step is to visualize the multi-level state machine data that's encoded into Redux for ...
-
-- chunked text explanations
-- fullscreen quotes
-- footnotes
-
-I may delay adding audio to a later point.
+Text and footnotes are also now associated with each slide in the Redux slideshow.  What remains are the quotes and audio for each slide.
 
 By the end of this stage of the process, the meaning of the content will finally become clear.  That's when this will stop being just a strange toy, and start to exhibit the feel of an actual interactive infographic.
 
