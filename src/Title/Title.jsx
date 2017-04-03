@@ -57,12 +57,14 @@ const AnimatedTitle = React.createClass({
 			{
 				right: this.props.display.right,
 				top: this.props.display.top,
-				textAlign: "right"
+				textAlign: "right",
+				zIndex: this.props.zindex
 			} :
 			{
 				left: this.props.display.left,
 				top: this.props.display.top,
-				textAlign: "left"
+				textAlign: "left",
+				zIndex: this.props.zindex
 			}
 
 		return (
@@ -84,7 +86,8 @@ const Title = React.createClass({
 				{this.props.showOverlay &&
 					<AnimatedTitle
 						position={this.props.position}
-						display={this.props.display}>
+						display={this.props.display}
+						zindex={this.props.zindex}>
 						{this.props.children}
 					</AnimatedTitle>
 				}

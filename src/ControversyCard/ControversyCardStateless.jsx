@@ -5,6 +5,7 @@ import './ControversyCard.scss';
 import DeepZoom from '../DeepZoom/DeepZoom.jsx';
 import Title from '../Title/Title.jsx';
 import Summary from '../Summary/Summary.jsx';
+import Shade from '../Shade/Shade.jsx';
 
 const ControversyCardStateless = React.createClass({
 	spinBubbleNumbers: function() {
@@ -69,6 +70,11 @@ const ControversyCardStateless = React.createClass({
 	render: function() {
 		return (
 			<div className="Deep-Zoom-Graphic">
+				<Shade
+					darkness={this.props.card.shade.darkness}
+					zindex={this.props.card.shade.zindex}
+					showOverlay={this.props.showOverlay} />
+
 				<DeepZoom
 					url={this.props.urls.background} />
 
@@ -76,7 +82,8 @@ const ControversyCardStateless = React.createClass({
 					key="left"
 					position="Left"
 					display={this.props.titleLeft}
-					showOverlay={this.props.showOverlay}>
+					showOverlay={this.props.showOverlay}
+					zindex={this.props.card.zindexes['title']}>
 					{this.props.titleLeft.markup}
 				</Title>
 
@@ -84,13 +91,15 @@ const ControversyCardStateless = React.createClass({
 					key="right"
 					position="Right"
 					display={this.props.titleRight}
-					showOverlay={this.props.showOverlay}>
+					showOverlay={this.props.showOverlay}
+					zindex={this.props.card.zindexes['title']}>
 					{this.props.titleRight.markup}
 				</Title>
 
 				<Summary
 					showOverlay={this.props.showOverlay}
-					openMenu={this.props.clickSummary}>
+					openMenu={this.props.clickSummary}
+					zindex={this.props.card.zindexes['summary']}>
 					{this.props.summary}
 				</Summary>
 
@@ -116,7 +125,9 @@ const ControversyCardStateless = React.createClass({
 						source={this.props.urls.overlay + graphic.source}
 						spin={this.props.bubbleNumbers.active}
 						top={top}
-						width={width} />)
+						width={width}
+						shadeElements={this.props.shadeElements}
+						unshadeElements={this.props.unshadeElements} />)
 					}
 				)}
 
@@ -126,7 +137,8 @@ const ControversyCardStateless = React.createClass({
 					source={this.props.urls.icon + this.props.card.icon.source}
 					showOverlay={this.props.showOverlay}
 					top={this.props.card.icon.top}
-					width={this.props.card.icon.width} />
+					width={this.props.card.icon.width}
+					zindex={this.props.card.zindexes['icon']} />
 			</div>
 		);
 	}

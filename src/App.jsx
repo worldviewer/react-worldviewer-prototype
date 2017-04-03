@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError, nextSlide, prevSlide, closeMenu } from './redux';
+import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError,
+	nextSlide, prevSlide, closeMenu } from './redux';
 import AppStateless from './AppStateless.jsx';
 
 const mapStateToProps = (state, ownProps) => {

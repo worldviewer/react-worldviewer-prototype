@@ -29,9 +29,14 @@ const AnimatedSummary = React.createClass({
 	},
 
 	render: function() {
+		let pStyles = {
+			zIndex: this.props.zindex
+		};
+
 		return (
 			<p
-				className={"Summary " + this.props.position}
+				style={pStyles}
+				className="Summary"
 				ref={c => this.container = c}
 				onClick={this.props.openMenu}
 			>
@@ -46,7 +51,8 @@ const SummaryStateless = React.createClass({
 		return (
 			<TransitionGroup component="div">
 				{ this.props.showOverlay &&
-					<AnimatedSummary openMenu={this.props.openMenu}>
+					<AnimatedSummary openMenu={this.props.openMenu}
+						zindex={this.props.zindex}>
 						{this.props.children}
 					</AnimatedSummary>
 				}

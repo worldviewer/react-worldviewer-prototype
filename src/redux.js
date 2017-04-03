@@ -18,6 +18,9 @@ const types = {
 	CLOSE_MENU: 'CLOSE_MENU',
 
 	TOGGLE_OVERLAY_STATE: 'TOGGLE_OVERLAY_STATE',
+	SHADE_ELEMENTS: 'SHADE_ELEMENTS',
+	UNSHADE_ELEMENTS: 'UNSHADE_ELEMENTS',
+	RESET_ELEMENT_ZINDEXES: 'RESET_ELEMENT_ZINDEXES',
 
 	NEXT_SLIDE: 'NEXT_SLIDE',
 	PREV_SLIDE: 'PREV_SLIDE',
@@ -64,7 +67,25 @@ const initialState = {
 		},
 		summary: '',
 		type: '',
-		graphics: []
+		graphics: [],
+		zindexes: {
+			icon: 10,
+			bubble0: 10,
+			bubble1: 10,
+			bubble2: 10,
+			bubble3: 10,
+			bubble4: 10,
+			bubble5: 10,
+			bubble6: 10,
+			bubble7: 10,
+			title: 10,
+			summary: 10,
+			controls: 10 // Not yet used
+		},
+		shade: {
+			darkness: 0,
+			zindex: 0
+		}
 	},
 
 	urls: {
@@ -104,14 +125,14 @@ export const showBubble = (num) => {
 		type: types.SHOW_BUBBLE,
 		num
 	}
-}
+};
 
 export const spinBubbleNumber = (num) => {
 	return {
 		type: types.SPIN_BUBBLE_NUMBER,
 		num
 	}
-}
+};
 
 export const disableSpinBubbleNumbers = () => {
 	return {
@@ -125,22 +146,23 @@ export const setSpinBubbleNumberTimeout = (num, timeout) => {
 		num,
 		timeout
 	}
-}
+};
 
 export const fetchCardRequest = (id) => {
 	return {
 		type: types.FETCH_CARD_REQUEST,
 		id
 	}
-}
+};
 
 export const fetchCardError = (error) => {
 	return {
 		type: types.FETCH_CARD_ERROR,
 		error
 	}
-}
+};
 
+// TODO: Grab zindexes
 export const fetchCardSuccess = (data) => {
 	let card = {};
 
@@ -160,7 +182,7 @@ export const fetchCardSuccess = (data) => {
 		card,
 		slideshow
 	}
-}
+};
 
 export function fetchCard(id, url) {
 	return dispatch => {
@@ -178,7 +200,7 @@ export function fetchCard(id, url) {
 				dispatch(fetchCardError(error));
 			});
 	}
-} 
+};
 
 export const clickBubble = (num) => {
 	return {
@@ -191,13 +213,13 @@ export const clickSummary = () => {
 	return {
 		type: types.CLICK_SUMMARY
 	}
-}
+};
 
 export const closeMenu = () => {
 	return {
 		type: types.CLOSE_MENU
 	}
-}
+};
 
 export const toggleOverlayState = (zoom) => {
 	return {
@@ -205,6 +227,26 @@ export const toggleOverlayState = (zoom) => {
 		active: zoom <= 1.1
 	}
 };
+
+export const shadeElements = (elements, shade) => {
+	return {
+		type: types.SHADE_ELEMENTS,
+		elements,
+		shade
+	}
+};
+
+export const unshadeElements = () => {
+	return {
+		type: types.UNSHADE_ELEMENTS
+	}
+};
+
+export const resetElementZindexes = () => {
+	return {
+		type: types.RESET_ELEMENT_ZINDEXES
+	}
+}
 
 export const nextSlide = () => {
 	return {
@@ -227,7 +269,8 @@ export const deactivateBubble = () => {
 export default (state = initialState, action) => {
 	let controls,
 		isEnd,
-		isBeginning;
+		isBeginning,
+		zindexes;
 
 	switch(action.type) {
 		case types.SHOW_BUBBLE:
@@ -398,6 +441,77 @@ export default (state = initialState, action) => {
 					active: action.active
 				}
 			};
+
+		// Note: shade display toggles to none when shade === 0
+		case types.SHADE_ELEMENTS:
+			zindexes = { ...state.card.zindexes };
+
+			zindexes = { ...state.card.zindexes };
+
+			if (action.elements === 'all') {
+				for (let zindex in state.card.zindexes) {
+					if (state.card.zindexes.hasOwnProperty(zindex)) {
+						zindexes[zindex] = -10;
+					}
+				}
+
+			// Important: shades all but the passed elements
+			} else {
+				for (let zindex in state.card.zindexes) {
+					if (state.card.zindexes.hasOwnProperty(zindex)) {
+						if (action.elements.includes(zindex)) {
+							zindexes[zindex] = 10;
+						} else {
+							zindexes[zindex] = -10;
+						}
+					}
+				}
+			}
+
+			return {
+				...state,
+				card: {
+					...state.card,
+					zindexes,
+					shade: {
+						darkness: action.shade,
+						zindex: 5
+					}
+				}
+			};
+
+		case types.UNSHADE_ELEMENTS:
+			return {
+				...state,
+				card: {
+					...state.card,
+					shade: {
+						...state.card.shade,
+						darkness: 0
+					}
+				}
+			};
+
+		case types.RESET_ELEMENT_ZINDEXES:
+			zindexes = { ...state.card.zindexes };
+
+			for (let zindex in state.card.zindexes) {
+				if (state.card.zindexes.hasOwnProperty(zindex)) {
+					zindexes[zindex] = 10;
+				}
+			}
+
+			return {
+				...state,
+				card: {
+					...state.card,
+					zindexes,
+					shade: {
+						...state.card.shade,
+						zindex: 0
+					}
+				}
+			};		
 
 		case types.NEXT_SLIDE:
 			isEnd = state.slides.current === state.slideshow.length-1;

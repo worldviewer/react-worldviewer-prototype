@@ -1,24 +1,17 @@
 import { connect } from 'react-redux';
-import BubbleStateless from './BubbleStateless.jsx';
-import { clickBubble, shadeElements, unshadeElements, resetElementZindexes } from '../redux';
+import ShadeStateless from './ShadeStateless.jsx';
+import { shadeElements, unshadeElements, resetElementZindexes } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		overlays: state.overlays,
 		slides: state.slides,
-		bubbles: state.bubbles,
-		bubbleNumbers: state.bubbleNumbers,
 		card: state.card,
-		urls: state.urls,
 		slideshow: state.slideshow
 	};
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		clickBubble: (num) => {
-			return dispatch(clickBubble(num));
-		},
 		shadeElements: (elements, shade) => {
 			return dispatch(shadeElements(elements, shade));
 		},
@@ -31,9 +24,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	};
 };
 
-const Bubble = connect(
+const Shade = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(BubbleStateless);
+)(ShadeStateless);
 
-export default Bubble;
+export default Shade;

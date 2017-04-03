@@ -24,4 +24,5 @@ $color-faded-white: #efdfd1;
 	@include title;
 
 	overflow: hidden;
+	z-index: 10;
 }

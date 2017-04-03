@@ -1,6 +1,7 @@
 import React from 'react';
 import TransitionGroup from 'react-addons-transition-group';
 import { TweenMax, Bounce } from 'gsap';
+import './Icon.scss';
 
 const AnimatedIcon = React.createClass({
 	componentWillAppear: function(callback) {
@@ -25,12 +26,12 @@ const AnimatedIcon = React.createClass({
 	},
 
 	render: function() {
-
 		const style = {
 			position: 'absolute',
 			left: this.props.left,
 			top: this.props.top,
-			width: this.props.width
+			width: this.props.width,
+			zIndex: this.props.zindex
 		}
 
 		return (
@@ -55,6 +56,7 @@ const IconStateless = React.createClass({
 						left={this.props.left}
 						top={this.props.top}
 						width={this.props.width}
+						zindex={this.props.zindex}
 					/>
 				}
 			</TransitionGroup>

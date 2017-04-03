@@ -63,7 +63,7 @@ const AnimatedBubble = React.createClass({
 		if (this.props.slides.active && !nextProps.slides.active) { // direct click unzoom
 			num = this.props.bubbleNumber;
 			slide = this.currentSlide();
-			this.bubbleIsActive(num, slide) && this.unzoom();
+			this.bubbleIsActive(num, slide) && this.unzoom(nextProps);
 
 		} else if (!this.props.slides.active && nextProps.slides.active) { // direct click zoom
 			num = nextProps.bubbleNumber;
@@ -85,7 +85,7 @@ const AnimatedBubble = React.createClass({
 			} else { // from zoomed / to unzoomed
 				num = this.props.bubbleNumber;
 				slide = this.currentSlide();
-				this.bubbleIsActive(num, slide) && this.unzoom();
+				this.bubbleIsActive(num, slide) && this.unzoom(nextProps);
 			}
 		}
 	},
@@ -95,28 +95,42 @@ const AnimatedBubble = React.createClass({
 	},
 
 	zoom: function(nextProps) {
-		const el = this.container;
+		const el = this.container,
+			bubbleString = 'bubble' + this.props.bubbleNumber,
+			zindex = parseInt(this.props.card.zindexes[bubbleString], 10),
+			nextZindex = parseInt(nextProps.card.zindexes[bubbleString], 10);
 
 		const { left, top, width } = this.originalSlideState(),
 			from = { left:left, top:top, width:width },
 			to = this.nextSlide(nextProps);
 
+		this.props.shadeElements([bubbleString], 0.75);
+
 		if (!this.zoomsAreSame(from, to)) {
-			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:2},
-					{width:to.width, left:to.left, top:to.top, zIndex:10, ease:Elastic.easeOut});
+			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:zindex},
+					{width:to.width, left:to.left, top:to.top, zIndex:nextZindex, ease:Elastic.easeOut});
 		}
 	},
 
-	unzoom: function() {
-		const el = this.container;
+	unzoom: function(nextProps) {
+		const el = this.container,
+			bubbleString = 'bubble' + this.props.bubbleNumber,
+			zindex = parseInt(this.props.card.zindexes[bubbleString], 10),
+			nextZindex = parseInt(nextProps.card.zindexes[bubbleString], 10);
 
 		const { left, top, width } = this.originalSlideState(),
 			to = { left:left, top:top, width:width },
 			from = this.currentSlide();
 
+		this.props.unshadeElements();
+
+		setTimeout(() => {
+			this.props.resetElementZindexes();
+		}, 2000)
+
 		if (!this.zoomsAreSame(from, to)) {
-			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:10},
-					{width:to.width, left:to.left, top:to.top, zIndex:2, ease:Elastic.easeIn});
+			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:zindex},
+					{width:to.width, left:to.left, top:to.top, zIndex:nextZindex, ease:Elastic.easeIn});
 		}
 	},
 
@@ -140,7 +154,8 @@ const AnimatedBubble = React.createClass({
 			left: (isActive && this.currentSlide().left) || original.left,
 			position: 'absolute',
 			top: (isActive && this.currentSlide().top) || original.top,
-			width: (isActive && this.currentSlide().width) || original.width
+			width: (isActive && this.currentSlide().width) || original.width,
+			zIndex: this.props.zindex
 		};
 
 		const imgStyle = {
@@ -170,6 +185,9 @@ const AnimatedBubble = React.createClass({
 
 const BubbleStateless = React.createClass({
 	render: function() {
+		const bubbleString = 'bubble' + this.props.bubbleNumber,
+			zindex = this.props.card.zindexes[bubbleString];
+
 		return (
 			<TransitionGroup component="div">
 				{ this.props.showOverlay &&
@@ -192,6 +210,10 @@ const BubbleStateless = React.createClass({
 						top={this.props.top}
 						width={this.props.width}
 						slides={this.props.slides}
+						shadeElements={this.props.shadeElements}
+						unshadeElements={this.props.unshadeElements}
+						resetElementZindexes={this.props.resetElementZindexes}
+						zindex={zindex}
 						/>
 				}
 			</TransitionGroup>
