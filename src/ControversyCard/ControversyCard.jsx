@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import ControversyCardStateless from './ControversyCardStateless.jsx';
 import { showBubble, spinBubbleNumber, disableSpinBubbleNumbers,
 	setSpinBubbleNumberTimeout, deactivateBubble, clickBubble,
-	clickSummary, shadeElements, unshadeElements, resetElementZindexes } from '../redux';
+	clickSummary, shadeElements, unshadeElements, resetElementZindexes,
+	clearQuoteTimers, setActiveQuote, setActiveQuoteTimer } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -12,7 +13,8 @@ const mapStateToProps = (state, ownProps) => {
 		bubbleNumbers: state.bubbleNumbers,
 		card: state.card,
 		urls: state.urls,
-		slideshow: state.slideshow
+		slideshow: state.slideshow,
+		quotes: state.quotes
 	};
 };
 
@@ -47,6 +49,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		resetElementZindexes: () => {
 			return dispatch(resetElementZindexes());
+		},
+		clearQuoteTimers: () => {
+			return dispatch(clearQuoteTimers());
+		},
+		setActiveQuote: (active) => {
+			return dispatch(setActiveQuote(active));
+		},
+		setActiveQuoteTimer: (id) => {
+			return dispatch(setActiveQuoteTimer(id));
 		}
 	};
 };

@@ -10,7 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 		bubbleNumbers: state.bubbleNumbers,
 		card: state.card,
 		urls: state.urls,
-		slideshow: state.slideshow
+		slideshow: state.slideshow,
+		quotes: state.quotes
 	};
 };
 

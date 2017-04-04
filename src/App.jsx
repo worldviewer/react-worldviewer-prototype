@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError,
-	nextSlide, prevSlide, closeMenu } from './redux';
+	nextSlide, prevSlide, closeMenu, setActiveQuote, clearQuoteTimers,
+	setActiveQuoteTimer } from './redux';
 import AppStateless from './AppStateless.jsx';
 
 const mapStateToProps = (state, ownProps) => {
@@ -11,7 +12,8 @@ const mapStateToProps = (state, ownProps) => {
 		slides: state.slides,
 		controls: state.controls,
 		slideshow: state.slideshow,
-		menu: state.menu
+		menu: state.menu,
+		quotes: state.quotes
 	};
 };
 
@@ -37,6 +39,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		closeMenu: () => {
 			return dispatch(closeMenu());
+		},
+		setActiveQuote: (active) => {
+			return dispatch(setActiveQuote(active));
+		},
+		setActiveQuoteTimer: (id) => {
+			return dispatch(setActiveQuoteTimer(id));
+		},
+		clearQuoteTimers: () => {
+			return dispatch(clearQuoteTimers());
 		}
 	};
 };

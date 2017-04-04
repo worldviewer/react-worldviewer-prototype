@@ -94,6 +94,29 @@ const AnimatedBubble = React.createClass({
 		this.props.clickHandler(bubbleNumber);
 	},
 
+	setupRotatingQuotes: function() {
+		const id = setInterval(() => {
+			const
+				slide = this.props.slideshow[this.props.slides.current],
+				totalQuotes = slide.quotes ? slide.quotes.length : 0;
+
+			console.log('Setting up rotating quotes');
+			console.log('total: ', totalQuotes);
+			console.log('slide: ', slide);
+			
+			this.props.setActiveQuote((this.props.quotes.active + 1) % totalQuotes);
+		}, 10000);
+
+		this.props.setActiveQuoteTimer(id);
+	},
+
+	removeRotatingQuotes: function() {
+		if (this.props.quotes.id) {
+			clearInterval(this.props.quotes.id);
+			this.props.clearQuoteTimers();
+		}
+	},
+
 	zoom: function(nextProps) {
 		const el = this.container,
 			bubbleString = 'bubble' + this.props.bubbleNumber,
@@ -104,9 +127,10 @@ const AnimatedBubble = React.createClass({
 			from = { left:left, top:top, width:width },
 			to = this.nextSlide(nextProps);
 
-		this.props.shadeElements([bubbleString], 0.75);
-
 		if (!this.zoomsAreSame(from, to)) {
+			this.props.shadeElements([bubbleString], 0.75);
+			this.setupRotatingQuotes();
+
 			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:zindex},
 					{width:to.width, left:to.left, top:to.top, zIndex:nextZindex, ease:Elastic.easeOut});
 		}
@@ -122,13 +146,14 @@ const AnimatedBubble = React.createClass({
 			to = { left:left, top:top, width:width },
 			from = this.currentSlide();
 
-		this.props.unshadeElements();
-
-		setTimeout(() => {
-			this.props.resetElementZindexes();
-		}, 2000)
-
 		if (!this.zoomsAreSame(from, to)) {
+			setTimeout(() => {
+				this.props.resetElementZindexes();
+			}, 2000);
+
+			this.props.unshadeElements();
+			this.removeRotatingQuotes();
+
 			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:zindex},
 					{width:to.width, left:to.left, top:to.top, zIndex:nextZindex, ease:Elastic.easeIn});
 		}
@@ -142,8 +167,31 @@ const AnimatedBubble = React.createClass({
 
 		if (!this.zoomsAreSame(from, to)) {
 			TweenMax.fromTo(el, 6, {width:from.width, left:from.left, top:from.top},
-					{width:to.width, left:to.left, top:to.top, ease:Power0.easeNone});
+				{width:to.width, left:to.left, top:to.top, ease:Power0.easeNone});
 		}
+
+		// TODO: Convert pans to zoom out / in (reduces nausea, may require refactoring slides to encode this info)
+		// let mid = {};
+		// mid.width = parseInt(this.props.card.graphics[this.props.bubbleNumber].width, 10)/2;
+		// mid.left = (parseInt(to.left, 10) - parseInt(from.left, 10))/2;
+		// mid.top = (parseInt(to.top, 10) - parseInt(from.top, 10))/2;
+
+		// mid.width += 'vw';
+		// mid.left += 'vw';
+		// mid.top += 'vw';
+
+		// console.log('mid: ', mid);
+
+		// if (!this.zoomsAreSame(from, to)) {
+		// 	TweenMax.fromTo(el, 3, {width:from.width, left:from.left, top:from.top},
+		// 		{width:mid.width, left:mid.left, top:mid.top, ease:Power0.easeNone, onComplete: () => {
+
+		// 			TweenMax.fromTo(el, 3, {width:mid.width, left:mid.left, top:mid.top},
+		// 				{width:to.width, left:to.left, top:to.top, ease:Power0.easeNone});
+
+		// 		}
+		// 	});
+		// }
 	},
 
 	render: function() {
@@ -214,6 +262,10 @@ const BubbleStateless = React.createClass({
 						unshadeElements={this.props.unshadeElements}
 						resetElementZindexes={this.props.resetElementZindexes}
 						zindex={zindex}
+						clearQuoteTimers={this.props.clearQuoteTimers}
+						setActiveQuote={this.props.setActiveQuote}
+						setActiveQuoteTimer={this.props.setActiveQuoteTimer}
+						quotes={this.props.quotes}
 						/>
 				}
 			</TransitionGroup>

@@ -5,6 +5,7 @@ import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
 import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner.jsx';
 import Preload from './Preload/Preload.jsx';
+import Quote from './Quote/Quote.jsx';
 
 const Menu = require('./BurgerMenu/menus/scaleDown').default;
 
@@ -51,7 +52,11 @@ const AppStateless = React.createClass({
 
 			prevNextStyle = {
 				display: this.props.overlays.active ? 'block' : 'none'
-			}
+			},
+
+			messages = this.props.slideshow.length > 0 ?
+				this.props.slideshow[this.props.slides.current].quotes :
+				null;
 
 		return (
 			<div className="App" id="outer-container">
@@ -71,13 +76,23 @@ const AppStateless = React.createClass({
 					<hr className="footnotes-line" />
 
 					<div className="footnotes">
-						{!isFirstPage && currentSlide.footnotes.map((note,i) => 
+						{!isFirstPage && currentSlide.footnotes && currentSlide.footnotes.map((note,i) => 
 							<p key={i}>{h.parse(note.markup)}</p>
 						)}
 					</div>
 				</Menu>
 
 				<main id="page-wrap">
+					<Quote
+						messages={messages}
+						showOverlay={this.props.overlays.active}
+						timer={this.props.quotes.id}
+						active={this.props.quotes.active}
+						clearQuoteTimers={this.props.clearQuoteTimers}
+						setActiveQuoteTimer={this.props.setActiveQuoteTimer}
+						setActiveQuote={this.props.setActiveQuote}
+						slide={this.props.slides.current} />
+
 					<Preload
 						cardId={this.props.card.id}
 						loadingIndicator={loadSpinner}

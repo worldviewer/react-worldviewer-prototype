@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import QuoteStateless from './QuoteStateless.jsx';
-import { clickBubble } from '../redux';
+import { showQuote } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {

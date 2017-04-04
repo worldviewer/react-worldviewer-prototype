@@ -25,6 +25,10 @@ const types = {
 	NEXT_SLIDE: 'NEXT_SLIDE',
 	PREV_SLIDE: 'PREV_SLIDE',
 
+	SET_ACTIVE_QUOTE: 'SET_ACTIVE_QUOTE',
+	SET_ACTIVE_QUOTE_TIMER: 'SET_ACTIVE_QUOTE_TIMER',
+	CLEAR_QUOTE_TIMERS: 'CLEAR_QUOTE_TIMERS',
+
 	FETCH_CARD_REQUEST: 'FETCH_CARD_REQUEST',
 	FETCH_CARD_ERROR: 'FETCH_CARD_ERROR',
 	FETCH_CARD_SUCCESS: 'FETCH_CARD_SUCCESS'
@@ -117,6 +121,11 @@ const initialState = {
 	bubbleNumbers: {
 		active: Array.from({length:8}, el => false),
 		timeouts: Array.from({length:8}, el => 0)
+	},
+
+	quotes: {
+		active: 0,
+		id: null
 	}
 };
 
@@ -257,6 +266,26 @@ export const nextSlide = () => {
 export const prevSlide = () => {
 	return {
 		type: types.PREV_SLIDE
+	}
+};
+
+export const setActiveQuote = (active) => {
+	return {
+		type: types.SET_ACTIVE_QUOTE,
+		active
+	}
+};
+
+export const setActiveQuoteTimer = (id) => {
+	return {
+		type: types.SET_ACTIVE_QUOTE_TIMER,
+		id
+	}
+}
+
+export const clearQuoteTimers = () => {
+	return {
+		type: types.CLEAR_QUOTE_TIMERS
 	}
 };
 
@@ -574,6 +603,33 @@ export default (state = initialState, action) => {
 					}
 				},
 				controls: controls
+			};
+
+		case types.SET_ACTIVE_QUOTE:
+			return {
+				...state,
+				quotes: {
+					...state.quotes,
+					active: action.active
+				}
+			};
+
+		case types.SET_ACTIVE_QUOTE_TIMER:
+			return {
+				...state,
+				quotes: {
+					...state.quotes,
+					id: action.id
+				}
+			};
+
+		case types.CLEAR_QUOTE_TIMERS:
+			return {
+				...state,
+				quotes: {
+					active: 0,
+					id: null
+				}
 			};
 
 		default:

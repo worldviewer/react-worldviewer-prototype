@@ -54,7 +54,7 @@ const ControversyCardStateless = React.createClass({
 
 	componentDidMount: function() {
 		this.showBubbles();
-		this.spinBubbleNumbers();		
+		this.spinBubbleNumbers();
 	},
 
 	// When active bubble is clicked, deactivate
@@ -127,7 +127,10 @@ const ControversyCardStateless = React.createClass({
 						top={top}
 						width={width}
 						shadeElements={this.props.shadeElements}
-						unshadeElements={this.props.unshadeElements} />)
+						unshadeElements={this.props.unshadeElements}
+						clearQuoteTimers={this.props.clearQuoteTimers}
+						setActiveQuote={this.props.setActiveQuote}
+						setActiveQuoteTimer={this.props.setActiveQuoteTimer} />)
 					}
 				)}
 
