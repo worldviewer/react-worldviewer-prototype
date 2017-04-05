@@ -1,8 +1,7 @@
 import React from 'react';
 import './Quote.scss';
 import TransitionGroup from 'react-addons-transition-group';
-import { TweenMax, Bounce, Elastic, Power0 } from 'gsap';
-import Quote from './Quote.jsx';
+// import { TweenMax, Bounce, Elastic, Power0 } from 'gsap';
 
 // Permits HTML markup encoding for quote text
 import { Parser as HtmlToReactParser } from 'html-to-react';
@@ -69,7 +68,7 @@ const AnimatedQuote = React.createClass({
 					margin: '2vw',
 					overflow: 'none',
 					textAlign: 'center',
-					fontSize: '1.2em',
+					fontSize: '3.0vw',
 					lineHeight: '1.3em'
 				}
 			}) :
