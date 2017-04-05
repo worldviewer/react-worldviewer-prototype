@@ -108,7 +108,7 @@ const AnimatedBubble = React.createClass({
 			to = this.nextSlide(nextProps);
 
 		if (!this.zoomsAreSame(from, to)) {
-			this.props.shadeElements([bubbleString], 0.75);
+			this.props.shadeElements([bubbleString], 0.3);
 
 			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:zindex},
 					{width:to.width, left:to.left, top:to.top, zIndex:nextZindex, ease:Elastic.easeOut});
