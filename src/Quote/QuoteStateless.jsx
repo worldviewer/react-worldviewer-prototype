@@ -68,7 +68,7 @@ const AnimatedQuote = React.createClass({
 					margin: '2vw',
 					overflow: 'none',
 					textAlign: 'center',
-					fontSize: '3.0vw',
+					fontSize: '3.5vw',
 					lineHeight: '1.3em'
 				}
 			}) :
