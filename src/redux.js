@@ -25,8 +25,10 @@ const types = {
 	NEXT_SLIDE: 'NEXT_SLIDE',
 	PREV_SLIDE: 'PREV_SLIDE',
 
-	SET_ACTIVE_QUOTE: 'SET_ACTIVE_QUOTE',
-	SET_ACTIVE_QUOTE_TIMER: 'SET_ACTIVE_QUOTE_TIMER',
+	SET_CURRENT_QUOTE: 'SET_CURRENT_QUOTE',
+	SET_CURRENT_QUOTE_ELEMENT: 'SET_CURRENT_QUOTE_ELEMENT',
+	SET_CURRENT_QUOTE_TIMER: 'SET_CURRENT_QUOTE_TIMER',
+	TOGGLE_QUOTE: 'TOGGLE_QUOTE',
 	CLEAR_QUOTE_TIMERS: 'CLEAR_QUOTE_TIMERS',
 
 	FETCH_CARD_REQUEST: 'FETCH_CARD_REQUEST',
@@ -124,7 +126,9 @@ const initialState = {
 	},
 
 	quotes: {
-		active: 0,
+		element: null,
+		current: 0,
+		active: false,
 		id: null
 	}
 };
@@ -133,20 +137,20 @@ export const showBubble = (num) => {
 	return {
 		type: types.SHOW_BUBBLE,
 		num
-	}
+	};
 };
 
 export const spinBubbleNumber = (num) => {
 	return {
 		type: types.SPIN_BUBBLE_NUMBER,
 		num
-	}
+	};
 };
 
 export const disableSpinBubbleNumbers = () => {
 	return {
 		type: types.DISABLE_SPIN_BUBBLE_NUMBERS
-	}
+	};
 };
 
 export const setSpinBubbleNumberTimeout = (num, timeout) => {
@@ -154,21 +158,21 @@ export const setSpinBubbleNumberTimeout = (num, timeout) => {
 		type: types.SET_SPIN_BUBBLE_NUMBER_TIMEOUT,
 		num,
 		timeout
-	}
+	};
 };
 
 export const fetchCardRequest = (id) => {
 	return {
 		type: types.FETCH_CARD_REQUEST,
 		id
-	}
+	};
 };
 
 export const fetchCardError = (error) => {
 	return {
 		type: types.FETCH_CARD_ERROR,
 		error
-	}
+	};
 };
 
 // TODO: Grab zindexes
@@ -190,7 +194,7 @@ export const fetchCardSuccess = (data) => {
 		type: types.FETCH_CARD_SUCCESS,
 		card,
 		slideshow
-	}
+	};
 };
 
 export function fetchCard(id, url) {
@@ -208,7 +212,7 @@ export function fetchCard(id, url) {
 			.catch(error => {
 				dispatch(fetchCardError(error));
 			});
-	}
+	};
 };
 
 export const clickBubble = (num) => {
@@ -221,20 +225,20 @@ export const clickBubble = (num) => {
 export const clickSummary = () => {
 	return {
 		type: types.CLICK_SUMMARY
-	}
+	};
 };
 
 export const closeMenu = () => {
 	return {
 		type: types.CLOSE_MENU
-	}
+	};
 };
 
 export const toggleOverlayState = (zoom) => {
 	return {
 		type: types.TOGGLE_OVERLAY_STATE,
 		active: zoom <= 1.1
-	}
+	};
 };
 
 export const shadeElements = (elements, shade) => {
@@ -242,57 +246,71 @@ export const shadeElements = (elements, shade) => {
 		type: types.SHADE_ELEMENTS,
 		elements,
 		shade
-	}
+	};
 };
 
 export const unshadeElements = () => {
 	return {
 		type: types.UNSHADE_ELEMENTS
-	}
+	};
 };
 
 export const resetElementZindexes = () => {
 	return {
 		type: types.RESET_ELEMENT_ZINDEXES
-	}
-}
+	};
+};
 
 export const nextSlide = () => {
 	return {
 		type: types.NEXT_SLIDE
-	}
+	};
 };
 
 export const prevSlide = () => {
 	return {
 		type: types.PREV_SLIDE
-	}
+	};
 };
 
-export const setActiveQuote = (active) => {
+export const setCurrentQuote = (current) => {
 	return {
-		type: types.SET_ACTIVE_QUOTE,
-		active
-	}
+		type: types.SET_CURRENT_QUOTE,
+		current
+	};
 };
 
-export const setActiveQuoteTimer = (id) => {
+export const setCurrentQuoteElement = (element) => {
 	return {
-		type: types.SET_ACTIVE_QUOTE_TIMER,
+		type: types.SET_CURRENT_QUOTE_ELEMENT,
+		element
+	};
+};
+
+export const setCurrentQuoteTimer = (id) => {
+	return {
+		type: types.SET_CURRENT_QUOTE_TIMER,
 		id
-	}
-}
+	};
+};
+
+export const toggleQuote = (state) => {
+	return {
+		type: types.TOGGLE_QUOTE,
+		state
+	};
+};
 
 export const clearQuoteTimers = () => {
 	return {
 		type: types.CLEAR_QUOTE_TIMERS
-	}
+	};
 };
 
 export const deactivateBubble = () => {
 	return {
 		type: types.DEACTIVATE_BUBBLE
-	}
+	};
 };
 
 export default (state = initialState, action) => {
@@ -605,16 +623,25 @@ export default (state = initialState, action) => {
 				controls: controls
 			};
 
-		case types.SET_ACTIVE_QUOTE:
+		case types.SET_CURRENT_QUOTE:
 			return {
 				...state,
 				quotes: {
 					...state.quotes,
-					active: action.active
+					current: action.current
 				}
 			};
 
-		case types.SET_ACTIVE_QUOTE_TIMER:
+		case types.SET_CURRENT_QUOTE_ELEMENT:
+			return {
+				...state,
+				quotes: {
+					...state.quotes,
+					element: action.element
+				}
+			};		
+
+		case types.SET_CURRENT_QUOTE_TIMER:
 			return {
 				...state,
 				quotes: {
@@ -623,12 +650,23 @@ export default (state = initialState, action) => {
 				}
 			};
 
+		case types.TOGGLE_QUOTE:
+			return {
+				...state,
+				quotes: {
+					...state.quotes,
+					active: action.state
+				}
+			};
+
 		case types.CLEAR_QUOTE_TIMERS:
 			return {
 				...state,
 				quotes: {
-					active: 0,
-					id: null
+					...state.quotes,
+					current: 0,
+					id: null,
+					active: false
 				}
 			};
 

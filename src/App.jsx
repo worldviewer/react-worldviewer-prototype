@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError,
-	nextSlide, prevSlide, closeMenu, setActiveQuote, clearQuoteTimers,
-	setActiveQuoteTimer } from './redux';
+	nextSlide, prevSlide, closeMenu, setCurrentQuote, clearQuoteTimers,
+	setCurrentQuoteTimer, setCurrentQuoteElement, toggleQuote } from './redux';
 import AppStateless from './AppStateless.jsx';
 
 const mapStateToProps = (state, ownProps) => {
@@ -40,14 +40,20 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		closeMenu: () => {
 			return dispatch(closeMenu());
 		},
-		setActiveQuote: (active) => {
-			return dispatch(setActiveQuote(active));
+		setCurrentQuote: (current) => {
+			return dispatch(setCurrentQuote(current));
 		},
-		setActiveQuoteTimer: (id) => {
-			return dispatch(setActiveQuoteTimer(id));
+		setCurrentQuoteTimer: (id) => {
+			return dispatch(setCurrentQuoteTimer(id));
+		},
+		setCurrentQuoteElement: (element) => {
+			return dispatch(setCurrentQuoteElement(element));
 		},
 		clearQuoteTimers: () => {
 			return dispatch(clearQuoteTimers());
+		},
+		toggleQuote: (state) => {
+			return dispatch(toggleQuote(state));
 		}
 	};
 };

@@ -55,6 +55,42 @@ const ControversyCardStateless = React.createClass({
 	componentDidMount: function() {
 		this.showBubbles();
 		this.spinBubbleNumbers();
+		this.setupRotatingQuotes();
+	},
+
+	setupRotatingQuotes: function() {
+		console.log('Setting up rotating quotes. This should happen only once ...');
+
+		const id = setInterval(() => {
+			const
+				slide = this.props.slideshow[this.props.slides.current],
+				totalQuotes = slide.quotes ? slide.quotes.length : 0;
+
+			if (totalQuotes > 1) {
+				this.props.toggleQuote(false);
+
+				setTimeout(() => {
+
+					console.log('total: ', totalQuotes);
+					console.log('slide: ', slide);
+					console.log('this.props.slides.current: ', this.props.slides.current);
+					console.log('totalQuotes: ', totalQuotes);
+
+					this.props.setCurrentQuote((this.props.quotes.current + 1) % totalQuotes);
+					this.props.toggleQuote(true);
+				}, 1000);
+
+			} else if (totalQuotes === 1) {
+				this.props.setCurrentQuote(0);
+				this.props.toggleQuote(true);
+
+			} else {
+				this.props.toggleQuote(false);
+			}
+
+		}, 10000);
+
+		this.props.setCurrentQuoteTimer(id);
 	},
 
 	// When active bubble is clicked, deactivate
@@ -129,8 +165,9 @@ const ControversyCardStateless = React.createClass({
 						shadeElements={this.props.shadeElements}
 						unshadeElements={this.props.unshadeElements}
 						clearQuoteTimers={this.props.clearQuoteTimers}
-						setActiveQuote={this.props.setActiveQuote}
-						setActiveQuoteTimer={this.props.setActiveQuoteTimer} />)
+						setCurrentQuote={this.props.setCurrentQuote}
+						setCurrentQuoteTimer={this.props.setCurrentQuoteTimer}
+						toggleQuote={this.props.toggleQuote} />)
 					}
 				)}
 

@@ -10,6 +10,8 @@ import { Parser as HtmlToReactParser } from 'html-to-react';
 const AnimatedQuote = React.createClass({
 	componentWillAppear: function(callback) {
 		// const el = this.container;
+		// console.log('componentWillAppear: ', el);
+
 		// TweenMax.fromTo(el, 2, {scale:0, opacity:0}, {scale:1, opacity:1, ease:Bounce.easeOut, onComplete: callback});
 
 		callback();
@@ -17,6 +19,8 @@ const AnimatedQuote = React.createClass({
 
 	componentWillEnter: function(callback) {
 		// const el = this.container;
+		// console.log('componentWillEnter: ', el);
+
 		// TweenMax.fromTo(el, .5, {scale:1.5, opacity:0}, {scale:1, opacity:1, ease:Bounce.easeOut, onComplete: callback});
 
   		callback();
@@ -35,20 +39,16 @@ const AnimatedQuote = React.createClass({
 	componentDidLeave: function() {
 	},
 
-	// Timer is cleared in BubbleStateless' unzoom function
 	componentWillReceiveProps: function(nextProps) {
+		// const el = this.container;
+
+		// 	TweenMax.fromTo(el, 1, {opacity:1}, {opacity:0, onComplete: () => {
+		// 		TweenMax.fromTo(el, 1, {opacity:0}, {opacity:1});
+		// 	}});
 	},
 
-	componentDidMount: function() {
-	},
-
-	// Don't re-render when a timer id changes
-	shouldComponentUpdate: function(nextProps) {
-		// return (!(nextProps.quotes.timer !== this.props.quotes.timer));
-
-		return true;
-	},
-
+	// Timers and current quote handling reset with bubble zooms; see BubbleStateless for
+	// that logic
 	render: function() {
 		const
 			h = new HtmlToReactParser(),
@@ -76,22 +76,22 @@ const AnimatedQuote = React.createClass({
 			null;
 
 		let quoteMarkup = this.props.messages && this.props.messages.map((quote,i) => {
-			return (<div
-				style={quoteStyles[i]}
-				className="Quote"
-				key={i}
-				ref={c => this.container = c}>
-
-					<span style={highlighterStyles}>
-						{h.parse(quote.text.unicode)}
-					</span>
-
-			</div>)
+			return (
+				<span style={highlighterStyles}>
+					{h.parse(quote.text.unicode)}
+				</span>
+			)
 		});
 
 		return (
-			<div>
-				{quoteMarkup ? quoteMarkup[this.props.active] : null}
+			<div
+				style={quoteStyles ? quoteStyles[this.props.current] : null}
+				className="Quote"
+				ref={c => this.container = c}>
+
+				{quoteMarkup && this.props.active ?
+					quoteMarkup[this.props.current] : null}
+
 			</div>
 		);
 	}
@@ -105,8 +105,13 @@ const QuoteStateless = React.createClass({
 					<AnimatedQuote
 						messages={this.props.messages}
 						timer={this.props.timer}
+						current={this.props.current}
 						active={this.props.active}
-						slide={this.props.slide} />
+						slide={this.props.slide}
+						slides={this.props.slides}
+						setCurrentQuoteElement={this.props.setCurrentQuoteElement}>
+						{this.props.children}
+					</AnimatedQuote>
 				}
 			</TransitionGroup>
 		);

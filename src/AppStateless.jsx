@@ -87,10 +87,13 @@ const AppStateless = React.createClass({
 						messages={messages}
 						showOverlay={this.props.overlays.active}
 						timer={this.props.quotes.id}
+						current={this.props.quotes.current}
 						active={this.props.quotes.active}
 						clearQuoteTimers={this.props.clearQuoteTimers}
-						setActiveQuoteTimer={this.props.setActiveQuoteTimer}
-						setActiveQuote={this.props.setActiveQuote}
+						setCurrentQuoteTimer={this.props.setCurrentQuoteTimer}
+						setCurrentQuote={this.props.setCurrentQuote}
+						setCurrentQuoteElement={this.props.setCurrentQuoteElement}
+						toggleQuote={this.props.toggleQuote}
 						slide={this.props.slides.current} />
 
 					<Preload

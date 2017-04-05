@@ -90,31 +90,11 @@ const AnimatedBubble = React.createClass({
 		}
 	},
 
+	componentDidMount: function() {
+	},
+
 	getComponent: function(bubbleNumber) {
 		this.props.clickHandler(bubbleNumber);
-	},
-
-	setupRotatingQuotes: function() {
-		const id = setInterval(() => {
-			const
-				slide = this.props.slideshow[this.props.slides.current],
-				totalQuotes = slide.quotes ? slide.quotes.length : 0;
-
-			console.log('Setting up rotating quotes');
-			console.log('total: ', totalQuotes);
-			console.log('slide: ', slide);
-			
-			this.props.setActiveQuote((this.props.quotes.active + 1) % totalQuotes);
-		}, 10000);
-
-		this.props.setActiveQuoteTimer(id);
-	},
-
-	removeRotatingQuotes: function() {
-		if (this.props.quotes.id) {
-			clearInterval(this.props.quotes.id);
-			this.props.clearQuoteTimers();
-		}
 	},
 
 	zoom: function(nextProps) {
@@ -129,7 +109,6 @@ const AnimatedBubble = React.createClass({
 
 		if (!this.zoomsAreSame(from, to)) {
 			this.props.shadeElements([bubbleString], 0.75);
-			this.setupRotatingQuotes();
 
 			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:zindex},
 					{width:to.width, left:to.left, top:to.top, zIndex:nextZindex, ease:Elastic.easeOut});
@@ -152,7 +131,6 @@ const AnimatedBubble = React.createClass({
 			}, 2000);
 
 			this.props.unshadeElements();
-			this.removeRotatingQuotes();
 
 			TweenMax.fromTo(el, 2, {width:from.width, left:from.left, top:from.top, zIndex:zindex},
 					{width:to.width, left:to.left, top:to.top, zIndex:nextZindex, ease:Elastic.easeIn});
@@ -263,8 +241,9 @@ const BubbleStateless = React.createClass({
 						resetElementZindexes={this.props.resetElementZindexes}
 						zindex={zindex}
 						clearQuoteTimers={this.props.clearQuoteTimers}
-						setActiveQuote={this.props.setActiveQuote}
-						setActiveQuoteTimer={this.props.setActiveQuoteTimer}
+						setCurrentQuote={this.props.setCurrentQuote}
+						setCurrentQuoteTimer={this.props.setCurrentQuoteTimer}
+						toggleQuote={this.props.toggleQuote}
 						quotes={this.props.quotes}
 						/>
 				}
