@@ -134,7 +134,7 @@ const ControversyCardStateless = React.createClass({
 
 				<Summary
 					showOverlay={this.props.showOverlay}
-					openMenu={this.props.clickSummary}
+					openMenu={this.props.openMenu}
 					zindex={this.props.card.zindexes['summary']}>
 					{this.props.summary}
 				</Summary>

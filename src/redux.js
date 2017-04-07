@@ -14,7 +14,7 @@ const types = {
 	CLICK_BUBBLE: 'CLICK_BUBBLE',
 
 	CLICK_ICON: 'CLICK_ICON',
-	CLICK_SUMMARY: 'CLICK_SUMMARY',
+	OPEN_MENU: 'OPEN_MENU',
 	CLOSE_MENU: 'CLOSE_MENU',
 
 	TOGGLE_OVERLAY_STATE: 'TOGGLE_OVERLAY_STATE',
@@ -222,9 +222,9 @@ export const clickBubble = (num) => {
 	};
 };
 
-export const clickSummary = () => {
+export const openMenu = () => {
 	return {
-		type: types.CLICK_SUMMARY
+		type: types.OPEN_MENU
 	};
 };
 
@@ -462,7 +462,7 @@ export default (state = initialState, action) => {
 				}
 			};
 
-		case types.CLICK_SUMMARY:
+		case types.OPEN_MENU:
 			return {
 				...state,
 				menu: {

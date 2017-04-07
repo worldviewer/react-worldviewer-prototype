@@ -32,6 +32,8 @@ const AppStateless = React.createClass({
 	isMenuOpen: function(state) {
 		if (!state.isOpen) {
 			this.props.closeMenu();
+		} else {
+			this.props.openMenu();
 		}
 	},
 

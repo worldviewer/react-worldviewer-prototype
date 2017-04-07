@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SummaryStateless from './SummaryStateless.jsx';
-import clickSummary from '../redux';
+import openMenu from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -12,8 +12,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		clickSummary: () => {
-			return dispatch(clickSummary());
+		openMenu: () => {
+			return dispatch(openMenu());
 		}
 	};
 };

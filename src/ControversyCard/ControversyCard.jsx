@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import ControversyCardStateless from './ControversyCardStateless.jsx';
 import { showBubble, spinBubbleNumber, disableSpinBubbleNumbers,
 	setSpinBubbleNumberTimeout, deactivateBubble, clickBubble,
-	clickSummary, shadeElements, unshadeElements, resetElementZindexes,
+	openMenu, shadeElements, unshadeElements, resetElementZindexes,
 	clearQuoteTimers, setCurrentQuote, setCurrentQuoteTimer, toggleQuote } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -38,8 +38,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		clickBubble: (num) => {
 			return dispatch(clickBubble(num));
 		},
-		clickSummary: () => {
-			return dispatch(clickSummary());
+		openMenu: () => {
+			return dispatch(openMenu());
 		},
 		shadeElements: (elements, shade) => {
 			return dispatch(shadeElements(elements, shade));
