@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SummaryStateless from './SummaryStateless.jsx';
-import openMenu from '../redux';
+import { openMenu } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
