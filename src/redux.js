@@ -589,7 +589,11 @@ export default (state = initialState, action) => {
 						num: state.slides.current
 					}
 				},
-				controls: controls
+				controls: controls,
+				quotes: {
+					...state.quotes,
+					current: 0
+				}
 			};
 
 		case types.PREV_SLIDE:

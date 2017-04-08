@@ -1,49 +1,34 @@
 import React from 'react';
 import './Quote.scss';
 import TransitionGroup from 'react-addons-transition-group';
-// import { TweenMax, Bounce, Elastic, Power0 } from 'gsap';
+import { TweenMax, Power0 } from 'gsap';
 
 // Permits HTML markup encoding for quote text
 import { Parser as HtmlToReactParser } from 'html-to-react';
 
 const AnimatedQuote = React.createClass({
 	componentWillAppear: function(callback) {
-		// const el = this.container;
-		// console.log('componentWillAppear: ', el);
-
-		// TweenMax.fromTo(el, 2, {scale:0, opacity:0}, {scale:1, opacity:1, ease:Bounce.easeOut, onComplete: callback});
-
-		callback();
+		const el = this.container;
+		TweenMax.fromTo(el, 2, {opacity:0}, {opacity:1, ease:Power0.easeOut, onComplete: callback});
 	},
 
 	componentWillEnter: function(callback) {
-		// const el = this.container;
-		// console.log('componentWillEnter: ', el);
-
-		// TweenMax.fromTo(el, .5, {scale:1.5, opacity:0}, {scale:1, opacity:1, ease:Bounce.easeOut, onComplete: callback});
-
-  		callback();
+		const el = this.container;
+		TweenMax.fromTo(el, 2, {opacity:0}, {opacity:1, ease:Power0.easeOut, onComplete: callback});
 	},
 
 	componentDidEnter: function() {
 	},
 
 	componentWillLeave: function(callback) {
-	    // const el = this.container;
-	    // TweenMax.to(el, .5, {scale:1.5, opacity:0, onComplete: callback});
-
-	    callback();
+	    const el = this.container;
+	    TweenMax.to(el, .5, {opacity:0, ease:Power0.easeOut, onComplete: callback});
 	},
 
 	componentDidLeave: function() {
 	},
 
 	componentWillReceiveProps: function(nextProps) {
-		// const el = this.container;
-
-		// 	TweenMax.fromTo(el, 1, {opacity:1}, {opacity:0, onComplete: () => {
-		// 		TweenMax.fromTo(el, 1, {opacity:0}, {opacity:1});
-		// 	}});
 	},
 
 	// Timers and current quote handling reset with bubble zooms; see BubbleStateless for
@@ -100,7 +85,7 @@ const QuoteStateless = React.createClass({
 	render: function() {
 		return (
 			<TransitionGroup component="div">
-				{ this.props.showOverlay &&
+				{ this.props.active &&
 					<AnimatedQuote
 						messages={this.props.messages}
 						timer={this.props.timer}
