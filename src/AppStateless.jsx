@@ -59,10 +59,14 @@ const AppStateless = React.createClass({
 
 			messages = this.props.slideshow.length > 0 ?
 				this.props.slideshow[this.props.slides.current].quotes :
-				null;
+				null,
+
+			containerStyles = {
+				height: '140vw'
+			};
 
 		return (
-			<SwipeableViews axis='y'>
+			<SwipeableViews axis='y' containerStyle={containerStyles} resistance >
 				<div className="Worldview" id="outer-container">
 
 					<Menu pageWrapId="page-wrap"
