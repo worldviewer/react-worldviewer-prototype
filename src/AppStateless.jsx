@@ -63,7 +63,7 @@ const AppStateless = React.createClass({
 
 		return (
 			<SwipeableViews axis='y'>
-				<div className="App" id="outer-container">
+				<div className="Worldview" id="outer-container">
 
 					<Menu pageWrapId="page-wrap"
 						outerContainerId="outer-container"
@@ -133,11 +133,14 @@ const AppStateless = React.createClass({
 	                </main>
 
 				</div>
-				<div>
-					<p>slide 2</p>
+				<div className="Model">
+					<p>Model</p>
 				</div>
-				<div>
-					<p>slide 3></p>
+				<div className="Propositional">
+					<p>Propositional</p>
+				</div>
+				<div className="Conceptual">
+					<p>Conceptual</p>
 				</div>
 			</SwipeableViews>
 		);

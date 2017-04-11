@@ -30,7 +30,7 @@
     font-style: italic;
 }
 
-.App {
+.Worldview {
 	/* Position and sizing of burger button */
 	.bm-burger-button {
 		position: fixed;
@@ -74,12 +74,6 @@
 		fill: #373a47;
 	}
 
-	/* Wrapper for item list */
-	// .bm-item-list {
-	// 	color: #b8b7ad;
-	// 	padding: 0.8em;
-	// }
-
 	/* Styling of overlay */
 	.bm-overlay {
 		background: rgba(0, 0, 0, 0.3);
@@ -88,4 +82,19 @@
 	.footnotes-line {
 		margin: 20px 0;
 	}
+}
+
+.Model {
+	background: #f00;
+	height: 140vw;
+}
+
+.Propositional {
+	background: #0f0;
+	height: 140vw;
+}
+
+.Conceptual {
+	background: #00f;
+	height: 140vw;
 }
