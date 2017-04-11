@@ -62,7 +62,7 @@ const AppStateless = React.createClass({
 				null,
 
 			containerStyles = {
-				height: '100vw'
+				height: '100vh'
 			};
 
 		return (
