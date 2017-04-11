@@ -6,6 +6,7 @@ import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner.jsx';
 import Preload from './Preload/Preload.jsx';
 import Quote from './Quote/Quote.jsx';
+import SwipeableViews from 'react-swipeable-views';
 
 const Menu = require('./BurgerMenu/menus/scaleDown').default;
 
@@ -61,76 +62,84 @@ const AppStateless = React.createClass({
 				null;
 
 		return (
-			<div className="App" id="outer-container">
+			<SwipeableViews axis='y'>
+				<div className="App" id="outer-container">
 
-				<Menu pageWrapId="page-wrap"
-					outerContainerId="outer-container"
-					isOpen={this.props.menu.open}
-					width='75vw'
-					onStateChange={this.isMenuOpen}
-					burgerToggle={showBurger}>
+					<Menu pageWrapId="page-wrap"
+						outerContainerId="outer-container"
+						isOpen={this.props.menu.open}
+						width='75vw'
+						onStateChange={this.isMenuOpen}
+						burgerToggle={showBurger}>
 
-					{isFirstPage ?
-						h.parse(this.props.card.text) :
-						hasText &&
-						h.parse(currentSlide.text.unicode)}
+						{isFirstPage ?
+							h.parse(this.props.card.text) :
+							hasText &&
+							h.parse(currentSlide.text.unicode)}
 
-					<hr className="footnotes-line" />
+						<hr className="footnotes-line" />
 
-					<div className="footnotes">
-						{!isFirstPage && currentSlide.footnotes && currentSlide.footnotes.map((note,i) => 
-							<p key={i}>{h.parse(note.markup)}</p>
-						)}
-					</div>
-				</Menu>
-
-				<main id="page-wrap">
-					<Quote
-						messages={messages}
-						showOverlay={this.props.overlays.active}
-						timer={this.props.quotes.id}
-						current={this.props.quotes.current}
-						active={this.props.quotes.active}
-						setCurrentQuoteElement={this.props.setCurrentQuoteElement}
-						slide={this.props.slides.current} />
-
-					<Preload
-						cardId={this.props.card.id}
-						loadingIndicator={loadSpinner}
-						onError={this.handleAssetLoadError}
-						onSuccess={this.handleAssetLoadSuccess}
-						resolveOnError={true}
-						mountChildren={true} >
-
-						<ControversyCard
-							icon={this.props.card.icon}
-							titleLeft={this.props.card.nameLeft}
-							titleRight={this.props.card.nameRight}
-							summary={this.props.card.summary}
-							currentSlide={this.props.slides.current}
-							activeSlide={this.props.slides.active}
-							showOverlay={this.props.overlays.active} />
-
-					</Preload>
-
-					{this.props.controls.prev &&
-						<div 
-							onClick={this.props.prevSlide}
-							className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5"
-							style={prevNextStyle}>
+						<div className="footnotes">
+							{!isFirstPage && currentSlide.footnotes && currentSlide.footnotes.map((note,i) => 
+								<p key={i}>{h.parse(note.markup)}</p>
+							)}
 						</div>
-					}
+					</Menu>
 
-					{this.props.controls.next &&
-	                    <div
-	                    	onClick={this.props.nextSlide}
-	                    	className="md-next md-np md-n mbsc-ic mbsc-ic-arrow-right5"
-	                    	style={prevNextStyle}>
-	                	</div>
-	                }
-                </main>
+					<main id="page-wrap">
+						<Quote
+							messages={messages}
+							showOverlay={this.props.overlays.active}
+							timer={this.props.quotes.id}
+							current={this.props.quotes.current}
+							active={this.props.quotes.active}
+							setCurrentQuoteElement={this.props.setCurrentQuoteElement}
+							slide={this.props.slides.current} />
 
-			</div>
+						<Preload
+							cardId={this.props.card.id}
+							loadingIndicator={loadSpinner}
+							onError={this.handleAssetLoadError}
+							onSuccess={this.handleAssetLoadSuccess}
+							resolveOnError={true}
+							mountChildren={true} >
+
+							<ControversyCard
+								icon={this.props.card.icon}
+								titleLeft={this.props.card.nameLeft}
+								titleRight={this.props.card.nameRight}
+								summary={this.props.card.summary}
+								currentSlide={this.props.slides.current}
+								activeSlide={this.props.slides.active}
+								showOverlay={this.props.overlays.active} />
+
+						</Preload>
+
+						{this.props.controls.prev &&
+							<div 
+								onClick={this.props.prevSlide}
+								className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5"
+								style={prevNextStyle}>
+							</div>
+						}
+
+						{this.props.controls.next &&
+		                    <div
+		                    	onClick={this.props.nextSlide}
+		                    	className="md-next md-np md-n mbsc-ic mbsc-ic-arrow-right5"
+		                    	style={prevNextStyle}>
+		                	</div>
+		                }
+	                </main>
+
+				</div>
+				<div>
+					<p>slide 2</p>
+				</div>
+				<div>
+					<p>slide 3></p>
+				</div>
+			</SwipeableViews>
 		);
 	}
 });
