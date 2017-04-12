@@ -7,11 +7,15 @@ const FeedCardStateless = React.createClass({
 		return (
 			<div className="feedcard">
 				<div className="image">
-					<div className="share">{share}</div>
+					<img className="share" alt="share" src={share} />
 				</div>
+
 				<div className="title">Were dark matter filaments "predicted"?</div>
+
 				<div className="breadcrumbs">The History of the Birkeland Current > Clash of Worldviews > Noteworthy Online Discussions</div>
+
 				<div className="ratings"></div>
+
 				<div className="author">
 					<div className="avatar"></div>
 					<div className="info">
@@ -19,6 +23,7 @@ const FeedCardStateless = React.createClass({
 						<div className="role"></div>
 					</div>
 				</div>
+
 				<div className="expand-content"></div>
 			</div>
 		);
