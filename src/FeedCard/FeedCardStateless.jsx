@@ -29,7 +29,10 @@ const FeedCardStateless = React.createClass({
 				<div className="breadcrumbs">The History of the Birkeland Current > Clash of Worldviews > Noteworthy Online Discussions</div>
 
 				<div className="ratings">
-					<Chip style={chipStyles}>Testing</Chip>
+					<Chip style={chipStyles}>
+						<Avatar size={32}>9</Avatar>
+						Testing
+					</Chip>
 				</div>
 
 				<div className="author">
