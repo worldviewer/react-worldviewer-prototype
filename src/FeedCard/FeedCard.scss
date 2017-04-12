@@ -39,8 +39,23 @@
 		height: 50vh;
 		width: 100vw;
 
+		.share-container {
+			background: rgba(0, 0, 0, 0.5);
+			height: 70px;
+			position: absolute;
+			right: 0;
+			top: 30vh;
+			width: 35px;
+			z-index: 100;
+		}
+
 		.share {
+			color: #fff;
 			width: 10vw;
+
+			&:hover {
+				opacity: 0.6;
+			}
 		}
 	}
 
