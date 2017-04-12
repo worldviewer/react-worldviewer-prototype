@@ -7,6 +7,7 @@ import Spinner from './Spinner/Spinner.jsx';
 import Preload from './Preload/Preload.jsx';
 import Quote from './Quote/Quote.jsx';
 import SwipeableViews from 'react-swipeable-views';
+import FeedCard from './FeedCard/FeedCard.jsx';
 
 const Menu = require('./BurgerMenu/menus/scaleDown').default;
 
@@ -138,7 +139,7 @@ const AppStateless = React.createClass({
 
 				</div>
 				<div className="Model">
-					<p>Model</p>
+					<FeedCard />
 				</div>
 				<div className="Propositional">
 					<p>Propositional</p>
