@@ -7,7 +7,9 @@ const FeedCardStateless = React.createClass({
 		return (
 			<div className="feedcard">
 				<div className="image">
-					<img className="share" alt="share" src={share} />
+					<div className="share-container">
+						<img className="share" alt="share" src={share} />
+					</div>
 				</div>
 
 				<div className="title">Were dark matter filaments "predicted"?</div>

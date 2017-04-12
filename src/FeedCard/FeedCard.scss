@@ -31,6 +31,8 @@
 }
 
 .feedcard {
+	position: relative;
+
 	.image {
 		background-image: url(http://ichef.bbci.co.uk/universe/img/ic/640/questions_and_ideas/dark_matter/dark_matter_large.jpg);
 		background-size: cover;
@@ -44,14 +46,15 @@
 			height: 70px;
 			position: absolute;
 			right: 0;
-			top: 30vh;
+			top: 35vh;
 			width: 35px;
 			z-index: 100;
 		}
 
 		.share {
-			color: #fff;
-			width: 10vw;
+			position: relative;
+			top: 20px;
+			width: 35px;
 
 			&:hover {
 				opacity: 0.6;
