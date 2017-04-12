@@ -1,6 +1,49 @@
-.feed-image {
-	background-image: url(http://ichef.bbci.co.uk/universe/img/ic/640/questions_and_ideas/dark_matter/dark_matter_large.jpg);
-	background-size: cover;
-	height: 50vh;
-	width: 100vw;
+.feedcard {
+	.image {
+		background-image: url(http://ichef.bbci.co.uk/universe/img/ic/640/questions_and_ideas/dark_matter/dark_matter_large.jpg);
+		background-size: cover;
+		font-family: 'Lato', 'Helvetica';
+		height: 50vh;
+		width: 100vw;
+
+		.share {
+
+		}
+	}
+
+	.title {
+		font-size: 1.5em;
+	}
+
+	.breadcrumbs {
+		font-size: 0.7em;
+		text-transform: uppercase;
+	}
+
+	.ratings {
+
+	}
+
+	.author {
+		.avatar {
+			
+		}
+
+		.info {
+
+		}
+
+		.name {
+			font-size: 0.7em;
+		}
+
+		.role {
+			font-size: 0.5em;
+			text-transform: uppercase;
+		}
+	}
+
+	.expand-content {
+
+	}
 }
