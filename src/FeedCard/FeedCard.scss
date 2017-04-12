@@ -1,8 +1,41 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('../../fonts/Lato-Regular.woff2') format('woff2'),
+    	 url('../../fonts/Lato-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('../../fonts/Lato-Heavy.woff2') format('woff2'),
+    	 url('../../fonts/Lato-Heavy.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('../../fonts/Lato-Italic.woff2') format('woff2'),
+    	 url('../../fonts/Lato-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('../../fonts/Lato-HeavyItalic.woff2') format('woff2'),
+    	 url('../../fonts/Lato-HeavyItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
 .feedcard {
 	.image {
 		background-image: url(http://ichef.bbci.co.uk/universe/img/ic/640/questions_and_ideas/dark_matter/dark_matter_large.jpg);
 		background-size: cover;
 		font-family: 'Lato', 'Helvetica';
+		font-weight: bold;
 		height: 50vh;
 		width: 100vw;
 
@@ -13,10 +46,12 @@
 
 	.title {
 		font-size: 1.5em;
+		padding: 4vw;
 	}
 
 	.breadcrumbs {
 		font-size: 0.7em;
+		padding-left: 4vw;
 		text-transform: uppercase;
 	}
 
@@ -26,7 +61,7 @@
 
 	.author {
 		.avatar {
-			
+
 		}
 
 		.info {
