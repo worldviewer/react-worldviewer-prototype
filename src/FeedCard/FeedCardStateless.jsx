@@ -1,9 +1,21 @@
 import React from 'react';
 import './FeedCard.scss';
 import share from '../../public/share.svg';
+import Avatar from 'material-ui/Avatar';
+import Chip from 'material-ui/Chip';
 
 const FeedCardStateless = React.createClass({
 	render: function() {
+		const chipStyles = {
+			chip: {
+				margin: 4
+			},
+			wrapper: {
+				display: 'flex',
+				flexWrap: 'wrap'
+			},
+		};
+
 		return (
 			<div className="feedcard">
 				<div className="image">
@@ -16,7 +28,9 @@ const FeedCardStateless = React.createClass({
 
 				<div className="breadcrumbs">The History of the Birkeland Current > Clash of Worldviews > Noteworthy Online Discussions</div>
 
-				<div className="ratings"></div>
+				<div className="ratings">
+					<Chip style={chipStyles}>Testing</Chip>
+				</div>
 
 				<div className="author">
 					<div className="avatar"></div>

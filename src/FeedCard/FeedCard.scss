@@ -37,7 +37,7 @@
 	.image {
 		background-image: url(http://ichef.bbci.co.uk/universe/img/ic/640/questions_and_ideas/dark_matter/dark_matter_large.jpg);
 		background-size: cover;
-		font-weight: bold;
+		font-weight: 900;
 		height: 50vh;
 		width: 100vw;
 
@@ -63,11 +63,13 @@
 	}
 
 	.title {
+		color: #a9a9a9;
 		font-size: 1.5em;
 		padding: 4vw;
 	}
 
 	.breadcrumbs {
+		color: #cccccc;
 		font-size: 0.7em;
 		padding-left: 4vw;
 		text-transform: uppercase;

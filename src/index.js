@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
@@ -27,7 +29,9 @@ const store = createStore(
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App />
+		<MuiThemeProvider>
+			<App />
+		</MuiThemeProvider>
 	</Provider>,
 	document.getElementById('root')
 );

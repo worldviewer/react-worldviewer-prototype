@@ -8,6 +8,7 @@ import Preload from './Preload/Preload.jsx';
 import Quote from './Quote/Quote.jsx';
 import SwipeableViews from 'react-swipeable-views';
 import FeedCard from './FeedCard/FeedCard.jsx';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const Menu = require('./BurgerMenu/menus/scaleDown').default;
 
@@ -15,6 +16,12 @@ const Menu = require('./BurgerMenu/menus/scaleDown').default;
 import { Parser as HtmlToReactParser } from 'html-to-react';
 
 const AppStateless = React.createClass({
+	getInitialState: function() {
+		injectTapEventPlugin();
+
+		return null;
+	},
+
 	componentDidMount: function() {
 	},
 
