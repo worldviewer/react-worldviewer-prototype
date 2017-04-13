@@ -62,21 +62,23 @@
 		}
 	}
 
+	.info {
+		margin: 4vw;
+	}
+
 	.title {
 		color: black;
 		font-size: 1.5em;
-		padding: 4vw;
 	}
 
 	.breadcrumbs {
 		color: #a9a9a9;
 		font-size: 0.7em;
-		padding-left: 4vw;
 		text-transform: uppercase;
 	}
 
 	.ratings {
-		padding: 4vw;
+		padding: -4px;
 	}
 
 	.author {
