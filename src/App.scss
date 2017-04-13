@@ -67,6 +67,7 @@
 	/* Color/shape of burger icon bars */
 	.bm-burger-bars {
 		background: #fff;
+		transition: width 1s;
 	}
 
 	.bm-burger-bars-container {
