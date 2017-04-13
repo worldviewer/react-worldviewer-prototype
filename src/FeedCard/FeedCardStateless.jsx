@@ -12,11 +12,9 @@ const FeedCardStateless = React.createClass({
 	},
 
 	handleClick: function() {
-		if (!this.state.isTextExpanded) {
-			this.setState({
-				isTextExpanded: true
-			});
-		}
+		this.setState({
+			isTextExpanded: !this.state.isTextExpanded
+		});
 	},
 
 	render: function() {
