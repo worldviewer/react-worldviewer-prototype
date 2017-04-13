@@ -24,28 +24,30 @@ const FeedCardStateless = React.createClass({
 					</div>
 				</div>
 
-				<div className="title">Were dark matter filaments "predicted"?</div>
+				<div className="info">
+					<div className="title">Were dark matter filaments "predicted"?</div>
 
-				<div className="breadcrumbs">The History of the Birkeland Current > Clash of Worldviews > Noteworthy Online Discussions</div>
+					<div className="breadcrumbs">The History of the Birkeland Current > Clash of Worldviews > Noteworthy Online Discussions</div>
 
-				<div className="ratings">
-					<div style={styles.wrapper}>
-						<Chip style={styles.chip}>
-							<Avatar size={32}>9</Avatar>
-							Testing
-						</Chip>
+					<div className="ratings">
+						<div style={styles.wrapper}>
+							<Chip style={styles.chip}>
+								<Avatar size={32}>9</Avatar>
+								Testing
+							</Chip>
+						</div>
 					</div>
-				</div>
 
-				<div className="author">
-					<div className="avatar"></div>
-					<div className="info">
-						<div className="name"></div>
-						<div className="role"></div>
+					<div className="author">
+						<div className="avatar"></div>
+						<div className="info">
+							<div className="name"></div>
+							<div className="role"></div>
+						</div>
 					</div>
-				</div>
 
-				<div className="expand-content"></div>
+					<div className="expand-content"></div>
+				</div>
 			</div>
 		);
 	}
