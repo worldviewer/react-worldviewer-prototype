@@ -8,7 +8,8 @@ const FeedCardStateless = React.createClass({
 	render: function() {
 		const chipStyles = {
 			chip: {
-				margin: 4
+				margin: 4,
+				width: 'fit-content'
 			},
 			wrapper: {
 				display: 'flex',
