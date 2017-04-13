@@ -34,14 +34,31 @@
 	height: 100vh;
 	overflow-y: hidden;
 
+    .bm-outer-circle {
+    	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		background-color: white;
+		border: 2px solid white;
+		border-radius: 36px;
+		cursor: pointer;
+		height: 36px;
+		left: 5vw;
+		position: fixed;
+		top: 5vw;
+		width: 36px;
+		z-index: 10;
+    }
+
+    .bm-inner-circle {
+		background-color: #1D1D1D;
+		border-radius: 36px;
+		height: 36px;
+		width: 36px;
+    }
+
 	/* Position and sizing of burger button */
 	.bm-burger-button {
-		position: fixed;
 		width: 36px;
 		height: 30px;
-		left: 36px;
-		top: 0;
-		cursor: pointer;
 	}
 
 	/* Color/shape of burger icon bars */

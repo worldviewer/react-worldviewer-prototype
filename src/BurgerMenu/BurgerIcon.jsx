@@ -14,7 +14,7 @@ const BurgerIcon = Radium(React.createClass({
       position: 'absolute',
       height: '5%',
       width: '40%',
-      left: 20,
+      left: 11,
       right: 20,
       top: 10 * (index * 2) + '%',
       opacity: this.state.hover ? 0.6 : 1
@@ -51,14 +51,11 @@ const BurgerIcon = Radium(React.createClass({
     };
 
     let burgerBoxStyle = {
-      width: '70px',
-      height: '35px',
-      background: 'rgba(0, 0, 0, 0.5)',
       display: this.props.burgerToggle ? 'block' : 'none'
     };
 
     let barsStyle = {
-      top: '9px',
+      top: '11px',
       height: '100%',
       position: 'relative'
     };
@@ -80,15 +77,21 @@ const BurgerIcon = Radium(React.createClass({
     }
 
     return (
-      <div className="bm-burger-button" style={[{zIndex: 15}, this.props.styles.bmBurgerButton, burgerBoxStyle]}>
-        {icon}
-        <button onClick={this.props.onClick}
-          onMouseEnter={this.handleHover}
-          onMouseLeave={this.handleHover}
-          style={buttonStyle}>
-          Open Menu
-        </button>
-      </div>
+        <div className="bm-outer-circle" style={burgerBoxStyle}>
+          <div className="bm-inner-circle">
+
+            <div className="bm-burger-button" style={[{zIndex: 15}, this.props.styles.bmBurgerButton]}>
+              {icon}
+              <button onClick={this.props.onClick}
+                onMouseEnter={this.handleHover}
+                onMouseLeave={this.handleHover}
+                style={buttonStyle}>
+                Open Menu
+              </button>
+            </div>
+
+          </div>
+        </div>
     );
   }
 }));

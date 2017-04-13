@@ -42,20 +42,33 @@
 		transition: height 1s;
 		width: 100vw;
 
-		.share-container {
-			background: rgba(0, 0, 0, 0.5);
-			height: 70px;
+		// Refactor as SCSS mix-in
+	    .share-outer-circle {
+	    	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			background-color: white;
+			border: 2px solid white;
+			border-radius: 36px;
+			cursor: pointer;
+			height: 36px;
+			left: 5vw;
 			position: absolute;
-			right: 0;
-			top: 35vh;
-			width: 35px;
-			z-index: 100;
-		}
+			top: 5vw;
+			width: 36px;
+			z-index: 10;
+	    }
+
+	    .share-inner-circle {
+			background-color: #1D1D1D;
+			border-radius: 36px;
+			height: 36px;
+			width: 36px;
+	    }
 
 		.share {
+			left: 3px;
 			position: relative;
-			top: 20px;
-			width: 35px;
+			top: 3px;
+			width: 30px;
 
 			&:hover {
 				opacity: 0.6;
