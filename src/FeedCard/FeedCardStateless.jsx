@@ -6,10 +6,9 @@ import Chip from 'material-ui/Chip';
 
 const FeedCardStateless = React.createClass({
 	render: function() {
-		const chipStyles = {
+		const styles = {
 			chip: {
-				margin: 4,
-				width: 'fit-content'
+				margin: 4
 			},
 			wrapper: {
 				display: 'flex',
@@ -30,10 +29,12 @@ const FeedCardStateless = React.createClass({
 				<div className="breadcrumbs">The History of the Birkeland Current > Clash of Worldviews > Noteworthy Online Discussions</div>
 
 				<div className="ratings">
-					<Chip style={chipStyles}>
-						<Avatar size={32}>9</Avatar>
-						Testing
-					</Chip>
+					<div style={styles.wrapper}>
+						<Chip style={styles.chip}>
+							<Avatar size={32}>9</Avatar>
+							Testing
+						</Chip>
+					</div>
 				</div>
 
 				<div className="author">
