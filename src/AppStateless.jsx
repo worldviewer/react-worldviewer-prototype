@@ -145,14 +145,21 @@ const AppStateless = React.createClass({
 	                </main>
 
 				</div>
+
 				<div className="Model">
 					<FeedCard />
 				</div>
+
 				<div className="Propositional">
-					<p>Propositional</p>
+					<FeedCard />
 				</div>
+
 				<div className="Conceptual">
-					<p>Conceptual</p>
+					<FeedCard />
+				</div>
+
+				<div className="Narrative">
+					<FeedCard />
 				</div>
 			</SwipeableViews>
 		);
