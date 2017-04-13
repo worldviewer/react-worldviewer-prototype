@@ -132,6 +132,9 @@ const AppStateless = React.createClass({
 								onClick={this.props.prevSlide}
 								className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5"
 								style={prevNextStyle}>
+
+									<div className="md-np-inner"></div>
+
 							</div>
 						}
 
@@ -140,6 +143,9 @@ const AppStateless = React.createClass({
 		                    	onClick={this.props.nextSlide}
 		                    	className="md-next md-np md-n mbsc-ic mbsc-ic-arrow-right5"
 		                    	style={prevNextStyle}>
+
+									<div className="md-np-inner"></div>
+		                    	
 		                	</div>
 		                }
 	                </main>
