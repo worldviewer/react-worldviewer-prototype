@@ -36,16 +36,33 @@ const FeedCardStateless = React.createClass({
 			{ height: 0 } :
 			{};
 
-		const shareStyles = this.state.isTextExpanded ?
-			{ display: 'none' } :
-			{ display: 'block' };
+		const outerShareStyles = this.state.isTextExpanded ?
+			{
+				width: 0,
+			 	height: 0,
+			 	opacity: 0,
+			 	margin: '18px' } :
+			{
+				margin: 0,
+				opacity: 1
+			};
+
+		const innerShareStyles = this.state.isTextExpanded ?
+			{
+				width: 0,
+			 	height: 0,
+			 	opacity: 0 } :
+			{
+				margin: 0,
+				opacity: 1
+			};
 
 		return (
 			<div className="feedcard">
 				<div className="image" style={imageStyles}>
-					<div className="share-outer-circle" style={shareStyles}>
-						<div className="share-inner-circle">
-							<img className="share" alt="share" src={share} />
+					<div className="share-outer-circle" style={outerShareStyles}>
+						<div className="share-inner-circle" style={innerShareStyles}>
+							<img className="share" alt="share" src={share} style={innerShareStyles} />
 						</div>
 					</div>
 				</div>

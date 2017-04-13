@@ -44,6 +44,7 @@
 		left: 5vw;
 		position: fixed;
 		top: 5vw;
+		transition: width 1s, height 1s, margin 1s, opacity 1s;
 		width: 36px;
 		z-index: 10;
     }
@@ -52,18 +53,25 @@
 		background-color: #1D1D1D;
 		border-radius: 36px;
 		height: 36px;
+		transition: width 1s, height 1s, opacity 1s;
 		width: 36px;
     }
 
 	/* Position and sizing of burger button */
 	.bm-burger-button {
-		width: 36px;
 		height: 30px;
+		transition: width 1s, height 1s, opacity 1s;
+		width: 36px;
 	}
 
 	/* Color/shape of burger icon bars */
 	.bm-burger-bars {
 		background: #fff;
+	}
+
+	.bm-burger-bars-container {
+		position: relative;
+		transition: padding 1s, height 1s, opacity 1s;
 	}
 
 	/* Position and sizing of clickable cross button */

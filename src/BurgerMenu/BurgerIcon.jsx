@@ -10,15 +10,18 @@ const BurgerIcon = Radium(React.createClass({
   },
 
   getLineStyle(index) {
-    return {
+    return this.props.burgerToggle ? {
       position: 'absolute',
       height: '5%',
       width: '40%',
-      left: 11,
+      left: 0,
       right: 20,
       top: 10 * (index * 2) + '%',
       opacity: this.state.hover ? 0.6 : 1
-    };
+    } :
+    { width: 0,
+      height: 0,
+      opacity: 0 };
   },
 
   handleHover() {
@@ -50,14 +53,41 @@ const BurgerIcon = Radium(React.createClass({
       fontSize: 8
     };
 
-    let burgerBoxStyle = {
-      display: this.props.burgerToggle ? 'block' : 'none'
+    let burgerBoxStyle = this.props.burgerToggle ? {
+      margin: 0,
+      opacity: 1
+    } :
+    {
+      width: 0,
+      height: 0,
+      opacity: 0,
+      margin: '18px'
     };
 
-    let barsStyle = {
-      top: '11px',
+    let burgerButtonStyle = this.props.burgerToggle ? {
+      margin: 0,
+      opacity: 1
+    } :
+    {
+      width: 0,
+      height: 0,
+      opacity: 0
+    };
+
+    let barsContainerStyle = this.props.burgerToggle ? {
       height: '100%',
-      position: 'relative'
+      opacity: 1,
+      top: '11px'
+    } :
+    { height: 0,
+      opacity: 0,
+      top: 0 };
+
+    let barsStyle = this.props.burgerToggle ? {
+      left: '11px'
+    } :
+    {
+      left: 0
     };
 
     if (this.props.customIcon) {
@@ -68,19 +98,19 @@ const BurgerIcon = Radium(React.createClass({
       icon = React.cloneElement(this.props.customIcon, extraProps);
     } else {
       icon = (
-        <div style={barsStyle}>
-          <span className="bm-burger-bars" style={[this.getLineStyle(0), this.props.styles.bmBurgerBars]} />
-          <span className="bm-burger-bars" style={[this.getLineStyle(1), this.props.styles.bmBurgerBars]} />
-          <span className="bm-burger-bars" style={[this.getLineStyle(2), this.props.styles.bmBurgerBars]} />
+        <div className="bm-burger-bars-container" style={barsContainerStyle}>
+          <span className="bm-burger-bars" style={[this.getLineStyle(0), this.props.styles.bmBurgerBars, barsStyle]} />
+          <span className="bm-burger-bars" style={[this.getLineStyle(1), this.props.styles.bmBurgerBars, barsStyle]} />
+          <span className="bm-burger-bars" style={[this.getLineStyle(2), this.props.styles.bmBurgerBars, barsStyle]} />
         </div>
       );
     }
 
     return (
         <div className="bm-outer-circle" style={burgerBoxStyle}>
-          <div className="bm-inner-circle">
+          <div className="bm-inner-circle" style={burgerButtonStyle}>
 
-            <div className="bm-burger-button" style={[{zIndex: 15}, this.props.styles.bmBurgerButton]}>
+            <div className="bm-burger-button" style={[{zIndex: 15}, this.props.styles.bmBurgerButton, burgerButtonStyle]}>
               {icon}
               <button onClick={this.props.onClick}
                 onMouseEnter={this.handleHover}
