@@ -134,6 +134,14 @@ const initialState = {
 		current: 0,
 		active: false,
 		id: null
+	},
+
+	feeds: {
+		worldview: [],
+		model: [],
+		propositional: [],
+		conceptual: [],
+		narrative: []
 	}
 };
 
