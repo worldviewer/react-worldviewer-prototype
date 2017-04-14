@@ -169,6 +169,7 @@
 		padding: 30px;
 
 		.chevron {
+	    	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 			cursor: pointer;
 			opacity: 0.6;
 			position: absolute;
@@ -185,6 +186,12 @@
 			line-height: 2em;
 			position: relative;
 			top: -3px;
+		}
+
+		.fa-chevron-down:before {
+			line-height: 2em;
+			position: relative;
+			top: -2px;			
 		}
 
 		.title {
