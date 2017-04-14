@@ -113,35 +113,15 @@
 		margin: 20px 0;
 	}
 
-	// Use vw's to land it exactly on border of controversy card
 	.prev-next {
-		background-color: white;
-		border: 1px solid white;
-		border-radius: 6vw;
-		height: 6vw;
+		cursor: pointer;
 		opacity: 0.6;
 		position: fixed;
-		width: 6vw;
 		z-index: 100;
 
 		&:hover {
 			opacity: 0.8;
 		}
-	}
-
-	.inner-prev-next {
-		background-color: white;
-		border-radius: 6vw;
-		height: 6vw;
-		width: 6vw;
-	}
-
-	.circles {
-		cursor: pointer;
-		font-size: 6vw;
-		left: .4vw;
-		position: relative;
-		top: .1vw;
 	}
 
 	.prev {

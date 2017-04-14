@@ -4,6 +4,7 @@ import share from '../../public/share.svg';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 import chris from '../../public/chris.jpg';
+import 'font-awesome-sass-loader';
 
 // Permits HTML markup encoding in feed text
 import { Parser as HtmlToReactParser } from 'html-to-react';
@@ -102,6 +103,13 @@ const FeedCardStateless = React.createClass({
 				</div>
 
 				<div className="info" onClick={this.handleClick} ref={node => this.info = node}>
+
+					<div className="chevron-outer-circle">
+						<div className="chevron-inner-circle">
+							<i className="chevron fa fa-chevron-up" aria-hidden="true"></i>
+						</div>
+					</div>
+
 					<div className="title" ref={node => this.title = node}>Were dark matter filaments "predicted"?</div>
 
 					<div className="breadcrumbs" ref={node => this.breadcrumbs = node}>The History of the Birkeland Current > Clash of Worldviews > Noteworthy Online Discussions</div>

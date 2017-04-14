@@ -1,0 +1,17 @@
+$fa-font-size-base:   4vw !default;
+
+.fa-stack {
+	height: 4vw !important;
+	line-height: 4vw !important;
+	width: 6vw !important;
+}
+
+.fa-stack .fa-stack-1x {
+	font-size: 4vw;
+	line-height: 6vw;
+}
+
+.fa-stack .fa-stack-2x {
+	font-size: 6vw;
+	line-height: 6vw;
+}

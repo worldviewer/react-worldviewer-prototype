@@ -168,6 +168,34 @@
 		overflow-y: auto;
 		padding: 5vw;
 
+	    .chevron-outer-circle {
+			background-color: white;
+			border: 1px solid white;
+			border-radius: 6vw;
+			height: 6vw;
+			opacity: 0.6;
+			position: fixed;
+			width: 6vw;
+			z-index: 100;
+
+			&:hover {
+				opacity: 0.8;
+			}
+	    }
+
+	    .chevron-inner-circle {
+			background-color: white;
+			border-radius: 6vw;
+			height: 6vw;
+			width: 6vw;
+	    }
+
+		.chevron {
+			color: #fff;
+			position: relative;
+			transition: width 1s, height 1s, opacity 1s;
+		}
+
 		.title {
 			color: black;
 			font-size: 1.5em;

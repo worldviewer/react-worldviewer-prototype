@@ -7,7 +7,7 @@ import Quote from './Quote/Quote.jsx';
 import SwipeableViews from 'react-swipeable-views';
 import FeedCard from './FeedCard/FeedCard.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import 'font-awesome-webpack';
+import 'font-awesome-sass-loader';
 
 const Menu = require('./BurgerMenu/menus/scaleDown').default;
 
@@ -134,9 +134,10 @@ const AppStateless = React.createClass({
 								className="prev-next prev"
 								style={prevNextStyle}>
 
-									<div className="inner-prev-next">
-										<i className="circles fa fa-arrow-circle-left" aria-hidden="true"></i>
-									</div>
+									<span className="fa-stack">
+										<i className="fa fa-circle fa-stack-2x fa-inverse"></i>
+										<i className="circles fa fa-arrow-circle-left fa-stack-1x"></i>
+									</span>
 
 							</div>
 						}
@@ -147,9 +148,10 @@ const AppStateless = React.createClass({
 		                    	className="prev-next next"
 		                    	style={prevNextStyle}>
 
-		                    		<div className="inner-prev-next">
-										<i className="circles fa fa-arrow-circle-right" aria-hidden="true"></i>
-									</div>
+									<span className="fa-stack">
+										<i className="fa fa-circle fa-stack-2x fa-inverse"></i>
+										<i className="circles fa fa-arrow-circle-right fa-stack-1x"></i>
+									</span>
 
 		                	</div>
 		                }
