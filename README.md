@@ -58,7 +58,11 @@ Parameterized overlay zooms are now done -- meaning that I can now pan and zoom 
 
 Text and footnotes are also now associated with each slide in the Redux slideshow.  What remains are the quotes and audio for each slide.
 
-By the end of this stage of the process, the meaning of the content will finally become clear.  That's when this will stop being just a strange toy, and start to exhibit the feel of an actual interactive infographic.
+(By the end of this stage of the process, the meaning of the content will finally become clear.  That's when this will stop being just a strange toy, and start to exhibit the feel of an actual interactive infographic.)
+
+I've switched over to working on the other discourse layers, which are accessible via vertical swipes.  Each of these layers will be a distinct feed, so I've created a FeedCard component.
+
+The next step is to create some JSON data for these feeds.
 
 ### Part 1: The Infographic Frontend
 
@@ -147,6 +151,10 @@ Typical controversy card JSON:
 While the social network is building out, new controversy cards will continue to post to the G+ collection.  A scraper script has been constructed to rapidly populate the mongo database.  That is here:
 
 https://github.com/worldviewer/controversy-api-mongodb
+
+### The Mobile Safari Scroll Bug
+
+I've seen online that Mobile Safari has had various scrolling issues.  I seem to have one of my own now: A sudden swipe to the right on the Summary component permanently scrolls the infographic up off the screen by about 20%, which then sticks.  I've not seen this behavior in any of the other browsers -- just iOs Safari.
 
 ## The Next Steps
 
