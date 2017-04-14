@@ -37,11 +37,12 @@
     .bm-outer-circle {
     	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 		background-color: white;
-		border: 2px solid white;
+		border: 4px solid white;
 		border-radius: 36px;
 		cursor: pointer;
 		height: 36px;
 		left: 5vw;
+		opacity: 0.6;
 		position: fixed;
 		top: 5vw;
 		transition: width 1s, height 1s, margin 1s, opacity 1s;
@@ -110,6 +111,45 @@
 
 	.footnotes-line {
 		margin: 20px 0;
+	}
+
+	// Use vw's to land it exactly on border of controversy card
+	.prev-next {
+		background-color: white;
+		border: 1px solid white;
+		border-radius: 6vw;
+		height: 6vw;
+		opacity: 0.6;
+		position: fixed;
+		width: 6vw;
+		z-index: 100;
+
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+
+	.inner-prev-next {
+		background-color: white;
+		border-radius: 6vw;
+		height: 6vw;
+		width: 6vw;
+	}
+
+	.circles {
+		cursor: pointer;
+		font-size: 6vw;
+		left: .4vw;
+		position: relative;
+		top: .1vw;
+	}
+
+	.prev {
+		left: 1.2vw;
+	}
+
+	.next {
+		right: 1.2vw;
 	}
 }
 

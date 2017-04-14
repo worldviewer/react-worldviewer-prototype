@@ -56,6 +56,14 @@ const ControversyCardStateless = React.createClass({
 		this.showBubbles();
 		this.spinBubbleNumbers();
 		this.setupRotatingQuotes();
+
+		this.props.setHeight(this.root.clientHeight);
+		const resize = () => this.setupResizeHandler();
+		window.addEventListener('resize', resize);
+	},
+
+	setupResizeHandler: function() {
+		this.props.setHeight(this.root.clientHeight);
 	},
 
 	setupRotatingQuotes: function() {
@@ -105,7 +113,9 @@ const ControversyCardStateless = React.createClass({
 
 	render: function() {
 		return (
-			<div className="Deep-Zoom-Graphic">
+			<div className="Deep-Zoom-Graphic"
+				ref={node => { this.root = node; }}>
+
 				<Shade
 					darkness={this.props.card.shade.darkness}
 					zindex={this.props.card.shade.zindex}

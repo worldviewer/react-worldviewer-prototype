@@ -3,7 +3,8 @@ import ControversyCardStateless from './ControversyCardStateless.jsx';
 import { showBubble, spinBubbleNumber, disableSpinBubbleNumbers,
 	setSpinBubbleNumberTimeout, deactivateBubble, clickBubble,
 	openMenu, shadeElements, unshadeElements, resetElementZindexes,
-	clearQuoteTimers, setCurrentQuote, setCurrentQuoteTimer, toggleQuote } from '../redux';
+	clearQuoteTimers, setCurrentQuote, setCurrentQuoteTimer, toggleQuote,
+	setHeight } from '../redux';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -61,6 +62,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		toggleQuote: (state) => {
 			return dispatch(toggleQuote(state));
+		},
+		setHeight: (height) => {
+			return dispatch(setHeight(height));
 		}
 	};
 };

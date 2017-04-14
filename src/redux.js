@@ -33,7 +33,9 @@ const types = {
 
 	FETCH_CARD_REQUEST: 'FETCH_CARD_REQUEST',
 	FETCH_CARD_ERROR: 'FETCH_CARD_ERROR',
-	FETCH_CARD_SUCCESS: 'FETCH_CARD_SUCCESS'
+	FETCH_CARD_SUCCESS: 'FETCH_CARD_SUCCESS',
+
+	SET_HEIGHT: 'SET_HEIGHT'
 };
 
 const initialState = {
@@ -54,6 +56,7 @@ const initialState = {
 
 	card: {
 		id: '58b8f1f7b2ef4ddae2fb8b17',
+		height: 0,
 		url: '',
 		icon: {
 			source: '',
@@ -310,6 +313,13 @@ export const clearQuoteTimers = () => {
 export const deactivateBubble = () => {
 	return {
 		type: types.DEACTIVATE_BUBBLE
+	};
+};
+
+export const setHeight = (height) => {
+	return {
+		type: types.SET_HEIGHT,
+		height
 	};
 };
 
@@ -673,6 +683,15 @@ export default (state = initialState, action) => {
 					active: false
 				}
 			};
+
+		case types.SET_HEIGHT:
+			return {
+				...state,
+				card: {
+					...state.card,
+					height: action.height
+				}
+			}
 
 		default:
 			return state;		

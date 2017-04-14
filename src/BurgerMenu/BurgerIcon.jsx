@@ -17,7 +17,7 @@ const BurgerIcon = Radium(React.createClass({
       left: 0,
       right: 20,
       top: 10 * (index * 2) + '%',
-      opacity: this.state.hover ? 0.6 : 1
+      opacity: this.state.hover ? 1 : 0.6
     } :
     { width: 0,
       height: 0,
@@ -55,7 +55,7 @@ const BurgerIcon = Radium(React.createClass({
 
     let burgerBoxStyle = this.props.burgerToggle ? {
       margin: 0,
-      opacity: 1
+      opacity: this.state.hover ? 0.8 : 0.6
     } :
     {
       width: 0,

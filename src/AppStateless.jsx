@@ -1,14 +1,13 @@
 import React from 'react';
 import './App.scss';
 import ControversyCard from './ControversyCard/ControversyCard.jsx';
-import './mobiscroll/mobiscroll.custom-3.0.1.min.css';
-import './mobiscroll/mobiscroll-prevnext.scss';
 import Spinner from './Spinner/Spinner.jsx';
 import Preload from './Preload/Preload.jsx';
 import Quote from './Quote/Quote.jsx';
 import SwipeableViews from 'react-swipeable-views';
 import FeedCard from './FeedCard/FeedCard.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import 'font-awesome-webpack';
 
 const Menu = require('./BurgerMenu/menus/scaleDown').default;
 
@@ -62,7 +61,8 @@ const AppStateless = React.createClass({
 				false,
 
 			prevNextStyle = {
-				display: this.props.overlays.active ? 'block' : 'none'
+				display: this.props.overlays.active ? 'block' : 'none',
+				top: this.props.card.height/2
 			},
 
 			messages = this.props.slideshow.length > 0 ?
@@ -130,10 +130,12 @@ const AppStateless = React.createClass({
 						{this.props.controls.prev &&
 							<div 
 								onClick={this.props.prevSlide}
-								className="md-prev md-np mbsc-ic mbsc-ic-arrow-left5"
+								className="prev-next prev"
 								style={prevNextStyle}>
 
-									<div className="md-np-inner"></div>
+									<div className="inner-prev-next">
+										<i className="circles fa fa-arrow-circle-left" aria-hidden="true"></i>
+									</div>
 
 							</div>
 						}
@@ -141,11 +143,13 @@ const AppStateless = React.createClass({
 						{this.props.controls.next &&
 		                    <div
 		                    	onClick={this.props.nextSlide}
-		                    	className="md-next md-np md-n mbsc-ic mbsc-ic-arrow-right5"
+		                    	className="prev-next next"
 		                    	style={prevNextStyle}>
 
-									<div className="md-np-inner"></div>
-		                    	
+		                    		<div className="inner-prev-next">
+										<i className="circles fa fa-arrow-circle-right" aria-hidden="true"></i>
+									</div>
+
 		                	</div>
 		                }
 	                </main>

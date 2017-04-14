@@ -44,7 +44,7 @@ const FeedCardStateless = React.createClass({
 			 	margin: '18px' } :
 			{
 				margin: 0,
-				opacity: 1
+				opacity: 0.6
 			};
 
 		const innerShareStyles = this.state.isTextExpanded ?
