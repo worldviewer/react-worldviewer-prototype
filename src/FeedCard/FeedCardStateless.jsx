@@ -66,10 +66,6 @@ const FeedCardStateless = React.createClass({
 			// 	{ overflowY: 'auto' } :
 			// 	{ overflow: 'hidden' },
 
-			cardStyles = this.state.isTextExpanded ?
-				{} :
-				{},
-
 			imageStyles = this.state.isTextExpanded ?
 				{ height: 0 } :
 				{},
@@ -96,7 +92,7 @@ const FeedCardStateless = React.createClass({
 				};
 
 		return (
-			<div className="feedcard" style={cardStyles}>
+			<div className="feedcard">
 				<div className="image" style={imageStyles}>
 					<div className="share-outer-circle" style={outerShareStyles}>
 						<div className="share-inner-circle" style={innerShareStyles}>
