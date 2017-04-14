@@ -36,7 +36,7 @@ const FeedCardStateless = React.createClass({
 				},
 			},
 
-			infoStyles = this.state.isTextExpanded ?
+			cardStyles = this.state.isTextExpanded ?
 				{ overflowY: 'auto' } :
 				{ overflow: 'hidden' },
 
@@ -66,7 +66,7 @@ const FeedCardStateless = React.createClass({
 				};
 
 		return (
-			<div className="feedcard">
+			<div className="feedcard" style={cardStyles}>
 				<div className="image" style={imageStyles}>
 					<div className="share-outer-circle" style={outerShareStyles}>
 						<div className="share-inner-circle" style={innerShareStyles}>
@@ -75,7 +75,7 @@ const FeedCardStateless = React.createClass({
 					</div>
 				</div>
 
-				<div className="info" style={infoStyles} onClick={this.handleClick}>
+				<div className="info" onClick={this.handleClick}>
 					<div className="title">Were dark matter filaments "predicted"?</div>
 
 					<div className="breadcrumbs">The History of the Birkeland Current > Clash of Worldviews > Noteworthy Online Discussions</div>
