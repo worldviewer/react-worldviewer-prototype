@@ -3,6 +3,7 @@ import './FeedCard.scss';
 import share from '../../public/share.svg';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
+import chris from '../../public/chris.jpg';
 
 const FeedCardStateless = React.createClass({
 	getInitialState: function() {
@@ -20,7 +21,8 @@ const FeedCardStateless = React.createClass({
 	render: function() {
 		const chipStyles = {
 			chip: {
-				margin: 4
+				margin: 4,
+				fontFamily: ['Lato', 'Helvetica']
 			},
 			wrapper: {
 				display: 'flex',
@@ -82,10 +84,12 @@ const FeedCardStateless = React.createClass({
 					</div>
 
 					<div className="author">
-						<div className="avatar"></div>
-						<div className="info">
-							<div className="name"></div>
-							<div className="role"></div>
+						<div className="avatar">
+							<Avatar src={chris} />
+						</div>
+						<div className="author-info">
+							<div className="name">Chris Reeve</div>
+							<div className="role">Master of Controversies</div>
 						</div>
 					</div>
 

@@ -101,20 +101,27 @@
 	}
 
 	.author {
-		.avatar {
+		margin-top: 4vw;
+		position: relative;
 
+		.avatar {
+			display: inline-block;
 		}
 
-		.info {
-
+		.author-info {
+			display: inline-block;
+			margin-left: 2vw;
+			position: absolute;
+			top: 1vw;
 		}
 
 		.name {
-			font-size: 0.7em;
+			font-size: 1.0em;
 		}
 
 		.role {
-			font-size: 0.5em;
+			color: #a9a9a9;
+			font-size: 0.7em;
 			text-transform: uppercase;
 		}
 	}
