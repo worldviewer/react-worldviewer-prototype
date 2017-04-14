@@ -75,7 +75,7 @@ const AppStateless = React.createClass({
 			};
 
 		return (
-			<SwipeableViews axis='y' containerStyle={containerStyles} resistance >
+			<SwipeableViews axis='y' containerStyle={containerStyles} resistance enableMouseEvents>
 				<div className="Worldview" id="outer-container">
 
 					<Menu pageWrapId="page-wrap"
