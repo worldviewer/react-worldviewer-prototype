@@ -30,9 +30,94 @@
     font-style: italic;
 }
 
+.Model .feedcard {
+	background: #E57373;
+
+	&::before {
+		background: -moz-linear-gradient(top, rgba(229,115,115,0) 75%, rgba(229,115,115,1) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, rgba(229,115,115,0) 75%,rgba(229,115,115,1) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, rgba(229,115,115,0) 75%,rgba(229,115,115,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	}
+
+	.info .breadcrumbs {
+		color: #424242;
+	}
+
+	.info .role {
+		color: #424242;
+	}
+}
+
+.Propositional .feedcard {
+	background: #42A5F5;
+
+	&::before {
+		background: -moz-linear-gradient(top, rgba(66,165,245,0) 75%, rgba(66,165,245,1) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, rgba(66,165,245,0) 75%,rgba(66,165,245,1) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, rgba(66,165,245,0) 75%,rgba(66,165,245,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	}
+
+	.info .breadcrumbs {
+		color: #424242;
+	}
+
+	.info .role {
+		color: #424242;
+	}
+}
+
+.Conceptual .feedcard {
+	background: #7CB342;
+
+	&::before {
+		background: -moz-linear-gradient(top, rgba(124,179,66,0) 75%, rgba(124,179,66,1) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, rgba(124,179,66,0) 75%,rgba(124,179,66,1) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, rgba(124,179,66,0) 75%,rgba(124,179,66,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	}
+
+	.info .breadcrumbs {
+		color: #424242;
+	}
+
+	.info .role {
+		color: #424242;
+	}
+}
+
+.Narrative .feedcard {
+	background: #FFD740;
+
+	&::before {
+		background: -moz-linear-gradient(top, rgba(1255,215,64,0) 75%, rgba(1255,215,64,1) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, rgba(1255,215,64,0) 75%,rgba(1255,215,64,1) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, rgba(1255,215,64,0) 75%,rgba(1255,215,64,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	}
+
+	.info .breadcrumbs {
+		color: #424242;
+	}
+
+	.info .role {
+		color: #424242;
+	}
+}
+
 .feedcard {
 	font-family: 'Lato', 'Helvetica';
+	height: 100%;
 	position: relative;
+	transition: height 1s;
+
+	&::before {
+		content: "";
+		display: block;
+		height: 100%;
+		left: 0;
+		pointer-events: none;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
 
 	.image {
 		background-image: url(http://ichef.bbci.co.uk/universe/img/ic/640/questions_and_ideas/dark_matter/dark_matter_large.jpg);
@@ -80,20 +165,7 @@
 	}
 
 	.info {
-		margin: 5vw;
-
-		&::before {
-			background: -moz-linear-gradient(top, rgba(125,185,232,0) 80%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
-			background: -webkit-linear-gradient(top, rgba(125,185,232,0) 80%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
-			background: linear-gradient(to bottom, rgba(125,185,232,0) 80%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-			content: "";
-			display: block;
-			height: 100%;
-			left: 0;
-			position: absolute;
-			top: 0;
-			width: 100%;
-		}
+		padding: 5vw;
 
 		.title {
 			color: black;
@@ -102,7 +174,6 @@
 		}
 
 		.breadcrumbs {
-			color: #a9a9a9;
 			font-size: 0.7em;
 			padding-top: 4vw;
 			padding-bottom: 4vw;
@@ -139,7 +210,6 @@
 			}
 
 			.role {
-				color: #a9a9a9;
 				font-size: 0.7em;
 				pointer-events: none;
 				text-transform: uppercase;
