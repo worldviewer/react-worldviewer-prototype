@@ -1,8 +1,8 @@
 {
   "main.css": "public/style.css",
   "main.css.map": "public/style.css.map",
-  "main.js": "static/js/main.53db39a5.js",
-  "main.js.map": "static/js/main.53db39a5.js.map",
+  "main.js": "static/js/main.5be92665.js",
+  "main.js.map": "static/js/main.5be92665.js.map",
   "static/media/Lato-Heavy.woff": "static/media/Lato-Heavy.2ce4d823.woff",
   "static/media/Lato-Heavy.woff2": "static/media/Lato-Heavy.c9cbbdc3.woff2",
   "static/media/Lato-HeavyItalic.woff": "static/media/Lato-HeavyItalic.38d2399f.woff",
@@ -18,9 +18,10 @@
   "static/media/LeagueGothic-RegularThinner.woff": "static/media/LeagueGothic-RegularThinner.676987d8.woff",
   "static/media/LeagueGothic-RegularThinner.woff2": "static/media/LeagueGothic-RegularThinner.2c39b146.woff2",
   "static/media/explosion-spinner.svg": "static/media/explosion-spinner.96900989.svg",
-  "static/media/icons_mobiscroll.eot?i26mmk": "static/media/icons_mobiscroll.88755aab.eot",
-  "static/media/icons_mobiscroll.svg?i26mmk": "static/media/icons_mobiscroll.4b96ad86.svg",
-  "static/media/icons_mobiscroll.ttf?i26mmk": "static/media/icons_mobiscroll.64ef01e6.ttf",
-  "static/media/icons_mobiscroll.woff?i26mmk": "static/media/icons_mobiscroll.f4233d39.woff",
+  "static/media/fontawesome-webfont.eot?v=4.7.0": "static/media/fontawesome-webfont.674f50d2.eot",
+  "static/media/fontawesome-webfont.svg?v=4.7.0": "static/media/fontawesome-webfont.912ec66d.svg",
+  "static/media/fontawesome-webfont.ttf?v=4.7.0": "static/media/fontawesome-webfont.b06871f2.ttf",
+  "static/media/fontawesome-webfont.woff2?v=4.7.0": "static/media/fontawesome-webfont.af7ae505.woff2",
+  "static/media/fontawesome-webfont.woff?v=4.7.0": "static/media/fontawesome-webfont.fee66e71.woff",
   "static/media/share.svg": "static/media/share.edb42b5c.svg"
 }
