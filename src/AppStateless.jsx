@@ -34,6 +34,11 @@ const AppStateless = React.createClass({
 		this.props.setLoaded();
 	},
 
+	handleSwipe: function(index) {
+		const discourseLevels = ['worldview', 'model', 'propositional', 'conceptual', 'narrative'];
+		this.props.setDiscourseLevel(discourseLevels[index]);
+	},
+
 	showSettings: function(event) {
 		event.preventDefault();
 	},
@@ -75,7 +80,7 @@ const AppStateless = React.createClass({
 			};
 
 		return (
-			<SwipeableViews axis='y' containerStyle={containerStyles} resistance enableMouseEvents>
+			<SwipeableViews axis='y' containerStyle={containerStyles} resistance enableMouseEvents onChangeIndex={this.handleSwipe}>
 				<div className="Worldview" id="outer-container">
 
 					<Menu pageWrapId="page-wrap"
@@ -105,7 +110,7 @@ const AppStateless = React.createClass({
 							showOverlay={this.props.overlays.active}
 							timer={this.props.quotes.id}
 							current={this.props.quotes.current}
-							active={this.props.quotes.active}
+							active={this.props.quotes.active && this.props.discourse.level === 'worldview'}
 							setCurrentQuoteElement={this.props.setCurrentQuoteElement}
 							slide={this.props.slides.current} />
 
@@ -128,7 +133,9 @@ const AppStateless = React.createClass({
 
 						</Preload>
 
-						{this.props.controls.prev && this.props.overlays.loaded &&
+						{ this.props.controls.prev &&
+						  this.props.overlays.loaded &&
+						  this.props.discourse.level === "worldview" &&
 							<div 
 								onClick={this.props.prevSlide}
 								className="prev-next prev"
@@ -142,7 +149,9 @@ const AppStateless = React.createClass({
 							</div>
 						}
 
-						{this.props.controls.next && this.props.overlays.loaded &&
+						{ this.props.controls.next &&
+						  this.props.overlays.loaded &&
+						  this.props.discourse.level === "worldview" &&
 		                    <div
 		                    	onClick={this.props.nextSlide}
 		                    	className="prev-next next"
@@ -160,19 +169,19 @@ const AppStateless = React.createClass({
 				</div>
 
 				<div className="Model">
-					<FeedCard />
+					<FeedCard level="model" />
 				</div>
 
 				<div className="Propositional">
-					<FeedCard />
+					<FeedCard level="propositional" />
 				</div>
 
 				<div className="Conceptual">
-					<FeedCard />
+					<FeedCard level="conceptual" />
 				</div>
 
 				<div className="Narrative">
-					<FeedCard />
+					<FeedCard level="narrative" />
 				</div>
 			</SwipeableViews>
 		);

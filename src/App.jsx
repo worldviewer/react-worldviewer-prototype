@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError,
 	nextSlide, prevSlide, closeMenu, setCurrentQuote, clearQuoteTimers,
 	setCurrentQuoteTimer, setCurrentQuoteElement, toggleQuote,
-	openMenu, setLoaded } from './redux';
+	openMenu, setLoaded, setDiscourseLevel } from './redux';
 import AppStateless from './AppStateless.jsx';
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,7 +14,8 @@ const mapStateToProps = (state, ownProps) => {
 		controls: state.controls,
 		slideshow: state.slideshow,
 		menu: state.menu,
-		quotes: state.quotes
+		quotes: state.quotes,
+		discourse: state.discourse
 	};
 };
 
@@ -61,6 +62,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		setLoaded: () => {
 			return dispatch(setLoaded());
+		},
+		setDiscourseLevel: (level) => {
+			return dispatch(setDiscourseLevel(level));
 		}
 	};
 };

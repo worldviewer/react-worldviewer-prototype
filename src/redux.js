@@ -36,7 +36,8 @@ const types = {
 	FETCH_CARD_SUCCESS: 'FETCH_CARD_SUCCESS',
 
 	SET_HEIGHT: 'SET_HEIGHT',
-	SET_LOADED: 'SET_LOADED'
+	SET_LOADED: 'SET_LOADED',
+	SET_DISCOURSE_LEVEL: 'SET_DISCOURSE_LEVEL'
 };
 
 const initialState = {
@@ -142,6 +143,10 @@ const initialState = {
 		propositional: [],
 		conceptual: [],
 		narrative: []
+	},
+
+	discourse: {
+		level: 'worldview'
 	}
 };
 
@@ -335,6 +340,13 @@ export const setHeight = (height) => {
 export const setLoaded = () => {
 	return {
 		type: types.SET_LOADED
+	}
+}
+
+export const setDiscourseLevel = (level) => {
+	return {
+		type: types.SET_DISCOURSE_LEVEL,
+		level
 	}
 }
 
@@ -717,7 +729,15 @@ export default (state = initialState, action) => {
 				}
 			}
 
+		case types.SET_DISCOURSE_LEVEL:
+			return {
+				...state,
+				discourse: {
+					level: action.level
+				}
+			}
+
 		default:
-			return state;		
+			return state;
 	}
 };

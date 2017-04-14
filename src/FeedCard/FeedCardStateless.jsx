@@ -40,10 +40,6 @@ const FeedCardStateless = React.createClass({
 				},
 			},
 
-			// cardStyles = this.state.isTextExpanded ?
-			// 	{ overflowY: 'auto' } :
-			// 	{ overflow: 'hidden' },
-
 			imageStyles = this.state.isTextExpanded ?
 				{ height: 0 } :
 				{},
@@ -79,11 +75,15 @@ const FeedCardStateless = React.createClass({
 					</div>
 				</div>
 
-				<div className="info" onClick={this.handleClick} ref={node => this.info = node}>
+				<div className="info">
 
-						<span className="chevron fa-stack">
+						<span className="chevron fa-stack" onClick={this.handleClick}>
 							<i className="fa fa-circle fa-stack-2x fa-inverse"></i>
-							<i className="circles fa fa-chevron-up fa-stack-1x"></i>
+
+							{this.state.isTextExpanded ?
+								<i className="circles fa fa-chevron-down fa-stack-1x"></i> :
+								<i className="circles fa fa-chevron-up fa-stack-1x"></i>
+							}
 						</span>
 
 					<div className="title">Were dark matter filaments "predicted"?</div>
