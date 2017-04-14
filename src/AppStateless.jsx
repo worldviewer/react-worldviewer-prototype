@@ -134,7 +134,7 @@ const AppStateless = React.createClass({
 								className="prev-next prev"
 								style={prevNextStyle}>
 
-									<span className="fa-stack">
+									<span className="fa-stack fa-lg">
 										<i className="fa fa-circle fa-stack-2x fa-inverse"></i>
 										<i className="circles fa fa-arrow-circle-left fa-stack-1x"></i>
 									</span>
@@ -148,7 +148,7 @@ const AppStateless = React.createClass({
 		                    	className="prev-next next"
 		                    	style={prevNextStyle}>
 
-									<span className="fa-stack">
+									<span className="fa-stack fa-lg">
 										<i className="fa fa-circle fa-stack-2x fa-inverse"></i>
 										<i className="circles fa fa-arrow-circle-right fa-stack-1x"></i>
 									</span>

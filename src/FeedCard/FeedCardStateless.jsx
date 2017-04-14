@@ -23,29 +23,6 @@ const FeedCardStateless = React.createClass({
 	},
 
 	componentDidMount: function() {
-		// this.info.addEventListener('touchmove', function(e) {
-		// 	e.preventDefault();
-		// });
-
-		// this.content.addEventListener('touchmove', function(e) {
-		// 	e.preventDefault();
-		// });
-
-		// this.author.addEventListener('touchmove', function(e) {
-		// 	e.preventDefault();
-		// });
-
-		// this.title.addEventListener('touchmove', function(e) {
-		// 	e.preventDefault();
-		// });
-
-		// this.breadcrumbs.addEventListener('touchmove', function(e) {
-		// 	e.preventDefault();
-		// });
-
-		// this.ratings.addEventListener('touchmove', function(e) {
-		// 	e.preventDefault();
-		// });
 	},
 
 	render: function() {
@@ -104,17 +81,16 @@ const FeedCardStateless = React.createClass({
 
 				<div className="info" onClick={this.handleClick} ref={node => this.info = node}>
 
-					<div className="chevron-outer-circle">
-						<div className="chevron-inner-circle">
-							<i className="chevron fa fa-chevron-up" aria-hidden="true"></i>
-						</div>
-					</div>
+						<span className="chevron fa-stack">
+							<i className="fa fa-circle fa-stack-2x fa-inverse"></i>
+							<i className="circles fa fa-chevron-up fa-stack-1x"></i>
+						</span>
 
-					<div className="title" ref={node => this.title = node}>Were dark matter filaments "predicted"?</div>
+					<div className="title">Were dark matter filaments "predicted"?</div>
 
-					<div className="breadcrumbs" ref={node => this.breadcrumbs = node}>The History of the Birkeland Current > Clash of Worldviews > Noteworthy Online Discussions</div>
+					<div className="breadcrumbs">The History of the Birkeland Current > Clash of Worldviews > Noteworthy Online Discussions</div>
 
-					<div className="ratings" ref={node => this.ratings = node}>
+					<div className="ratings">
 						<div style={chipStyles.wrapper}>
 							<Chip style={chipStyles.chip}>
 								<Avatar size={32}>9</Avatar>
@@ -123,7 +99,7 @@ const FeedCardStateless = React.createClass({
 						</div>
 					</div>
 
-					<div className="author" ref={node => this.author = node}>
+					<div className="author">
 						<div className="avatar">
 							<Avatar src={chris} />
 						</div>
@@ -133,7 +109,7 @@ const FeedCardStateless = React.createClass({
 						</div>
 					</div>
 
-					<div className="content" ref={node => this.content = node}>{h.parse('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus tellus dui, sit amet fermentum justo venenatis ut. Cras lacinia nisl bibendum, vehicula mauris sed, mollis nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit.')}</div>
+					<div className="content">{h.parse('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus tellus dui, sit amet fermentum justo venenatis ut. Cras lacinia nisl bibendum, vehicula mauris sed, mollis nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit.')}</div>
 				</div>
 			</div>
 		);
