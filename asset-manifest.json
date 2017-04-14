@@ -1,8 +1,8 @@
 {
   "main.css": "public/style.css",
   "main.css.map": "public/style.css.map",
-  "main.js": "static/js/main.0fb1e988.js",
-  "main.js.map": "static/js/main.0fb1e988.js.map",
+  "main.js": "static/js/main.eb9b2375.js",
+  "main.js.map": "static/js/main.eb9b2375.js.map",
   "static/media/Lato-Heavy.woff": "static/media/Lato-Heavy.2ce4d823.woff",
   "static/media/Lato-Heavy.woff2": "static/media/Lato-Heavy.c9cbbdc3.woff2",
   "static/media/Lato-HeavyItalic.woff": "static/media/Lato-HeavyItalic.38d2399f.woff",
@@ -17,6 +17,7 @@
   "static/media/LeagueGothic-Regular.woff2": "static/media/LeagueGothic-Regular.607bbd8b.woff2",
   "static/media/LeagueGothic-RegularThinner.woff": "static/media/LeagueGothic-RegularThinner.676987d8.woff",
   "static/media/LeagueGothic-RegularThinner.woff2": "static/media/LeagueGothic-RegularThinner.2c39b146.woff2",
+  "static/media/chris.jpg": "static/media/chris.c8ea01b1.jpg",
   "static/media/explosion-spinner.svg": "static/media/explosion-spinner.96900989.svg",
   "static/media/fontawesome-webfont.eot?v=4.7.0": "static/media/fontawesome-webfont.674f50d2.eot",
   "static/media/fontawesome-webfont.svg?v=4.7.0": "static/media/fontawesome-webfont.912ec66d.svg",
