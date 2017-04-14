@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError,
 	nextSlide, prevSlide, closeMenu, setCurrentQuote, clearQuoteTimers,
 	setCurrentQuoteTimer, setCurrentQuoteElement, toggleQuote,
-	openMenu } from './redux';
+	openMenu, setLoaded } from './redux';
 import AppStateless from './AppStateless.jsx';
 
 const mapStateToProps = (state, ownProps) => {
@@ -58,6 +58,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		openMenu: () => {
 			return dispatch(openMenu());
+		},
+		setLoaded: () => {
+			return dispatch(setLoaded());
 		}
 	};
 };

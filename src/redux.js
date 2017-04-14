@@ -35,7 +35,8 @@ const types = {
 	FETCH_CARD_ERROR: 'FETCH_CARD_ERROR',
 	FETCH_CARD_SUCCESS: 'FETCH_CARD_SUCCESS',
 
-	SET_HEIGHT: 'SET_HEIGHT'
+	SET_HEIGHT: 'SET_HEIGHT',
+	SET_LOADED: 'SET_LOADED'
 };
 
 const initialState = {
@@ -322,6 +323,12 @@ export const setHeight = (height) => {
 		height
 	};
 };
+
+export const setLoaded = () => {
+	return {
+		type: types.SET_LOADED
+	}
+}
 
 export default (state = initialState, action) => {
 	let controls,
@@ -690,6 +697,15 @@ export default (state = initialState, action) => {
 				card: {
 					...state.card,
 					height: action.height
+				}
+			}
+
+		case types.SET_LOADED:
+			return {
+				...state,
+				overlays: {
+					...state.overlays,
+					loaded: true
 				}
 			}
 

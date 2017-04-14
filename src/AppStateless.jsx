@@ -31,6 +31,7 @@ const AppStateless = React.createClass({
 
 	handleAssetLoadSuccess: function() {
 		console.log('All assets loaded successfully.');
+		this.props.setLoaded();
 	},
 
 	showSettings: function(event) {
@@ -127,7 +128,7 @@ const AppStateless = React.createClass({
 
 						</Preload>
 
-						{this.props.controls.prev &&
+						{this.props.controls.prev && this.props.overlays.loaded &&
 							<div 
 								onClick={this.props.prevSlide}
 								className="prev-next prev"
@@ -140,7 +141,7 @@ const AppStateless = React.createClass({
 							</div>
 						}
 
-						{this.props.controls.next &&
+						{this.props.controls.next && this.props.overlays.loaded &&
 		                    <div
 		                    	onClick={this.props.nextSlide}
 		                    	className="prev-next next"

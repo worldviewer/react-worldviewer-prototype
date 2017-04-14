@@ -142,12 +142,16 @@ const ControversyCardStateless = React.createClass({
 					{this.props.titleRight.markup}
 				</Title>
 
-				<Summary
-					showOverlay={this.props.showOverlay}
-					openMenu={this.props.openMenu}
-					zindex={this.props.card.zindexes['summary']}>
-					{this.props.summary}
-				</Summary>
+				{this.props.overlays.loaded &&
+
+					<Summary
+						showOverlay={this.props.showOverlay}
+						openMenu={this.props.openMenu}
+						zindex={this.props.card.zindexes['summary']}>
+						{this.props.summary}
+					</Summary>
+
+				}
 
 				{ this.props.card.graphics.map((graphic, i) => {
 					const slide = this.props.slideshow ?
