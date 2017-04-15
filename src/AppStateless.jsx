@@ -105,7 +105,7 @@ const AppStateless = React.createClass({
 					transform: 'translateY(-40vh)'
 				} :
 				{
-					top: '5vh'
+					top: '30px'
 				},
 
 			swipeOverlayStyles = this.props.discourse.isFullScreen ?
@@ -117,7 +117,7 @@ const AppStateless = React.createClass({
 				{
 					height: '40vh',
 					position: 'absolute',
-					right: '10vw'
+					right: '30px'
 				},
 
 			scienceLevelImages = {
