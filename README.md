@@ -62,6 +62,10 @@ Text and footnotes are also now associated with each slide in the Redux slidesho
 
 I've switched over to working on the other discourse layers, which are accessible via vertical swipes.  Each of these layers will be a distinct feed, so I've created a FeedCard component.
 
+(There is currently a bug which requires that swipes up first start going down)
+
+Since one of the primary objectives of the app is to teach the epistemological structure of science (and especially what a worldview is), I am now briefly showing a diagram of the users' current layer of discourse when they swipe vertically between them.
+
 The next step is to create some JSON data for these feeds.
 
 ### Part 1: The Infographic Frontend
