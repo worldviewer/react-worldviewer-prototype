@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import { fetchCard, fetchCardRequest, fetchCardSuccess, fetchCardError,
 	nextSlide, prevSlide, closeMenu, setCurrentQuote, clearQuoteTimers,
 	setCurrentQuoteTimer, setCurrentQuoteElement, toggleQuote,
-	openMenu, setLoaded, setDiscourseLevel } from './redux';
+	openMenu, setLoaded, setDiscourseLevel, activateSwipeOverlay,
+	deactivateSwipeOverlay, setSwipeOverlaySize } from './redux';
 import AppStateless from './AppStateless.jsx';
 
 const mapStateToProps = (state, ownProps) => {
@@ -63,8 +64,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		setLoaded: () => {
 			return dispatch(setLoaded());
 		},
-		setDiscourseLevel: (level) => {
-			return dispatch(setDiscourseLevel(level));
+		setDiscourseLevel: (level, direction) => {
+			return dispatch(setDiscourseLevel(level, direction));
+		},
+		activateSwipeOverlay: () => {
+			return dispatch(activateSwipeOverlay());
+		},
+		deactivateSwipeOverlay: () => {
+			return dispatch(deactivateSwipeOverlay());
+		},
+		setSwipeOverlaySize: (isFullScreen) => {
+			return dispatch(setSwipeOverlaySize(isFullScreen));
 		}
 	};
 };

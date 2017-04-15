@@ -37,7 +37,11 @@ const types = {
 
 	SET_HEIGHT: 'SET_HEIGHT',
 	SET_LOADED: 'SET_LOADED',
-	SET_DISCOURSE_LEVEL: 'SET_DISCOURSE_LEVEL'
+	SET_DISCOURSE_LEVEL: 'SET_DISCOURSE_LEVEL',
+
+	ACTIVATE_SWIPE_OVERLAY: 'ACTIVATE_SWIPE_OVERLAY',
+	DEACTIVATE_SWIPE_OVERLAY: 'DEACTIVATE_SWIPE_OVERLAY',
+	SET_SWIPE_OVERLAY_SIZE: 'SET_SWIPE_OVERLAY_SIZE'
 };
 
 const initialState = {
@@ -146,7 +150,10 @@ const initialState = {
 	},
 
 	discourse: {
-		level: 'worldview'
+		level: 'worldview',
+		overlay: false,
+		swipeDirection: 'up',
+		isFullScreen: false
 	}
 };
 
@@ -340,15 +347,35 @@ export const setHeight = (height) => {
 export const setLoaded = () => {
 	return {
 		type: types.SET_LOADED
-	}
-}
+	};
+};
 
-export const setDiscourseLevel = (level) => {
+export const setDiscourseLevel = (level, direction) => {
 	return {
 		type: types.SET_DISCOURSE_LEVEL,
-		level
-	}
-}
+		level,
+		direction
+	};
+};
+
+export const activateSwipeOverlay = () => {
+	return {
+		type: types.ACTIVATE_SWIPE_OVERLAY
+	};
+};
+
+export const deactivateSwipeOverlay = () => {
+	return {
+		type: types.DEACTIVATE_SWIPE_OVERLAY
+	};
+};
+
+export const setSwipeOverlaySize = (isFullScreen) => {
+	return {
+		type: types.SET_SWIPE_OVERLAY_SIZE,
+		isFullScreen
+	};
+};
 
 export default (state = initialState, action) => {
 	let controls,
@@ -718,7 +745,7 @@ export default (state = initialState, action) => {
 					...state.card,
 					height: action.height
 				}
-			}
+			};
 
 		case types.SET_LOADED:
 			return {
@@ -727,13 +754,42 @@ export default (state = initialState, action) => {
 					...state.overlays,
 					loaded: true
 				}
-			}
+			};
 
 		case types.SET_DISCOURSE_LEVEL:
 			return {
 				...state,
 				discourse: {
-					level: action.level
+					...state.discourse,
+					level: action.level,
+					swipeDirection: action.direction
+				}
+			};
+
+		case types.ACTIVATE_SWIPE_OVERLAY:
+			return {
+				...state,
+				discourse: {
+					...state.discourse,
+					overlay: true
+				}
+			};
+
+		case types.DEACTIVATE_SWIPE_OVERLAY:
+			return {
+				...state,
+				discourse: {
+					...state.discourse,
+					overlay: false
+				}
+			};
+
+		case types.SET_SWIPE_OVERLAY_SIZE:
+			return {
+				...state,
+				discourse: {
+					...state.discourse,
+					isFullScreen: action.isFullScreen
 				}
 			}
 
