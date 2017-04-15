@@ -8,7 +8,12 @@ import SwipeableViews from 'react-swipeable-views';
 import FeedCard from './FeedCard/FeedCard.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'font-awesome-sass-loader';
-import science from '../public/science-structure-transparent.svg';
+
+import worldviews from '../public/science-structure-worldviews.svg';
+import models from '../public/science-structure-models.svg';
+import propositions from '../public/science-structure-propositions.svg';
+import concepts from '../public/science-structure-concepts.svg';
+import narratives from '../public/science-structure-narratives.svg';
 
 const Menu = require('./BurgerMenu/menus/scaleDown').default;
 
@@ -112,15 +117,23 @@ const AppStateless = React.createClass({
 					height: '40vh',
 					position: 'absolute',
 					right: '10vw'
-				};
+				},
+
+			scienceLevelImages = {
+				worldview : worldviews,
+				model : models,
+				propositional : propositions,
+				conceptual : concepts,
+				narrative : narratives
+			};
 
 		return (
 			<div>
 				{this.props.discourse.overlay &&
 					<div className="swipe-overlay" style={swipeOverlayContainerStyles}>
 
-						<img className="science-structure" alt="epistemology" src={science} style={swipeOverlayStyles} />
-						
+						<img className="science-structure" alt="epistemology" src={scienceLevelImages[this.props.discourse.level]} style={swipeOverlayStyles} />
+
 					</div>
 				}
 
