@@ -1,20 +1,17 @@
 import React from 'react';
 import './App.scss';
+
 import ControversyCard from './ControversyCard/ControversyCard.jsx';
 import Spinner from './Spinner/Spinner.jsx';
 import Preload from './Preload/Preload.jsx';
 import Quote from './Quote/Quote.jsx';
 import SwipeableViews from 'react-swipeable-views';
 import FeedCard from './FeedCard/FeedCard.jsx';
+import SwipeOverlay from './SwipeOverlay/SwipeOverlay.jsx';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'font-awesome-sass-loader';
 import debounce from 'debounce';
-
-import worldviews from '../public/science-structure-worldviews.svg';
-import models from '../public/science-structure-models.svg';
-import propositions from '../public/science-structure-propositions.svg';
-import concepts from '../public/science-structure-concepts.svg';
-import narratives from '../public/science-structure-narratives.svg';
 
 const Menu = require('./BurgerMenu/menus/scaleDown').default;
 
@@ -96,46 +93,14 @@ const AppStateless = React.createClass({
 
 			containerStyles = {
 				height: '100vh'
-			},
-
-			swipeOverlayContainerStyles = this.props.discourse.isFullScreen ?
-				{
-					left: 0,
-					top: '50%',
-					transform: 'translateY(-40vh)'
-				} :
-				{
-					top: '30px'
-				},
-
-			swipeOverlayStyles = this.props.discourse.isFullScreen ?
-				{
-					display: 'block',
-					height: '80vh',
-					margin: '0 auto'
-				} :
-				{
-					height: '40vh',
-					position: 'absolute',
-					right: '30px'
-				},
-
-			scienceLevelImages = {
-				worldview : worldviews,
-				model : models,
-				propositional : propositions,
-				conceptual : concepts,
-				narrative : narratives
 			};
 
 		return (
 			<div>
 				{this.props.discourse.overlay &&
-					<div className="swipe-overlay" style={swipeOverlayContainerStyles}>
-
-						<img className="science-structure" alt="epistemology" src={scienceLevelImages[this.props.discourse.level]} style={swipeOverlayStyles} />
-
-					</div>
+					<SwipeOverlay
+						isFullScreen={this.props.discourse.isFullScreen}
+						discourseLevel={this.props.discourse.level} />
 				}
 
 				<SwipeableViews axis='y' containerStyle={containerStyles} resistance onChangeIndex={this.handleSwipe}>
