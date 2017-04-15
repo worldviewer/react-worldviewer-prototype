@@ -54,13 +54,8 @@ const AppStateless = React.createClass({
 	},
 
 	handleSwipeOverlay: function() {
-		const delay = this.props.discourse.isFullScreen ? 3000 : 6000;
-
-		console.log('handleSwipeOverlay');
-
+		this.props.activateSwipeOverlay();
 		this.deactivateSwipeOverlay();
-
-		this.props.activateSwipeOverlay(0);
 	},
 
 	showSettings: function(event) {
