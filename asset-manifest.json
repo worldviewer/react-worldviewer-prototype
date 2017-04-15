@@ -1,8 +1,8 @@
 {
   "main.css": "public/style.css",
   "main.css.map": "public/style.css.map",
-  "main.js": "static/js/main.195a64ae.js",
-  "main.js.map": "static/js/main.195a64ae.js.map",
+  "main.js": "static/js/main.27b6713b.js",
+  "main.js.map": "static/js/main.27b6713b.js.map",
   "static/media/Lato-Heavy.woff": "static/media/Lato-Heavy.2ce4d823.woff",
   "static/media/Lato-Heavy.woff2": "static/media/Lato-Heavy.c9cbbdc3.woff2",
   "static/media/Lato-HeavyItalic.woff": "static/media/Lato-HeavyItalic.38d2399f.woff",
@@ -24,6 +24,10 @@
   "static/media/fontawesome-webfont.ttf?v=4.7.0": "static/media/fontawesome-webfont.b06871f2.ttf",
   "static/media/fontawesome-webfont.woff2?v=4.7.0": "static/media/fontawesome-webfont.af7ae505.woff2",
   "static/media/fontawesome-webfont.woff?v=4.7.0": "static/media/fontawesome-webfont.fee66e71.woff",
-  "static/media/science-structure-transparent.svg": "static/media/science-structure-transparent.d62a9962.svg",
+  "static/media/science-structure-concepts.svg": "static/media/science-structure-concepts.0e6f790a.svg",
+  "static/media/science-structure-models.svg": "static/media/science-structure-models.89c6a48f.svg",
+  "static/media/science-structure-narratives.svg": "static/media/science-structure-narratives.59aa0b10.svg",
+  "static/media/science-structure-propositions.svg": "static/media/science-structure-propositions.2c366f94.svg",
+  "static/media/science-structure-worldviews.svg": "static/media/science-structure-worldviews.d60eb85b.svg",
   "static/media/share.svg": "static/media/share.edb42b5c.svg"
 }
