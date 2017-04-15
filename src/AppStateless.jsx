@@ -118,7 +118,9 @@ const AppStateless = React.createClass({
 			<div>
 				{this.props.discourse.overlay &&
 					<div className="swipe-overlay" style={swipeOverlayContainerStyles}>
+
 						<img className="science-structure" alt="epistemology" src={science} style={swipeOverlayStyles} />
+						
 					</div>
 				}
 
