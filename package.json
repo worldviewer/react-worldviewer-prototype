@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "bezier-easing": "^2.0.3",
+    "bounce.js": "^0.8.2",
     "debounce": "^1.0.0",
     "dotenv": "^2.0.0",
     "font-awesome": "^4.7.0",

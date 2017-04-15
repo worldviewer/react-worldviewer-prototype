@@ -97,11 +97,10 @@ const AppStateless = React.createClass({
 
 		return (
 			<div>
-				{this.props.discourse.overlay &&
-					<SwipeOverlay
-						isFullScreen={this.props.discourse.isFullScreen}
-						discourseLevel={this.props.discourse.level} />
-				}
+				<SwipeOverlay
+					isFullScreen={this.props.discourse.isFullScreen}
+					discourseLevel={this.props.discourse.level}
+					active={this.props.discourse.overlay} />
 
 				<SwipeableViews axis='y' containerStyle={containerStyles} resistance onChangeIndex={this.handleSwipe}>
 					<div className="Worldview" id="outer-container">

@@ -1,6 +1,6 @@
 import React from 'react';
 import TransitionGroup from 'react-addons-transition-group';
-import { TweenMax, Bounce } from 'gsap';
+import Bounce from '../../public/bounce.min.js';
 import './SwipeOverlay.scss';
 
 import worldviews from '../../public/science-structure-worldviews.svg';
@@ -10,25 +10,102 @@ import concepts from '../../public/science-structure-concepts.svg';
 import narratives from '../../public/science-structure-narratives.svg';
 
 const AnimatedSwipeOverlay = React.createClass({
+	getInitialState: function() {
+		this.splatIn = new Bounce();
+
+		this.splatIn
+			.translate({
+				from: { x: 100, y: 0 },
+				to: { x: 0, y: 0 },
+				duration: 600,
+				easing: "bounce",
+				delay: 0,
+				bounces: 4,
+				stiffness: 4
+			})
+			.scale({
+				from: { x: 1, y: 1 },
+				to: { x: 0.1, y: 2.3 },
+				easing: "sway",
+				duration: 800,
+				delay: 65,
+				bounces: 4,
+				stiffness: 2
+			})
+			.scale({
+				from: { x: 1, y: 1},
+				to: { x: 5, y: 1 },
+				easing: "sway",
+				duration: 300,
+				delay: 30,
+				bounces: 4,
+				stiffness: 3
+			});
+
+		this.splatOut = new Bounce();
+
+		this.splatOut
+			.scale({
+				from: { x: 1, y: 1 },
+				to: { x: 0.1, y: 2.3 },
+				easing: "sway",
+				duration: 800,
+				delay: 65,
+				bounces: 4,
+				stiffness: 2
+			})
+			.scale({
+				from: { x: 1, y: 1},
+				to: { x: 5, y: 1 },
+				easing: "sway",
+				duration: 300,
+				delay: 30,
+				bounces: 4,
+				stiffness: 3
+			})
+			.translate({
+				from: { x: 0, y: 0 },
+				to: { x: 100, y: 0 },
+				duration: 600,
+				easing: "bounce",
+				delay: 0,
+				bounces: 4,
+				stiffness: 4
+			});	
+
+		return null;
+	},
+
 	componentWillAppear: function(callback) {
 		const el = this.container;
-		TweenMax.fromTo(el, 2, {scale:0.5}, {scale:1.0, ease:Bounce.easeOut, onComplete: callback});
+		this.splatIn.applyTo(el);
+		callback();
+		// TweenMax.fromTo(el, 2, {scale:0.5}, {scale:1.0, onComplete: callback});
 	},
 
 	componentWillEnter: function(callback) {
 		const el = this.container;
-    	TweenMax.fromTo(el, 1.0, {opacity: 0}, {opacity: 1, onComplete: callback});		
+		this.splatIn.applyTo(el);
+		callback();
+    	// TweenMax.fromTo(el, 1.0, {opacity: 0}, {opacity: 1, onComplete: callback});
 	},
 
 	componentDidEnter: function() {
 	},
 
 	componentWillLeave: function(callback) {
+		console.log('will leave');
+
 	    const el = this.container;
-	    TweenMax.fromTo(el, 1.0, {opacity: 1}, {opacity: 0, onComplete: callback});		
+	    this.splatOut.applyTo(el);
+	    callback();
+	    // TweenMax.fromTo(el, 1.0, {opacity: 1}, {opacity: 0, onComplete: callback});
 	},
 
 	componentDidLeave: function() {
+	},
+
+	componentDidMount: function() {
 	},
 
 	render: function() {
@@ -63,8 +140,6 @@ const AnimatedSwipeOverlay = React.createClass({
 				narrative : narratives
 			};
 
-		console.log('swipe overlay render');
-
 		return (
 			<div className="SwipeOverlay"
 				style={swipeOverlayContainerStyles}
@@ -81,9 +156,11 @@ const SwipeOverlayStateless = React.createClass({
 	render: function() {
 		return (
 			<TransitionGroup component="div">
-				<AnimatedSwipeOverlay
-					isFullScreen={this.props.isFullScreen}
-					discourseLevel={this.props.discourseLevel} />
+				{ this.props.active &&
+					<AnimatedSwipeOverlay
+						isFullScreen={this.props.isFullScreen}
+						discourseLevel={this.props.discourseLevel} />
+				}
 			</TransitionGroup>
 		);
 	}
