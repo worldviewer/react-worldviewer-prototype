@@ -153,7 +153,8 @@ const initialState = {
 		level: 'worldview',
 		overlay: false,
 		swipeDirection: 'up',
-		isFullScreen: false
+		isFullScreen: false,
+		timeoutId: null
 	}
 };
 
@@ -358,9 +359,10 @@ export const setDiscourseLevel = (level, direction) => {
 	};
 };
 
-export const activateSwipeOverlay = () => {
+export const activateSwipeOverlay = (timeoutId) => {
 	return {
-		type: types.ACTIVATE_SWIPE_OVERLAY
+		type: types.ACTIVATE_SWIPE_OVERLAY,
+		timeoutId
 	};
 };
 
@@ -771,7 +773,8 @@ export default (state = initialState, action) => {
 				...state,
 				discourse: {
 					...state.discourse,
-					overlay: true
+					overlay: true,
+					timeoutId: action.timeoutId
 				}
 			};
 

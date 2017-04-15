@@ -8,6 +8,7 @@ import SwipeableViews from 'react-swipeable-views';
 import FeedCard from './FeedCard/FeedCard.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'font-awesome-sass-loader';
+import debounce from 'debounce';
 
 import worldviews from '../public/science-structure-worldviews.svg';
 import models from '../public/science-structure-models.svg';
@@ -24,10 +25,13 @@ const AppStateless = React.createClass({
 	getInitialState: function() {
 		injectTapEventPlugin();
 
-		return null;
+		return {
+			id: null
+		};
 	},
 
 	componentDidMount: function() {
+		this.deactivateSwipeOverlay = debounce(this.props.deactivateSwipeOverlay, this.props.discourse.isFullScreen ? 3000 : 6000);
 	},
 
 	handleAssetLoadError: function(error) {
@@ -52,9 +56,11 @@ const AppStateless = React.createClass({
 	handleSwipeOverlay: function() {
 		const delay = this.props.discourse.isFullScreen ? 3000 : 6000;
 
-		this.props.activateSwipeOverlay();
+		console.log('handleSwipeOverlay');
 
-		setTimeout(() => this.props.deactivateSwipeOverlay(), delay);
+		this.deactivateSwipeOverlay();
+
+		this.props.activateSwipeOverlay(0);
 	},
 
 	showSettings: function(event) {

@@ -67,8 +67,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		setDiscourseLevel: (level, direction) => {
 			return dispatch(setDiscourseLevel(level, direction));
 		},
-		activateSwipeOverlay: () => {
-			return dispatch(activateSwipeOverlay());
+		activateSwipeOverlay: (timeoutId) => {
+			return dispatch(activateSwipeOverlay(timeoutId));
 		},
 		deactivateSwipeOverlay: () => {
 			return dispatch(deactivateSwipeOverlay());
