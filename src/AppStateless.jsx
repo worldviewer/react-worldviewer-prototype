@@ -29,6 +29,8 @@ const AppStateless = React.createClass({
 
 	componentDidMount: function() {
 		this.deactivateSwipeOverlay = debounce(this.props.deactivateSwipeOverlay, this.props.discourse.isFullScreen ? 3000 : 6000);
+
+		document.addEventListener('scroll', () => document.scrollTop(0));
 	},
 
 	handleAssetLoadError: function(error) {
