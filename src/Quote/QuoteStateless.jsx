@@ -1,20 +1,68 @@
 import React from 'react';
 import './Quote.scss';
 import TransitionGroup from 'react-addons-transition-group';
-import { TweenMax, Power0 } from 'gsap';
+import Bounce from '../../public/bounce.min.js';
 
 // Permits HTML markup encoding for quote text
 import { Parser as HtmlToReactParser } from 'html-to-react';
 
 const AnimatedQuote = React.createClass({
+	getInitialState: function() {
+		this.splatIn = new Bounce();
+
+		this.splatIn
+			.scale({
+				from: { x: 1, y: 1 },
+				to: { x: 0.1, y: 2.3 },
+				easing: "sway",
+				duration: 800,
+				delay: 65,
+				bounces: 4,
+				stiffness: 2
+			})
+			.scale({
+				from: { x: 1, y: 1},
+				to: { x: 5, y: 1 },
+				easing: "sway",
+				duration: 300,
+				delay: 30,
+				bounces: 4,
+				stiffness: 3
+			});
+
+		this.splatOut = new Bounce();
+
+		this.splatOut
+			.scale({
+				from: { x: 1, y: 1 },
+				to: { x: 0.1, y: 2.3 },
+				easing: "sway",
+				duration: 800,
+				delay: 400,
+				bounces: 4,
+				stiffness: 2
+			})
+			.scale({
+				from: { x: 1, y: 1},
+				to: { x: 0, y: 0 },
+				easing: "bounce",
+				duration: 1000,
+				delay: 800,
+				bounces: 4,
+				stiffness: 3
+			});
+
+		return null;
+	},
+
 	componentWillAppear: function(callback) {
 		const el = this.container;
-		TweenMax.fromTo(el, 2, {opacity:0}, {opacity:1, ease:Power0.easeOut, onComplete: callback});
+		this.splatIn.applyTo(el, {onComplete: callback});
 	},
 
 	componentWillEnter: function(callback) {
 		const el = this.container;
-		TweenMax.fromTo(el, 2, {opacity:0}, {opacity:1, ease:Power0.easeOut, onComplete: callback});
+		this.splatIn.applyTo(el, {onComplete: callback});
 	},
 
 	componentDidEnter: function() {
@@ -22,7 +70,7 @@ const AnimatedQuote = React.createClass({
 
 	componentWillLeave: function(callback) {
 	    const el = this.container;
-	    TweenMax.to(el, .5, {opacity:0, ease:Power0.easeOut, onComplete: callback});
+	    this.splatOut.applyTo(el, {remove: true, onComplete: callback});
 	},
 
 	componentDidLeave: function() {
