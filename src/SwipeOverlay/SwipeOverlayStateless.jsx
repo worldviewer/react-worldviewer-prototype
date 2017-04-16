@@ -90,12 +90,12 @@ const AnimatedSwipeOverlay = React.createClass({
 	},
 
 	componentWillAppear: function(callback) {
-		const el = this.container;
+		const el = this.element;
 		this.splatIn.applyTo(el, {onComplete: callback});
 	},
 
 	componentWillEnter: function(callback) {
-		const el = this.container;
+		const el = this.element;
 		this.splatIn.applyTo(el, {onComplete: callback});
 	},
 
@@ -103,8 +103,8 @@ const AnimatedSwipeOverlay = React.createClass({
 	},
 
 	componentWillLeave: function(callback) {
-	    const el = this.container;
-	    this.splatOut.applyTo(el, {remove: true, onComplete: callback});
+		const el = this.element;
+		this.splatOut.applyTo(el, {remove: true, onComplete: callback});
 	},
 
 	componentDidLeave: function() {
@@ -114,11 +114,49 @@ const AnimatedSwipeOverlay = React.createClass({
 	},
 
 	componentWillReceiveProps: function(nextProps) {
-		const el = this.container;
+		const el = this.element;
 
 		if (this.splatChange && nextProps.discourseLevel !== this.props.discourseLevel) {
-	    	this.splatChange.applyTo(el);
+			this.splatChange.applyTo(el);
 		}
+	},
+
+	getPosition: function(element) {
+		var xPosition = 0;
+		var yPosition = 0;
+
+		while(element) {
+			xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+			yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+			element = element.offsetParent;
+		}
+
+		return { x: xPosition, y: yPosition };
+	},
+
+	clickHandler: function(e) {
+		const
+			el = this.element,
+			y = e.clientY,
+			height = el.offsetHeight,
+			top = this.getPosition(el).y,
+			percentY = (y - top)/height;
+
+		let level = 'worldview';
+
+		if (percentY < 0.17) {
+			level = 'worldview';
+		} else if (percentY < 0.40) {
+			level = 'model';
+		} else if (percentY < 0.61) {
+			level = 'propositional';
+		} else if (percentY < 0.83) {
+			level = 'conceptual';
+		} else {
+			level = 'narrative';
+		}
+
+		console.log(level);
 	},
 
 	render: function() {
@@ -161,7 +199,8 @@ const AnimatedSwipeOverlay = React.createClass({
 					alt="epistemology"
 					src={scienceLevelImages[this.props.discourseLevel]}
 					style={swipeOverlayStyles}
-					ref={c => this.container = c} />
+					ref={c => this.element = c}
+					onClick={this.clickHandler} />
 
 			</div>
 		)

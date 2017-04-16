@@ -102,7 +102,13 @@ const AppStateless = React.createClass({
 					discourseLevel={this.props.discourse.level}
 					active={this.props.discourse.overlay} />
 
-				<SwipeableViews axis='y' containerStyle={containerStyles} resistance onChangeIndex={this.handleSwipe}>
+				<SwipeableViews
+					axis='y'
+					containerStyle={containerStyles}
+					resistance
+					ignoreNativeScroll
+					onChangeIndex={this.handleSwipe}>
+
 					<div className="Worldview" id="outer-container">
 
 						<Menu pageWrapId="page-wrap"
