@@ -66,6 +66,12 @@ const AppStateless = React.createClass({
 		}
 	},
 
+	componentWillReceiveProps: function(nextProps) {
+		if (nextProps.discourse.level !== this.props.discourse.level) {
+			this.deactivateSwipeOverlay();
+		}
+	},
+
 	render: function() {
 		const
 			h = new HtmlToReactParser(),
