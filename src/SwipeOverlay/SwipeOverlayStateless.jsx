@@ -42,70 +42,83 @@ const AnimatedSwipeOverlay = React.createClass({
 				stiffness: 3
 			});
 
+		this.splatChange = new Bounce();
+
+		this.splatChange
+			.scale({
+				from: { x: .8, y: 1 },
+				to: { x: 1, y: 1 },
+				easing: "bounce",
+				duration: 500,
+				delay: 0,
+				bounces: 4,
+				stiffness: 1
+			})
+			.scale({
+				from: { x: 1, y: .8},
+				to: { x: 1, y: 1 },
+				easing: "bounce",
+				duration: 500,
+				delay: 0,
+				bounces: 4,
+				stiffness: 1
+			});
+
 		this.splatOut = new Bounce();
 
 		this.splatOut
-			.scale({
-				from: { x: 1, y: 1 },
-				to: { x: 0.1, y: 2.3 },
-				easing: "sway",
-				duration: 800,
-				delay: 65,
-				bounces: 4,
-				stiffness: 2
-			})
-			.scale({
-				from: { x: 1, y: 1},
-				to: { x: 5, y: 1 },
-				easing: "sway",
-				duration: 300,
-				delay: 30,
+			.translate({
+				from: { x: 0, y: 0 },
+				to: { x: 500, y: 0 },
+				duration: 1000,
+				easing: "bounce",
+				delay: 1800,
 				bounces: 4,
 				stiffness: 3
 			})
-			.translate({
+			.skew({
 				from: { x: 0, y: 0 },
-				to: { x: 100, y: 0 },
-				duration: 600,
+				to: { x: 10, y: 0 },
 				easing: "bounce",
-				delay: 0,
+				duration: 800,
+				delay: 1750,
 				bounces: 4,
-				stiffness: 4
-			});	
+				stiffness: 3
+			})		
 
 		return null;
 	},
 
 	componentWillAppear: function(callback) {
 		const el = this.container;
-		this.splatIn.applyTo(el);
-		callback();
-		// TweenMax.fromTo(el, 2, {scale:0.5}, {scale:1.0, onComplete: callback});
+		this.splatIn.applyTo(el, {onComplete: callback});
 	},
 
 	componentWillEnter: function(callback) {
 		const el = this.container;
-		this.splatIn.applyTo(el);
-		callback();
-    	// TweenMax.fromTo(el, 1.0, {opacity: 0}, {opacity: 1, onComplete: callback});
+		this.splatIn.applyTo(el, {onComplete: callback});
 	},
 
 	componentDidEnter: function() {
 	},
 
 	componentWillLeave: function(callback) {
-		console.log('will leave');
-
 	    const el = this.container;
-	    this.splatOut.applyTo(el);
-	    callback();
-	    // TweenMax.fromTo(el, 1.0, {opacity: 1}, {opacity: 0, onComplete: callback});
+	    this.splatOut.applyTo(el, {remove: true, onComplete: callback});
 	},
 
 	componentDidLeave: function() {
 	},
 
 	componentDidMount: function() {
+	},
+
+	componentWillReceiveProps: function(nextProps) {
+		const el = this.container;
+
+		if (this.splatChange && nextProps.discourseLevel !== this.props.discourseLevel) {
+	    	this.splatChange.applyTo(el);
+		}
 	},
 
 	render: function() {
@@ -142,10 +155,13 @@ const AnimatedSwipeOverlay = React.createClass({
 
 		return (
 			<div className="SwipeOverlay"
-				style={swipeOverlayContainerStyles}
-				ref={c => this.container = c}>
+				style={swipeOverlayContainerStyles}>
 
-				<img className="science-structure" alt="epistemology" src={scienceLevelImages[this.props.discourseLevel]} style={swipeOverlayStyles} />
+				<img className="science-structure"
+					alt="epistemology"
+					src={scienceLevelImages[this.props.discourseLevel]}
+					style={swipeOverlayStyles}
+					ref={c => this.container = c} />
 
 			</div>
 		)
