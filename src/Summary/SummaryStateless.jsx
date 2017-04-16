@@ -28,7 +28,10 @@ const AnimatedSummary = React.createClass({
 	componentDidLeave: function() {
 	},
 
-	// onClick={this.props.openMenu}
+	handleClick: function(e) {
+		e.preventDefault();
+	},
+
 	render: function() {
 		let pStyles = {
 			zIndex: this.props.zindex
@@ -38,6 +41,7 @@ const AnimatedSummary = React.createClass({
 			<p
 				style={pStyles}
 				className="Summary"
+				onClick={this.handleClick}
 				ref={c => this.container = c}>
 				{this.props.children}
 			</p>
