@@ -43,10 +43,9 @@ const AppStateless = React.createClass({
 
 	handleSwipe: function(index, previous) {
 		const
-			discourseLevels = ['worldview', 'model', 'propositional', 'conceptual', 'narrative'],
 			swipeDirection = index > previous ? 'up' : 'down';
 
-		this.props.setDiscourseLevel(discourseLevels[index], swipeDirection);
+		this.props.setDiscourseLevel(index, swipeDirection);
 		this.handleSwipeOverlay();
 	},
 
@@ -100,13 +99,15 @@ const AppStateless = React.createClass({
 				<SwipeOverlay
 					isFullScreen={this.props.discourse.isFullScreen}
 					discourseLevel={this.props.discourse.level}
-					active={this.props.discourse.overlay} />
+					active={this.props.discourse.overlay}
+					discourseHandler={this.props.setDiscourseLevel} />
 
 				<SwipeableViews
 					axis='y'
 					containerStyle={containerStyles}
 					resistance
 					ignoreNativeScroll
+					index={this.props.discourse.level}
 					onChangeIndex={this.handleSwipe}>
 
 					<div className="Worldview" id="outer-container">

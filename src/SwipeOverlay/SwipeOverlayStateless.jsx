@@ -142,21 +142,21 @@ const AnimatedSwipeOverlay = React.createClass({
 			top = this.getPosition(el).y,
 			percentY = (y - top)/height;
 
-		let level = 'worldview';
+		let level = 0;
 
 		if (percentY < 0.17) {
-			level = 'worldview';
+			level = 0;
 		} else if (percentY < 0.40) {
-			level = 'model';
+			level = 1;
 		} else if (percentY < 0.61) {
-			level = 'propositional';
+			level = 2;
 		} else if (percentY < 0.83) {
-			level = 'conceptual';
+			level = 3;
 		} else {
-			level = 'narrative';
+			level = 4;
 		}
 
-		console.log(level);
+		this.props.discourseHandler(level);
 	},
 
 	render: function() {
@@ -183,13 +183,7 @@ const AnimatedSwipeOverlay = React.createClass({
 					right: '30px'
 				},
 
-			scienceLevelImages = {
-				worldview : worldviews,
-				model : models,
-				propositional : propositions,
-				conceptual : concepts,
-				narrative : narratives
-			};
+			scienceLevelImages = [worldviews, models, propositions, concepts, narratives];
 
 		return (
 			<div className="SwipeOverlay"
@@ -214,7 +208,8 @@ const SwipeOverlayStateless = React.createClass({
 				{ this.props.active &&
 					<AnimatedSwipeOverlay
 						isFullScreen={this.props.isFullScreen}
-						discourseLevel={this.props.discourseLevel} />
+						discourseLevel={this.props.discourseLevel}
+						discourseHandler={this.props.discourseHandler} />
 				}
 			</TransitionGroup>
 		);

@@ -150,7 +150,7 @@ const initialState = {
 	},
 
 	discourse: {
-		level: 'worldview',
+		level: 0,
 		overlay: false,
 		swipeDirection: 'up',
 		isFullScreen: false,
