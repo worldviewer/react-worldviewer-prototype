@@ -147,7 +147,7 @@ const AppStateless = React.createClass({
 								showOverlay={this.props.overlays.active}
 								timer={this.props.quotes.id}
 								current={this.props.quotes.current}
-								active={this.props.quotes.active && this.props.discourse.level === 'worldview'}
+								active={this.props.quotes.active && this.props.discourse.level === 0}
 								setCurrentQuoteElement={this.props.setCurrentQuoteElement}
 								slide={this.props.slides.current} />
 
@@ -172,7 +172,7 @@ const AppStateless = React.createClass({
 
 							{ this.props.controls.prev &&
 							  this.props.overlays.loaded &&
-							  this.props.discourse.level === "worldview" &&
+							  this.props.discourse.level === 0 &&
 								<div 
 									onClick={this.props.prevSlide}
 									className="prev-next prev"
@@ -188,7 +188,7 @@ const AppStateless = React.createClass({
 
 							{ this.props.controls.next &&
 							  this.props.overlays.loaded &&
-							  this.props.discourse.level === "worldview" &&
+							  this.props.discourse.level === 0 &&
 			                    <div
 			                    	onClick={this.props.nextSlide}
 			                    	className="prev-next next"
