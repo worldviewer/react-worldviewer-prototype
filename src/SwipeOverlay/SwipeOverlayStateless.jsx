@@ -98,7 +98,7 @@ const AnimatedSwipeOverlay = React.createClass({
 			distY,
 			threshold = 30, //required min distance traveled to be considered swipe
 			restraint = 300, // maximum distance allowed at the same time in perpendicular direction
-			allowedTime = 300, // maximum time allowed to travel that distance
+			allowedTime = 200, // maximum time allowed to travel that distance
 			elapsedTime,
 			startTime,
 			handleswipe = callback || function(swipedir) {};
@@ -114,9 +114,9 @@ const AnimatedSwipeOverlay = React.createClass({
 			// e.preventDefault();
 		}, false);
 	  
-		touchsurface.addEventListener('touchmove', function(e) {
-			// e.preventDefault(); // prevent scrolling when inside DIV
-		}, false);
+		// touchsurface.addEventListener('touchmove', function(e) {
+		// 	e.preventDefault(); // prevent scrolling when inside DIV
+		// }, false);
 	  
 		touchsurface.addEventListener('touchend', function(e) {
 			let touchobj = e.changedTouches[0];
@@ -125,7 +125,7 @@ const AnimatedSwipeOverlay = React.createClass({
 			distY = touchobj.pageY - startY; // get vertical dist traveled by finger while in contact with surface
 			elapsedTime = new Date().getTime() - startTime ;// get time elapsed
 
-			if (elapsedTime <= allowedTime) { // first condition for awipe met
+			if (elapsedTime <= allowedTime) { // first condition for swipe met
 				if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) { // 2nd condition for horizontal swipe met
 					swipedir = (distX < 0)?  'left' : 'right'; // if dist traveled is negative, it indicates left swipe
 				}
