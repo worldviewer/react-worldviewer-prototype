@@ -108,7 +108,8 @@ const AppStateless = React.createClass({
 					isFullScreen={this.props.discourse.isFullScreen}
 					discourseLevel={this.props.discourse.level}
 					active={this.props.discourse.overlay}
-					discourseHandler={this.props.setDiscourseLevel} />
+					discourseHandler={this.props.setDiscourseLevel}
+					deactivateOverlayHandler={this.props.deactivateSwipeOverlay} />
 
 				<SwipeableViews
 					axis='y'
