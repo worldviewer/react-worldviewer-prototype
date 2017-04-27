@@ -64,11 +64,13 @@ I've switched over to working on the other discourse layers, which are accessibl
 
 Since one of the primary objectives of the app is to teach the epistemological structure of science (and especially what a worldview is), I am now briefly showing a diagram of the users' current layer of discourse when they swipe vertically between them.
 
-The next step is to create some JSON data for these feeds.
+Simulated feed data is now created for all five levels of discourse (worldview, model, propositional, concept and narrative) for the Halton Arp controversy.  This is the first time that this categorization scheme has actually been put to some sort of real-world application, and it seems to work pretty well.  I noticed along the way that it is not always obvious which of the model, propositional or conceptual categories that some piece of information should bin into (so users may need some assistance built into the app to guide them on this); I think the best strategy for this would be to include questions at the point of content submission (with links to jump to the other levels).  In total, I was able to generate 67 (!) sample feed submissions -- which should provide for an extremely realistic experience with the demo.
 
-Also, the current implementation of the burger menu system should not be embedded within a layer of discourse, so it should be refactored to exist outside of the Swipeable component.
+The immediate next step is create a script which can transform this markdown into JSON (so that I can retain an ability to modify it in its markdown format).  To do this, I will set up a consistent directory structure which the script can assume.
 
-I'm nearing completion of the research required to construct these feeds.  Once that work is complete, a logical next step would be to incorporate the React Router so that I can add in a controversy search homepage.
+The current implementation of the burger menu system should not be embedded within a layer of discourse, so it should be refactored to exist outside of the Swipeable component.
+
+A looming next step would be to incorporate the React Router so that I can add in a controversy search homepage.
 
 ### Part 1: The Infographic Frontend
 
