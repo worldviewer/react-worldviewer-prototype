@@ -160,6 +160,17 @@ While the social network is building out, new controversy cards will continue to
 
 https://github.com/worldviewer/controversy-api-mongodb
 
+### Part 5 - The Simulated Feed API Generator
+
+- Should convert markdown to unicode-encoded HTML
+- Should automatically convert zoomable images to dzi's
+- Will for now push udpates to github manually
+- Fields for: citizen scientist name / title, title, image location, zoomable flag / max zoom, content, array of metrics objects, date / time, github url, crowdsourcing pattern
+- Image names must be automatically generated such that collisions never occur
+- Data should be included in the /cards endpoint under "feeds"
+- Script must evaluate whether or not a particular feed item has changed, rather than mindlessly converting all entries
+- Save to db
+
 ### The Mobile Safari Scroll Bug
 
 I've seen online that Mobile Safari has had various scrolling issues.  I seem to have one of my own now: A sudden swipe to the right on the Summary component permanently scrolls the infographic up off the screen by about 20%, which then sticks.  I've not seen this behavior in any of the other browsers -- just iOs Safari.
