@@ -181,117 +181,119 @@ This part of the app will be constructed using Netlify's Open Source Ecosystem d
 
 **The Worldviewer App Structure**
 
-    + This system is designed to create information gathering habits within information consumers.  The system should help people to adapt to the rules, but only go so far to adapt the rules to the information consumers' pre-existing information consumer habits.
+- This system is designed to create information gathering habits within information consumers.  The system should help people to adapt to the rules, but only go so far to adapt the rules to the information consumers' pre-existing information consumer habits.
 
-    + Base the initial design off of G+, but using, when necessary, the React components at http://www.material-ui.com/.  This should ease the transition for most people by starting with something already familiar.
+- Base the initial design off of G+, but using, when necessary, the React components at http://www.material-ui.com/.  This should ease the transition for most people by starting with something already familiar.
 
-    + All content is (at least initially) curated by a set of editors assigned by specialty.
+- All content is (at least initially) curated by a set of editors assigned by specialty.
 
-    + Links / content / commentary can be submitted by anybody, but please understand that editors may restructure these submissions and augment the content if these changes better suit the site's principles.
+- Links / content / commentary can be submitted by anybody, but please understand that editors may restructure these submissions and augment the content if these changes better suit the site's principles.
 
-    + A distinction is made between "contributions" and "comments".  A contribution is information that is relevant to a scientific controversy, whereas a comment need not be.  Some comments will be elevated by moderators (or may evolve) to contributions.  Comments can be more freeform.
+- A distinction is made between "contributions" and "comments".  A contribution is information that is relevant to a scientific controversy, whereas a comment need not be.  Some comments will be elevated by moderators (or may evolve) to contributions.  Comments can be more freeform.
 
-    + Disagreements should generally be judged according to the site's principles, but the editors should be given much freedom to decide on their own.
+- Disagreements should generally be judged according to the site's principles, but the editors should be given much freedom to decide on their own.
 
-    + There will be a place to discuss the site's principles, where cases can be made to change them.
+- There will be a place to discuss the site's principles, where cases can be made to change them.
 
-    + The app should teach the structure of science at each level where it is integrated into the app's UI.  Of significant importance is the goal of teaching laypeople what a worldview is, and the value of a constructivist approach when some textbook claim has become challenged.  One way to do this: On transition, overlay graphic on screen of relevant structure of science.
+- The app should teach the structure of science at each level where it is integrated into the app's UI.  Of significant importance is the goal of teaching laypeople what a worldview is, and the value of a constructivist approach when some textbook claim has become challenged.  One way to do this: On transition, overlay graphic on screen of relevant structure of science.
 
-    + Clicking on H1's (like "Model Talk") drops down an explanation of the purpose of this area + suggestions for how to contribute.
+- Clicking on H1's (like "Model Talk") drops down an explanation of the purpose of this area + suggestions for how to contribute.
 
-    + Categories are agnostic of the content type -- can be books, journals, press releases, videos, podcasts, whatever.
+- Categories are agnostic of the content type -- can be books, journals, press releases, videos, podcasts, whatever.
 
-    + The worldview, model, propositional and conceptual levels are four separate feeds, where each post is labeled according to their H2 category.
+- The worldview, model, propositional and conceptual levels are four separate feeds, where each post is labeled according to their H2 category.
 
-    + Users rate all feed content according to the criteria, but some user's ratings carry more weight.
+- Users rate all feed content according to the criteria, but some user's ratings carry more weight.
 
-    + Consider creating controversy cards to explain the judging criteria.
+- Consider creating controversy cards to explain the judging criteria.
 
-    + Users must not be required to remember the judging criteria; they should be reminded at the moments when it matters.
+- Users must not be required to remember the judging criteria; they should be reminded at the moments when it matters.
 
-    + Non-threaded conversations can attach to each feed item (similar to G+).  See http://www.material-ui.com/#/components/list.
+- Non-threaded conversations can attach to each feed item (similar to G+).  See http://www.material-ui.com/#/components/list.
 
-    + When these conversations derail off-topic or into an unproductive direction, editors are free to turn visibility off by default (user must click to see).  The point of this is to solve the information overload problem -- not bind ourselves to being so nice that it hamstrings everybody else's need to have a clean information channel.
+- When these conversations derail off-topic or into an unproductive direction, editors are free to turn visibility off by default (user must click to see).  The point of this is to solve the information overload problem -- not bind ourselves to being so nice that it hamstrings everybody else's need to have a clean information channel.
 
-    + There is search throughout the app which is always constrained to the context of the current view panel.
+- There is search throughout the app which is always constrained to the context of the current view panel.
 
-    + Map the four levels of discourse to routes
+- Map the four levels of discourse to routes
 
-    + Animated cards are mixed in with static cards.
+- Animated cards are mixed in with static cards.
 
-    + There should be a place where people can publicly pitch a new controversy card, and the public can provide feedback and even rate them (criteria?).
+- There should be a place where people can publicly pitch a new controversy card, and the public can provide feedback and even rate them (criteria?).
 
-    + There should be a set of clearly-stated criteria for identifying and selecting the best controversies to cover.
+- There should be a set of clearly-stated criteria for identifying and selecting the best controversies to cover.
 
-    + H2: (Future Feature) The Paper Annotator - a chance to apply all of the various criteria at all levels of discourse directly to the original scientific papers themselves; emphasis upon questionable claims dressed up in esoteric academic jargon; upon surprising admissions that were never reported on by science journalists; upon confirmations for challenges to textbook theory.
+- (Future Feature) The Paper Annotator - a chance to apply all of the various criteria at all levels of discourse directly to the original scientific papers themselves; emphasis upon questionable claims dressed up in esoteric academic jargon; upon surprising admissions that were never reported on by science journalists; upon confirmations for challenges to textbook theory.
 
-    + Over time, the objective should be to make sure that the materials are internally linking to each other.
+- Over time, the objective should be to make sure that the materials are internally linking to each other.
 
-    Consistent format for all citizen scientist contributions, unexpanded:
-    + Image (deep zoomable via OpenSeaDragon gestures)
-    + Title of the Controversy Card it is attached to > H1 > H2 as a breadcrumb trail
-    + Title of the contribution
-    + Expand content
-    + Ranking criteria numbers listed inside of chips
-    + Link to social share
+Consistent format for all citizen scientist contributions, unexpanded:
 
-    Expanded:
-    + Citizen scientists' bio link
-    + Text Content
+- Image (deep zoomable via OpenSeaDragon gestures)
+- Title of the Controversy Card it is attached to > H1 > H2 as a breadcrumb trail
+- Title of the contribution
+- Expand content
+- Ranking criteria numbers listed inside of chips
+- Link to social share
 
-**H1: THE CLASH OF WORLDVIEWS**
+Expanded:
 
-    + H2: An Observational or Experimental Confirmation - try to be concise if the link between the two is not immediately obvious; emphasis upon documenting the needed context for a typical layperson to understand it (you can assume they have read the controversy card, points deducted if there is some sort of misunderstanding of the controversy or science).
+- Citizen scientists' bio link
+- Text Content
 
-    + H2: Links to the Best Related Critiques - short-form journalism ("articles"); emphasis upon basic journalism and science standards; do not fall back upon overly-simplistic filters (like ignoring all publications by a particular source), take the time to actually evaluate the claims; emphasis upon the author's selection of details; upon applicability to the controversy; upon level of detail with the sourcing (please add corrections for broken links); emphasis upon empirical science over other forms (thought experiments, purely observational, excessive reliance upon constructs).
+**THE CLASH OF WORLDVIEWS**
 
-    + H2: Press Releases or Scientific Papers that Relate to this Controversy - not to be confused with PR's that more properly relate to the challenged theory; emphasis upon significance to the controversy; emphasis upon the logic of the claimed fit; points for filtering out unnecessary information or emphasizing the important bits (either bolding or highlighting); particular emphasis upon relevant points from scientific papers which have not shown up in mainstream science aggregators.
+- *An Observational or Experimental Confirmation* - try to be concise if the link between the two is not immediately obvious; emphasis upon documenting the needed context for a typical layperson to understand it (you can assume they have read the controversy card, points deducted if there is some sort of misunderstanding of the controversy or science).
 
-    + H2: Noteworthy Online Discussions - emphasis upon identification of misconceptions or misguided "debunking"; upon proper addition of context (could people understand what the point of this was?); upon surprising claims; upon noting patterns discussed in controversy cards; upon character studies of the main players in online debates; upon any related online censorship; upon people who take the time to run claims and report back on their findings with snapshots; upon any discussions for how to deal with online challenges.  Points always deducted for evidence of any petty or trollish behaviors (or any other violation of the site's own principles when members interact with the larger science community since these behaviors can lead to stereotypes).
+- *Links to the Best Related Critiques* - short-form journalism ("articles"); emphasis upon basic journalism and science standards; do not fall back upon overly-simplistic filters (like ignoring all publications by a particular source), take the time to actually evaluate the claims; emphasis upon the author's selection of details; upon applicability to the controversy; upon level of detail with the sourcing (please add corrections for broken links); emphasis upon empirical science over other forms (thought experiments, purely observational, excessive reliance upon constructs).
 
-    + H2: Observational / Experimental Suggestions - pretend you are a graduate student who actually had access to facilities, equipment and funding, can you devise a test that might resolve the debate?  emphasis upon whether or not sufficient technical detail was provided to fully understand the idea; upon whether or not people think it might work; points for creative problem-solving.  Don't hold ideas back here if you lack all of the quantitative details, assume that somebody else at a later time may be able to help with that.
+- *Press Releases or Scientific Papers that Relate to this Controversy* - not to be confused with PR's that more properly relate to the challenged theory; emphasis upon significance to the controversy; emphasis upon the logic of the claimed fit; points for filtering out unnecessary information or emphasizing the important bits (either bolding or highlighting); particular emphasis upon relevant points from scientific papers which have not shown up in mainstream science aggregators.
 
-    + H2: Crucial Resources - where would somebody go to get a deeper background in this subject? if it's just a chapter of a larger book, please identify (or if helpful) describe the chapters; emphasis upon whether or not the material is accessible to laypeople, but technical materials are of course important here too; if the material is very technical, the reviewer can rank the material higher if they provide their own annotated version of the resource.  Opinions on how to properly approach the subject are encouraged.
+- *Noteworthy Online Discussions* - emphasis upon identification of misconceptions or misguided "debunking"; upon proper addition of context (could people understand what the point of this was?); upon surprising claims; upon noting patterns discussed in controversy cards; upon character studies of the main players in online debates; upon any related online censorship; upon people who take the time to run claims and report back on their findings with snapshots; upon any discussions for how to deal with online challenges.  Points always deducted for evidence of any petty or trollish behaviors (or any other violation of the site's own principles when members interact with the larger science community since these behaviors can lead to stereotypes).
 
-**H1: MODEL TALK**
+- *Observational / Experimental Suggestions* - pretend you are a graduate student who actually had access to facilities, equipment and funding, can you devise a test that might resolve the debate?  emphasis upon whether or not sufficient technical detail was provided to fully understand the idea; upon whether or not people think it might work; points for creative problem-solving.  Don't hold ideas back here if you lack all of the quantitative details, assume that somebody else at a later time may be able to help with that.
 
-    + H2: The Best Explanations - selected according to usage of visuals, clarity on assumptions, good presentation of historical context, thorough conceptual explanation of any presented mathematics, written at a level that a layperson non-scientist can understand.  These pieces should not be rated on the basis of age so long as there is no confusion generated from the introduction of that former context.
+- *Crucial Resources* - where would somebody go to get a deeper background in this subject? if it's just a chapter of a larger book, please identify (or if helpful) describe the chapters; emphasis upon whether or not the material is accessible to laypeople, but technical materials are of course important here too; if the material is very technical, the reviewer can rank the material higher if they provide their own annotated version of the resource.  Opinions on how to properly approach the subject are encouraged.
 
-    + H2: Modeling Practices & Assumptions - explanation of some particular modeling practice or assumption (preferably focused on just one at a time), with an emphasis upon how the practice/assumption would be conveyed within scientific papers or press releases (such that the reader is now better equiped to identify this pattern in the future).  Points for emphasis upon hidden practices or assumptions whose exposure alters the interpretation of the results.  This would be a good spot to place discussions about statistics.
+**MODEL TALK**
 
-    + H2: The History and Origin of the Idea - emphasis upon unexpected context, little-known historical facts/interpretations or popular beliefs, famous or otherwise important quotes.
+- *The Best Explanations* - selected according to usage of visuals, clarity on assumptions, good presentation of historical context, thorough conceptual explanation of any presented mathematics, written at a level that a layperson non-scientist can understand.  These pieces should not be rated on the basis of age so long as there is no confusion generated from the introduction of that former context.
 
-    + H2: Tracking the Science Journalism and Public Perception - emphasis upon tracking changes in the journalism; upon initial expressions of surprise or honest admissions which are subsequently rolled into the model (which can help us to identify hindsight biases); upon any omission of context or detail which undermines the offered conclusions; upon materials presented purely for their clickbait attributes; upon dubious logic.  Extra points for those who take the time to dig up some unexpected science journalism gem from the distant past which gives us some insight on how ideas have transformed over time.
+- *Modeling Practices & Assumptions* - explanation of some particular modeling practice or assumption (preferably focused on just one at a time), with an emphasis upon how the practice/assumption would be conveyed within scientific papers or press releases (such that the reader is now better equiped to identify this pattern in the future).  Points for emphasis upon hidden practices or assumptions whose exposure alters the interpretation of the results.  This would be a good spot to place discussions about statistics.
 
-    + H2: Press Releases that Relate to the Challenged Theory - not to be confused with PR's that are more directly relevant to the controversy, and realize there is a category already dedicated to inconsistences and anomalies; try to focus people on the specific part you want them to read, and help us understand why it should matter to us.
+- *The History and Origin of the Idea* - emphasis upon unexpected context, little-known historical facts/interpretations or popular beliefs, famous or otherwise important quotes.
 
-    + H2: Things to Know About Wikipedia's Coverage on This - think supplemental -- the point is not to replicate work already done on Wikipedia (this is analysis, not duplication); emphasis upon ideology posing as facts, questionable selection of evidence, information about wiki wars and activities of those known to abuse the platform.  If the entry (and its history) is unremarkable and uncontroversial, then this bin should be empty.
+- *Tracking the Science Journalism and Public Perception* - emphasis upon tracking changes in the journalism; upon initial expressions of surprise or honest admissions which are subsequently rolled into the model (which can help us to identify hindsight biases); upon any omission of context or detail which undermines the offered conclusions; upon materials presented purely for their clickbait attributes; upon dubious logic.  Extra points for those who take the time to dig up some unexpected science journalism gem from the distant past which gives us some insight on how ideas have transformed over time.
 
-    + H2: The Inconsistencies and Anomalies - emphasis upon internal inconsistencies and any attempts to resolve them -- born of either observations or logic; slight emphasis upon those which are more empirically established, but it's okay if some of these turn out to be to incorrect (let's keep a broad dragnet).
+- *Press Releases that Relate to the Challenged Theory* - not to be confused with PR's that are more directly relevant to the controversy, and realize there is a category already dedicated to inconsistences and anomalies; try to focus people on the specific part you want them to read, and help us understand why it should matter to us.
 
-**H1: PROPOSITIONS**
+- *Things to Know About Wikipedia's Coverage on This* - think supplemental -- the point is not to replicate work already done on Wikipedia (this is analysis, not duplication); emphasis upon ideology posing as facts, questionable selection of evidence, information about wiki wars and activities of those known to abuse the platform.  If the entry (and its history) is unremarkable and uncontroversial, then this bin should be empty.
 
-    + H2: Dumb Questions - emphasis upon how common these questions pop up.
+- *The Inconsistencies and Anomalies* - emphasis upon internal inconsistencies and any attempts to resolve them -- born of either observations or logic; slight emphasis upon those which are more empirically established, but it's okay if some of these turn out to be to incorrect (let's keep a broad dragnet).
 
-    + H2: Poignant Questions - do not judge these questions on your perception of whether or not they will prove true; the emphasis is upon asking good questions that can in some way be justified; emphasis upon creativity and synthesis (bringing together two ideas whose connection is not immediately obvious).
+**PROPOSITIONS**
 
-    + H2: Creative Conjectures - a general-purpose bin for conjectures; ranking might not be necessary.
+- *Dumb Questions* - emphasis upon how common these questions pop up.
 
-    + H2: Confident Claims
+- *Poignant Questions* - do not judge these questions on your perception of whether or not they will prove true; the emphasis is upon asking good questions that can in some way be justified; emphasis upon creativity and synthesis (bringing together two ideas whose connection is not immediately obvious).
 
-    + H2: Predictions - emphasis upon the rationale (does this person know something we previously did not?); points after-the-fact if it proves correct.
+- *Creative Conjectures* - a general-purpose bin for conjectures; ranking might not be necessary.
 
-**H1: CONCEPTS**
+- *Confident Claims*
 
-    + H2: Concept Maps - emphasis upon use of concept maps as a pedagogical tool.
+- *Predictions* - emphasis upon the rationale (does this person know something we previously did not?); points after-the-fact if it proves correct.
 
-    + H2: Explain the Math - emphasis upon the conceptual explanation or critique of some mathematics.
+**CONCEPTS**
 
-    + H2: Multiple Representations in Multiple Agents - emphasis upon some mismatch in definitions, either according to worldview or domain.
+- *Concept Maps* - emphasis upon use of concept maps as a pedagogical tool.
 
-**H1: NARRATIVES**
+- *Explain the Math* - emphasis upon the conceptual explanation or critique of some mathematics.
 
-    + H2: Examples - emphasis upon exposure of unsupported or faddish narratives; upon effective demonstrations, with evidence, that the narratives are off.
+- *Multiple Representations in Multiple Agents* - emphasis upon some mismatch in definitions, either according to worldview or domain.
+
+**NARRATIVES**
+
+- *Examples* - emphasis upon exposure of unsupported or faddish narratives; upon effective demonstrations, with evidence, that the narratives are off.
 
 ### The Mobile Safari Scroll Bug
 
