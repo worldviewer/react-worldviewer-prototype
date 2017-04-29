@@ -68,9 +68,7 @@ Simulated feed data is now created for all five levels of discourse (worldview, 
 
 The immediate next step is create a script which can transform this markdown into JSON (so that I can retain an ability to modify it in its markdown format).  To do this, I will set up a consistent directory structure which the script can assume.
 
-The current implementation of the burger menu system should not be embedded within a layer of discourse, so it should be refactored to exist outside of the Swipeable component.
-
-A looming next step would be to incorporate the React Router so that I can add in a controversy search homepage.
+Two looming next steps would be to (1) incorporate the React Router so that I can add in a controversy search homepage; and (2) incorporate Netlify's CMS so that I can begin to work in the posts for the feeds.
 
 ### Part 1: The Infographic Frontend
 
