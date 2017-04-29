@@ -85,7 +85,7 @@ const AppStateless = React.createClass({
 				currentSlide &&
 				currentSlide.text,
 
-			showBurger = !this.props.overlays.active || (!isFirstPage && hasText) ?
+			showBurger = !this.props.overlays.active || (!isFirstPage && hasText && this.props.discourse.level === 0) ?
 				true :
 				false,
 
@@ -111,6 +111,27 @@ const AppStateless = React.createClass({
 					discourseHandler={this.props.setDiscourseLevel}
 					deactivateOverlayHandler={this.props.deactivateSwipeOverlay} />
 
+				<Menu pageWrapId="page-wrap"
+					outerContainerId="outer-container"
+					isOpen={this.props.menu.open}
+					width='75vw'
+					onStateChange={this.isMenuOpen}
+					burgerToggle={showBurger}>
+
+					{isFirstPage ?
+						h.parse(this.props.card.text) :
+						hasText &&
+						h.parse(currentSlide.text.unicode)}
+
+					<hr className="footnotes-line" />
+
+					<div className="footnotes">
+						{!isFirstPage && currentSlide.footnotes && currentSlide.footnotes.map((note,i) => 
+							<p key={i}>{h.parse(note.markup)}</p>
+						)}
+					</div>
+				</Menu>
+
 				<SwipeableViews
 					axis='y'
 					containerStyle={containerStyles}
@@ -120,28 +141,6 @@ const AppStateless = React.createClass({
 					onChangeIndex={this.handleSwipe}>
 
 					<div className="Worldview" id="outer-container">
-
-						<Menu pageWrapId="page-wrap"
-							outerContainerId="outer-container"
-							isOpen={this.props.menu.open}
-							width='75vw'
-							onStateChange={this.isMenuOpen}
-							burgerToggle={showBurger}>
-
-							{isFirstPage ?
-								h.parse(this.props.card.text) :
-								hasText &&
-								h.parse(currentSlide.text.unicode)}
-
-							<hr className="footnotes-line" />
-
-							<div className="footnotes">
-								{!isFirstPage && currentSlide.footnotes && currentSlide.footnotes.map((note,i) => 
-									<p key={i}>{h.parse(note.markup)}</p>
-								)}
-							</div>
-						</Menu>
-
 						<main id="page-wrap">
 							<Quote
 								messages={messages}
